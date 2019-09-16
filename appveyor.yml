@@ -1,0 +1,52 @@
+environment:
+  APPVEYOR_SAVE_CACHE_ON_ERROR: true
+
+  matrix:
+    - PYTHON: C:\Python37-x64
+      PYTHON_VERSION: 3.7
+      PYTHON_ARCH: 64
+
+init:
+  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+  - "ECHO \"%APPVEYOR_SCHEDULED_BUILD%\""
+  # If there is a newer build queued for the same PR, cancel this one.
+  # The AppVeyor 'rollout builds' option is supposed to serve the same
+  # purpose but it is problematic because it tends to cancel builds pushed
+  # directly to master instead of just PR builds (or the converse).
+  # credits: JuliaLang developers.
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
+        https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
+        Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
+          throw "There are newer queued builds for this pull request, failing early." }
+
+cache:
+  # Cache downloaded pip packages.
+  - '%LOCALAPPDATA%\pip\Cache\http'
+
+install:
+  - C:\cygwin\bin\du -hs "%LOCALAPPDATA%\pip\Cache"
+  # Prepend newly installed Python to the PATH of this build (this cannot be
+  # done from inside the powershell script as it would require to restart
+  # the parent CMD process).
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+
+  # Check that we have the expected version and architecture for Python
+  - python --version
+  - >-
+     %CMD_IN_ENV%
+     python -c "import sys,platform,struct;
+     print(sys.platform, platform.machine(), struct.calcsize('P') * 8, )"
+  # Upgrade to the latest pip.
+  - 'python -m pip install -U pip setuptools wheel pyinstaller'
+
+  # install packages
+  - 'python -m pip install -f wheels/ imgui'
+  - 'python -m pip install -r requirements.txt'
+  - 'python -m pip install .'
+  - pyinstaller --noconsole --onefile main.py
+  - 7z a .zip dist/*
+
+build: off
+
+artifacts:
+  - path: dist/*.zip
