@@ -44,9 +44,9 @@ install:
   - 'python -m pip install -r requirements.txt'
   #- 'python -m pip install .'
   - pyinstaller --noconsole --onefile main.py
-  - 7z a .zip dist/*
+  - 7z a main.zip dist/*
 
 build: off
 
 artifacts:
-  - path: dist/*.zip
+  - path: main.zip
