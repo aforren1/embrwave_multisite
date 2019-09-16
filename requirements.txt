@@ -1,4 +1,4 @@
 pyglet # windowing, ...
-pyimgui
+imgui
 numpy
 pyopengl
