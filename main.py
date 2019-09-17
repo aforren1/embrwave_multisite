@@ -36,5 +36,3 @@ if __name__ == '__main__':
         update(1/60)
         win.dispatch_event('on_draw')
         win.flip()
-
-    impl.shutdown()
