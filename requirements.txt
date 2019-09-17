@@ -1,4 +1,4 @@
 pyglet # windowing, ...
-imgui
-numpy
-pyopengl
+imgui # GUI
+numpy # random numbers, ...
+pyopengl # imgui requirement

@@ -1,6 +1,9 @@
 
-Python 3.7
+The most recent Windows executable will be zipped up under:
 
-```
-pip install -f wheels/ imgui
-```
+https://ci.appveyor.com/project/aforren1/embrwave-multisite/build/artifacts
+
+A few notes:
+ - Assuming Python 3.7
+ - Targeting Windows 10 (but *should* work fine elsewhere?)
+ - We're currently using a fixed version of pyimgui (the most recent master, c163865), which gives us some bugfixes/enhancements toward changing GUI colors.
