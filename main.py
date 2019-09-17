@@ -1,5 +1,6 @@
 
 if __name__ == '__main__':
+    import sys
     import pyglet
     from pyglet import gl
     import imgui
@@ -11,13 +12,29 @@ if __name__ == '__main__':
     imgui.create_context()
     impl = PygletRenderer(win)
 
+    def update(dt):
+        imgui.new_frame()
+        imgui.show_test_window()
+
     @win.event
     def on_draw():
         win.clear()
-        imgui.new_frame()
-        imgui.show_test_window()
         imgui.render()
         impl.render(imgui.get_draw_data())
 
-    pyglet.app.run()
+    def on_key_press(symbol, modifiers):
+        if symbol == pyglet.window.key.ESCAPE:
+            impl.shutdown()
+            sys.exit(0)
+
+    win.event(on_key_press)
+
+    while True:
+        pyglet.clock.tick()
+        win.switch_to()
+        win.dispatch_events()
+        update(1/60)
+        win.dispatch_event('on_draw')
+        win.flip()
+
     impl.shutdown()
