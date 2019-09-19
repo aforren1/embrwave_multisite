@@ -49,7 +49,7 @@ display = pyglet.canvas.get_display()
 screen = display.get_screens()[0]
 win = pyglet.window.Window(resizable=False, fullscreen=True,
                            screen=screen, config=config,
-                           style='borderless', vsync=True)
+                           style='borderless', vsync=False)
 gl.glClearColor(0.5, 0.5, 0.5, 1)
 imgui.create_context()
 impl = ProgrammablePygletRenderer(win)
