@@ -41,14 +41,12 @@ class ButtonRow(object):
         self.states = _state([False] * count)
 
     def update(self):
-        imgui.push_style_color(imgui.COLOR_TEXT, 1, 1, 1, 1)
         for index in range(len(self.states)):
             button_id = self._ids[index]
             state = self.states[index]
             if imgui.radio_button('##%s' % (button_id), state):
                 self.states[index] = not self.states[index]
             imgui.next_column()
-        imgui.pop_style_color()
 
 
 button_row = ButtonRow(task_id='a', question_number=12, count=5)
