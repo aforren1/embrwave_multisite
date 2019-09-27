@@ -44,6 +44,7 @@ class ButtonRow(object):
         for index in range(len(self.states)):
             button_id = self._ids[index]
             state = self.states[index]
+            wh = imgui.get_font_size() + imgui.get_style().frame_padding[1] * 2
             if imgui.radio_button('##%s' % (button_id), state):
                 self.states[index] = not self.states[index]
             imgui.next_column()
@@ -57,7 +58,8 @@ def update(dt):
     imgui.new_frame()
     imgui.begin('Radio row test')
     imgui.columns(5, 'test')
-    imgui.set_column_offset(1, 40)
+    imgui.set_column_offset(1, 50)
+    imgui.set_column_offset(3, 100)
     button_row.update()
     imgui.new_line()
     imgui.separator()
@@ -65,4 +67,4 @@ def update(dt):
     imgui.end()
 
 
-loop(update)
+# loop(update)
