@@ -1,0 +1,41 @@
+Qs:
+
+How "random" is heating/cooling? Totally random (seeded by participant ID), pseudo-random (even # of each, randomly shuffled)...
+
+General: Pay attention to page breaks
+
+DV1: intro prompt
+Text-- 1 to 6
+
+DV2: Intro prompt
+Text-- 1 to 5
+
+DV3: Intro prompt
+Large text, question, then 1 to 7
+
+DV4: *
+Text -- 1 to 7
+
+DV5: *
+Unclear how to introduce images/intro text
+1-7
+
+DV6: *
+image -- 1 to 7, then 1 to 7 (two q)
+1 page per person
+
+DV7: *
+image-- A/B
+newpage w/ more instruction
+Same q, different image
+
+DV8: *
+text-- 1 to 7 
+page break per brand
+
+DV9: *
+Depression questionnaire (1-4)
+
+
+
+

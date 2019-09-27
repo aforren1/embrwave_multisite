@@ -30,11 +30,11 @@ class CheckRow(object):
             button_id = self._ids[index]
             state = self.states[index]
             _, enabled = imgui.checkbox('##%s' % button_id, state)
-            if enabled:
-                self.states[index] = enabled
+            self.states[index] = enabled
 
         # imgui.same_line(spacing=1/12)
         # imgui.new_line()
+        print(self.states[:])
         imgui.set_window_font_scale(1)
 
 
@@ -58,4 +58,4 @@ def update(dt):
     imgui.end()
 
 
-loop(update)
+# loop(update)

@@ -58,8 +58,6 @@ def update(dt):
     imgui.new_frame()
     imgui.begin('Radio row test')
     imgui.columns(5, 'test')
-    imgui.set_column_offset(1, 50)
-    imgui.set_column_offset(3, 100)
     button_row.update()
     imgui.new_line()
     imgui.separator()

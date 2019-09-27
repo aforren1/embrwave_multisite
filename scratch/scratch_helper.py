@@ -22,6 +22,7 @@ class ProgrammablePygletRenderer(PygletMixin, ProgrammablePipelineRenderer):
 
         self.io.display_size = window_size
         self.io.display_fb_scale = compute_fb_scale(window_size, viewport_size)
+        print(window_size, viewport_size)
         # try to scale fonts in high DPI situations
         self.io.font_global_scale = 1.0/self.io.display_fb_scale[0]
 
