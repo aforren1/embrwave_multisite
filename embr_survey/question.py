@@ -12,53 +12,80 @@ class QuestionBlock(object):
         self.prompt = prompt
         self.header = header
         self.questions = questions
-        self.states = [_state([False] * len(header)) for i in len(questions)]
+        self.states = [_state([False] * len(header)) for i in range(len(questions))]
 
     def update(self):
-        #
+        # prompt text
         with imgui.font(self.win.impl.bold_font):
             imgui.push_text_wrap_pos(0)
             imgui.text(self.prompt)
             imgui.pop_text_wrap_pos()
 
         # get current width
-        total_wid = imgui.get_window_width()
+        total_wid = imgui.get_window_width() * 0.95
+        text_wid = total_wid//4
+        rest_wid = (3 * total_wid)//4
+        ncol = len(self.header)
+        sub_wid = rest_wid // ncol
 
-        # add columns
+        # add header
+        imgui.begin_child('##header', total_wid, height=150)
         with imgui.font(self.win.impl.reg_font):
-            imgui.set_window_font_scale(0.75)
-            imgui.spacing()
-            rest_width = (2 * total_wid)//3
-            num_headers = len(self.header)
-            sub_width = rest_width // num_headers
-            imgui.columns(num_headers+1)  # add one for padding
-            imgui.set_column_offset(-1, total_wid//3 - 2*sub_width)
-            imgui.next_column()
-            imgui.push_text_wrap_pos(0)
+            # TODO: may need to uniquely identify this?
+            imgui.begin_child('##space', width=text_wid - sub_wid//2, height=150, border=True)
+            imgui.end_child()
+            imgui.same_line()
             for count, head in enumerate(self.header):
-                imgui.set_column_width(count, sub_width)
-                imgui.text(head)
-                if count < num_headers:
-                    imgui.next_column()
-            imgui.pop_text_wrap_pos()
-            imgui.set_window_font_scale(1)
-
-            imgui.columns(1)
-            # add questions (leaving room for OK button)
-            imgui.begin_child('foo', height=-120)
-            for count, question in enumerate(self.questions):
-                imgui.begin_child('##%s%s' % (count, question),
-                                  height=150, width=total_wid//3 - 2*sub_width)
+                imgui.begin_child('##%s%s' % (count, head),
+                                  height=150, width=sub_wid, border=True)
+                imgui.set_window_font_scale(0.8)
                 imgui.push_text_wrap_pos()
-                imgui.text('%s. %s' % (count+1, question))
+                imgui.text(head)
                 imgui.pop_text_wrap_pos()
+                imgui.set_window_font_scale(1)
                 imgui.end_child()
                 imgui.same_line()
-                imgui.begin_child('##%s%s2' % (count, question),
-                                  height=150, width=0)
-                imgui.end_child()
+            imgui.new_line()
+        imgui.end_child()
 
-            imgui.end_child()
+        # add checkboxes
+        imgui.begin_child('##ans', total_wid, height=-120)
+        with imgui.font(self.win.impl.reg_font):
+            for count, question in enumerate(self.questions):
+                # question first (change color border)
+                if any(self.states[count]):
+                    col = 0.2, 0.9, 0.3, 1
+                else:  # no answer
+                    col = 0.9, 0.3, 0.2, 1
+                imgui.push_style_color(imgui.COLOR_BORDER, *col)
+                imgui.begin_child('##%s%stext' % (count, question),
+                                  width=text_wid - sub_wid//2, height=100,
+                                  border=True)
+                imgui.push_text_wrap_pos()
+                imgui.set_window_font_scale(0.75)
+                imgui.text(question)
+                imgui.set_window_font_scale(1)
+                imgui.pop_text_wrap_pos()
+                imgui.end_child()  # end question
+                imgui.same_line()
+                # checkboxes
+                for i in range(ncol):
+                    tmp = '##%s%s%s' % (count, question, i)
+                    imgui.begin_child(tmp,
+                                      width=sub_wid, height=100)
+                    imgui.set_window_font_scale(2)
+                    # try to center in child
+                    font_height = imgui.get_text_line_height_with_spacing()
+                    imgui.same_line(position=font_height//2)
+                    _, enabled = imgui.checkbox(tmp + 'chk',
+                                                self.states[count][i])
+                    imgui.set_window_font_scale(1)
+                    self.states[count][i] = enabled
+                    imgui.end_child()  # end checkbox
+                    imgui.same_line()
+                imgui.pop_style_color(1)
+                imgui.new_line()
+        imgui.end_child()
 
 
 class _state(object):
@@ -132,7 +159,9 @@ Words and things
     # questions = question['en']
     questions = ['What is your name?',
                  'What is your quest?',
-                 'What is your favorite color?']
+                 'What is your favorite color?',
+                 'What else is your favourite color?',
+                 'It should be blue.']
     question_block = QuestionBlock(win, prompt=prompt,
                                    header=header,
                                    questions=questions)
