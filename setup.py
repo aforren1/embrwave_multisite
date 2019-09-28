@@ -17,11 +17,6 @@ with open("readme.md", "r") as f:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-# TODO: Re-discover embedded resources (left these for example)
-# resources = ['./resources/*/*.' + ext for ext in ['ttf', 'png', 'wav']]
-# settings = ['./settings.yml']  # TODO: local settings.yml to override?
-
-
 setuptools.setup(
     name="embr_survey",
     version=verstr,

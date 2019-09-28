@@ -1,3 +1,7 @@
 .vscode/
 imgui.ini
 __pycache__/
+*.pyc
+*.egg-info/
+__pycache__/
+
