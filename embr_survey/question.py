@@ -29,15 +29,17 @@ class QuestionBlock(object):
         sub_wid = rest_wid // ncol
 
         # add header
-        imgui.begin_child('##header', total_wid, height=150)
+        header_height = 120
+        imgui.begin_child('##header', total_wid, height=header_height)
         with imgui.font(self.win.impl.reg_font):
             # TODO: may need to uniquely identify this?
-            imgui.begin_child('##space', width=text_wid - sub_wid//2, height=150, border=True)
+            imgui.begin_child('##space', width=text_wid - sub_wid//2,
+                              height=header_height, border=True)
             imgui.end_child()
             imgui.same_line()
             for count, head in enumerate(self.header):
                 imgui.begin_child('##%s%s' % (count, head),
-                                  height=150, width=sub_wid, border=True)
+                                  height=header_height, width=sub_wid, border=True)
                 imgui.set_window_font_scale(0.8)
                 imgui.push_text_wrap_pos()
                 imgui.text(head)
@@ -49,6 +51,7 @@ class QuestionBlock(object):
         imgui.end_child()
 
         # add checkboxes
+        q_chk_height = 100
         imgui.begin_child('##ans', total_wid, height=-120)
         with imgui.font(self.win.impl.reg_font):
             for count, question in enumerate(self.questions):
@@ -59,7 +62,7 @@ class QuestionBlock(object):
                     col = 0.9, 0.3, 0.2, 1
                 imgui.push_style_color(imgui.COLOR_BORDER, *col)
                 imgui.begin_child('##%s%stext' % (count, question),
-                                  width=text_wid - sub_wid//2, height=100,
+                                  width=text_wid - sub_wid//2, height=q_chk_height,
                                   border=True)
                 imgui.push_text_wrap_pos()
                 imgui.set_window_font_scale(0.75)
@@ -72,7 +75,7 @@ class QuestionBlock(object):
                 for i in range(ncol):
                     tmp = '##%s%s%s' % (count, question, i)
                     imgui.begin_child(tmp,
-                                      width=sub_wid, height=100)
+                                      width=sub_wid, height=q_chk_height)
                     imgui.set_window_font_scale(2)
                     # try to center in child
                     font_height = imgui.get_text_line_height_with_spacing()
@@ -86,6 +89,16 @@ class QuestionBlock(object):
                 imgui.pop_style_color(1)
                 imgui.new_line()
         imgui.end_child()
+
+        # return current state
+        ans = []
+        for state in self.states:
+            try:
+                # add one to match scoring (generally)
+                ans.append(state.index(True) + 1)
+            except ValueError:  # no Trues
+                ans.append(None)
+        return ans
 
 
 class _state(object):
@@ -106,41 +119,8 @@ class _state(object):
     def __len__(self):
         return len(self.lst)
 
-
-class CheckRow(object):
-    def __init__(self, task_id, question_number, count=4):
-        task_id = str(task_id)
-        question_number = str(question_number)
-        if len(task_id) > 3:
-            raise ValueError('Task ID should be no more than 3 digits')
-        if len(question_number) > 3:
-            raise ValueError('Question number should be no more than 3 digits')
-        task_id = task_id.zfill(3)
-        question_number = question_number.zfill(3)
-
-        self._ids = []
-        for i in range(count):
-            self._ids.append((('%s%s%s') % (task_id, question_number, i)))
-        self.states = _state([False] * count)
-
-    def update(self):
-        ccp = imgui.get_window_content_region_width()
-        style = imgui.get_style()
-        imgui.set_window_font_scale(5)
-        wh = imgui.get_font_size() + imgui.get_style().frame_padding[0] * 2
-        foo = [0.1, 0.3, 0.5, 0.7, 0.9]
-        for index in range(len(self.states)):
-            # not *totally* sure why the next line works
-            imgui.same_line(position=foo[index]*ccp - 0.4*wh)
-            button_id = self._ids[index]
-            state = self.states[index]
-            _, enabled = imgui.checkbox('##%s' % button_id, state)
-            self.states[index] = enabled
-
-        # imgui.same_line(spacing=1/12)
-        # imgui.new_line()
-        print(self.states[:])
-        imgui.set_window_font_scale(1)
+    def index(self, val):
+        return self.lst.index(val)
 
 
 if __name__ == '__main__':
@@ -168,4 +148,5 @@ Words and things
 
     while True:
         current_ans = question_block.update()
+        print(current_ans)
         win.flip()
