@@ -21,7 +21,7 @@ class CheckRow(object):
     def update(self):
         ccp = imgui.get_window_content_region_width()
         style = imgui.get_style()
-        imgui.set_window_font_scale(9)
+        imgui.set_window_font_scale(5)
         wh = imgui.get_font_size() + imgui.get_style().frame_padding[0] * 2
         foo = [0.1, 0.3, 0.5, 0.7, 0.9]
         for index in range(len(self.states)):

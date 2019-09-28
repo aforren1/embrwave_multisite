@@ -43,5 +43,22 @@ def update(dt):
     imgui.text("outside region")
     imgui.end()
 
+    imgui.begin("Example: simple popup")
+
+    if imgui.button("select"):
+        imgui.open_popup("select-popup")
+
+    imgui.same_line()
+
+    if imgui.begin_popup("select-popup"):
+        imgui.text("Select one")
+        imgui.separator()
+        imgui.selectable("One")
+        imgui.selectable("Two")
+        imgui.selectable("Three")
+        imgui.end_popup()
+
+    imgui.end()
+
 
 loop(update)

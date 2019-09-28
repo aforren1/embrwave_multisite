@@ -20,18 +20,10 @@ class _state(object):
         return len(self.lst)
 
 
-class Question(object):
-    def __init__(self, task_id, question_number, question_txt, n_answers):
-        task_id = str(task_id)
-        question_number = str(question_number)
-        self._ids = []
-        for i in range(n_answers):
-            self._ids.append((('%s%s%s') % (task_id, question_number, i)))
-        self.states = _state([False] * n_answers)
+class QuestionRegion(object):
+    # question region consists of:
+    # - a prompt (potentially a big block of text)
+    # - A header for the survey block (informs how many responses are possible)
+    # - A list of questions
 
-    def draw(self):
-        # current idea:
-        # make a new child window to contain buttons & text
-        #
-        # need to calculate the height of text
-        pass
+    def __init__(self, prompt, header, questions):
