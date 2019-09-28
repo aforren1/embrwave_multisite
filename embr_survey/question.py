@@ -53,6 +53,9 @@ class QuestionBlock(object):
         # add checkboxes
         q_chk_height = 100
         imgui.begin_child('##ans', total_wid, height=-120)
+        if imgui.is_window_hovered():
+            imgui.set_scroll_y(imgui.get_scroll_y() -
+                               imgui.get_io().mouse_wheel * 30)
         with imgui.font(self.win.impl.reg_font):
             for count, question in enumerate(self.questions):
                 # question first (change color border)
@@ -63,7 +66,7 @@ class QuestionBlock(object):
                 imgui.push_style_color(imgui.COLOR_BORDER, *col)
                 imgui.begin_child('##%s%stext' % (count, question),
                                   width=text_wid - sub_wid//2, height=q_chk_height,
-                                  border=True)
+                                  border=True, flags=imgui.WINDOW_NO_SCROLL_WITH_MOUSE)
                 imgui.push_text_wrap_pos()
                 imgui.set_window_font_scale(0.75)
                 imgui.text(question)
@@ -75,7 +78,7 @@ class QuestionBlock(object):
                 for i in range(ncol):
                     tmp = '##%s%s%s' % (count, question, i)
                     imgui.begin_child(tmp,
-                                      width=sub_wid, height=q_chk_height)
+                                      width=sub_wid, height=q_chk_height, flags=imgui.WINDOW_NO_SCROLL_WITH_MOUSE)
                     imgui.set_window_font_scale(2)
                     # try to center in child
                     font_height = imgui.get_text_line_height_with_spacing()
@@ -148,5 +151,5 @@ Words and things
 
     while True:
         current_ans = question_block.update()
-        print(current_ans)
+        # print(current_ans)
         win.flip()
