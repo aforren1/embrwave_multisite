@@ -128,6 +128,7 @@ class _state(object):
 
 if __name__ == '__main__':
     from embr_survey.window import ExpWindow as Win
+    from embr_survey.imgui_common import ok_button
 
     win = Win()
 
@@ -149,7 +150,10 @@ Words and things
                                    header=header,
                                    questions=questions)
 
-    while True:
+    done = False
+    while not done:
         current_ans = question_block.update()
         # print(current_ans)
+        cat = not any(ca is None for ca in current_ans)
+        done = ok_button(win.impl.reg_font, cat)
         win.flip()

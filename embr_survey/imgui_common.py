@@ -4,6 +4,7 @@ from imgui.integrations.opengl import ProgrammablePipelineRenderer
 from imgui.integrations.pyglet import PygletMixin, PygletRenderer
 from pkg_resources import resource_filename
 from pyglet import gl
+from timeit import default_timer
 
 
 class ProgrammablePygletRenderer(PygletMixin, ProgrammablePipelineRenderer):
@@ -45,6 +46,27 @@ class ProgrammablePygletRenderer(PygletMixin, ProgrammablePipelineRenderer):
             )
 
 
-def ok_button():
+def ok_button(font, sure):
+    ans = False
+    if sure:
+        colo = 0.2, 0.9, 0.2
+    else:
+        colo = 0.9, 0.9, 0.3
     with imgui.istyled(imgui.STYLE_BUTTON_TEXT_ALIGN, (0.5, 0.5),
-                       imgui.STYLE_FRAME_ROUNDING, 6), imgui.colored
+                       imgui.STYLE_FRAME_ROUNDING, 6, imgui.STYLE_FRAME_BORDERSIZE, 4), imgui.colored(imgui.COLOR_BUTTON, *colo), imgui.colored(imgui.COLOR_BORDER, 0.1, 0.5, 0.2), imgui.colored(imgui.COLOR_TEXT, 0, 0, 0):
+        with imgui.font(font):
+            imgui.set_window_font_scale(2)
+            if imgui.button('NEXT'):
+                if not sure:
+                    imgui.open_popup('sure?')
+                else:
+                    ans = True
+
+            if imgui.begin_popup_modal('sure?')[0]:
+                if imgui.button('OK'):
+                    ans = True
+                    imgui.close_current_popup()
+                imgui.end_popup()
+            imgui.set_window_font_scale(1)
+
+    return ans
