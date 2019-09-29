@@ -69,8 +69,6 @@ def ok_button(font, sure):
                 imgui.same_line()
                 if imgui.button('Back'):
                     imgui.close_current_popup()
-                if not imgui.is_window_hovered() and imgui.is_mouse_clicked():
-                    imgui.close_current_popup()
                 imgui.end_popup()
 
             imgui.set_window_font_scale(1)
