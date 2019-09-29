@@ -47,13 +47,17 @@ class ProgrammablePygletRenderer(PygletMixin, ProgrammablePipelineRenderer):
 
 
 def ok_button(font, sure):
+    imgui.new_line()
+    imgui.same_line(imgui.get_window_width() - 200)
     ans = False
     if sure:
-        colo = 0.2, 0.9, 0.2
+        color = 0.2, 0.9, 0.2
+        hover_color = 0.2, 0.6, 0.2
     else:
-        colo = 0.9, 0.9, 0.3
+        colo = 0.7, 0.7, 0.3
+        hover_color = 0.8, 0.5, 0.3
     with imgui.istyled(imgui.STYLE_BUTTON_TEXT_ALIGN, (0.5, 0.5),
-                       imgui.STYLE_FRAME_ROUNDING, 6, imgui.STYLE_FRAME_BORDERSIZE, 4), imgui.colored(imgui.COLOR_BUTTON, *colo), imgui.colored(imgui.COLOR_BORDER, 0.1, 0.5, 0.2), imgui.colored(imgui.COLOR_TEXT, 0, 0, 0):
+                       imgui.STYLE_FRAME_ROUNDING, 6, imgui.STYLE_FRAME_BORDERSIZE, 4), imgui.colored(imgui.COLOR_BUTTON, *colo), imgui.colored(imgui.COLOR_BORDER, 0.1, 0.5, 0.2), imgui.colored(imgui.COLOR_TEXT, 1, 1, 1), imgui.colored(imgui.COLOR_BUTTON_HOVERED, *hover_color):
         with imgui.font(font):
             imgui.set_window_font_scale(2)
             if imgui.button('NEXT'):
