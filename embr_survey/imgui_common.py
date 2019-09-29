@@ -66,7 +66,11 @@ def ok_button(font, sure):
                 if imgui.button('OK'):
                     ans = True
                     imgui.close_current_popup()
+                imgui.same_line()
+                if imgui.button('Back'):
+                    imgui.close_current_popup()
                 imgui.end_popup()
+
             imgui.set_window_font_scale(1)
 
     return ans
