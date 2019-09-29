@@ -1,38 +1,40 @@
 
 if __name__ == '__main__':
-    import sys
-    import pyglet
-    from pyglet import gl
-    import imgui
+    import random
+    from datetime import datetime
+    from embr_survey.window import ExpWindow
+    import embr_survey.dvs
+    win = ExpWindow()
 
-    from imgui.integrations.pyglet import PygletRenderer
+    # intro dialog--
+    # - set participant ID
+    # - set language
+    # - set localization (i.e. different pics in DV5)
+    settings = intro_dlg(win)
 
-    win = pyglet.window.Window(fullscreen=True)
-    gl.glClearColor(1, 1, 1, 1)
-    imgui.create_context()
-    impl = PygletRenderer(win)
+    # sanity check that all questions, values, images
+    # are accounted for
 
-    def update(dt):
-        imgui.new_frame()
-        imgui.show_test_window()
+    exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
+    seed = hash(settings['id'] + exp_start)
+    random.seed(seed)
 
-    @win.event
-    def on_draw():
-        win.clear()
-        imgui.render()
-        impl.render(imgui.get_draw_data())
+    # TODO: generate all DVs
+    dvs = [d(win, settings) for d in dvs]
 
-    def on_key_press(symbol, modifiers):
-        if symbol == pyglet.window.key.ESCAPE:
-            impl.shutdown()
-            sys.exit(0)
+    # set the order
+    random.shuffle(dvs)
 
-    win.event(on_key_press)
+    # generate heat/cool levels
+    temperature_levels = random.choices([-9, -5, 0, 5, 9], k=len(dvs))
 
-    while True:
-        pyglet.clock.tick()
-        win.switch_to()
-        win.dispatch_events()
-        update(1/60)
-        win.dispatch_event('on_draw')
-        win.flip()
+    # TODO: intro text
+
+    # run all DVs
+    for dv, temp_level in zip(dvs, temperature_levels):
+        # TODO please wait
+        # set temperature level for next dv
+        dv.run(temp_level)
+
+    # post-questionnaire (TODO: note about also including pre-)
+    post_questions(settings)
