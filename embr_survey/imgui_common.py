@@ -43,3 +43,8 @@ class ProgrammablePygletRenderer(PygletMixin, ProgrammablePipelineRenderer):
                 self.on_mouse_scroll,
                 self.on_resize,
             )
+
+
+def ok_button():
+    with imgui.istyled(imgui.STYLE_BUTTON_TEXT_ALIGN, (0.5, 0.5),
+                       imgui.STYLE_FRAME_ROUNDING, 6), imgui.colored
