@@ -13,14 +13,9 @@ class QuestionBlock(object):
         self.header = header
         self.questions = questions
         self.states = [_state([False] * len(header)) for i in range(len(questions))]
+        self.id = hash(''.join(questions) + ''.join(header))
 
     def update(self):
-        # prompt text
-        with imgui.font(self.win.impl.bold_font):
-            imgui.push_text_wrap_pos(0)
-            imgui.text(self.prompt)
-            imgui.pop_text_wrap_pos()
-
         # get current width
         total_wid = imgui.get_window_width() * 0.95
         text_wid = total_wid//4
@@ -28,17 +23,25 @@ class QuestionBlock(object):
         ncol = len(self.header)
         sub_wid = rest_wid // ncol
 
+        # prompt text
+        imgui.begin_child('##title%s' % self.id, total_wid, height=160)
+        with imgui.font(self.win.impl.bold_font):
+            imgui.push_text_wrap_pos(0)
+            imgui.text(self.prompt)
+            imgui.pop_text_wrap_pos()
+        imgui.end_child()
+
         # add header
         header_height = 120
-        imgui.begin_child('##header', total_wid, height=header_height)
+        imgui.begin_child('##header%s' % self.id, total_wid, height=header_height)
         with imgui.font(self.win.impl.reg_font):
             # TODO: may need to uniquely identify this?
-            imgui.begin_child('##space', width=text_wid - sub_wid//2,
+            imgui.begin_child('##space%s' % self.id, width=text_wid - sub_wid//2,
                               height=header_height, border=True)
             imgui.end_child()
             imgui.same_line()
             for count, head in enumerate(self.header):
-                imgui.begin_child('##%s%s' % (count, head),
+                imgui.begin_child('##%s%s%s' % (count, head, self.id),
                                   height=header_height, width=sub_wid, border=True)
                 imgui.set_window_font_scale(0.8)
                 imgui.push_text_wrap_pos()
@@ -52,7 +55,8 @@ class QuestionBlock(object):
 
         # add checkboxes
         q_chk_height = 100
-        imgui.begin_child('##ans', total_wid, height=-120)
+        hei = imgui.get_window_height()
+        imgui.begin_child('##ans%s' % self.id, total_wid, height=q_chk_height*len(self.questions)*1.1)
         if imgui.is_window_hovered():
             imgui.set_scroll_y(imgui.get_scroll_y() -
                                imgui.get_io().mouse_wheel * 30)
@@ -64,7 +68,7 @@ class QuestionBlock(object):
                 else:  # no answer
                     col = 0.9, 0.3, 0.2, 1
                 imgui.push_style_color(imgui.COLOR_BORDER, *col)
-                imgui.begin_child('##%s%stext' % (count, question),
+                imgui.begin_child('##%s%stext%s' % (count, question, self.id),
                                   width=text_wid - sub_wid//2, height=q_chk_height,
                                   border=True, flags=imgui.WINDOW_NO_SCROLL_WITH_MOUSE)
                 imgui.push_text_wrap_pos()
@@ -76,7 +80,7 @@ class QuestionBlock(object):
                 imgui.same_line()
                 # checkboxes
                 for i in range(ncol):
-                    tmp = '##%s%s%s' % (count, question, i)
+                    tmp = '##%s%s%s%s' % (count, question, i, self.id)
                     imgui.begin_child(tmp,
                                       width=sub_wid, height=q_chk_height, flags=imgui.WINDOW_NO_SCROLL_WITH_MOUSE)
                     imgui.set_window_font_scale(2)
@@ -150,10 +154,18 @@ Words and things
                                    header=header,
                                    questions=questions)
 
+    header2 = ['1', '2', '3']
+    questions2 = ['Question 1', 'Question2', 'Question3']
+
+    q2 = QuestionBlock(win, prompt='fooooo', header=header2, questions=questions2)
+
     done = False
     while not done:
+        imgui.begin_child('foob')
         current_ans = question_block.update()
+        q2.update()
         # print(current_ans)
         cat = not any(ca is None for ca in current_ans)
         done = ok_button(win.impl.reg_font, cat)
+        imgui.end_child()
         win.flip()
