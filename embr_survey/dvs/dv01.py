@@ -21,13 +21,13 @@ class DV01SimilarityObjects(BaseDv):
 
         prompt = translation['prompt'][lang]
         header = translation['header'][lang]
-        self.questions = [q[lang] for q in translation['question']]
+        self.questions = [('q%i' % i, q[lang]) for i, q in enumerate(translation['question'])]
         # new ordering
         random.shuffle(self.questions)
 
         self.qs = QuestionBlock(win, prompt,
                                 header=header,
-                                questions=[q for q in self.questions])
+                                questions=[q[1] for q in self.questions])
 
     def run(self, temperature):
         # two data files-- a CSV with:
@@ -52,9 +52,11 @@ class DV01SimilarityObjects(BaseDv):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'seed': num_q * [settings['seed']],
-                'questions': self.questions,
+                'questions': [q[1] for q in self.questions],
+                'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
-                'dv': num_q * ['dv01_similarity_objects']}
+                'dv': num_q * ['dv01_similarity_objects'],
+                'block_number': num_q * [self.block_num]}
         keys = sorted(data.keys())
         with open(csv_name, "w") as f:
             writer = csv.writer(f, delimiter=",")
