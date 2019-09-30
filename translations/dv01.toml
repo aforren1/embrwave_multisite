@@ -1,0 +1,32 @@
+[prompt]
+en = "Next, we will present you with some pairs of objects. Please rate how similar or different they seem to you."
+fr = "Ensuite, nous vous présenterons quelques paires d'objets. Veuillez évaluer leur ressemblance ou leur différence."
+
+[header]
+en = ["1\nVery Different", "2", "3", "4", "5", "6\nVery Similar"]
+fr = ["1\nTrès Différent", "2", "3", "4", "5", "6\nTrès Similaire"]
+
+
+[[question]]
+en = "whale-dolphin"
+fr = "baleine-dauphin"
+
+[[question]]
+en = "white wine-red wine"
+fr = "vin blanc-vin rouge"
+
+[[question]]
+en = "bicycle-motorcycle"
+fr = "vélo-moto"
+
+[[question]]
+en = "peach-nectarine"
+fr = "pêche-nectarine"
+
+[[question]]
+en = "broccoli-zucchini"
+fr = "brocoli-courgette"
+
+[[question]]
+en = "pen-pencil"
+fr = "stylo-crayon"

@@ -1,1 +1,1 @@
-from .dv01 import DV1SimilarityObjects
+from .dv01 import DV01SimilarityObjects

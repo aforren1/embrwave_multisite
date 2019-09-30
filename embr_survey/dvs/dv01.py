@@ -3,6 +3,8 @@ from datetime import datetime
 from embr_survey.dvs.base_dv import BaseDv
 from embr_survey.question import QuestionBlock
 from embr_survey.imgui_common import ok_button
+from pip._vendor import pytoml as toml
+import os
 
 
 class DV01SimilarityObjects(BaseDv):
@@ -11,22 +13,20 @@ class DV01SimilarityObjects(BaseDv):
         self.settings = settings
         self.block_num = block_num
         # TODO: load from external?
-        prompt = {'en': 'Next, we will present you with some pairs of objects. Please rate how similar or different they seem to you.'}
-        header = {'en': ['1\nVery Different', '2', '3', '4', '5', '6\nVery Similar']}
-        questions = {'en': ['whale-dolphin',
-                            'white wine-red wine',
-                            'bicycle-motorcycle',
-                            'peach-nectarine',
-                            'broccoli-zucchini',
-                            'pen-pencil']}
+        lang = settings['language']
+        translation_path = os.path.join(settings['translation_dir'], 'dv01.toml')
+        with open(translation_path, 'r') as f:
+            translation = toml.load(f)
 
-        # get original list of
-        questions_lang = list(enumerate(questions[settings['language']]))
-        random.shuffle(questions_lang)
+        prompt = translation['prompt'][lang]
+        header = translation['header'][lang]
+        self.questions = [q[lang] for q in translation['question']]
+        # new ordering
+        random.shuffle(self.questions)
 
-        self.qs = QuestionBlock(win, prompt[settings['language']],
+        self.qs = QuestionBlock(win, prompt,
                                 header=header,
-                                questions=questions)
+                                questions=[q for q in self.questions])
 
     def run(self, temperature):
         # two data files-- a CSV with:
@@ -48,5 +48,6 @@ if __name__ == '__main__':
     from embr_survey.window import ExpWindow
     win = ExpWindow()
 
-    dv1 = DV1SimilarityObjects(win, 1, None)
+    dv1 = DV01SimilarityObjects(win, 1, {'language': 'en',
+                                         'translation_dir': 'translations/'})
     dv1.run(0)

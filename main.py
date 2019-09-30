@@ -12,25 +12,42 @@ else:
 
 if __name__ == '__main__':
     import random
+    from hashlib import md5
     from datetime import datetime
     from embr_survey.window import ExpWindow
-    import embr_survey.dvs
+    import embr_survey.dvs as dvs
+    from embr_survey import setup_logger
+    import logging
     win = ExpWindow()
 
     # intro dialog--
     # - set participant ID
     # - set language
     # - set localization (i.e. different pics in DV5)
-    settings = intro_dlg(win)
-    settings['data_dir'] = os.path.join(application_path, 'data/')
+    #settings = intro_dlg(win)
+    settings = {'id': 'test', 'language': 'en', 'locale': 'us'}
+    settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
+    settings['translation_dir'] = os.path.join(application_path, 'translations/')
+    os.makedirs(settings['data_dir'], exist_ok=True)
+    # can access logger using `my_logger = logging.getLogger('embr_survey')`
+    setup_logger(settings['data_dir'])
     # sanity check that all questions, values, images
     # are accounted for
-
     exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
-    seed = hash(settings['id'] + exp_start)
+    # + exp_start if want no chance of collision
+    seed = md5(settings['id'].encode('utf-8')).hexdigest()
     random.seed(seed)
 
+    logger = logging.getLogger('embr_survey')
+    logger.info('Starting experiment for %s' % settings['id'])
+    logger.info('Datetime of start (YMD-HMS): %s' % exp_start)
+    logger.info('Seed: %s' % seed)
+    logger.info('Language: %s' % settings['language'])
+    logger.info('Locale: %s' % settings['locale'])
+    logger.info('----------')
+
     # TODO: generate all DVs
+    dvs = [getattr(dvs, d) for d in dir(dvs) if d.startswith('DV')]
     dvs = [d(win, block_num, settings) for block_num, d in enumerate(dvs)]
 
     # set the order
@@ -44,8 +61,9 @@ if __name__ == '__main__':
     # run all DVs
     for dv, temp_level in zip(dvs, temperature_levels):
         # TODO please wait
+        logger.info('Setting Embr Wave temperature to %i' % temp_level)
         # set temperature level for next dv
         dv.run(temp_level)
 
     # post-questionnaire (TODO: note about also including pre-)
-    post_questions(settings)
+    # post_questions(settings)

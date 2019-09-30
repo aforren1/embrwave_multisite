@@ -1,5 +1,6 @@
 
 import imgui
+import logging
 
 
 class QuestionBlock(object):
@@ -14,6 +15,7 @@ class QuestionBlock(object):
         self.questions = questions
         self.states = [_state([False] * len(header)) for i in range(len(questions))]
         self.id = hash(''.join(questions) + ''.join(header))
+        self._log = logging.getLogger('embr_survey')
 
     def update(self):
         # get current width
@@ -26,7 +28,7 @@ class QuestionBlock(object):
         # prompt text
         imgui.begin_child('##title%s' % self.id, total_wid, height=160)
         with imgui.font(self.win.impl.bold_font):
-            imgui.push_text_wrap_pos(0)
+            imgui.push_text_wrap_pos(total_wid//2)
             imgui.text(self.prompt)
             imgui.pop_text_wrap_pos()
         imgui.end_child()
@@ -89,6 +91,10 @@ class QuestionBlock(object):
                     imgui.same_line(position=font_height//2)
                     _, enabled = imgui.checkbox(tmp + 'chk',
                                                 self.states[count][i])
+                    if enabled and not self.states[count][i]:
+                        self._log.info('Question %i (%s), element %i selected' % (count, question, i))
+                    elif not enabled and self.states[count][i]:
+                        self._log.info('Question %i (%s), element %i deselected' % (count, question, i))
                     imgui.set_window_font_scale(1)
                     self.states[count][i] = enabled
                     imgui.end_child()  # end checkbox
