@@ -1,0 +1,20 @@
+[prompt]
+en = "In this section we will ask several questions about how you are feeling. For each question, please select the number that best represents your current feelings."
+
+[header]
+en = ["1\nNot at all", "2", "3", "4", "5\nExtremely"]
+
+[[question]]
+en = 'I feel "disconnected"'
+
+[[question]]
+en = 'I feel rejected'
+
+[[question]]
+en = 'I feel like an outsider'
+
+[[question]]
+en = 'I feel I belong'
+
+[[question]]
+en = 'I feel other people interact with me a lot'
