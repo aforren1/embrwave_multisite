@@ -18,6 +18,8 @@ if __name__ == '__main__':
     import embr_survey.dvs as dvs
     from embr_survey import setup_logger
     import logging
+
+    exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
     win = ExpWindow()
 
     # intro dialog--
@@ -28,15 +30,16 @@ if __name__ == '__main__':
     settings = {'id': 'test', 'language': 'en', 'locale': 'us'}
     settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
     settings['translation_dir'] = os.path.join(application_path, 'translations/')
+    settings['datetime_start'] = exp_start
     os.makedirs(settings['data_dir'], exist_ok=True)
     # can access logger using `my_logger = logging.getLogger('embr_survey')`
-    setup_logger(settings['data_dir'])
+    setup_logger(settings['data_dir'], exp_start)
     # sanity check that all questions, values, images
     # are accounted for
-    exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
     # + exp_start if want no chance of collision
     seed = md5(settings['id'].encode('utf-8')).hexdigest()
     random.seed(seed)
+    settings['seed'] = seed
 
     logger = logging.getLogger('embr_survey')
     logger.info('Starting experiment for %s' % settings['id'])

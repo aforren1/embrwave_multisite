@@ -6,14 +6,14 @@ OpenGL.ERROR_CHECKING = False
 pyglet.options['debug_gl'] = False
 
 
-def setup_logger(pth):
+def setup_logger(pth, now):
     import os
     import logging
     embr_logger = logging.getLogger('embr_survey')
     embr_logger.setLevel(logging.INFO)
     sh = logging.StreamHandler()
     sh.setLevel(logging.INFO)
-    fh = logging.FileHandler(os.path.join(pth, 'log.log'))
+    fh = logging.FileHandler(os.path.join(pth, '%slog.log' % now))
     fh.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)

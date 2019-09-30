@@ -5,6 +5,7 @@ from embr_survey.question import QuestionBlock
 from embr_survey.imgui_common import ok_button
 from pip._vendor import pytoml as toml
 import os
+import csv
 
 
 class DV01SimilarityObjects(BaseDv):
@@ -42,6 +43,23 @@ class DV01SimilarityObjects(BaseDv):
             done = ok_button(self.win.impl.reg_font, no_nones)
             self.win.flip()
         # save data, fade out
+        settings = self.settings
+        csv_name = os.path.join(settings['data_dir'], 'dv01_%s.csv' % now)
+        num_q = len(self.questions)
+        data = {'participant_id': num_q * [settings['id']],
+                'datetime_start_exp': num_q * [settings['datetime_start']],
+                'datetime_start_block': num_q * [now],
+                'language': num_q * [settings['language']],
+                'locale': num_q * [settings['locale']],
+                'seed': num_q * [settings['seed']],
+                'questions': self.questions,
+                'responses': current_answers,
+                'dv': num_q * ['dv01_similarity_objects']}
+        keys = sorted(data.keys())
+        with open(csv_name, "w") as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
 
 
 if __name__ == '__main__':
