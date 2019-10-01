@@ -28,7 +28,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/aforren1/embrwave-multisite",
     packages=setuptools.find_packages(),
-    package_data={'embr_survey': ['fonts/*']},
+    package_data={'embr_survey': ['fonts/*', 'images/*']},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
