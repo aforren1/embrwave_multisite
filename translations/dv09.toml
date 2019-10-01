@@ -1,0 +1,66 @@
+[prompt]
+en = '''The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by selecting one of the responses below. Here is an example:
+
+	How often do you feel happy?
+
+If you never felt happy, you would respond "never"; if you always feel happy, you would respond "always." '''
+
+[header]
+en = ["Never", "Rarely", "Sometimes", "Always"]
+
+[[question]]
+en = 'How often do you feel that you are "in tune" with the people around you?'
+
+[[question]]
+en = "How often do you feel that you lack companionship?"
+
+[[question]]
+en = "How often do you feel that there is no one you can turn to?"
+
+[[question]]
+en = "How often do you feel alone?"
+
+[[question]]
+en = "Hoe often do you feel part of a group of friends?"
+
+[[question]]
+en = "How often do you feel that you have a lot in common with the people around you?"
+
+[[question]]
+en = "How often do you feel that you are no longer close to anyone?"
+
+[[question]]
+en = "How often do you feel that your interests and ideas are not shared by those around you?"
+
+[[question]]
+en = "How often do you feel outgoing and friendly?"
+
+[[question]]
+en = "How often do you feel close to people?"
+
+[[question]]
+en = "How often do you feel left out?"
+
+[[question]]
+en = "How often do you feel that your relationships with others are not meaningful?"
+
+[[question]]
+en = "How often do you feel that no one really knows you well?"
+
+[[question]]
+en = "How often do you feel isolated from others?"
+
+[[question]]
+en = "How often do you feel that you can find companionship when you want it?"
+
+[[question]]
+en = "How often do you feel shy?"
+
+[[question]]
+en = "How often do you feel that people are around you but not with you?"
+
+[[question]]
+en = "How often do you feel that there are people you can talk to?"
+
+[[question]]
+en = "How often do you feel that there are people you can turn to?"
