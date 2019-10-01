@@ -1,0 +1,19 @@
+[prompt]
+en = "In this next section, we will ask you to read several scenarios and indicate your opinion about them."
+
+[header]
+en = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
+
+[[subprompts]]
+en =  """Enemy soldiers have taken over your village. They have orders to kill all remaining civilians. You and some of your townspeople have sought refuge in the cellar of a large house. Outside you hear the voices of soldiers who have come to search the house for valuables.
+Your baby begins to cry loudly. You cover his mouth to block the sound. If you remove your hand from his mouth his crying will summon the attention of the soldiers who will kill you, your child, and the others hiding out in the cellar. To save yourself and the others you must smother your child to death."""
+
+[[question]]
+en = "Is it appropriate for you to smother your child in order to save yourself and the other townspeople?"
+
+[[subprompts]]
+en = """A runaway trolley is heading down the tracks toward five workmen who will be killed if the trolley proceeds on its present course. You are on a footbridge over the tracks, in between the approaching trolley and the five workmen. Next to you on this footbridge is a stranger who happens to be very large.
+The only way to save the lives of the five workmen is to push this stranger off the bridge and onto the tracks below where his large body will stop the trolley. The stranger will die if you do this, but the five workmen will be saved."""
+
+[[question]]
+en = "Is it appropriate for you to push the stranger on to the tracks in order to save the five workmen?"
