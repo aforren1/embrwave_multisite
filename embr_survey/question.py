@@ -28,7 +28,7 @@ class QuestionBlock(object):
         # prompt text
         imgui.begin_child('##title%s' % self.id, total_wid, height=160)
         with imgui.font(self.win.impl.bold_font):
-            imgui.push_text_wrap_pos(total_wid//2)
+            imgui.push_text_wrap_pos(3*total_wid//4)
             imgui.text(self.prompt)
             imgui.pop_text_wrap_pos()
         imgui.end_child()

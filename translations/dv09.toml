@@ -3,7 +3,7 @@ en = '''The following statements describe how people sometimes feel. For each st
 
 	How often do you feel happy?
 
-If you never felt happy, you would respond "never"; if you always feel happy, you would respond "always." '''
+If you never felt happy, you would respond "never"; if you always feel happy, you would respond "always."'''
 
 [header]
 en = ["Never", "Rarely", "Sometimes", "Always"]
