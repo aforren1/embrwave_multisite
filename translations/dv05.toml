@@ -1,0 +1,53 @@
+[prompt]
+en = "Next, we are going to present you with a house. After reading the information and examining the photos, we’ll ask you what you think about the house."
+
+[title]
+en = "Layout"
+
+[f1]
+en = """Ground floor:
+Hallway, toilet and sink, and stairs to the first floor. Living room at the front of the house, dining area and open kitchen located at the rear of the house."""
+
+[f2]
+# sub in locale info
+en = """%s:
+Hallway offering access to four bedrooms and a bathroom. Two bedrooms are located on the front of the house, and two bedrooms are located on the back."""
+
+[f3]
+en = """Third floor:
+Here is the 5th bedroom."""
+
+[prompt2]
+en = """Now, we will ask you to rate how you feel about the house on several different dimensions. The scale is always the same: 1 = not at all, 7 = to a great extent
+
+To what extent does the property seem (or feel)..."""
+
+[header]
+en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nTo a great\nextent"]
+
+[[question]]
+en = "Safe"
+
+[[question]]
+en = "Familiar"
+
+[[question]]
+en = "Warm"
+
+[[question]]
+en = "Like a 'home'"
+
+[[question]]
+en = "Soothing"
+
+[[question]]
+en = "Relaxing"
+
+[[question]]
+en = "Comfortable"
+
+[[question]]
+en = "Private"
+
+[[question]]
+en = "Like a quality house"
