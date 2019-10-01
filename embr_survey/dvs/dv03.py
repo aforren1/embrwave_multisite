@@ -3,11 +3,10 @@ import os
 import random
 from datetime import datetime
 
+from embr_survey.dvs.base_dv import BaseDv
 from embr_survey.imgui_common import ok_button
 from embr_survey.question import QuestionBlock
 from pip._vendor import pytoml as toml
-
-from embr_survey.dvs.base_dv import BaseDv
 
 
 class DV03Utilitarian(BaseDv):
@@ -28,9 +27,9 @@ class DV03Utilitarian(BaseDv):
         header = translation['header'][lang]
 
         # questions
-        self.questions = [('q%i' % i, pr[lang], q[lang]) for i, (pr, q) in enumerate(zip(translation['subprompts'], translation['question']))]
+        self.questions = [('q%i' % i, pr[lang], q[lang]) for i, (pr, q) in enumerate(zip(translation['subprompt'], translation['question']))]
 
         # new ordering
         random.shuffle(self.questions)
 
-        # one question block per
+        # one question block per page

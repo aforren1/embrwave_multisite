@@ -4,16 +4,52 @@ en = "In this next section, we will ask you to read several scenarios and indica
 [header]
 en = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
 
-[[subprompts]]
+[[subprompt]]
 en =  """Enemy soldiers have taken over your village. They have orders to kill all remaining civilians. You and some of your townspeople have sought refuge in the cellar of a large house. Outside you hear the voices of soldiers who have come to search the house for valuables.
 Your baby begins to cry loudly. You cover his mouth to block the sound. If you remove your hand from his mouth his crying will summon the attention of the soldiers who will kill you, your child, and the others hiding out in the cellar. To save yourself and the others you must smother your child to death."""
 
 [[question]]
 en = "Is it appropriate for you to smother your child in order to save yourself and the other townspeople?"
 
-[[subprompts]]
+[[subprompt]]
 en = """A runaway trolley is heading down the tracks toward five workmen who will be killed if the trolley proceeds on its present course. You are on a footbridge over the tracks, in between the approaching trolley and the five workmen. Next to you on this footbridge is a stranger who happens to be very large.
 The only way to save the lives of the five workmen is to push this stranger off the bridge and onto the tracks below where his large body will stop the trolley. The stranger will die if you do this, but the five workmen will be saved."""
 
 [[question]]
 en = "Is it appropriate for you to push the stranger on to the tracks in order to save the five workmen?"
+
+[[subprompt]]
+en = """You are the leader of a mountaineering expedition that is stranded in the wilderness. Your expedition includes a family of six that has a genetically caused vitamin deficiency. A few people's kidneys contain large amounts of this vitamin.
+There is one such person in your party. The only way to save the lives of the six members of this family is to remove one of this man's kidneys so that the necessary vitamins may be extracted from it. The man will not die if you do this, but his health will be compromised. The man is opposed to this plan, but you have the power to do as you see fit."""
+
+[[question]]
+en = "Is it appropriate for you to forcibly remove this man's kidney in order to save the lives of the six vitamin-deficient people?"
+
+[[subprompt]]
+en = """You are the leader of a small army that consists of warriors from two tribes, the hill tribe and the river tribe. You belong to neither tribe. During the night a hill tribesman got into an argument with a river tribesman and murdered him. The river tribe will attack the hill tribe unless the murderer is put to death, but the hill tribe refuses to kill one of its own warriors.
+The only way for you to avoid a war between the two tribes that will costs hundreds of lives is to publicly execute the murderer by cutting off is head with your sword."""
+
+[[question]]
+en = "Is it appropriate for you to cut off this man's head in order to prevent the two tribes from fighting a war that will cost hundreds of lives?"
+
+[[subprompt]]
+en = """You are negotiating with a powerful and determined terrorist who is about to set off a bomb in a crowded area. Your one advantage is that you have his teen-age son in your custody.
+There is only one thing that you can do to stop him from detonating his bomb, which will kill thousands of people if detonated. To stop him, you must contact him over the satellite hook-up that he has established and, in front of the camera, break one of his son's arms and then threaten to break the other one if he does not give himself up."""
+
+[[question]]
+en = "Is it appropriate for you to break the terrorist's son's arm in order to prevent the terrorist from killing thousands of people with his bomb?"
+
+[[subprompt]]
+en = """You are the captain of a military submarine travelling underneath a large iceberg. An onboard explosion has caused you to lose most of your oxygen supply and has injured one of your crew who is quickly losing blood. The injured crew member is going to die from his wounds no matter what happens.
+The remaining oxygen is not sufficient for the entire crew to make it to the surface. The only way to save the other crew members is to shoot dead the injured crew member so that there will be just enough oxygen for the rest of the crew to survive."""
+
+[[question]]
+en = "Is it appropriate for you to kill the fatally injured crew member in order to save the lives of the remaining crew members?"
+
+[[subprompt]]
+en = """You are a doctor. One of your patients, whom you diagnosed as HIV positive, is about to be released from the hospital. He has told you, in the confidence of your doctor-patient relationship, that he intends to infect as many people as possible with HIV starting that evening.
+Because you are bound by doctor-patient confidentiality, there is no legal way to stop this man from carrying out his plan. It occurs to you that you could contaminate his medication with an untraceable poison that will kill him before he gets a chance to infect others."""
+
+[[question]]
+en = "Is it appropriate for you to poison this man in order to prevent him from spreading HIV?"
+
