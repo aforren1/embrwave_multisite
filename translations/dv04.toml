@@ -1,0 +1,65 @@
+[prompt]
+en = "Using the following scale, select a number to indicate what you miss right now about when you were younger and how much you miss it: 1 = not at all, 7 = very much."
+
+[header]
+en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nVery much"]
+
+[[question]]
+en = "Family"
+
+[[question]]
+en = "Heroes or heroines"
+
+[[question]]
+en = "Not having to worry"
+
+[[question]]
+en = "Places"
+
+[[question]]
+en = "Music"
+
+[[question]]
+en = "Someone you loved"
+
+[[question]]
+en = "Friends"
+
+[[question]]
+en = "Things you did"
+
+[[question]]
+en = "Toys"
+
+[[question]]
+en = "The way people were"
+
+[[question]]
+en = "Feelings you had"
+
+[[question]]
+en = "TV shows, movies"
+
+[[question]]
+en = "School"
+
+[[question]]
+en = "Having someone to depend on"
+
+[[question]]
+en = "Holidays"
+
+[[question]]
+en = "The way society was"
+
+[[question]]
+en = "Pets or pets" # ???
+
+[[question]]
+en = "Not knowing sad or evil things"
+
+[[question]]
+en = "Church or temple, etc."
+
+[[question]]
+en = "Your house"

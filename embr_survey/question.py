@@ -58,7 +58,8 @@ class QuestionBlock(object):
         # add checkboxes
         q_chk_height = 100
         hei = imgui.get_window_height()
-        imgui.begin_child('##ans%s' % self.id, total_wid, height=q_chk_height*len(self.questions)*1.1)
+        # TODO: should be total height - height of [OK] button
+        imgui.begin_child('##ans%s' % self.id, total_wid, height=hei*0.7)
         if imgui.is_window_hovered():
             imgui.set_scroll_y(imgui.get_scroll_y() -
                                imgui.get_io().mouse_wheel * 30)
