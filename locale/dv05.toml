@@ -1,7 +1,7 @@
 # if missing key, take US as default?
 [house_cost]
 us = '$225,000'
-eu = '€205,740'
+eu = '205,740 euros'
 
 [floor_label]
 us = ['Second floor', 'Third floor']

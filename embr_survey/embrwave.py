@@ -111,7 +111,7 @@ class EmbrWave(object):
         self.write(EmbrVal.LEVEL, value)
 
     @property
-    def battery(self):
+    def battery_charge(self):
         return self.read(EmbrVal.BATTERY_CHARGE)
 
     @property
