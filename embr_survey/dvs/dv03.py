@@ -17,7 +17,7 @@ class DV03Utilitarian(BaseDv):
         self.win = win
         self.settings = settings
         self.block_num = block_num
-        # TODO: load from external?
+        # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.short_name)
         with open(translation_path, 'r') as f:

@@ -7,7 +7,7 @@ if True:
 # load an image
 ctx = mgl.create_context()
 ctx.enable(mgl.BLEND)
-dv5_1 = pyglet.image.load('../images/dv5_1.png')
+dv5_1 = pyglet.image.load('dv5_1.png')
 texture = ctx.texture((dv5_1.width, dv5_1.height), 4, dv5_1.get_data())
 w, h = 3*texture.width, 3*texture.height
 center_x, center_y = win.width//2, win.height//2

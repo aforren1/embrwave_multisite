@@ -1,7 +1,16 @@
 [prompt]
 en = "Next, we are going to present you with a house. After reading the information and examining the photos, we’ll ask you what you think about the house."
 
-[title]
+[preprompt]
+en = 'What do you think about this house?'
+
+[big_title]
+en = "General Information"
+
+[background]
+en = "The resale value of the house is %s. It has six bedrooms, it's located close to several parks, schools, and public transportation. The property has a large master bedroom, kitchen, and backyard."
+
+[subtitle]
 en = "Layout"
 
 [f1]
@@ -14,7 +23,7 @@ en = """%s:
 Hallway offering access to four bedrooms and a bathroom. Two bedrooms are located on the front of the house, and two bedrooms are located on the back."""
 
 [f3]
-en = """Third floor:
+en = """%s:
 Here is the 5th bedroom."""
 
 [prompt2]

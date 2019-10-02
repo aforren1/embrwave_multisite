@@ -30,6 +30,7 @@ if __name__ == '__main__':
     settings = {'id': 'test', 'language': 'en', 'locale': 'us'}
     settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
     settings['translation_dir'] = os.path.join(application_path, 'translations/')
+    settings['locale_dir'] = os.path.join(application_path, 'locale/')
     settings['datetime_start'] = exp_start
     os.makedirs(settings['data_dir'], exist_ok=True)
     # can access logger using `my_logger = logging.getLogger('embr_survey')`
