@@ -25,6 +25,32 @@ class EmbrVal(object):
 # generally 800ms between commands
 
 
+class DummyWave(object):
+    def __init__(self):
+        self.level = -1
+        self.battery = -1
+        self.firmware_version = -1
+        self.device_id = -1
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        pass
+
+    def write(self, uuid, value):
+        pass
+
+    def read(self, uuid):
+        return -1
+
+    def blink(self):
+        pass
+
+    def stop(self):
+        pass
+
+
 class EmbrWave(object):
     def __init__(self):
         self.adapter = gatt.BGAPIBackend()
@@ -72,8 +98,8 @@ class EmbrWave(object):
 
     def read(self, uuid):
         res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
-        return struct.unpack(uuid[1], res)[0]
         sleep(1)  # TODO: check if this should be longer/shorter
+        return struct.unpack(uuid[1], res)[0]
 
     @property
     def level(self):
