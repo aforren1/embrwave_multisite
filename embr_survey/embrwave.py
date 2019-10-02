@@ -127,3 +127,15 @@ class EmbrWave(object):
 
     def stop(self):
         self._write(EmbrVal.STOP, [0x00, 0x00, 0x00, 0x20])
+
+
+if __name__ == '__main__':
+    # device already needs to be in pairing mode!
+    embr = EmbrWave()  # TODO: explicitly pass in address?
+
+    with embr:
+        print(embr.device_id)
+        print(embr.firmware_version)
+        for i in range(5):
+            embr.blink()
+            sleep(0.5)
