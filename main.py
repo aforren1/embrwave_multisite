@@ -27,7 +27,7 @@ if __name__ == '__main__':
     # - set language
     # - set localization (i.e. different pics in DV5)
     #settings = intro_dlg(win)
-    settings = {'id': 'test', 'language': 'en', 'locale': 'us'}
+    settings = {'id': 'test', 'language': 'en', 'locale': 'eu'}
     settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
     settings['translation_dir'] = os.path.join(application_path, 'translations/')
     settings['locale_dir'] = os.path.join(application_path, 'locale/')
