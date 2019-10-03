@@ -9,7 +9,7 @@ class EmbrVal(object):
     # Some of these are read only/write only, and we don't
     # currently enforce any of that
     FIRMWARE_VERSION = ('4001', '<I')  # uint32_t
-    DEVICE_ID = ('4002', '<HI')  # uint32_t
+    DEVICE_ID = ('4002', '<HI')  # uint32_t?? But it sends 6 bytes...
     BEACON = ('4003', '<?')  # bool (write only)
     LEVEL = ('4005', '<b')  # int8_t
     STATE = ('4006', '<B')  # uint8_t
@@ -82,6 +82,7 @@ class EmbrWave(object):
 
     @level.setter
     def level(self, value):
+        self.stop()
         self.write(EmbrVal.LEVEL, value)
 
     @property
@@ -126,11 +127,35 @@ class DummyWave(object):
     def read(self, uuid):
         return -1
 
+    @property
+    def level(self):
+        return -1
+
+    @level.setter
+    def level(self, value):
+        pass
+
+    @property
+    def battery_charge(self):
+        return -1
+
+    @property
+    def firmware_version(self):
+        return -1
+
+    @property
+    def device_id(self):
+        return -1
+
     def blink(self):
         pass
 
     def stop(self):
         pass
+
+    @property
+    def state(self):
+        return -1
 
 
 
@@ -149,7 +174,6 @@ if __name__ == '__main__':
         print(embr.level)
         sleep(3)
         print('now warming')
-        embr.stop()
         embr.level = 9
         sleep(6)
         print(embr.level)
