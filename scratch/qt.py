@@ -1,6 +1,9 @@
 import sys
 from PyQt5.QtCore import Qt, QMargins
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QRadioButton, QGridLayout, QCheckBox, QSizePolicy, QButtonGroup
+from PyQt5.QtGui import QPixmap
+from functools import partial
+
 
 if __name__ == '__main__':
     app = QApplication([])
@@ -8,6 +11,8 @@ if __name__ == '__main__':
     window = QWidget()
     policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
     grid = QGridLayout()
+
+    dv5_1 = QPixmap('dv5_1.png')
 
     grid.addWidget(QLabel('Reserved'), 0, 0)
     header = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
@@ -27,6 +32,9 @@ if __name__ == '__main__':
             qbg.addButton(rad)
             grid.addWidget(rad, i+1, count+1, alignment=Qt.AlignCenter)
 
+    lab = QLabel()
+    lab.setPixmap(dv5_1)
+    grid.addWidget(lab, 0, 0)
     window.setLayout(grid)
     window.show()
 
