@@ -34,6 +34,7 @@ if __name__ == '__main__':
     settings['datetime_start'] = exp_start
     os.makedirs(settings['data_dir'], exist_ok=True)
     # can access logger using `my_logger = logging.getLogger('embr_survey')`
+    # blocks have it built in as `self._log`
     setup_logger(settings['data_dir'], exp_start)
     # sanity check that all questions, values, images
     # are accounted for

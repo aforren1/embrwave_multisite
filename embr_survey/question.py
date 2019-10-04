@@ -8,13 +8,13 @@ class QuestionBlock(object):
     # - a prompt (potentially a big block of text)
     # - A header for the survey block (informs how many responses are possible)
     # - A list of questions
-    def __init__(self, win, prompt, header, questions):
+    def __init__(self, win, prompt, header, questions, extra_id=''):
         self.win = win
         self.prompt = prompt
         self.header = header
         self.questions = questions
         self.states = [_state([False] * len(header)) for i in range(len(questions))]
-        self.id = hash(''.join(questions) + ''.join(header))
+        self.id = hash(''.join(questions) + ''.join(header) + extra_id)
         self._log = logging.getLogger('embr_survey')
 
     def update(self):

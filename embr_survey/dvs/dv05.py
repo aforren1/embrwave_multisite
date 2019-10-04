@@ -5,18 +5,11 @@ import imgui
 from datetime import datetime
 from pkg_resources import resource_filename
 
-from pyglet import image
+from embr_survey import get_texture_id
 from embr_survey.dvs.base_dv import BaseDv
 from embr_survey.imgui_common import ok_button
 from embr_survey.question import QuestionBlock
 from pip._vendor import pytoml as toml
-
-
-def get_texture_id(pth, context):
-    img = image.load(pth)
-    # TODO: this is *total* overkill-- should be able to just use pyglet's GL
-    texture = context.texture((img.width, img.height), 4, img.get_data())
-    return texture.glo
 
 
 class DV05HousesHomelikeness(BaseDv):

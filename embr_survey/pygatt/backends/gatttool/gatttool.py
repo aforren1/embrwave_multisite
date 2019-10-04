@@ -13,9 +13,9 @@ import subprocess
 from uuid import UUID
 from contextlib import contextmanager
 
-from pygatt.exceptions import NotConnectedError, BLEError, NotificationTimeout
-from pygatt.backends import BLEBackend, Characteristic, BLEAddressType
-from pygatt.backends.backend import DEFAULT_CONNECT_TIMEOUT_S
+from embr_survey.pygatt.exceptions import NotConnectedError, BLEError, NotificationTimeout
+from embr_survey.pygatt.backends import BLEBackend, Characteristic, BLEAddressType
+from embr_survey.pygatt.backends.backend import DEFAULT_CONNECT_TIMEOUT_S
 from .device import GATTToolBLEDevice
 
 log = logging.getLogger(__name__)

@@ -38,3 +38,12 @@ def setup_logger(pth, now):
     sl = StreamToLogger(embr_logger, logging.ERROR)
     sys.stderr = sl
     embr_logger.addHandler(fh)
+
+
+def get_texture_id(pth, context):
+    from pyglet import image
+
+    img = image.load(pth)
+    # TODO: this is *total* overkill-- should be able to just use pyglet's GL
+    texture = context.texture((img.width, img.height), len(img.format), img.get_data())
+    return texture.glo

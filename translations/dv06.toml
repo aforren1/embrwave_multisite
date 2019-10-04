@@ -1,0 +1,13 @@
+[prompt]
+en = "In this section we will show you pictures of people who committed crimes ('mugshots') from an online database. Each of these individuals committed a crime, but we will ask you about the type of crime you think each one committed."
+
+[header]
+en = ["1\nVery unlikely", "2", "3", "4", "5", "6", "7\nVery likely"]
+
+
+[[question]]
+# TODO: add emphasis? We have the bold font loaded already...
+en = "How likely is it that this person committed a premeditated crime?"
+
+[[question]]
+en = "How likely is it that this person committed an impulsive crime?"

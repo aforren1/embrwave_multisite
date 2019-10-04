@@ -1,14 +1,18 @@
 import csv
+import logging
 import os
 import random
 from datetime import datetime
 
+from pip._vendor import pytoml as toml
+
 from embr_survey.imgui_common import ok_button
 from embr_survey.question import QuestionBlock
-from pip._vendor import pytoml as toml
 
 
 class BaseDv(object):
+    _log = logging.getLogger('embr_survey')
+
     def __init__(self, win, settings):
         # read images, ...
         pass

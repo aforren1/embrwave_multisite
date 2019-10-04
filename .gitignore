@@ -10,4 +10,5 @@ dist/
 *.spec
 build/
 data/
+*.docx#
 
