@@ -1,0 +1,8 @@
+[prompt]
+en = """In this next section, you will be asked to assess 6 figures. A 'target object' will be shown at the top of the screen, with two other objects below it. The goal is for you to judge which of the two objects looks like the one at the top. Do not think too long, instead use your first instinct. There is no right or wrong!\n\nFirst, we will give you a sample question so you know what it looks like."""
+
+[prompt2]
+en = "That was the sample question. You will get 6 more figures to evaluate. The question remains the same: Which object (A or B) most resembles the target object to you? Good luck!"
+
+[question]
+en = "Which object most resembles the target object to you? [Object A/Object B]"

@@ -13,9 +13,9 @@ from embr_survey.question import QuestionBlock
 from pip._vendor import pytoml as toml
 
 
-class DV06CriminalRating(BaseDv):
-    short_name = 'dv06'
-    name = 'dv06_criminal_rating'
+class DV07_PerceptualFocus(BaseDv):
+    short_name = 'dv07'
+    name = 'dv07_perceptual_focus'
 
     def __init__(self, win, block_num, settings):
         self.win = win
@@ -28,21 +28,21 @@ class DV06CriminalRating(BaseDv):
 
         # load images
         # TODO: shuffle images?
-        img_names = ['dv6_%i.png' % i for i in range(1, 9, 1)]
+        img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
         self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
         self.images = [get_texture_id(pth, win.context) for pth in self.img_names]
 
         self.prompt = translation['prompt'][lang]
-        header = translation['header'][lang]
-
+        self.prompt2 = translation['prompt2'][lang]
+        self.header = ['A', 'B']
+        question = translation['question'][lang]
         self.qblocks = []
         self.questions = []
-        # we need to add extra ID for questions
         for count, img in enumerate(img_names):
-            qs = [('q%i_%i' % (i, count), q[lang]) for i, q in enumerate(translation['question'])]
-            self.questions.extend(qs)
-            self.qblocks.append(QuestionBlock(win, '', header=header,
-                                              questions=[q[1] for q in qs],
+            qs = ('q%i' % count, question)
+            self.questions.append(qs)
+            self.qblocks.append(QuestionBlock(win, '', header=self.header,
+                                              questions=[qs[1]],
                                               extra_id=img))
 
     def run(self, temperature):
@@ -53,7 +53,7 @@ class DV06CriminalRating(BaseDv):
             imgui.text(self.prompt)
             done = ok_button(self.win.impl.reg_font, True)
             self.win.flip()
-        # 1 page per mug
+        # 1 page per image
         for count, qblock in enumerate(self.qblocks):
             done = False
             self._log.info('Starting image %s.' % self.img_names[count])
@@ -64,24 +64,33 @@ class DV06CriminalRating(BaseDv):
                 done = ok_button(self.win.impl.reg_font, no_nones)
                 self.win.flip()
             # TODO: fade between questions
-            answers.extend(current_answers)
+            # we only have one question per image, and we want A/B at the end
+            str_ans = self.header[current_answers[0]-1] if current_answers[0] is not None else None
+            answers.append(str_ans)
+
+            if count == 0:
+                done = False
+                while not done:
+                    imgui.text(self.prompt2)
+                    done = ok_button(self.win.impl.reg_font, True)
+                    self.win.flip()
+
         # save data, fade out
         settings = self.settings
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.short_name, now))
         num_q = len(self.questions)
-        rep_img_names = list(itertools.chain.from_iterable(itertools.repeat(os.path.basename(x), 2) for x in self.img_names))
         data = {'participant_id': num_q * [settings['id']],
                 'datetime_start_exp': num_q * [settings['datetime_start']],
                 'datetime_start_block': num_q * [now],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': ['...' + q[1][-20:] for q in self.questions],
+                'questions': ['...' + q[1][:20] for q in self.questions],
                 'question_original_order': [q[0] for q in self.questions],
                 'responses': answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [temperature],
-                'images': rep_img_names}
+                'images': self.img_names}
         keys = sorted(data.keys())
         with open(csv_name, "w") as f:
             writer = csv.writer(f, delimiter=",")
