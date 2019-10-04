@@ -13,7 +13,7 @@ from embr_survey.question import QuestionBlock
 from pip._vendor import pytoml as toml
 
 
-class DV07_PerceptualFocus(BaseDv):
+class DV07PerceptualFocus(BaseDv):
     short_name = 'dv07'
     name = 'dv07_perceptual_focus'
 
