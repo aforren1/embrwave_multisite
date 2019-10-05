@@ -22,6 +22,14 @@ class MainWindow(object):
         self.win.setLayout(self.main_layout)
 
         # main scroll area
+        self.scrollarea = qtw.QScrollArea()
+        self.scrollarea.setWidgetResizable(False)
+        self.scrollarea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollarea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)  # TODO: check
+        self.scrollarea.setFixedSize(1.1 * rect.height(), 0.85*rect.height())
+        widget = qtw.QWidget()
+        self.scrollarea.setWidget(widget)
+        self.main_layout.addWidget(widget, 1, 1, 1, 1, Qt.AlignCenter)
 
         # handle stack of widgets
         self.widgets = qtw.QStackedWidget()
