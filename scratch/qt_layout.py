@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QImage
 from functools import partial
 
 
@@ -35,16 +35,41 @@ if __name__ == '__main__':
     main_layout = qtw.QGridLayout()
 
     # stack
-    stack = qtw.QStackedWidget()
-    stack.setFixedSize(1.1 * rect.height(), 0.85*rect.height())
-    main_layout.addWidget(stack, 1, 1)
+    scroll = qtw.QScrollArea()
+    scroll.setWidgetResizable(False)
+    scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    scroll.setFixedSize(1.1 * rect.height(), 0.85*rect.height())
+    scroll_wid = qtw.QWidget()
+    scroll.setWidget(scroll_wid)
+    scroll_area = qtw.QVBoxLayout(scroll_wid)
+    scroll_area.addStretch(1)
 
-    pic = QPixmap('dv5_1.png')
+    stack = qtw.QStackedWidget()
+    scroll_area.addWidget(stack, Qt.AlignCenter)
+    scroll_area.addStretch(1)
+
+    #stack.setFixedSize(1.05 * rect.height(), 0.8*rect.height())
+    main_layout.addWidget(scroll_wid, 1, 1, 1, 1, Qt.AlignCenter)
+
+    pic = QImage('dv5_1.png').scaledToHeight(600, Qt.SmoothTransformation)
     pic_inst = qtw.QLabel()
+    # pic_inst.setScaledContents(True)
     pic_inst.setAlignment(Qt.AlignCenter)
-    pic_inst.setPixmap(pic)
+    pic_inst.setPixmap(QPixmap.fromImage(pic))
     pic_inst.setStyleSheet('border:2px solid rgb(0, 0, 0);border-radius:20px;')
-    stack.addWidget(pic_inst)
+
+    pic2 = qtw.QLabel()
+    pic2.setPixmap(QPixmap.fromImage(pic))
+    pic3 = qtw.QLabel()
+    pic3.setPixmap(QPixmap.fromImage(pic))
+    xxx = qtw.QWidget()
+    t0 = qtw.QVBoxLayout()
+    t0.addWidget(pic_inst)
+    t0.addWidget(pic2)
+    t0.addWidget(pic3)
+    t0.addStretch(1)
+    xxx.setLayout(t0)
+    stack.addWidget(xxx)
     stack.setCurrentIndex(0)
 
     tmp = qtw.QLabel('FOOO')
@@ -53,9 +78,18 @@ if __name__ == '__main__':
     # OK button
     ok_button = qtw.QPushButton('Next')
     ok_button.setFixedHeight(0.1*rect.height())
-    ok_button.setStyleSheet('''
-    QPushButton {border:4px solid rgb(0, 0, 0); border-radius:10px;background-color: rgb(255, 0, 0);font: bold 40px;padding: 24px;}
-    QPushButton:pressed { background-color: rgb(255, 128, 128); border-style: inset;}''')
+    base_style = '''
+    QPushButton {border:4px solid rgb(0, 0, 0); 
+                border-radius:10px;
+                font: bold 40px;padding: 24px;}
+    '''
+
+    no_resp_style = '''
+QPushButton {background-color: rgb(120,120,120);color:rgb(60,60,60);}
+QPushButton:pressed {background-color: rgb(0,255,127);}
+'''
+
+    ok_button.setStyleSheet(base_style+no_resp_style)
     ok_button.clicked.connect(partial(toggle_stack, stack))
     main_layout.addWidget(ok_button, 2, 1, 1, 1, Qt.AlignRight)
 
