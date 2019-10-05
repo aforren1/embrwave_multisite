@@ -2,18 +2,12 @@ from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
 from PyQt5.QtGui import QPixmap, QImage
 from functools import partial
+from next_button import NextButton
 
 
 def _exit_on_esc(e):
     if e.key() == Qt.Key_Escape:
         qtw.QApplication.instance().quit()
-
-
-def toggle_stack(stack):
-    choice = qtw.QMessageBox.question(None, '', 'Are you sure? You left some blank.',
-                                      qtw.QMessageBox.Yes | qtw.QMessageBox.No)
-    if choice == qtw.QMessageBox.Yes:
-        stack.setCurrentIndex(not stack.currentIndex())
 
 
 if __name__ == '__main__':
@@ -76,21 +70,8 @@ if __name__ == '__main__':
     stack.addWidget(tmp)
 
     # OK button
-    ok_button = qtw.QPushButton('Next')
-    ok_button.setFixedHeight(0.1*rect.height())
-    base_style = '''
-    QPushButton {border:4px solid rgb(0, 0, 0); 
-                border-radius:10px;
-                font: bold 40px;padding: 24px;}
-    '''
-
-    no_resp_style = '''
-QPushButton {background-color: rgb(120,120,120);color:rgb(60,60,60);}
-QPushButton:pressed {background-color: rgb(0,255,127);}
-'''
-
-    ok_button.setStyleSheet(base_style+no_resp_style)
-    ok_button.clicked.connect(partial(toggle_stack, stack))
+    ok_button = NextButton(rect.height(), stack)
+    ok_button.state = 'incomplete'
     main_layout.addWidget(ok_button, 2, 1, 1, 1, Qt.AlignRight)
 
     window.setLayout(main_layout)
