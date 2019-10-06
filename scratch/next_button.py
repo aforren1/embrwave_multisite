@@ -1,4 +1,5 @@
-from PyQt5.QtCore import Qt
+import sys
+from PyQt5.QtCore import Qt, QPropertyAnimation, QEasingCurve
 import PyQt5.QtWidgets as qtw
 from functools import partial
 
@@ -52,6 +53,7 @@ class NextButton(qtw.QPushButton):
         self.setStyleSheet(base_style + new_sty)
 
     def _callback(self):
+        # TODO: also signal for data saving
         if self.state == 'neutral':
             return
         if self.state == 'incomplete':
@@ -60,4 +62,44 @@ class NextButton(qtw.QPushButton):
                                               qtw.QMessageBox.Yes | qtw.QMessageBox.No)
             if choice != qtw.QMessageBox.Yes:
                 return
+        # all good to keep going, save data (no-op for instructions, but important for surveys)
+        current = self.stack.currentWidget()
+        # current.save_data()
+        self.state = 'neutral'
+        self.eff = qtw.QGraphicsOpacityEffect()
+        current.setGraphicsEffect(self.eff)
+        a = QPropertyAnimation(self.eff, b'opacity')
+        a.setDuration(500)
+        a.setStartValue(1)
+        a.setEndValue(0)
+        a.setEasingCurve(QEasingCurve.Linear)
+        a.finished.connect(self._callback_pt2)
+        a.start(QPropertyAnimation.DeleteWhenStopped)
+        self.a = a  # keep from GC
+
+    # part 2
+    # need to:
+    # - pop off previous widget
+    # - if we're out of widgets
+    def _callback_pt2(self):
+        self.stack.removeWidget(self.stack.currentWidget())
+        if self.stack.count() <= 0:
+            sys.exit(0)
+
+        # move to the next one
         self.stack.setCurrentIndex(self.stack.currentIndex() + 1)
+        new_widget = self.stack.currentWidget()
+        self.eff = qtw.QGraphicsOpacityEffect()
+        new_widget.setGraphicsEffect(self.eff)
+        a = QPropertyAnimation(self.eff, b'opacity')
+        a.setDuration(350)
+        a.setStartValue(0)
+        a.setEndValue(1)
+        a.setEasingCurve(QEasingCurve.OutQuad)
+        a.finished.connect(self._callback_pt3)
+        a.start(QPropertyAnimation.DeleteWhenStopped)
+        self.a = a
+
+    def _callback_pt3(self):
+        # re-enable the button on completion
+        self.state = 'incomplete'
