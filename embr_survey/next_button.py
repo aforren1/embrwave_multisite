@@ -34,7 +34,7 @@ class NextButton(qtw.QPushButton):
         self.setStyleSheet(base_style)
         self.stack = stack
         self.clicked.connect(self._callback)
-        self.state = 'incomplete'
+        self.state = 'complete'
 
     @property
     def state(self):
@@ -58,16 +58,20 @@ class NextButton(qtw.QPushButton):
         # divided into three parts for potential animations between
         # sections-- however, the attempt (9496818f6a9b7ae3694a7f77faa354d96351a53a)
         # seemed to lead to "smearing" artifacts on subsequent widgets...
+        current = self.stack.currentWidget()
+        try:
+            all_ans = current.all_ans()
+        except AttributeError:  # no all_ans attribute, probably a regular widget
+            all_ans = True
         if self.state == 'neutral':
             return
-        if self.state == 'incomplete':
+        if self.state == 'incomplete' or not all_ans:
             choice = qtw.QMessageBox.question(None, '',
                                               'Are you sure? You left some blank.',
                                               qtw.QMessageBox.Yes | qtw.QMessageBox.No)
             if choice != qtw.QMessageBox.Yes:
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
-        current = self.stack.currentWidget()
         current._end_time = datetime.now()
         # implement a save_data if doing a survey section
         if hasattr(current, 'save_data'):
@@ -103,4 +107,4 @@ class NextButton(qtw.QPushButton):
 
     def _callback_pt3(self):
         # re-enable the button on completion
-        self.state = 'incomplete'
+        self.state = 'complete'

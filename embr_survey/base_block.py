@@ -5,8 +5,9 @@ import logging
 
 import PyQt5.QtWidgets as qtw
 from pip._vendor import pytoml as toml
-from PyQt5.QtCore import Qt
-from my_widgets import MultiQuestion
+from PyQt5.QtCore import Qt, pyqtSignal
+from embr_survey.common_widgets import MultiQuestion
+from embr_survey.next_button import NextButton
 
 
 class BaseDV(qtw.QWidget):
@@ -21,9 +22,12 @@ class BaseDV(qtw.QWidget):
     def save_data(self):
         pass
 
+    def all_ans(self):
+        # check if all answered (used by next_button)
+        pass
+
 
 class SimpleDV(BaseDV):
-
     def __init__(self, block_num, temperature, settings):
         super().__init__(block_num, temperature, settings)
         lang = settings['language']
@@ -69,6 +73,9 @@ class SimpleDV(BaseDV):
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
 
+    def all_ans(self):
+        return all([x > 0 for x in self.qs.get_responses()])
+
 
 class DV01SimilarityObjects(SimpleDV):
     name = 'dv01_similarity_objects'
@@ -77,13 +84,13 @@ class DV01SimilarityObjects(SimpleDV):
 
 if __name__ == '__main__':
     from datetime import datetime
-    from base_area import MainWindow
+    from window import MainWindow
 
     app = qtw.QApplication([])
 
     holder = qtw.QLabel('Start.')
     now = datetime.now().strftime('%y%m%d_%H%M%S')
-    dv1 = DV01SimilarityObjects(1, 9,  {'language': 'en', 'translation_dir': './',
+    dv1 = DV01SimilarityObjects(1, 9,  {'language': 'en', 'translation_dir': './translations/',
                                         'data_dir': './data/', 'id': 'test',
                                         'datetime_start': now, 'locale': 'us'})
 
