@@ -58,9 +58,7 @@ class MainWindow(object):
         for widget in widgets:
             widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             self.widgets.addWidget(widget)
-        self.widgets.setCurrentIndex(0)
         self.widgets.setFixedWidth(1.2*self.height)
-        # top_layout.addWidget(self.widgets)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
         self.widgets.adjustSize()

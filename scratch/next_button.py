@@ -1,6 +1,6 @@
 import sys
 from time import sleep
-from PyQt5.QtCore import Qt, QPropertyAnimation, QEasingCurve
+from PyQt5.QtCore import Qt, QTimer
 import PyQt5.QtWidgets as qtw
 from functools import partial
 
@@ -76,7 +76,7 @@ class NextButton(qtw.QPushButton):
     # part 2
     # need to:
     # - pop off previous widget
-    # - if we're out of widgets
+    # - if we're out of widgets, exit
     # TODO: (non-critical, but nice) reset the scrolling region
     def _callback_pt2(self):
         self.stack.removeWidget(self.stack.currentWidget())
@@ -87,7 +87,7 @@ class NextButton(qtw.QPushButton):
         new_widget = self.stack.currentWidget()
         new_widget.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
         self.stack.adjustSize()
-        self._callback_pt3()
+        QTimer.singleShot(500, self._callback_pt3)
 
     def _callback_pt3(self):
         # re-enable the button on completion
