@@ -52,7 +52,7 @@ class MultiQuestion(qtw.QWidget):
         self.qbgs = qbgs
         self.setLayout(grid)
 
-    def save_data(self):
+    def get_responses(self):
         # temporarily called save_data; should be something like get_responses?
         resps = [bg.checkedId() for bg in self.qbgs]
         print(resps)

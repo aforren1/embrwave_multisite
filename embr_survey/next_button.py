@@ -3,6 +3,7 @@ from time import sleep
 from PyQt5.QtCore import Qt, QTimer
 import PyQt5.QtWidgets as qtw
 from functools import partial
+from datetime import datetime
 
 base_style = '''
 QPushButton {border:4px solid rgb(0, 0, 0); 
@@ -67,6 +68,7 @@ class NextButton(qtw.QPushButton):
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
         current = self.stack.currentWidget()
+        current._end_time = datetime.now()
         # implement a save_data if doing a survey section
         if hasattr(current, 'save_data'):
             current.save_data()
@@ -79,6 +81,9 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
+        # TODO: handle StackedWidgets properly? Would allow for more
+        # natural data movement...
+        passed_data = getattr(current_widget, 'passed_data', None)
         current_widget.setSizePolicy(qtw.QSizePolicy.Ignored,
                                      qtw.QSizePolicy.Ignored)
         self.stack.adjustSize()
@@ -88,10 +93,13 @@ class NextButton(qtw.QPushButton):
 
         # move to the next one
         new_widget = self.stack.currentWidget()
+        new_widget._start_time = datetime.now()
+        if passed_data is not None:
+            new_widget.passed_data = passed_data
         new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
                                  qtw.QSizePolicy.Preferred)
         self.stack.adjustSize()
-        QTimer.singleShot(500, self._callback_pt3)
+        QTimer.singleShot(1000, self._callback_pt3)
 
     def _callback_pt3(self):
         # re-enable the button on completion

@@ -1,7 +1,6 @@
 import embr_survey.pygatt as gatt
 import struct
 from time import sleep
-from timeit import default_timer
 
 
 class EmbrVal(object):
@@ -24,12 +23,11 @@ class EmbrVal(object):
 
 # generally 800ms between commands
 
+
 class EmbrWave(object):
     def __init__(self):
+        self.name = 'EmbrWave'
         self.adapter = gatt.BGAPIBackend()
-        self.t0 = default_timer()
-
-    def __enter__(self):
         self.adapter.start()
 
         devs = self.adapter.scan()
@@ -51,16 +49,22 @@ class EmbrWave(object):
             self.write(EmbrVal.DURATION, 30)  # custom mode, duration of 30 mins
             self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             self.write(EmbrVal.DURATION, 5)  # ramp up at 1C/s
+
+    def __enter__(self):
         return self
 
     def __exit__(self, *args):
         self.stop()
+        self.write(EmbrVal.MODE, (6, 1))
+        self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
+        self.write(EmbrVal.MODE, (7, 2))
+        self.write(EmbrVal.DURATION, 131)
         self.device.disconnect()
         self.adapter.stop()
 
     def write(self, uuid, value):
         # converts to bytes, *then* write for real
-        try: # convert non-iterables to iterables
+        try:  # convert non-iterables to iterables
             x = iter(value)
         except TypeError:
             value = [value]
@@ -110,6 +114,7 @@ class EmbrWave(object):
 
 class DummyWave(object):
     def __init__(self):
+        self.name = 'DummyWave'
         self.level = -1
         self.battery = -1
         self.firmware_version = -1
@@ -158,10 +163,12 @@ class DummyWave(object):
         return -1
 
 
-
 if __name__ == '__main__':
     # device already needs to be in pairing mode!
-    embr = EmbrWave()  # TODO: explicitly pass in address?
+    try:
+        embr = EmbrWave()  # TODO: explicitly pass in address?
+    except Exception:
+        embr = DummyWave()
 
     with embr:
         print(embr.device_id)

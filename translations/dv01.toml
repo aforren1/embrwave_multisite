@@ -8,25 +8,25 @@ fr = ["1\nTrès Différent", "2", "3", "4", "5", "6\nTrès Similaire"]
 
 
 [[question]]
-en = "whale-dolphin"
-fr = "baleine-dauphin"
+en = "whale - dolphin"
+fr = "baleine - dauphin"
 
 [[question]]
-en = "white wine-red wine"
-fr = "vin blanc-vin rouge"
+en = "white wine - red wine"
+fr = "vin blanc - vin rouge"
 
 [[question]]
-en = "bicycle-motorcycle"
-fr = "vélo-moto"
+en = "bicycle - motorcycle"
+fr = "vélo - moto"
 
 [[question]]
-en = "peach-nectarine"
-fr = "pêche-nectarine"
+en = "peach - nectarine"
+fr = "pêche - nectarine"
 
 [[question]]
-en = "broccoli-zucchini"
-fr = "brocoli-courgette"
+en = "broccoli - zucchini"
+fr = "brocoli - courgette"
 
 [[question]]
-en = "pen-pencil"
-fr = "stylo-crayon"
+en = "pen - pencil"
+fr = "stylo - crayon"
