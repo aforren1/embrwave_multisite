@@ -1,7 +1,4 @@
-pyglet==1.4.4 # windowing, ...
-imgui # GUI
-pyopengl # imgui requirement
-moderngl==5.5.3
+PyQt5
 # currently using a vendored version of pygatt,
 # which *doesn't* include docs/anything about
 # requirements (so these are taken from the 

@@ -53,7 +53,6 @@ class NextButton(qtw.QPushButton):
         self.setStyleSheet(base_style + new_sty)
 
     def _callback(self):
-        # TODO: also signal for data saving
         if self.state == 'neutral':
             return
         if self.state == 'incomplete':
@@ -64,23 +63,27 @@ class NextButton(qtw.QPushButton):
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
         current = self.stack.currentWidget()
-        # current.save_data()
+        # implement a save_data if doing a survey section
+        if hasattr(current, 'save_data'):
+            current.save_data()
         self.state = 'neutral'
-        self.eff = qtw.QGraphicsOpacityEffect()
-        current.setGraphicsEffect(self.eff)
-        a = QPropertyAnimation(self.eff, b'opacity')
-        a.setDuration(500)
-        a.setStartValue(1)
-        a.setEndValue(0)
-        a.setEasingCurve(QEasingCurve.Linear)
-        a.finished.connect(self._callback_pt2)
-        a.start(QPropertyAnimation.DeleteWhenStopped)
-        self.a = a  # keep from GC
+        self._callback_pt2()
+        # self.eff = qtw.QGraphicsOpacityEffect()
+        # current.setGraphicsEffect(self.eff)
+        # a = QPropertyAnimation(self.eff, b'opacity')
+        # a.setDuration(500)
+        # a.setStartValue(1)
+        # a.setEndValue(0)
+        # a.setEasingCurve(QEasingCurve.Linear)
+        # a.finished.connect(self._callback_pt2)
+        # a.start(QPropertyAnimation.DeleteWhenStopped)
+        # self.a = a  # keep from GC
 
     # part 2
     # need to:
     # - pop off previous widget
     # - if we're out of widgets
+    # TODO: (non-critical, but nice) reset the scrolling region
     def _callback_pt2(self):
         self.stack.removeWidget(self.stack.currentWidget())
         if self.stack.count() <= 0:
@@ -89,16 +92,17 @@ class NextButton(qtw.QPushButton):
         # move to the next one
         self.stack.setCurrentIndex(self.stack.currentIndex() + 1)
         new_widget = self.stack.currentWidget()
-        self.eff = qtw.QGraphicsOpacityEffect()
-        new_widget.setGraphicsEffect(self.eff)
-        a = QPropertyAnimation(self.eff, b'opacity')
-        a.setDuration(350)
-        a.setStartValue(0)
-        a.setEndValue(1)
-        a.setEasingCurve(QEasingCurve.OutQuad)
-        a.finished.connect(self._callback_pt3)
-        a.start(QPropertyAnimation.DeleteWhenStopped)
-        self.a = a
+        self._callback_pt3()
+        # self.eff = qtw.QGraphicsOpacityEffect()
+        # new_widget.setGraphicsEffect(self.eff)
+        # a = QPropertyAnimation(self.eff, b'opacity')
+        # a.setDuration(350)
+        # a.setStartValue(0)
+        # a.setEndValue(1)
+        # a.setEasingCurve(QEasingCurve.OutQuad)
+        # a.finished.connect(self._callback_pt3)
+        # a.start(QPropertyAnimation.DeleteWhenStopped)
+        # self.a = a
 
     def _callback_pt3(self):
         # re-enable the button on completion
