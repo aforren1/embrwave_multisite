@@ -35,7 +35,9 @@ if __name__ == '__main__':
 
     tmp = qtw.QLabel('FOOO')
     tmp.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-    stack = [tmp, xxx]
+    tmp2 = qtw.QLabel('BAR')
+    tmp2.setAlignment(Qt.AlignRight | Qt.AlignBottom)
+    stack = [tmp, xxx, tmp2]
 
     window = MainWindow(stack)
 

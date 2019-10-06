@@ -1,4 +1,5 @@
 import sys
+from time import sleep
 from PyQt5.QtCore import Qt, QPropertyAnimation, QEasingCurve
 import PyQt5.QtWidgets as qtw
 from functools import partial
@@ -68,16 +69,6 @@ class NextButton(qtw.QPushButton):
             current.save_data()
         self.state = 'neutral'
         self._callback_pt2()
-        # self.eff = qtw.QGraphicsOpacityEffect()
-        # current.setGraphicsEffect(self.eff)
-        # a = QPropertyAnimation(self.eff, b'opacity')
-        # a.setDuration(500)
-        # a.setStartValue(1)
-        # a.setEndValue(0)
-        # a.setEasingCurve(QEasingCurve.Linear)
-        # a.finished.connect(self._callback_pt2)
-        # a.start(QPropertyAnimation.DeleteWhenStopped)
-        # self.a = a  # keep from GC
 
     # part 2
     # need to:
@@ -90,19 +81,11 @@ class NextButton(qtw.QPushButton):
             sys.exit(0)
 
         # move to the next one
-        self.stack.setCurrentIndex(self.stack.currentIndex() + 1)
+
         new_widget = self.stack.currentWidget()
+        new_widget.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+        self.stack.adjustSize()
         self._callback_pt3()
-        # self.eff = qtw.QGraphicsOpacityEffect()
-        # new_widget.setGraphicsEffect(self.eff)
-        # a = QPropertyAnimation(self.eff, b'opacity')
-        # a.setDuration(350)
-        # a.setStartValue(0)
-        # a.setEndValue(1)
-        # a.setEasingCurve(QEasingCurve.OutQuad)
-        # a.finished.connect(self._callback_pt3)
-        # a.start(QPropertyAnimation.DeleteWhenStopped)
-        # self.a = a
 
     def _callback_pt3(self):
         # re-enable the button on completion
