@@ -4,11 +4,11 @@ from functools import partial
 # Multi-question questionnaire
 
 no_ans = '''
-border-radius: 8px;border: 2px solid #a62700;font-size:12pt;
+border-radius: 10px;background-color: #ffa7a1;font-size:18pt;padding:5px;
 '''
 
 ans = '''
-border-radius: 8px;border: 2px solid #7ab764;font-size:12pt;
+border-radius: 10px;background-color: #a1ffb2;font-size:18pt;padding:5px;
 '''
 
 
@@ -24,6 +24,7 @@ class MultiQuestion(qtw.QWidget):
         grid = qtw.QGridLayout()
         for count, head in enumerate(header):
             h = qtw.QLabel(head)
+            h.setStyleSheet('font-size:18pt;')
             h.setAlignment(Qt.AlignCenter)
             grid.addWidget(h, 0, count + 1,
                            alignment=Qt.AlignCenter | Qt.AlignBottom)
