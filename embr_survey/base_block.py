@@ -51,6 +51,7 @@ class SimpleDV(BaseDV):
 
     def save_data(self):
         current_answers = self.qs.get_responses()
+        current_answers = [ca if ca >= 0 else None for ca in current_answers]
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.short_name, now))
@@ -74,7 +75,7 @@ class SimpleDV(BaseDV):
             writer.writerows(zip(*[data[key] for key in keys]))
 
     def all_ans(self):
-        return all([x > 0 for x in self.qs.get_responses()])
+        return all([x >= 0 for x in self.qs.get_responses()])
 
 
 class DV01SimilarityObjects(SimpleDV):
@@ -85,14 +86,25 @@ class DV01SimilarityObjects(SimpleDV):
 if __name__ == '__main__':
     from datetime import datetime
     from window import MainWindow
+    from embr_survey import setup_logger
+
+    settings = {'language': 'en', 'translation_dir': './translations/',
+                'data_dir': './data/', 'id': 'test',
+                'datetime_start': 0, 'locale': 'us'}
+    setup_logger(settings['data_dir'], 0)
+    logger = logging.getLogger('embr_survey')
+    logger.info('Starting experiment for %s' % settings['id'])
+    logger.info('Datetime of start (YMD-HMS): %s' % 0)
+    logger.info('Seed: %s' % 1)
+    logger.info('Language: %s' % settings['language'])
+    logger.info('Locale: %s' % settings['locale'])
+    logger.info('----------')
 
     app = qtw.QApplication([])
 
     holder = qtw.QLabel('Start.')
     now = datetime.now().strftime('%y%m%d_%H%M%S')
-    dv1 = DV01SimilarityObjects(1, 9,  {'language': 'en', 'translation_dir': './translations/',
-                                        'data_dir': './data/', 'id': 'test',
-                                        'datetime_start': now, 'locale': 'us'})
+    dv1 = DV01SimilarityObjects(1, 9, settings)
 
     stack = [holder, dv1]
     window = MainWindow(stack)

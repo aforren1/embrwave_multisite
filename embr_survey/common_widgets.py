@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
 from functools import partial
+import logging
 # Multi-question questionnaire
 
 no_ans = '''
@@ -11,14 +12,19 @@ ans = '''
 border-radius: 10px;background-color: #a1ffb2;font-size:18pt;padding:5px;
 '''
 
+log = logging.getLogger('embr_survey')
+
 
 def deal_with_toggle(group_id, button, q_text):
-    print('group: %s, button: %s' % (group_id, button.checkedId()))
+    log.info('Button %s in group %s (question: %s) pressed.' % (button.checkedId(),
+                                                                group_id,
+                                                                q_text.text()))
     q_text.setStyleSheet(ans)
 
 
 def single_toggle(button, q_text):
-    print('button: %s' % (button.checkedId()))
+    log.info('Button %s (question: %s) pressed.' % (button.checkedId(),
+                                                    q_text.text()))
     q_text.setStyleSheet(ans)
 
 
@@ -55,7 +61,6 @@ class MultiQuestion(qtw.QWidget):
     def get_responses(self):
         # temporarily called save_data; should be something like get_responses?
         resps = [bg.checkedId() for bg in self.qbgs]
-        print(resps)
         return(resps)
 
 

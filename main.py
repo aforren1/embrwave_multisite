@@ -12,16 +12,17 @@ else:
 
 if __name__ == '__main__':
     import random
+    import PyQt5.QtWidgets as qtw
     from hashlib import md5
     from datetime import datetime
-    from embr_survey.window import ExpWindow
+    from embr_survey.window import MainWindow
     import embr_survey.dvs as dvs
     from embr_survey import setup_logger
     import logging
 
-    exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
-    win = ExpWindow()
+    app = qtw.QApplication([])
 
+    exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
     # intro dialog--
     # - set participant ID
     # - set language
@@ -51,10 +52,16 @@ if __name__ == '__main__':
     logger.info('Locale: %s' % settings['locale'])
     logger.info('----------')
 
-    # TODO: generate all DVs
-    dvs = [getattr(dvs, d) for d in dir(dvs) if d.startswith('DV')]
-    dvs = [d(win, block_num, settings) for block_num, d in enumerate(dvs)]
+    # put all widgets in a list (stack)
+    # each one ends up being at least a two-element list
+    # [[embr_screen, dv1], [embr_screen, dv2_1, dv2_2], ...]
+    stack = []
+    # shuffle around
+    random.shuffle(stack)
+    # stick the personal questionnaire at beginning or end of this stack
 
+    window = MainWindow(stack)
+    app.exec_()
     # set the order
     random.shuffle(dvs)
 
