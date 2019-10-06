@@ -116,9 +116,6 @@ class DummyWave(object):
     def __init__(self):
         self.name = 'DummyWave'
         self.level = -1
-        self.battery = -1
-        self.firmware_version = -1
-        self.device_id = -1
 
     def __enter__(self):
         return self
@@ -134,11 +131,11 @@ class DummyWave(object):
 
     @property
     def level(self):
-        return -1
+        return self._level
 
     @level.setter
     def level(self, value):
-        pass
+        self._level = value
 
     @property
     def battery_charge(self):

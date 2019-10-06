@@ -63,7 +63,10 @@ class MainWindow(object):
         self.scroll_area.setStyleSheet(scroll_style)
         self.main_layout.addWidget(self.scroll_area)
 
+        # next button iterates through the stack
         self.widgets = SpecialStack()
+        self.next_button = NextButton(self.height, self.widgets)
+
         self.widgets.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
         # accept single widget or list of widgets (for multi-page experiments)
         # alternatively, we could've detected in the button whether the current
@@ -72,21 +75,21 @@ class MainWindow(object):
             try:
                 widget.setSizePolicy(qtw.QSizePolicy.Ignored,
                                      qtw.QSizePolicy.Ignored)
+                widget._button = self.next_button
                 self.widgets.addWidget(widget)
             except AttributeError:  # list of widgets (hopefully)
                 for w2 in widget:
                     w2.setSizePolicy(qtw.QSizePolicy.Ignored,
                                      qtw.QSizePolicy.Ignored)
+                    w2._button = self.next_button
                     self.widgets.addWidget(w2)
         self.widgets.setFixedWidth(1.2*self.height)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
                                                    qtw.QSizePolicy.Preferred)
         self.widgets.adjustSize()
-
-        # next button iterates through the stack
-        self.next_button = NextButton(self.height, self.widgets)
         self.main_layout.addWidget(self.next_button, Qt.AlignRight)
+
         self.win.setLayout(self.main_layout)
 
     def show(self):

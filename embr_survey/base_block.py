@@ -12,10 +12,12 @@ from embr_survey.next_button import NextButton
 
 class BaseDV(qtw.QWidget):
     _log = logging.getLogger('embr_survey')
+    auto_continue = True  # control whether button auto-enabled
 
-    def __init__(self, block_num, temperature, settings):
+    def __init__(self, block_num, device, temperature, settings):
         super().__init__()
         self.settings = settings
+        self.device = device
         self.block_num = block_num
         self.temperature = temperature
 
@@ -26,10 +28,19 @@ class BaseDV(qtw.QWidget):
         # check if all answered (used by next_button)
         pass
 
+    def on_enter(self):
+        pass
+
+    def on_exit(self):
+        pass
+
 
 class SimpleDV(BaseDV):
-    def __init__(self, block_num, temperature, settings):
-        super().__init__(block_num, temperature, settings)
+    name = 'Simple'
+    long_name = 'Long Simple'
+
+    def __init__(self, block_num, device, temperature, settings):
+        super().__init__(block_num, device, temperature, settings)
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.short_name)
         with open(translation_path, 'r') as f:
@@ -48,6 +59,11 @@ class SimpleDV(BaseDV):
         layout.addWidget(head)
         layout.addWidget(self.qs)
         self.setLayout(layout)
+
+    def on_enter(self):
+        self.device.level = self.temperature
+        self._log.info('Temperature set to %i for %s' % (self.temperature,
+                                                         self.long_name))
 
     def save_data(self):
         current_answers = self.qs.get_responses()
@@ -87,6 +103,8 @@ if __name__ == '__main__':
     from datetime import datetime
     from window import MainWindow
     from embr_survey import setup_logger
+    from embr_survey.common_widgets import JustText, EmbrSection
+    from embr_survey.embrwave import DummyWave
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
@@ -102,10 +120,14 @@ if __name__ == '__main__':
 
     app = qtw.QApplication([])
 
-    holder = qtw.QLabel('Start.')
-    now = datetime.now().strftime('%y%m%d_%H%M%S')
-    dv1 = DV01SimilarityObjects(1, 9, settings)
+    dev = DummyWave()
 
-    stack = [holder, dv1]
+    start = JustText('start.')
+    embr_sec = EmbrSection('Please wait.', dev)
+    holder = JustText("In this next section, we will ask you to read several scenarios and indicate <b>your opinion</b> about them.")
+    dv1 = DV01SimilarityObjects(1, dev, 9, settings)
+
+    stack = [start, [embr_sec, holder, dv1]]
     window = MainWindow(stack)
-    app.exec_()
+    with dev:
+        app.exec_()

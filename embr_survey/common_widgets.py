@@ -1,4 +1,4 @@
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 import PyQt5.QtWidgets as qtw
 from functools import partial
 import logging
@@ -20,6 +20,32 @@ def deal_with_toggle(group_id, button, q_text):
                                                                 group_id,
                                                                 q_text.text()))
     q_text.setStyleSheet(ans)
+
+
+class JustText(qtw.QLabel):
+    def __init__(self, text):
+        super().__init__(text)
+        self.setStyleSheet('font-size:40pt;')
+        self.setWordWrap(True)
+        self.setTextFormat(Qt.RichText)  # allow HTML
+
+
+class EmbrSection(JustText):
+    auto_continue = False
+
+    def __init__(self, text, device):
+        super().__init__(text)
+        self.dev = device
+
+    def on_enter(self):
+        # button ref is injected
+        log.info('Entering neutral EmbrWave section & disabling "next" for 5 seconds.')
+        self._button.state = 'neutral'
+        QTimer.singleShot(5000, self._enable)
+        self.dev.stop()
+
+    def _enable(self):
+        self._button.state = 'complete'
 
 
 class MultiQuestion(qtw.QWidget):

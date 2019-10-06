@@ -85,6 +85,8 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
+        if hasattr(current_widget, 'on_exit'):
+            current_widget.on_exit()  # call additional cleanup things
         # TODO: handle StackedWidgets properly? Would allow for more
         # natural data movement...
         passed_data = getattr(current_widget, 'passed_data', None)
@@ -97,13 +99,16 @@ class NextButton(qtw.QPushButton):
 
         # move to the next one
         new_widget = self.stack.currentWidget()
+        if hasattr(new_widget, 'on_enter'):
+            new_widget.on_enter()  # call one-shot things (generally for controlling temperature)
         new_widget._start_time = datetime.now()
         if passed_data is not None:
             new_widget.passed_data = passed_data
         new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
                                  qtw.QSizePolicy.Preferred)
         self.stack.adjustSize()
-        QTimer.singleShot(1000, self._callback_pt3)
+        if getattr(new_widget, 'auto_continue', True):
+            QTimer.singleShot(1000, self._callback_pt3)
 
     def _callback_pt3(self):
         # re-enable the button on completion
