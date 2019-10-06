@@ -32,7 +32,7 @@ class NextButton(qtw.QPushButton):
         self.setFixedHeight(0.1*height)
         self.setStyleSheet(base_style)
         self.stack = stack
-        self.clicked.connect(partial(self._callback))
+        self.clicked.connect(self._callback)
         self.state = 'incomplete'
 
     @property

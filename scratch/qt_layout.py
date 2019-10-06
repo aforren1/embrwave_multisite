@@ -3,6 +3,7 @@ import PyQt5.QtWidgets as qtw
 from PyQt5.QtGui import QPixmap, QImage
 from functools import partial
 from base_area import MainWindow
+from my_widgets import MultiQuestion
 
 
 def _exit_on_esc(e):
@@ -32,12 +33,29 @@ if __name__ == '__main__':
     t0.addWidget(pic2, 1, 0, 1, 1, Qt.AlignLeft)
     t0.addWidget(pic3, 2, 0, 1, 1, Qt.AlignCenter)
     xxx.setLayout(t0)
-
-    tmp = qtw.QLabel('FOOO')
-    tmp.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+    header = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
+    questions = ["How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 """How likely is it that this person committed a premeditated crime? Here's even more text to see how things wrap...
+                 
+                 Newlines and all.""",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that <b>this person</b> committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?",
+                 "How likely is it that this person committed a premeditated crime?",
+                 "How likely is it that this person committed an impulsive crime?"]
+    multi_q = MultiQuestion(header, questions)
     tmp2 = qtw.QLabel('BAR')
     tmp2.setAlignment(Qt.AlignRight | Qt.AlignBottom)
-    stack = [[tmp, xxx], pic_inst, tmp2]
+    stack = [[multi_q, xxx], pic_inst, tmp2]
 
     window = MainWindow(stack)
 
