@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
 from next_button import NextButton
+from functools import partial
 
 
 def _exit_on_esc(e):
@@ -31,6 +32,10 @@ QScrollBar::sub-line:verticall {
 '''
 
 
+def scroll_up(area):
+    area.verticalScrollBar().setValue(0)
+
+
 class MainWindow(object):
     def __init__(self, widgets):
         self.win = qtw.QWidget()
@@ -49,6 +54,7 @@ class MainWindow(object):
         self.main_layout.addWidget(self.scroll_area)
 
         self.widgets = qtw.QStackedWidget()
+        self.widgets.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
         for widget in widgets:
             widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             self.widgets.addWidget(widget)

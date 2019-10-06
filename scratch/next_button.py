@@ -54,6 +54,9 @@ class NextButton(qtw.QPushButton):
         self.setStyleSheet(base_style + new_sty)
 
     def _callback(self):
+        # divided into three parts for potential animations between
+        # sections-- however, the attempt (9496818f6a9b7ae3694a7f77faa354d96351a53a)
+        # seemed to lead to "smearing" artifacts on subsequent widgets...
         if self.state == 'neutral':
             return
         if self.state == 'incomplete':
@@ -81,7 +84,6 @@ class NextButton(qtw.QPushButton):
             sys.exit(0)
 
         # move to the next one
-
         new_widget = self.stack.currentWidget()
         new_widget.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
         self.stack.adjustSize()

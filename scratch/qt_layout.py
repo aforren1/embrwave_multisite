@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # main window (fullscreen)
     app = qtw.QApplication([])
 
-    pic = QImage('dv5_1.png').scaledToHeight(600, Qt.SmoothTransformation)
+    pic = QImage('dv5_1.png').scaledToHeight(1200, Qt.SmoothTransformation)
     pic_inst = qtw.QLabel()
     # pic_inst.setScaledContents(True)
     pic_inst.setAlignment(Qt.AlignCenter)
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     tmp.setAlignment(Qt.AlignLeft | Qt.AlignTop)
     tmp2 = qtw.QLabel('BAR')
     tmp2.setAlignment(Qt.AlignRight | Qt.AlignBottom)
-    stack = [tmp, xxx, tmp2]
+    stack = [tmp, xxx, pic_inst, tmp2]
 
     window = MainWindow(stack)
 
