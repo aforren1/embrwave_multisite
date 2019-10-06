@@ -3,9 +3,18 @@ import PyQt5.QtWidgets as qtw
 from functools import partial
 # Multi-question questionnaire
 
+no_ans = '''
+border-radius: 8px;border: 2px solid #a62700;font-size:12pt;
+'''
 
-def deal_with_toggle(group_id, button):
+ans = '''
+border-radius: 8px;border: 2px solid #7ab764;font-size:12pt;
+'''
+
+
+def deal_with_toggle(group_id, button, q_text):
     print('group: %s, button: %s' % (group_id, button.checkedId()))
+    q_text.setStyleSheet(ans)
 
 
 class MultiQuestion(qtw.QWidget):
@@ -22,11 +31,11 @@ class MultiQuestion(qtw.QWidget):
         for i, quest in enumerate(questions):
             q = qtw.QLabel(quest)
             q.setWordWrap(True)
-            q.setStyleSheet('border-radius: 8px;border: 2px solid #4A0C46;font-size:12pt;')
+            q.setStyleSheet(no_ans)
             q.setTextFormat(Qt.RichText)
             grid.addWidget(q, i+1, 0)
             qbg = qtw.QButtonGroup()
-            qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg))
+            qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))
             qbgs.append(qbg)
             for count in range(len(header)):
                 rad = qtw.QRadioButton()
