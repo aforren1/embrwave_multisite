@@ -22,12 +22,6 @@ def deal_with_toggle(group_id, button, q_text):
     q_text.setStyleSheet(ans)
 
 
-def single_toggle(button, q_text):
-    log.info('Button %s (question: %s) pressed.' % (button.checkedId(),
-                                                    q_text.text()))
-    q_text.setStyleSheet(ans)
-
-
 class MultiQuestion(qtw.QWidget):
     # TODO: logging responses
     def __init__(self, header, questions):
@@ -59,7 +53,6 @@ class MultiQuestion(qtw.QWidget):
         self.setLayout(grid)
 
     def get_responses(self):
-        # temporarily called save_data; should be something like get_responses?
         resps = [bg.checkedId() for bg in self.qbgs]
         return(resps)
 

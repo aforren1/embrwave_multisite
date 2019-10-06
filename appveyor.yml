@@ -43,9 +43,8 @@ install:
   - 'python -m pip install -U pip setuptools wheel pyinstaller'
 
   # install packages
-  - 'python -m pip install -f wheels/ imgui'
   - 'python -m pip install .'
-  - pyinstaller --noconsole --onefile main.py --add-data "embr_survey/fonts/*.ttf;embr_survey/fonts/" --add-data "embr_survey/images/*.png;embr_survey/images/"
+  - pyinstaller --noconsole --onefile main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
   - cp -r translations .\dist\translations
   - 7z a main.zip .\dist\*
 
