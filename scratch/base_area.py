@@ -55,9 +55,17 @@ class MainWindow(object):
 
         self.widgets = qtw.QStackedWidget()
         self.widgets.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+        # accept single widget or list of widgets (for multi-page experiments)
+        # alternatively, we could've detected in the button whether the current
+        # widget was a StackedWidget or not
         for widget in widgets:
-            widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
-            self.widgets.addWidget(widget)
+            try:
+                widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+                self.widgets.addWidget(widget)
+            except AttributeError:  # list of widgets (hopefully)
+                for w2 in widget:
+                    w2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+                    self.widgets.addWidget(w2)
         self.widgets.setFixedWidth(1.2*self.height)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
