@@ -27,11 +27,11 @@ QPushButton {background-color: rgb(120, 120, 120);color:rgb(40,40,40);}
 class NextButton(qtw.QPushButton):
     def __init__(self, height, stack):
         super().__init__('Next')
-        self.state = 'neutral'
         self.setFixedHeight(0.1*height)
         self.setStyleSheet(base_style)
         self.stack = stack
         self.clicked.connect(partial(self._callback))
+        self.state = 'incomplete'
 
     @property
     def state(self):

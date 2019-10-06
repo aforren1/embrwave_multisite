@@ -9,6 +9,28 @@ def _exit_on_esc(e):
         qtw.QApplication.instance().quit()
 
 
+scroll_style = '''
+QScrollBar:vertical {
+    border: 4px solid grey;
+    background: #444444;
+    width: 40px;
+}
+QScrollBar::handle:vertical {
+    background: #c0c0c0;
+    min-width: 40px;
+}
+QScrollBar::add-line:vertical {
+      border: none;
+      background: none;
+}
+
+QScrollBar::sub-line:verticall {
+      border: none;
+      background: none;
+}
+'''
+
+
 class MainWindow(object):
     def __init__(self, widgets):
         self.win = qtw.QWidget()
@@ -18,24 +40,26 @@ class MainWindow(object):
         self.win.showFullScreen()
         self.win.keyPressEvent = _exit_on_esc
 
-        self.main_layout = qtw.QGridLayout()
-        self.win.setLayout(self.main_layout)
+        # overall layout
+        self.main_layout = qtw.QVBoxLayout(self.win)
+        # scroll region
+        self.scroll_area = qtw.QScrollArea()
+        self.scroll_area.setAlignment(Qt.AlignCenter)
+        self.scroll_area.setStyleSheet(scroll_style)
+        self.main_layout.addWidget(self.scroll_area)
 
-        # main scroll area
-        self.scrollarea = qtw.QScrollArea()
-        self.scrollarea.setWidgetResizable(False)
-        self.scrollarea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scrollarea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)  # TODO: check
-        self.scrollarea.setFixedSize(1.1 * rect.height(), 0.85*rect.height())
-        widget = qtw.QWidget()
-        self.scrollarea.setWidget(widget)
-        self.main_layout.addWidget(widget, 1, 1, 1, 1, Qt.AlignCenter)
-
-        # handle stack of widgets
         self.widgets = qtw.QStackedWidget()
         for widget in widgets:
             self.widgets.addWidget(widget)
+        self.widgets.setCurrentIndex(0)
+        self.widgets.setFixedWidth(1.2*self.height)
+        # top_layout.addWidget(self.widgets)
+        self.scroll_area.setWidget(self.widgets)
 
         # next button iterates through the stack
         self.next_button = NextButton(self.height, self.widgets)
-        self.main_layout.addWidget(self.next_button, 2, 1, 1, 1, Qt.AlignRight)
+        self.main_layout.addWidget(self.next_button, Qt.AlignRight)
+        self.win.setLayout(self.main_layout)
+
+    def show(self):
+        self.win.show()

@@ -1,0 +1,21 @@
+# for any non-task translations (largely for the intro dialog)
+
+[next]
+en = 'Next'
+es = 'Próxima'
+fr = 'Suivante'
+
+
+[next_incomplete]
+en = 'Next (questions unanswered)'
+
+[participant]
+en = 'Participant ID'
+es = 'ID del participante'
+fr = 'ID de participant'
+
+[language]
+en = 'Language'
+es = 'Idioma'
+fr = 'La langue'
+
