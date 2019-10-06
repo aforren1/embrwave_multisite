@@ -10,9 +10,12 @@ def _exit_on_esc(e):
         qtw.QApplication.instance().quit()
 
 
+def scroll_up(area):
+    area.verticalScrollBar().setValue(0)
+
+
 scroll_style = '''
 QScrollBar:vertical {
-    border: 4px solid grey;
     background: #444444;
     width: 40px;
 }
@@ -31,9 +34,15 @@ QScrollBar::sub-line:verticall {
 }
 '''
 
+# https://stackoverflow.com/questions/23511430/qt-qstackedwidget-resizing-issue
 
-def scroll_up(area):
-    area.verticalScrollBar().setValue(0)
+
+class SpecialStack(qtw.QStackedWidget):
+    def sizeHint(self):
+        return self.currentWidget().sizeHint()
+
+    def minimumSizeHint(self):
+        return self.currentWidget().minimumSizeHint()
 
 
 class MainWindow(object):
@@ -53,22 +62,25 @@ class MainWindow(object):
         self.scroll_area.setStyleSheet(scroll_style)
         self.main_layout.addWidget(self.scroll_area)
 
-        self.widgets = qtw.QStackedWidget()
+        self.widgets = SpecialStack()
         self.widgets.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
         # accept single widget or list of widgets (for multi-page experiments)
         # alternatively, we could've detected in the button whether the current
         # widget was a StackedWidget or not
         for widget in widgets:
             try:
-                widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+                widget.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                     qtw.QSizePolicy.Ignored)
                 self.widgets.addWidget(widget)
             except AttributeError:  # list of widgets (hopefully)
                 for w2 in widget:
-                    w2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+                    w2.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                     qtw.QSizePolicy.Ignored)
                     self.widgets.addWidget(w2)
         self.widgets.setFixedWidth(1.2*self.height)
         self.scroll_area.setWidget(self.widgets)
-        self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+        self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
+                                                   qtw.QSizePolicy.Preferred)
         self.widgets.adjustSize()
 
         # next button iterates through the stack

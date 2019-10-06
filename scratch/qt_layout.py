@@ -3,7 +3,7 @@ import PyQt5.QtWidgets as qtw
 from PyQt5.QtGui import QPixmap, QImage
 from functools import partial
 from base_area import MainWindow
-from my_widgets import MultiQuestion
+from my_widgets import MultiQuestion, SingleQuestion
 
 
 def _exit_on_esc(e):
@@ -53,9 +53,17 @@ if __name__ == '__main__':
                  "How likely is it that this person committed a premeditated crime?",
                  "How likely is it that this person committed an impulsive crime?"]
     multi_q = MultiQuestion(header, questions)
+
+    q1 = SingleQuestion(header, 'What is your name?')
+    q2 = SingleQuestion(header, 'What is your quest?')
+    single_q = qtw.QWidget()
+    layout = qtw.QVBoxLayout()
+    layout.addWidget(q1)
+    layout.addWidget(q2)
+    single_q.setLayout(layout)
     tmp2 = qtw.QLabel('BAR')
     tmp2.setAlignment(Qt.AlignRight | Qt.AlignBottom)
-    stack = [[multi_q, xxx], pic_inst, tmp2]
+    stack = [[single_q, multi_q, xxx], pic_inst, tmp2]
 
     window = MainWindow(stack)
 

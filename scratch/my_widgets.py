@@ -17,6 +17,11 @@ def deal_with_toggle(group_id, button, q_text):
     q_text.setStyleSheet(ans)
 
 
+def single_toggle(button, q_text):
+    print('button: %s' % (button.checkedId()))
+    q_text.setStyleSheet(ans)
+
+
 class MultiQuestion(qtw.QWidget):
     # TODO: logging responses
     def __init__(self, header, questions):
@@ -52,3 +57,8 @@ class MultiQuestion(qtw.QWidget):
         resps = [bg.checkedId() for bg in self.qbgs]
         print(resps)
         return(resps)
+
+
+class SingleQuestion(MultiQuestion):
+    def __init__(self, header, question):
+        super().__init__(header, [question])

@@ -77,15 +77,19 @@ class NextButton(qtw.QPushButton):
     # need to:
     # - pop off previous widget
     # - if we're out of widgets, exit
-    # TODO: (non-critical, but nice) reset the scrolling region
     def _callback_pt2(self):
+        current_widget = self.stack.currentWidget()
+        current_widget.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                     qtw.QSizePolicy.Ignored)
+        self.stack.adjustSize()
         self.stack.removeWidget(self.stack.currentWidget())
         if self.stack.count() <= 0:
             sys.exit(0)
 
         # move to the next one
         new_widget = self.stack.currentWidget()
-        new_widget.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+        new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
+                                 qtw.QSizePolicy.Preferred)
         self.stack.adjustSize()
         QTimer.singleShot(500, self._callback_pt3)
 
