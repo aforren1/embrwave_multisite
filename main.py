@@ -11,18 +11,27 @@ else:
 
 
 if __name__ == '__main__':
+    import logging
     import random
     import PyQt5.QtWidgets as qtw
     from hashlib import md5
     from datetime import datetime
     from embr_survey.window import MainWindow
     import embr_survey.dvs as dvs
+    from embr_survey.embrwave import EmbrWave, DummyWave
     from embr_survey import setup_logger
-    import logging
+    from embr_survey.common_widgets import JustText, EmbrFactory
 
     app = qtw.QApplication([])
 
     exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
+
+    try:
+        device = EmbrWave()
+    except Exception as e:
+        print(e)
+        device = DummyWave()
+
     # intro dialog--
     # - set participant ID
     # - set language
@@ -52,30 +61,35 @@ if __name__ == '__main__':
     logger.info('Locale: %s' % settings['locale'])
     logger.info('----------')
 
+    temps = random.choices([-9, -5, 0, 5, 9], k=20)
+    logger.info('Temperature progression: %s' % temps)
     # put all widgets in a list (stack)
     # each one ends up being at least a two-element list
     # [[embr_screen, dv1], [embr_screen, dv2_1, dv2_2], ...]
-    stack = []
-    # shuffle around
+    start = JustText('Start by pressing the button below.')
+    ef = EmbrFactory('Please wait until the button below turns green.', device)
+    dv1 = [ef.spawn(), dvs.DV01(1, device, temps[0], settings)]
+    dv2 = [ef.spawn(), dvs.DV02(2, device, temps[1], settings)]
+    _dv3 = dvs.DV03(3, device, temps[2], settings)
+    dv3 = [ef.spawn(), _dv3._prompt, _dv3]
+    dv4 = [ef.spawn(), dvs.DV04(4, device, temps[3], settings)]
+    dv5 = [ef.spawn(), dvs.DV05(5, device, temps[4], settings)]
+    _dv6 = dvs.DV06(6, device, temps[5], settings)
+    dv6 = [ef.spawn(), _dv6._prompt, _dv6]
+    _dv7 = dvs.DV07(7, device, temps[6], settings)
+    dv7 = [ef.spawn(), _dv7._prompt, _dv7]
+    _dv8 = dvs.DV08(8, device, temps[7], settings)
+    dv8 = [ef.spawn(), _dv8._prompt, _dv8]
+    dv9 = [ef.spawn(), dvs.DV09(9, device, temps[8], settings)]
+    dv10 = [ef.spawn(), dvs.DV10(10, device, temps[9], settings)]
+    stack = [dv1, dv2, dv3, dv4, dv5, dv6, dv7, dv8, dv9, dv10]
+
+    # shuffle around questions
     random.shuffle(stack)
+    stack.insert(0, start)
+
     # stick the personal questionnaire at beginning or end of this stack
 
     window = MainWindow(stack)
-    app.exec_()
-    # set the order
-    random.shuffle(dvs)
-
-    # generate heat/cool levels
-    temperature_levels = random.choices([-9, -5, 0, 5, 9], k=len(dvs))
-
-    # TODO: intro text
-
-    # run all DVs
-    for dv, temp_level in zip(dvs, temperature_levels):
-        # TODO please wait
-        logger.info('Setting Embr Wave temperature to %i' % temp_level)
-        # set temperature level for next dv
-        dv.run(temp_level)
-
-    # post-questionnaire (TODO: note about also including pre-)
-    # post_questions(settings)
+    with device:
+        app.exec_()
