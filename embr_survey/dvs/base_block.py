@@ -100,6 +100,7 @@ if __name__ == '__main__':
     from embr_survey.dvs import DV01SimilarityObjects
     from embr_survey.dvs import DV02Belonging
     from embr_survey.dvs import DV03Utilitarian
+    from embr_survey.dvs import DV04Nostalgia
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
@@ -123,8 +124,9 @@ if __name__ == '__main__':
     dv1 = DV01SimilarityObjects(1, dev, 9, settings)
     dv2 = DV02Belonging(2, dev, -5, settings)
     dv3 = DV03Utilitarian(3, dev, 0, settings)
+    dv4 = DV04Nostalgia(4, dev, 5, settings)
 
-    stack = [start, [dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
+    stack = [start, [dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()
