@@ -29,7 +29,9 @@ class BaseDV(qtw.QWidget):
         pass
 
     def on_enter(self):
-        pass
+        self.device.level = self.temperature
+        self._log.info('Temperature set to %i for %s' % (self.temperature,
+                                                         self.long_name))
 
     def on_exit(self):
         pass
@@ -59,11 +61,6 @@ class SimpleDV(BaseDV):
         layout.addWidget(head)
         layout.addWidget(self.qs)
         self.setLayout(layout)
-
-    def on_enter(self):
-        self.device.level = self.temperature
-        self._log.info('Temperature set to %i for %s' % (self.temperature,
-                                                         self.long_name))
 
     def save_data(self):
         current_answers = self.qs.get_responses()
@@ -102,6 +99,7 @@ if __name__ == '__main__':
     from embr_survey.embrwave import DummyWave
     from embr_survey.dvs import DV01SimilarityObjects
     from embr_survey.dvs import DV02Belonging
+    from embr_survey.dvs import DV03Utilitarian
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
@@ -124,8 +122,9 @@ if __name__ == '__main__':
     holder = JustText("In this next section, we will ask you to read several scenarios and indicate <b>your opinion</b> about them.")
     dv1 = DV01SimilarityObjects(1, dev, 9, settings)
     dv2 = DV02Belonging(2, dev, -5, settings)
+    dv3 = DV03Utilitarian(3, dev, 0, settings)
 
-    stack = [start, [wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
+    stack = [start, [dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()

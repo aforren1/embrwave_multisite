@@ -2,6 +2,7 @@ from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
 from embr_survey.next_button import NextButton
 from functools import partial
+from embr_survey.common_widgets import SpecialStack
 
 
 def _exit_on_esc(e):
@@ -35,14 +36,6 @@ QScrollBar::sub-line:vertical {
 '''
 
 # https://stackoverflow.com/questions/23511430/qt-qstackedwidget-resizing-issue
-
-
-class SpecialStack(qtw.QStackedWidget):
-    def sizeHint(self):
-        return self.currentWidget().sizeHint()
-
-    def minimumSizeHint(self):
-        return self.currentWidget().minimumSizeHint()
 
 
 class MainWindow(object):

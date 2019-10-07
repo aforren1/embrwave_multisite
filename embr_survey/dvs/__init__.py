@@ -1,2 +1,3 @@
 from .dv01 import DV01SimilarityObjects
 from .dv02 import DV02Belonging
+from .dv03 import DV03Utilitarian

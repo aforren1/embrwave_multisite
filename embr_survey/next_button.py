@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt, QTimer
 import PyQt5.QtWidgets as qtw
 from functools import partial
 from datetime import datetime
+from embr_survey.common_widgets import SpecialStack
 
 base_style = '''
 QPushButton {border:4px solid rgb(0, 0, 0); 
@@ -72,11 +73,6 @@ class NextButton(qtw.QPushButton):
             if choice != qtw.QMessageBox.Yes:
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
-        current._end_time = datetime.now()
-        # implement a save_data if doing a survey section
-        if hasattr(current, 'save_data'):
-            current.save_data()
-        self.state = 'neutral'
         self._callback_pt2()
 
     # part 2
@@ -85,30 +81,52 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
-        if hasattr(current_widget, 'on_exit'):
-            current_widget.on_exit()  # call additional cleanup things
-        # TODO: handle StackedWidgets properly? Would allow for more
-        # natural data movement...
-        passed_data = getattr(current_widget, 'passed_data', None)
-        current_widget.setSizePolicy(qtw.QSizePolicy.Ignored,
-                                     qtw.QSizePolicy.Ignored)
-        self.stack.adjustSize()
-        self.stack.removeWidget(self.stack.currentWidget())
-        if self.stack.count() <= 0:
-            sys.exit(0)
+        if isinstance(current_widget, SpecialStack):
+            # consume a subwidget
+            c2 = current_widget.currentWidget()
+            c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+            # current_widget.adjustSize()
+            # move to the next subwidget
+            current_widget.setCurrentIndex(current_widget.currentIndex() + 1)
+            # current_widget.removeWidget(c2)
+            if current_widget.currentIndex() + 1 < current_widget.count():
+                # resize to subwidget
+                c2 = current_widget.currentWidget()
+                c2.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+                current_widget.adjustSize()
 
-        # move to the next one
-        new_widget = self.stack.currentWidget()
-        if hasattr(new_widget, 'on_enter'):
-            new_widget.on_enter()  # call one-shot things (generally for controlling temperature)
-        new_widget._start_time = datetime.now()
-        if passed_data is not None:
-            new_widget.passed_data = passed_data
-        new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
-                                 qtw.QSizePolicy.Preferred)
-        self.stack.adjustSize()
-        if getattr(new_widget, 'auto_continue', True):
-            QTimer.singleShot(1000, self._callback_pt3)
+        if (not isinstance(current_widget, SpecialStack) or
+                current_widget.currentIndex() + 1 >= current_widget.count()):
+            if hasattr(current_widget, 'on_exit'):
+                current_widget.on_exit()  # call additional cleanup things
+
+            current_widget._end_time = datetime.now()
+            # implement a save_data if doing a survey section
+            if hasattr(current_widget, 'save_data'):
+                current_widget.save_data()
+            self.state = 'neutral'
+            # TODO: handle StackedWidgets properly? Would allow for more
+            # natural data movement...
+            passed_data = getattr(current_widget, 'passed_data', None)
+            current_widget.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                         qtw.QSizePolicy.Ignored)
+            self.stack.adjustSize()
+            self.stack.removeWidget(current_widget)
+            if self.stack.count() <= 0:
+                sys.exit(0)
+
+            # move to the next one
+            new_widget = self.stack.currentWidget()
+            if hasattr(new_widget, 'on_enter'):
+                new_widget.on_enter()  # call one-shot things (generally for controlling temperature)
+            new_widget._start_time = datetime.now()
+            if passed_data is not None:
+                new_widget.passed_data = passed_data
+            new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
+                                     qtw.QSizePolicy.Preferred)
+            self.stack.adjustSize()
+            if getattr(new_widget, 'auto_continue', True):
+                QTimer.singleShot(1000, self._callback_pt3)
 
     def _callback_pt3(self):
         # re-enable the button on completion

@@ -22,6 +22,14 @@ def deal_with_toggle(group_id, button, q_text):
     q_text.setStyleSheet(ans)
 
 
+class SpecialStack(qtw.QStackedWidget):
+    def sizeHint(self):
+        return self.currentWidget().sizeHint()
+
+    def minimumSizeHint(self):
+        return self.currentWidget().minimumSizeHint()
+
+
 class JustText(qtw.QLabel):
     def __init__(self, text):
         super().__init__(text)
