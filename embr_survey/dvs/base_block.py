@@ -42,7 +42,7 @@ class SimpleDV(BaseDV):
     def __init__(self, block_num, device, temperature, settings):
         super().__init__(block_num, device, temperature, settings)
         lang = settings['language']
-        translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.short_name)
+        translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
         with open(translation_path, 'r') as f:
             translation = toml.load(f)
 
@@ -70,7 +70,7 @@ class SimpleDV(BaseDV):
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
-        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.short_name, now))
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
         num_q = len(self.questions)
         data = {'participant_id': num_q * [settings['id']],
                 'datetime_start_exp': num_q * [settings['datetime_start']],
