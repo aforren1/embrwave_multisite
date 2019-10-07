@@ -1,5 +1,5 @@
 
-from embr_survey.dvs.base_dv import SimpleDV
+from embr_survey.dvs.base_block import SimpleDV
 
 
 class DV02Belonging(SimpleDV):

@@ -30,12 +30,22 @@ class JustText(qtw.QLabel):
         self.setTextFormat(Qt.RichText)  # allow HTML
 
 
+class EmbrFactory(object):
+    def __init__(self, text, device):
+        self.dev = device
+        self.text = text
+
+    def spawn(self):
+        return EmbrSection(self.text, self.dev)
+
+
 class EmbrSection(JustText):
     auto_continue = False
 
     def __init__(self, text, device):
         super().__init__(text)
         self.dev = device
+        self.setAlignment(Qt.AlignCenter)
 
     def on_enter(self):
         # button ref is injected

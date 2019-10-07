@@ -98,9 +98,10 @@ if __name__ == '__main__':
     from datetime import datetime
     from embr_survey.window import MainWindow
     from embr_survey import setup_logger
-    from embr_survey.common_widgets import JustText, EmbrSection
+    from embr_survey.common_widgets import JustText, EmbrFactory
     from embr_survey.embrwave import DummyWave
     from embr_survey.dvs import DV01SimilarityObjects
+    from embr_survey.dvs import DV02Belonging
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
@@ -119,11 +120,12 @@ if __name__ == '__main__':
     dev = DummyWave()
 
     start = JustText('start.')
-    embr_sec = EmbrSection('Please wait.', dev)
+    wait_sec = EmbrFactory('Please wait.', dev)
     holder = JustText("In this next section, we will ask you to read several scenarios and indicate <b>your opinion</b> about them.")
     dv1 = DV01SimilarityObjects(1, dev, 9, settings)
+    dv2 = DV02Belonging(2, dev, -5, settings)
 
-    stack = [start, [embr_sec, holder, dv1]]
+    stack = [start, [wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()
