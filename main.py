@@ -11,6 +11,7 @@ else:
 
 
 if __name__ == '__main__':
+    import PyQt5
     import logging
     import random
     import PyQt5.QtWidgets as qtw
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     from embr_survey.embrwave import EmbrWave, DummyWave
     from embr_survey import setup_logger
     from embr_survey.common_widgets import JustText, EmbrFactory
+    import atexit
 
     app = qtw.QApplication([])
 
@@ -28,10 +30,12 @@ if __name__ == '__main__':
 
     try:
         device = EmbrWave()
+        exception = None
     except Exception as e:
-        print(e)
+        exception = e
         device = DummyWave()
 
+    atexit.register(device.close)
     # intro dialog--
     # - set participant ID
     # - set language
@@ -60,6 +64,10 @@ if __name__ == '__main__':
     logger.info('Language: %s' % settings['language'])
     logger.info('Locale: %s' % settings['locale'])
     logger.info('Device: %s' % device.name)
+
+    logger.info('Device exception: %s' % exception)
+    logger.info('Device ID, Firmware: %s, %s' % (device.device_id, device.firmware_version))
+    logger.info('Device battery remaining: %s' % device.battery_charge)
     logger.info('----------')
 
     temps = random.choices([-9, -5, 0, 5, 9], k=20)

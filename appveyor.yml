@@ -46,6 +46,7 @@ install:
   - 'python -m pip install .'
   - pyinstaller --noconsole --onefile main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
   - cp -r translations .\dist\translations
+  - cp -r locale .\dist\locale
   - 7z a main.zip .\dist\*
 
 build: off

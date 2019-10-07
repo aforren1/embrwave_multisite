@@ -54,6 +54,9 @@ class EmbrWave(object):
         return self
 
     def __exit__(self, *args):
+        self.close()
+
+    def close(self):
         self.stop()
         self.write(EmbrVal.MODE, (6, 1))
         self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
@@ -121,6 +124,9 @@ class DummyWave(object):
         return self
 
     def __exit__(self, *args):
+        pass
+
+    def close(self):
         pass
 
     def write(self, uuid, value):
