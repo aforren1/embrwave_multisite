@@ -94,17 +94,13 @@ class SimpleDV(BaseDV):
         return all([x >= 0 for x in self.qs.get_responses()])
 
 
-class DV01SimilarityObjects(SimpleDV):
-    name = 'dv01_similarity_objects'
-    short_name = 'dv01'
-
-
 if __name__ == '__main__':
     from datetime import datetime
-    from window import MainWindow
+    from embr_survey.window import MainWindow
     from embr_survey import setup_logger
     from embr_survey.common_widgets import JustText, EmbrSection
     from embr_survey.embrwave import DummyWave
+    from embr_survey.dvs import DV01SimilarityObjects
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',

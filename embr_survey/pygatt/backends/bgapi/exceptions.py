@@ -1,4 +1,4 @@
-from pygatt.exceptions import BLEError
+from embr_survey.pygatt.exceptions import BLEError
 
 
 class BGAPIError(BLEError):

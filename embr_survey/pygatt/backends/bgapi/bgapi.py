@@ -16,9 +16,9 @@ from uuid import UUID
 from enum import Enum
 from collections import defaultdict
 
-from pygatt.exceptions import NotConnectedError
-from pygatt.backends import BLEBackend, Characteristic, BLEAddressType
-from pygatt.util import uuid16_to_uuid
+from embr_survey.pygatt.exceptions import NotConnectedError
+from embr_survey.pygatt.backends import BLEBackend, Characteristic, BLEAddressType
+from embr_survey.pygatt.util import uuid16_to_uuid
 
 from . import bglib, constants
 from .exceptions import BGAPIError, ExpectedResponseTimeout

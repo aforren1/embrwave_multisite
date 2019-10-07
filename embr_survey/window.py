@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 import PyQt5.QtWidgets as qtw
-from next_button import NextButton
+from embr_survey.next_button import NextButton
 from functools import partial
 
 

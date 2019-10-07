@@ -1,7 +1,7 @@
 import logging
 import time
 
-from pygatt import BLEDevice, exceptions
+from embr_survey.pygatt import BLEDevice, exceptions
 from . import constants
 from .bgapi import BGAPIError
 from .error_codes import ErrorCode
@@ -15,6 +15,7 @@ def connection_required(func):
     """Raise an exception if the device is not connected before calling the
     actual function.
     """
+
     def wrapper(self, *args, **kwargs):
         if self._handle is None:
             raise exceptions.NotConnectedError()
