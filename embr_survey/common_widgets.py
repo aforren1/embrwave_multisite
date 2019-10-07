@@ -33,7 +33,7 @@ class SpecialStack(qtw.QStackedWidget):
 class JustText(qtw.QLabel):
     def __init__(self, text):
         super().__init__(text)
-        self.setStyleSheet('font-size:40pt;')
+        self.setStyleSheet('font-size:20pt;')
         self.setWordWrap(True)
         self.setTextFormat(Qt.RichText)  # allow HTML
 

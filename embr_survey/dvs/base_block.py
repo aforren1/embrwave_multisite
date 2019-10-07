@@ -101,10 +101,12 @@ if __name__ == '__main__':
     from embr_survey.dvs import DV02Belonging
     from embr_survey.dvs import DV03Utilitarian
     from embr_survey.dvs import DV04Nostalgia
+    from embr_survey.dvs import DV05HousesHomelikeness
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
-                'datetime_start': 0, 'locale': 'us'}
+                'datetime_start': 0, 'locale': 'us',
+                'locale_dir': './locale/'}
     setup_logger(settings['data_dir'], 0)
     logger = logging.getLogger('embr_survey')
     logger.info('Starting experiment for %s' % settings['id'])
@@ -125,8 +127,9 @@ if __name__ == '__main__':
     dv2 = DV02Belonging(2, dev, -5, settings)
     dv3 = DV03Utilitarian(3, dev, 0, settings)
     dv4 = DV04Nostalgia(4, dev, 5, settings)
+    dv5 = DV05HousesHomelikeness(5, dev, -2, settings)
 
-    stack = [start, [dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
+    stack = [start, [dv5, dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()

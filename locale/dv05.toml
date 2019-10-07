@@ -8,7 +8,7 @@ us = ['Second floor', 'Third floor']
 eu = ['First floor', 'Second floor'] # TODO: check (wikipedia told me this)
 
 [house_photos]
-us = ['dv5_1_tmp.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
+us = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
       'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
 # TODO: if missing key, use default locale?
 eu = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',

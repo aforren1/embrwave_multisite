@@ -6,9 +6,8 @@ import random
 import PyQt5.QtWidgets as qtw
 from pip._vendor import pytoml as toml
 
-from embr_survey.common_widgets import JustText, SingleQuestion
+from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack
 from embr_survey.dvs.base_block import BaseDV
-from embr_survey.window import SpecialStack
 
 
 class DV03Utilitarian(SpecialStack):
