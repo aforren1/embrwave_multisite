@@ -1,28 +1,35 @@
 import csv
+import logging
 import os
 import random
-import imgui
-import itertools
-from datetime import datetime
 from pkg_resources import resource_filename
+import itertools
 
-from embr_survey import get_texture_id
-from embr_survey.dvs.base_dv import BaseDv
-from embr_survey.imgui_common import ok_button
-from embr_survey.question import QuestionBlock
+import PyQt5.QtWidgets as qtw
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+
 from pip._vendor import pytoml as toml
 
+from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack
+from embr_survey.dvs.base_block import BaseDV
 
-class DV07PerceptualFocus(BaseDv):
-    short_name = 'dv07'
-    name = 'dv07_perceptual_focus'
 
-    def __init__(self, win, block_num, settings):
-        self.win = win
+class DV07PerceptualFocus(SpecialStack):
+    long_name = 'dv07_perceptual_focus'
+    name = 'dv07'
+    _log = logging.getLogger('embr_survey')
+    auto_continue = True  # control whether button auto-enabled
+
+    def __init__(self, block_num, device, temperature, settings):
+        super().__init__()
         self.settings = settings
+        self.device = device
         self.block_num = block_num
+        self.temperature = temperature
+        # load settings from external TOML
         lang = settings['language']
-        translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.short_name)
+        translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
         with open(translation_path, 'r') as f:
             translation = toml.load(f)
 
@@ -30,69 +37,87 @@ class DV07PerceptualFocus(BaseDv):
         # TODO: shuffle images?
         img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
         self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
-        self.images = [get_texture_id(pth, win.context) for pth in self.img_names]
 
         self.prompt = translation['prompt'][lang]
         self.prompt2 = translation['prompt2'][lang]
         self.header = ['A', 'B']
         question = translation['question'][lang]
-        self.qblocks = []
+        self.qs = []
         self.questions = []
-        for count, img in enumerate(img_names):
-            qs = ('q%i' % count, question)
-            self.questions.append(qs)
-            self.qblocks.append(QuestionBlock(win, '', header=self.header,
-                                              questions=[qs[1]],
-                                              extra_id=img))
+        # GUI stuff
+        self._prompt = JustText(self.prompt)
+        for count, img in enumerate(self.img_names):
+            tw = qtw.QWidget()  # temporary widget to hold layout
+            tw.setSizePolicy(qtw.QSizePolicy.Ignored,
+                             qtw.QSizePolicy.Ignored)
+            img_holder = qtw.QLabel()
+            img = QPixmap(img)
+            img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+            self.questions.append(question)
+            qs = SingleQuestion(self.header, question)
+            lt = qtw.QVBoxLayout()
+            lt.addWidget(img_holder)
+            lt.addWidget(qs)
+            tw.setLayout(lt)
+            self.addWidget(tw)
+            self.qs.append(qs)
+            if count == 0:  # after first one, there's another block of text
+                tw = qtw.QWidget()
+                txt = JustText(self.prompt2)
+                lt = qtw.QVBoxLayout()
+                lt.addWidget(txt)
+                tw.setLayout(lt)
+                self.addWidget(tw)
 
-    def run(self, temperature):
-        now = datetime.now().strftime('%y%m%d-%H%M%S')
-        answers = []
-        done = False
-        while not done:
-            imgui.text(self.prompt)
-            done = ok_button(self.win.impl.reg_font, True)
-            self.win.flip()
-        # 1 page per image
-        for count, qblock in enumerate(self.qblocks):
-            done = False
-            self._log.info('Starting image %s.' % self.img_names[count])
-            while not done:
-                imgui.image(self.images[count], 400, 400)  # TODO: height fixed, width based on original aspect ratio
-                current_answers = qblock.update()
-                no_nones = not any(ca is None for ca in current_answers)
-                done = ok_button(self.win.impl.reg_font, no_nones)
-                self.win.flip()
-            # TODO: fade between questions
-            # we only have one question per image, and we want A/B at the end
-            str_ans = self.header[current_answers[0]-1] if current_answers[0] is not None else None
-            answers.append(str_ans)
+        desktop = qtw.QDesktopWidget().screenGeometry()
+        self.setFixedWidth(1.2*desktop.height())
+        self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
+                                           qtw.QSizePolicy.Preferred)
+        self.adjustSize()
 
-            if count == 0:
-                done = False
-                while not done:
-                    imgui.text(self.prompt2)
-                    done = ok_button(self.win.impl.reg_font, True)
-                    self.win.flip()
+    def save_data(self):
+        # flatten out responses
+        current_answers = [x.get_responses() for x in self.qs]
+        print(current_answers)
+        current_answers = [x for sublist in current_answers for x in sublist]
+        current_answers = [ca if ca >= 0 else None for ca in current_answers]
 
-        # save data, fade out
         settings = self.settings
-        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.short_name, now))
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
         num_q = len(self.questions)
         data = {'participant_id': num_q * [settings['id']],
                 'datetime_start_exp': num_q * [settings['datetime_start']],
                 'datetime_start_block': num_q * [now],
+                'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': ['...' + q[1][:20] for q in self.questions],
+                'questions': self.questions,
                 'question_original_order': [q[0] for q in self.questions],
-                'responses': answers,
+                'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],
-                'embr_temperature': num_q * [temperature],
+                'embr_temperature': num_q * [self.temperature],
                 'images': self.img_names}
         keys = sorted(data.keys())
         with open(csv_name, "w") as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
+
+    def all_ans(self):
+        cw = self.currentIndex()
+        # hacky handling of index-question relation
+        if cw != 1:
+            if cw > 1:
+                cw -= 1
+            return all([x >= 0 for x in self.qs[cw].get_responses()])
+        return True
+
+    def on_enter(self):
+        self.device.level = self.temperature
+        self._log.info('Temperature set to %i for %s' % (self.temperature,
+                                                         self.long_name))
+
+    def on_exit(self):
+        pass

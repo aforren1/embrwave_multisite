@@ -89,6 +89,7 @@ class NextButton(qtw.QPushButton):
             # move to the next subwidget
             current_widget.setCurrentIndex(current_widget.currentIndex() + 1)
             # current_widget.removeWidget(c2)
+            print(current_widget.currentIndex(), current_widget.count())
             if current_widget.currentIndex() + 1 < current_widget.count():
                 # resize to subwidget
                 c2 = current_widget.currentWidget()

@@ -100,7 +100,6 @@ class DV06CriminalRating(SpecialStack):
 
     def all_ans(self):
         cw = self.currentIndex()
-        # first one is prompt
         return all([x >= 0 for x in self.qs[cw].get_responses()])
 
     def on_enter(self):

@@ -6,8 +6,8 @@ en = ["1\nVery unlikely", "2", "3", "4", "5", "6", "7\nVery likely"]
 
 
 [[question]]
-# TODO: add emphasis? We have the bold font loaded already...
-en = "How likely is it that this person committed a premeditated crime?"
+# NB that HTML tags are accepted (bold in this case)
+en = "How likely is it that this person committed a <b>premeditated crime</b>?"
 
 [[question]]
-en = "How likely is it that this person committed an impulsive crime?"
+en = "How likely is it that this person committed an <b>impulsive crime</b>?"
