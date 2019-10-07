@@ -59,6 +59,7 @@ if __name__ == '__main__':
     logger.info('Seed: %s' % seed)
     logger.info('Language: %s' % settings['language'])
     logger.info('Locale: %s' % settings['locale'])
+    logger.info('Device: %s' % device.name)
     logger.info('----------')
 
     temps = random.choices([-9, -5, 0, 5, 9], k=20)
