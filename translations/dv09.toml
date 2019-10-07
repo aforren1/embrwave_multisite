@@ -1,5 +1,5 @@
 [prompt]
-en = '''The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by selecting one of the responses below. Here is an example:
+en = '''<b>Instructions</b>: The following statements describe how people sometimes feel. For each statement, please indicate how often you feel the way described by selecting one of the responses below. Here is an example:
 
 	How often do you feel happy?
 

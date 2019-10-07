@@ -11,13 +11,13 @@ from PyQt5.QtCore import Qt
 
 from pip._vendor import pytoml as toml
 
-from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack
+from embr_survey.common_widgets import JustText, SingleQuestion, MultiQuestion, SpecialStack
 from embr_survey.dvs.base_block import BaseDV
 
 
-class DV07PerceptualFocus(SpecialStack):
-    long_name = 'dv07_perceptual_focus'
-    name = 'dv07'
+class DV08BrandPersonality(SpecialStack):
+    long_name = 'dv08_brand_personality'
+    name = 'dv08'
     _log = logging.getLogger('embr_survey')
     auto_continue = True  # control whether button auto-enabled
 
@@ -34,41 +34,53 @@ class DV07PerceptualFocus(SpecialStack):
         with open(translation_path, 'r') as f:
             translation = toml.load(f)
 
-        # load images
-        # TODO: shuffle images?
-        img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
-        self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
+        prompt = translation['prompt'][lang]  # in this next section,...
+        prompt2 = translation['prompt2'][lang]  # Please answer the following...
 
-        self.prompt = translation['prompt'][lang]
-        self.prompt2 = translation['prompt2'][lang]
-        self.header = ['A', 'B']
-        question = translation['question'][lang]
-        self.qs = []
-        self.questions = []
-        # GUI stuff
-        self._prompt = JustText(self.prompt)
-        for count, img in enumerate(self.img_names):
-            tw = qtw.QWidget()  # temporary widget to hold layout
-            tw.setSizePolicy(qtw.QSizePolicy.Ignored,
-                             qtw.QSizePolicy.Ignored)
-            img_holder = qtw.QLabel()
-            img = QPixmap(img)
-            img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
-            self.questions.append(question)
-            qs = SingleQuestion(self.header, question)
+        warm = translation['warm'][lang]
+        warm_header = translation['warm_header'][lang]
+        friendly = translation['friendly'][lang]
+        friendly_header = translation['friendly_header'][lang]
+
+        rest_header = translation['rest_header'][lang]
+        intentions = translation['intentions'][lang]
+        public_interest = translation['public_interest'][lang]
+        rugged = translation['rugged'][lang]
+        competence = translation['competence'][lang]
+        aggressive = translation['aggressive'][lang]
+
+        # Fixed for now
+        brands = ['ADIDAS', 'NIKE', 'REEBOK']
+        random.shuffle(brands)
+
+        self.qs = []  # container for button groups
+        self.questions = []  # actual question text
+        self.brand_col = []  # convenience
+        self._prompt = JustText(prompt)
+        for brand in brands:
+            tw = qtw.QWidget()
+            tw.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+            # two sets of single Qs (different header)
+            # these won't end up aligning very well
+            warm_q = SingleQuestion(warm_header, warm)
+            friendly_q = SingleQuestion(friendly_header, friendly)
+            # One MultiQuestion (same header)
+            multi_q = MultiQuestion(rest_header,
+                                    [intentions, public_interest, rugged,
+                                     competence, aggressive])
+
+            txt = JustText(prompt2 % brand)  # Please answer the following...
             lt = qtw.QVBoxLayout()
-            lt.addWidget(img_holder)
-            lt.addWidget(qs)
+            lt.addWidget(txt)
+            lt.addWidget(warm_q)
+            lt.addWidget(friendly_q)
+            lt.addWidget(multi_q)
             tw.setLayout(lt)
             self.addWidget(tw)
-            self.qs.append(qs)
-            if count == 0:  # after first one, there's another block of text
-                tw = qtw.QWidget()
-                txt = JustText(self.prompt2)
-                lt = qtw.QVBoxLayout()
-                lt.addWidget(txt)
-                tw.setLayout(lt)
-                self.addWidget(tw)
+            self.brand_col.extend([brand]*7)
+            self.qs.append([warm_q, friendly_q, multi_q])
+            self.questions.extend([warm, friendly, intentions, public_interest,
+                                   rugged, competence, aggressive])
 
         desktop = qtw.QDesktopWidget().screenGeometry()
         self.setFixedWidth(1.2*desktop.height())
@@ -78,7 +90,7 @@ class DV07PerceptualFocus(SpecialStack):
 
     def save_data(self):
         # flatten out responses
-        current_answers = [x.get_responses() for x in self.qs]
+        current_answers = [x.get_responses() for sublist in self.qs for x in sublist]
         current_answers = [x for sublist in current_answers for x in sublist]
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
 
@@ -92,13 +104,12 @@ class DV07PerceptualFocus(SpecialStack):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': self.questions,
-                'question_original_order': [q[0] for q in self.questions],
+                'questions': [q[:30] + '...' for q in self.questions],
                 'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
-                'images': self.img_names}
+                'brands': self.brand_col}
         keys = sorted(data.keys())
         with open(csv_name, "w") as f:
             writer = csv.writer(f, delimiter=",")
@@ -107,12 +118,11 @@ class DV07PerceptualFocus(SpecialStack):
 
     def all_ans(self):
         cw = self.currentIndex()
-        # hacky handling of index-question relation
-        if cw != 1:
-            if cw > 1:
-                cw -= 1
-            return all([x >= 0 for x in self.qs[cw].get_responses()])
-        return True
+        res = []
+        for question_sec in self.qs[cw]:
+            for x in question_sec.get_responses():
+                res.append(x >= 0)
+        return all(res)
 
     def on_enter(self):
         self.device.level = self.temperature

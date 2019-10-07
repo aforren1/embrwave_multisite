@@ -1,0 +1,8 @@
+[prompt]
+en = "You and your classmate A attended a course that required a term paper. Upon A's request, you gave your paper to A for reference. However, the professor later told you that your paper was identical to A's and asked you to rewrite it or you would receive no credit for the course."
+
+[question]
+en = 'How willing would you be to forgive your classmate?'
+
+[header]
+en = ["1\nCertainly Not", "2", "3", "4", "5", "6", "7", "8", "9", "10\nCertainly"]

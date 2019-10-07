@@ -18,14 +18,14 @@ en = ["1\nNot at\nall \"warm\"", '2', '3', '4', '5', '6', "7\nVery \"warm\""]
 [friendly]
 en = 'How friendly do you consider this brand?'
 
-[intentions]
-en = 'This brand has good intentions toward ordinary people.'
-
 [friendly_header]
 en = ["1\nNot at\nall friendly", '2', '3', '4', '5', '6', "7\nVery friendly"]
 
+[intentions]
+en = 'This brand has good intentions toward ordinary people.'
+
 [rest_header]
-en = ["1\nTotally disagree", '2', '3', '4', '5', '6', '7\nTotally agree']
+en = ["1\nTotally disagree", '2', '3', '4', '5', '6', "7\nTotally agree"]
 
 [public_interest]
 en = "This brand consistently acts with the public's best interest in mind."

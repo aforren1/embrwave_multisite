@@ -27,6 +27,7 @@ class DV06CriminalRating(SpecialStack):
         self.device = device
         self.block_num = block_num
         self.temperature = temperature
+        self._count = 0
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)

@@ -126,8 +126,11 @@ if __name__ == '__main__':
     dv5 = DV05HousesHomelikeness(5, dev, -2, settings)
     dv6 = DV06CriminalRating(6, dev, 22, settings)
     dv7 = DV07PerceptualFocus(7, dev, 11, settings)
+    dv8 = DV08BrandPersonality(8, dev, 6, settings)
+    dv9 = DV09Loneliness(9, dev, -4, settings)
+    dv10 = DV10WillingnessToForgive(10, dev, 3, settings)
 
-    stack = [start, [dv7._prompt, dv7, dv6._prompt, dv6, dv5, dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
+    stack = [start, dv10, dv9, [dv8._prompt, dv8, dv7._prompt, dv7, dv6._prompt, dv6, dv5, dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()

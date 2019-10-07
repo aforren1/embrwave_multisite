@@ -62,6 +62,7 @@ class DV05HousesHomelikeness(BaseDV):
         layout = qtw.QVBoxLayout()
 
         layout.addWidget(JustText(self.preprompt))  # what do you think..
+        layout.addWidget(JustText(prompt2))
         layout.addWidget(self.images['dv5_1.png'])
         layout.addWidget(JustText('<b>%s</b>' % self.big_title))
         layout.addWidget(JustText(self.background))  # General info...

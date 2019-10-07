@@ -87,20 +87,18 @@ class NextButton(qtw.QPushButton):
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
             # move to the next subwidget
+            current_widget._count += 1
             current_widget.setCurrentIndex(current_widget.currentIndex() + 1)
             # current_widget.removeWidget(c2)
-            print(current_widget.currentIndex(), current_widget.count())
-            if current_widget.currentIndex() + 1 < current_widget.count():
+            if (current_widget.currentIndex() + 1) < current_widget.count():
                 # resize to subwidget
                 c2 = current_widget.currentWidget()
                 c2.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
                 current_widget.adjustSize()
-
         if (not isinstance(current_widget, SpecialStack) or
-                current_widget.currentIndex() + 1 >= current_widget.count()):
+                (current_widget._count) >= current_widget.count()):
             if hasattr(current_widget, 'on_exit'):
                 current_widget.on_exit()  # call additional cleanup things
-
             current_widget._end_time = datetime.now()
             # implement a save_data if doing a survey section
             if hasattr(current_widget, 'save_data'):
@@ -115,7 +113,6 @@ class NextButton(qtw.QPushButton):
             self.stack.removeWidget(current_widget)
             if self.stack.count() <= 0:
                 sys.exit(0)
-
             # move to the next one
             new_widget = self.stack.currentWidget()
             if hasattr(new_widget, 'on_enter'):
