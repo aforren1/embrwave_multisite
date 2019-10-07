@@ -57,8 +57,6 @@ class DV05HousesHomelikeness(BaseDV):
         for img in self.images:
             ql = qtw.QLabel()
             ql.setPixmap(self.images[img].scaled(800, 500, Qt.KeepAspectRatio))
-            # ql.setScaledContents(True)
-
             self.images[img] = ql
 
         layout = qtw.QVBoxLayout()

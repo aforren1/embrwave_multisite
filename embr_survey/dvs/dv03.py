@@ -64,6 +64,8 @@ class DV03Utilitarian(SpecialStack):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.qs]
         current_answers = [x for sublist in current_answers for x in sublist]
+        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
@@ -88,10 +90,7 @@ class DV03Utilitarian(SpecialStack):
 
     def all_ans(self):
         cw = self.currentIndex()
-        # first one is prompt
-        if cw > 0:
-            return all([x >= 0 for x in self.qs[cw].get_responses()])
-        return True
+        return all([x >= 0 for x in self.qs[cw].get_responses()])
 
     def on_enter(self):
         self.device.level = self.temperature

@@ -97,11 +97,7 @@ if __name__ == '__main__':
     from embr_survey import setup_logger
     from embr_survey.common_widgets import JustText, EmbrFactory
     from embr_survey.embrwave import DummyWave
-    from embr_survey.dvs import DV01SimilarityObjects
-    from embr_survey.dvs import DV02Belonging
-    from embr_survey.dvs import DV03Utilitarian
-    from embr_survey.dvs import DV04Nostalgia
-    from embr_survey.dvs import DV05HousesHomelikeness
+    from embr_survey.dvs import *
 
     settings = {'language': 'en', 'translation_dir': './translations/',
                 'data_dir': './data/', 'id': 'test',
@@ -128,8 +124,9 @@ if __name__ == '__main__':
     dv3 = DV03Utilitarian(3, dev, 0, settings)
     dv4 = DV04Nostalgia(4, dev, 5, settings)
     dv5 = DV05HousesHomelikeness(5, dev, -2, settings)
+    dv6 = DV06CriminalRating(6, dev, 22, settings)
 
-    stack = [start, [dv5, dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
+    stack = [start, [dv6._prompt, dv6, dv5, dv4, dv3._prompt, dv3, wait_sec.spawn(), holder, dv1, wait_sec.spawn(), dv2]]
     window = MainWindow(stack)
     with dev:
         app.exec_()
