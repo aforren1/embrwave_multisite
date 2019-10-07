@@ -40,7 +40,8 @@ install:
      python -c "import sys,platform,struct;
      print(sys.platform, platform.machine(), struct.calcsize('P') * 8, )"
   # Upgrade to the latest pip.
-  - 'python -m pip install -U pip setuptools wheel pyinstaller'
+  - 'python -m pip install -U pip setuptools wheel'
+  - 'python -m pip install git+https://github.com/pyinstaller/pyinstaller'
 
   # install packages
   - 'python -m pip install .'
