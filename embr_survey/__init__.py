@@ -4,7 +4,7 @@ import os
 import sys
 import logging
 
-
+is_script = getattr(sys, 'frozen', False)
 # https://stackoverflow.com/a/39215961/2690232
 
 
@@ -33,16 +33,17 @@ def setup_logger(pth, now):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
     sl = StreamToLogger(embr_logger, logging.ERROR)
-    sys.stderr = sl
+    if not is_script:
+        sys.stderr = sl
     embr_logger.addHandler(fh)
 
 
 def app_path():
     # figure out if we're a script or exe
-    if getattr(sys, 'frozen', False):
-        application_path = os.path.dirname(sys.executable)
+    if is_script:
+        application_path = os.path.join(os.path.dirname(sys.executable), '..')
     elif __file__:
-        application_path = os.path.dirname(__file__)
+        application_path = os.path.join(os.path.dirname(__file__), '..')
     else:
         raise ValueError('No idea if this is running as a script or under pyinstaller!')
     return application_path

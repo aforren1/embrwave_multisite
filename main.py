@@ -1,8 +1,6 @@
 import os
 import sys
-from embr_survey import app_path
 
-application_path = app_path()
 
 if __name__ == '__main__':
     import PyQt5
@@ -17,6 +15,9 @@ if __name__ == '__main__':
     from embr_survey import setup_logger
     from embr_survey.common_widgets import JustText, EmbrFactory
     import atexit
+    from embr_survey import app_path
+
+    application_path = app_path()
 
     app = qtw.QApplication([])
 
