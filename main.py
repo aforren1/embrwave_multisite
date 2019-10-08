@@ -65,7 +65,7 @@ if __name__ == '__main__':
     logger.info('Device battery remaining: %s' % device.battery_charge)
     logger.info('----------')
 
-    temps = random.choices([-9, -5, 0, 5, 9], k=20)
+    temps = random.choices([-9, -5, 5, 9], k=20)
     logger.info('Temperature progression: %s' % temps)
     # put all widgets in a list (stack)
     # each one ends up being at least a two-element list
