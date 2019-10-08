@@ -1,14 +1,8 @@
 import os
 import sys
+from embr_survey import app_path
 
-# figure out if we're a script or exe
-if getattr(sys, 'frozen', False):
-    application_path = os.path.dirname(sys.executable)
-elif __file__:
-    application_path = os.path.dirname(__file__)
-else:
-    raise ValueError('No idea if this is running as a script or under pyinstaller!')
-
+application_path = app_path()
 
 if __name__ == '__main__':
     import PyQt5

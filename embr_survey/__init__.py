@@ -35,3 +35,14 @@ def setup_logger(pth, now):
     sl = StreamToLogger(embr_logger, logging.ERROR)
     sys.stderr = sl
     embr_logger.addHandler(fh)
+
+
+def app_path():
+    # figure out if we're a script or exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+    else:
+        raise ValueError('No idea if this is running as a script or under pyinstaller!')
+    return application_path
