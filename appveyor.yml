@@ -3,7 +3,7 @@ environment:
 
   matrix:
     - PYTHON: C:\Python37-x64
-      PYTHON_VERSION: 3.7.3
+      PYTHON_VERSION: 3.7.4
       PYTHON_ARCH: 64
 
 only_commits:
