@@ -26,6 +26,9 @@ class EmbrVal(object):
 
 class EmbrWave(object):
     def __init__(self):
+        # I don't think using atexit w/ the context manager is *completely* redundant,
+        # and this keeps us from getting superfluous errors on normal exit
+        self.on = True
         self.name = 'EmbrWave'
         self.adapter = gatt.BGAPIBackend()
         self.adapter.start()
@@ -57,13 +60,15 @@ class EmbrWave(object):
         self.close()
 
     def close(self):
-        self.stop()
-        self.write(EmbrVal.MODE, (6, 1))
-        self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
-        self.write(EmbrVal.MODE, (7, 2))
-        self.write(EmbrVal.DURATION, 131)
-        self.device.disconnect()
-        self.adapter.stop()
+        if self.on:
+            self.on = False
+            self.stop()
+            self.write(EmbrVal.MODE, (6, 1))
+            self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
+            self.write(EmbrVal.MODE, (7, 2))
+            self.write(EmbrVal.DURATION, 131)
+            self.device.disconnect()
+            self.adapter.stop()
 
     def write(self, uuid, value):
         # converts to bytes, *then* write for real
