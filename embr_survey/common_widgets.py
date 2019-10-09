@@ -19,6 +19,7 @@ def deal_with_toggle(group_id, button, q_text):
     log.info('Button %s in group %s (question: %s) pressed.' % (button.checkedId(),
                                                                 group_id,
                                                                 q_text.text()))
+    print(q_text)
     q_text.setStyleSheet(ans)
 
 

@@ -45,13 +45,13 @@ install:
 
   # install packages
   - 'python -m pip install .'
-  - pyinstaller --noconsole main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
+  - pyinstaller --noconsole --onefile --name embr_survey main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
   - cp -r translations .\dist\translations
   - cp -r locale .\dist\locale
   - dir .\dist
-  - 7z a main.zip .\dist\*
+  - 7z a embr_survey.zip .\dist\*
 
 build: off
 
 artifacts:
-  - path: main.zip
+  - path: embr_survey.zip
