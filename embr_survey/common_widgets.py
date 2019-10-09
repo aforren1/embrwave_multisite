@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt, QTimer
-import PyQt5.QtWidgets as qtw
+from PySide2.QtCore import Qt, QTimer
+import PySide2.QtWidgets as qtw
 from functools import partial
 import logging
 # Multi-question questionnaire
@@ -98,7 +98,7 @@ class MultiQuestion(qtw.QWidget):
 
     def get_responses(self):
         resps = [bg.checkedId() for bg in self.qbgs]
-        return(resps)
+        return resps
 
 
 class SingleQuestion(MultiQuestion):

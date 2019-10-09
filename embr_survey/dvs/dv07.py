@@ -5,9 +5,9 @@ import random
 from pkg_resources import resource_filename
 import itertools
 
-import PyQt5.QtWidgets as qtw
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
+import PySide2.QtWidgets as qtw
+from PySide2.QtGui import QPixmap
+from PySide2.QtCore import Qt
 
 from pip._vendor import pytoml as toml
 

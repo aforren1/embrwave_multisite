@@ -3,7 +3,7 @@ import logging
 import os
 import random
 
-import PyQt5.QtWidgets as qtw
+import PySide2.QtWidgets as qtw
 from pip._vendor import pytoml as toml
 
 from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack

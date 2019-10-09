@@ -1,4 +1,4 @@
-PyQt5
+PySide2
 # currently using a vendored version of pygatt,
 # which *doesn't* include docs/anything about
 # requirements (so these are taken from the 

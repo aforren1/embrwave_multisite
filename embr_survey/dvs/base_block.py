@@ -3,9 +3,9 @@ import os
 import random
 import logging
 
-import PyQt5.QtWidgets as qtw
+import PySide2.QtWidgets as qtw
 from pip._vendor import pytoml as toml
-from PyQt5.QtCore import Qt, pyqtSignal
+from PySide2.QtCore import Qt
 from embr_survey.common_widgets import MultiQuestion
 from embr_survey.next_button import NextButton
 

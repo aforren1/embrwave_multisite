@@ -3,10 +3,10 @@ import sys
 
 
 if __name__ == '__main__':
-    import PyQt5
+    import PySide2
     import logging
     import random
-    import PyQt5.QtWidgets as qtw
+    import PySide2.QtWidgets as qtw
     from hashlib import md5
     from datetime import datetime
     from embr_survey.window import MainWindow

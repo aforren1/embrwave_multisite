@@ -1,6 +1,6 @@
-from PyQt5.QtCore import Qt
-import PyQt5.QtWidgets as qtw
-from PyQt5.QtGui import QPixmap, QImage
+from PySide2.QtCore import Qt
+import PySide2.QtWidgets as qtw
+from PySide2.QtGui import QPixmap, QImage
 from functools import partial
 from base_area import MainWindow
 from my_widgets import MultiQuestion, SingleQuestion

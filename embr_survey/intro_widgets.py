@@ -1,6 +1,6 @@
 import os
-from PyQt5.QtCore import Qt, QTimer
-import PyQt5.QtWidgets as qtw
+from PySide2.QtCore import Qt, QTimer
+import PySide2.QtWidgets as qtw
 from functools import partial
 import logging
 from pkg_resources import resource_filename

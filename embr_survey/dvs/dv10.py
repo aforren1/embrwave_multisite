@@ -4,8 +4,8 @@ import random
 from datetime import datetime
 from pkg_resources import resource_filename
 
-import PyQt5.QtWidgets as qtw
-from PyQt5.QtCore import Qt
+import PySide2.QtWidgets as qtw
+from PySide2.QtCore import Qt
 from pip._vendor import pytoml as toml
 from embr_survey.common_widgets import JustText, SingleQuestion
 from embr_survey.dvs.base_block import BaseDV

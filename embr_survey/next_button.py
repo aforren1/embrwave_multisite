@@ -1,7 +1,7 @@
 import sys
 from time import sleep
-from PyQt5.QtCore import Qt, QTimer
-import PyQt5.QtWidgets as qtw
+from PySide2.QtCore import Qt, QTimer
+import PySide2.QtWidgets as qtw
 from functools import partial
 from datetime import datetime
 from embr_survey.common_widgets import SpecialStack

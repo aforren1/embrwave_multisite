@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt
-import PyQt5.QtWidgets as qtw
+from PySide2.QtCore import Qt
+import PySide2.QtWidgets as qtw
 from embr_survey.next_button import NextButton
 from functools import partial
 from embr_survey.common_widgets import SpecialStack

@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtCore import Qt, QMargins
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QRadioButton, QGridLayout, QCheckBox, QSizePolicy, QButtonGroup, QDesktopWidget
-from PyQt5.QtGui import QPixmap
+from PySide2.QtCore import Qt, QMargins
+from PySide2.QtWidgets import QApplication, QLabel, QWidget, QHBoxLayout, QVBoxLayout, QRadioButton, QGridLayout, QCheckBox, QSizePolicy, QButtonGroup, QDesktopWidget
+from PySide2.QtGui import QPixmap
 from functools import partial
 
 
