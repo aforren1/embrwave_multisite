@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 if __name__ == '__main__':
     import PySide2
     import logging
@@ -11,6 +10,7 @@ if __name__ == '__main__':
     from datetime import datetime
     from embr_survey.window import MainWindow
     import embr_survey.dvs as dvs
+    from embr_survey.intro_widgets import IntroDlg
     from embr_survey.embrwave import EmbrWave, DummyWave
     from embr_survey import setup_logger
     from embr_survey.common_widgets import JustText, EmbrFactory

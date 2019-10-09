@@ -23,6 +23,28 @@ class EmbrVal(object):
 
 # generally 800ms between commands
 
+class PreEmbr(object):
+    # non-bonding version
+    def __init__(self):
+        self.adapter = gatt.BGAPIBackend()
+        self.adapter.start()
+        self.scan()
+
+    def scan(self):
+        devs = self.adapter.scan()
+        self.addrs = [d['address'] for d in devs if d['name'] == 'EmbrWave']
+
+    def blink(self, addr):
+        dev = self.adapter.connect(address=addr, timeout=5,
+                                   address_type='BLEAddressType.public',
+                                   interval_min=15, interval_max=30,
+                                   supervision_timeout=400, latency=0)
+        for i in range(3):
+            self._blink(dev)
+        dev.disconnect()
+
+    def _blink(self, dev):
+        dev.char_write('00004003-1112-efde-1523-725a2aab0123', bytearray(b'\x01'))
 
 class EmbrWave(object):
     def __init__(self):
@@ -41,6 +63,7 @@ class EmbrWave(object):
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
                                            supervision_timeout=400, latency=0)
+        self.blink()
         self.blink()
         self.device.bond()
         sleep(1)

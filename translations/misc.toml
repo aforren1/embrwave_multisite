@@ -19,3 +19,7 @@ en = 'Language'
 es = 'Idioma'
 fr = 'La langue'
 
+[locale]
+en = 'Locale'
+es = 'Lugar'
+fr = 'Lieu'
