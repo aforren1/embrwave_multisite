@@ -12,7 +12,11 @@ from PySide2.QtCore import Qt
 from pip._vendor import pytoml as toml
 
 from embr_survey.common_widgets import JustText, MultiQuestion, SpecialStack
-from embr_survey.dvs.base_block import BaseDV
+
+
+class CriminalQuestion(qtw.QWidget):
+    def __init__(self, img_name, questions):
+        pass
 
 
 class DV06CriminalRating(SpecialStack):
@@ -53,6 +57,7 @@ class DV06CriminalRating(SpecialStack):
             img_holder = qtw.QLabel()
             img = QPixmap(img)
             img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+            img_holder.setAlignment(Qt.AlignCenter)
             qtext = [q[lang] for q in translation['question']]
             self.questions.extend(qtext)
             qs = MultiQuestion(header, qtext)
@@ -87,7 +92,7 @@ class DV06CriminalRating(SpecialStack):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': [q[:30] + '...' for q in self.questions],
-                #'question_original_order': [q[0] for q in self.questions],
+                # 'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],

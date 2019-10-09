@@ -6,7 +6,7 @@ import logging
 import PySide2.QtWidgets as qtw
 from pip._vendor import pytoml as toml
 from PySide2.QtCore import Qt
-from embr_survey.common_widgets import MultiQuestion
+from embr_survey.common_widgets import MultiQuestion, SpecialStack
 from embr_survey.next_button import NextButton
 
 
@@ -27,6 +27,35 @@ class BaseDV(qtw.QWidget):
     def all_ans(self):
         # check if all answered (used by next_button)
         pass
+
+    def on_enter(self):
+        self.device.level = self.temperature
+        self._log.info('Temperature set to %i for %s' % (self.temperature,
+                                                         self.long_name))
+
+    def on_exit(self):
+        pass
+
+
+class StackedDV(SpecialStack):
+    # abstract away the ugly stuff for having a nested DV
+    def __init__(self, widgets=None):
+        self._count = 0
+        # widget is a complete page
+        if widgets:
+            for widget in widgets:
+                widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+                self.addWidget(widget)
+            desktop = qtw.QDesktopWidget().screenGeometry()
+            self.setFixedWidth(1.2*desktop.height())  # magic number to match host widget size
+            # initial widget should be properly sized
+            self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
+                                               qtw.QSizePolicy.Preferred)
+            self.adjustSize()
+
+    def all_ans(self):
+        cw = self.currentWidget()  # current widget
+        return cw.all_ans() if hasattr(cw, 'all_ans') else True
 
     def on_enter(self):
         self.device.level = self.temperature

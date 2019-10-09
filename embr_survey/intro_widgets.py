@@ -42,11 +42,13 @@ def count_keys(files, ref):
             languages.append(lang)
     return languages
 
+
 def on_activated(self, idx):
     new_lang = self.lang.currentText()
     self.id_label.setText(self.translations['participant'][new_lang])
     self.lang_label.setText(self.translations['language'][new_lang])
     self.locale_label.setText(self.translations['locale'][new_lang])
+
 
 def on_blink(sel):
     dev = sel.device.currentText()
@@ -55,6 +57,7 @@ def on_blink(sel):
     sel.pre_embr.scan()
     sel.device.clear()
     sel.device.addItems(sel.pre_embr.addrs)
+
 
 class IntroDlg(qtw.QWidget):
     _log = logging.getLogger('embr_survey')
@@ -75,6 +78,9 @@ class IntroDlg(qtw.QWidget):
         # figure out complete translations, using english as ref
         languages = count_keys(translation_files, 'en')
         # now same with localization
+        # I think it's "more" ok to have missing keys in localization files,
+        # and if the locale has *any* keys it should be allowed (and the default
+        # subbed in if missing)
         locale_files = glob(os.path.join(self.settings['locale_dir'], 'd*.toml'))
         locales = count_keys(locale_files, 'us')
 
@@ -108,19 +114,19 @@ class IntroDlg(qtw.QWidget):
         self.blinker = qtw.QPushButton()
         self.blinker.clicked.connect(partial(on_blink, self))
 
-        layout.addWidget(self.id_label, 0, 0, Qt.AlignRight|Qt.AlignVCenter)
+        layout.addWidget(self.id_label, 0, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.id, 0, 1, Qt.AlignLeft | Qt.AlignVCenter)
         layout.addWidget(self.lang_label, 1, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.lang, 1, 1, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.locale_label, 2, 0, Qt.AlignRight|Qt.AlignVCenter)
+        layout.addWidget(self.locale_label, 2, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.locale, 2, 1, Qt.AlignLeft | Qt.AlignVCenter)
         layout.addWidget(self.device_label, 3, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.device, 3, 1, Qt.AlignLeft | Qt.AlignVCenter)
         layout.addWidget(self.blinker, 3, 2, Qt.AlignLeft | Qt.AlignVCenter)
 
         self.setLayout(layout)
-    
+
     # TODO: on exit, should do everything currently done in main-- adding widgets to the stack
-    # with proper settings, 
+    # with proper settings,
     def all_ans(self):
         return self.id.text != ''
