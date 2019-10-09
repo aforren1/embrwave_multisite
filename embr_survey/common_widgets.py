@@ -2,6 +2,7 @@ from PySide2.QtCore import Qt, QTimer
 import PySide2.QtWidgets as qtw
 from functools import partial
 import logging
+from pkg_resources import resource_filename
 # Multi-question questionnaire
 
 no_ans = '''
@@ -87,9 +88,14 @@ class MultiQuestion(qtw.QWidget):
             qbg = qtw.QButtonGroup()
             qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))
             qbgs.append(qbg)
+            chk_pth = resource_filename('embr_survey', 'images/radio_checked.png')
+            unchk_pth = resource_filename('embr_survey', 'images/radio_unchecked.png')
+            chk_pth = chk_pth.replace('\\', '/')
+            unchk_pth = unchk_pth.replace('\\', '/')
+            style = 'QRadioButton::indicator{width:80px; height:80px; image:url(%s);} QRadioButton::indicator::checked{image:url(%s);}' % (unchk_pth, chk_pth)
             for count in range(len(header)):
                 rad = qtw.QRadioButton()
-                rad.setStyleSheet('QRadioButton::indicator{width:60px; height:60px;}')
+                rad.setStyleSheet(style)
                 qbg.addButton(rad, count)
                 grid.addWidget(rad, i+1, count+1, alignment=Qt.AlignCenter)
 
