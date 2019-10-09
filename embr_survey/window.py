@@ -3,11 +3,13 @@ import PySide2.QtWidgets as qtw
 from embr_survey.next_button import NextButton
 from functools import partial
 from embr_survey.common_widgets import SpecialStack
+import logging
 
+logger = logging.getLogger('embr_survey')
 
 def _exit_on_esc(e):
     if e.key() == Qt.Key_Escape:
-        # TODO log
+        logger.warn('Premature escape.')
         qtw.QApplication.instance().quit()
 
 
