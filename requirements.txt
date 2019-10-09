@@ -1,7 +1,7 @@
-PySide2
+PySide2==5.13.1
 # currently using a vendored version of pygatt,
 # which *doesn't* include docs/anything about
 # requirements (so these are taken from the 
 # proper repo: https://github.com/peplin/pygatt)
-pyserial
-enum-compat
+pyserial==3.4
+enum-compat==0.0.2

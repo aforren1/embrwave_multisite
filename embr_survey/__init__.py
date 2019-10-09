@@ -4,7 +4,7 @@ import os
 import sys
 import logging
 
-is_script = getattr(sys, 'frozen', False)
+is_exe = getattr(sys, 'frozen', False)
 # https://stackoverflow.com/a/39215961/2690232
 
 
@@ -33,17 +33,20 @@ def setup_logger(pth, now):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
     sl = StreamToLogger(embr_logger, logging.ERROR)
-    if not is_script:
+    if is_exe:
         sys.stderr = sl
     embr_logger.addHandler(fh)
 
 
 def app_path():
-    # figure out if we're a script or exe
-    if is_script:
-        application_path = os.path.join(os.path.dirname(sys.executable), '..')
-    elif __file__:
-        application_path = os.path.join(os.path.dirname(__file__), '..')
+    #https://stackoverflow.com/questions/404744/determining-application-path-in-a-python-exe-generated-by-pyinstaller
+    if is_exe:
+        # If the application is run as a bundle, the pyInstaller bootloader
+        # extends the sys module by a flag frozen=True and sets the app 
+        # path into variable _MEIPASS'.
+        application_path = os.path.join(sys.executable, '..') # sys.executable for onefile option
+        print(application_path)
     else:
-        raise ValueError('No idea if this is running as a script or under pyinstaller!')
+        application_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
     return application_path
+    

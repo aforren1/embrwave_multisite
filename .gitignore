@@ -11,4 +11,4 @@ dist/
 build/
 data/
 *.docx#
-
+~$*

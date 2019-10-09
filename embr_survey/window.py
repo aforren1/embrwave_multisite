@@ -11,7 +11,7 @@ def _exit_on_esc(e):
         qtw.QApplication.instance().quit()
 
 
-def scroll_up(area):
+def scroll_up(area, removed):
     area.verticalScrollBar().setValue(0)
 
 

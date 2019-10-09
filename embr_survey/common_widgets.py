@@ -15,11 +15,10 @@ border-radius: 10px;background-color: #a1ffb2;font-size:18pt;padding:5px;
 log = logging.getLogger('embr_survey')
 
 
-def deal_with_toggle(group_id, button, q_text):
-    log.info('Button %s in group %s (question: %s) pressed.' % (button.checkedId(),
+def deal_with_toggle(group_id, button_grp, q_text, button):
+    log.info('Button %s in group %s (question: %s) pressed.' % (button_grp.checkedId(),
                                                                 group_id,
                                                                 q_text.text()))
-    print(q_text)
     q_text.setStyleSheet(ans)
 
 
