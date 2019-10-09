@@ -86,15 +86,15 @@ class DV06CriminalRating(SpecialStack):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': [q[1][:30] + '...' for q in self.questions],
-                'question_original_order': [q[0] for q in self.questions],
+                'questions': [q[:30] + '...' for q in self.questions],
+                #'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
                 'images': rep_img_names}
         keys = sorted(data.keys())
-        with open(csv_name, "w") as f:
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))

@@ -100,7 +100,7 @@ class DV07PerceptualFocus(SpecialStack):
                 'embr_temperature': num_q * [self.temperature],
                 'images': self.img_names}
         keys = sorted(data.keys())
-        with open(csv_name, "w") as f:
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))

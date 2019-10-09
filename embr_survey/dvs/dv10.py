@@ -53,7 +53,7 @@ class DV10WillingnessToForgive(BaseDV):
                 'block_number': [self.block_num],
                 'embr_temperature': [self.temperature]}
         keys = sorted(data.keys())
-        with open(csv_name, "w") as f:
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
