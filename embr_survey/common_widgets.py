@@ -25,10 +25,14 @@ def deal_with_toggle(group_id, button_grp, q_text, button):
 
 class SpecialStack(qtw.QStackedWidget):
     def sizeHint(self):
-        return self.currentWidget().sizeHint()
+        if self.count() > 0:
+            return self.currentWidget().sizeHint()
+        return super().sizeHint()
 
     def minimumSizeHint(self):
-        return self.currentWidget().minimumSizeHint()
+        if self.count() > 0:
+            return self.currentWidget().minimumSizeHint()
+        return super().minimumSizeHint()
 
 
 class JustText(qtw.QLabel):

@@ -78,8 +78,8 @@ if __name__ == '__main__':
     dv3 = [ef.spawn(), _dv3._prompt, _dv3]
     dv4 = [ef.spawn(), dvs.DV04(4, device, temps[3], settings)]
     dv5 = [ef.spawn(), dvs.DV05(5, device, temps[4], settings)]
-    _dv6 = dvs.DV06(6, device, temps[5], settings)
-    dv6 = [ef.spawn(), _dv6._prompt, _dv6]
+    dv6 = dvs.DV06(6, device, temps[5], settings)
+    dv6 = [ef.spawn(), dv6]
     _dv7 = dvs.DV07(7, device, temps[6], settings)
     dv7 = [ef.spawn(), _dv7._prompt, _dv7]
     _dv8 = dvs.DV08(8, device, temps[7], settings)

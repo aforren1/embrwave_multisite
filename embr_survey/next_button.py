@@ -81,31 +81,31 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
+        # handle when the current widget is a Stack
         if isinstance(current_widget, SpecialStack):
             # consume a subwidget
             c2 = current_widget.currentWidget()
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
             # move to the next subwidget
-            current_widget._count += 1
-            current_widget.setCurrentIndex(current_widget.currentIndex() + 1)
-            # current_widget.removeWidget(c2)
-            if (current_widget.currentIndex() + 1) < current_widget.count():
+            current_widget.removeWidget(c2)
+            if current_widget.count() > 0:
                 # resize to subwidget
-                c2 = current_widget.currentWidget()
-                c2.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+                c3 = current_widget.currentWidget()
+                c3.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
+                c3.adjustSize()
                 current_widget.adjustSize()
-        if (not isinstance(current_widget, SpecialStack) or
-                (current_widget._count) >= current_widget.count()):
+                self.stack.adjustSize()
+
+        # if we're ready to go to the next widget
+        if not isinstance(current_widget, SpecialStack) or current_widget.count() <= 0:
+            current_widget._end_time = datetime.now()
             if hasattr(current_widget, 'on_exit'):
                 current_widget.on_exit()  # call additional cleanup things
-            current_widget._end_time = datetime.now()
             # implement a save_data if doing a survey section
             if hasattr(current_widget, 'save_data'):
                 current_widget.save_data()
             self.state = 'neutral'
-            # TODO: handle StackedWidgets properly? Would allow for more
-            # natural data movement...
             passed_data = getattr(current_widget, 'passed_data', None)
             current_widget.setSizePolicy(qtw.QSizePolicy.Ignored,
                                          qtw.QSizePolicy.Ignored)
@@ -120,8 +120,9 @@ class NextButton(qtw.QPushButton):
             new_widget._start_time = datetime.now()
             if passed_data is not None:
                 new_widget.passed_data = passed_data
-            new_widget.setSizePolicy(qtw.QSizePolicy.Preferred,
-                                     qtw.QSizePolicy.Preferred)
+            new_widget.setSizePolicy(qtw.QSizePolicy.Expanding,
+                                     qtw.QSizePolicy.Expanding)
+            new_widget.adjustSize()
             self.stack.adjustSize()
             if getattr(new_widget, 'auto_continue', True):
                 QTimer.singleShot(1000, self._callback_pt3)

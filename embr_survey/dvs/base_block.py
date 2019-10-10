@@ -38,20 +38,37 @@ class BaseDV(qtw.QWidget):
 
 
 class StackedDV(SpecialStack):
+    long_name = 'long_name'
+    name = 'name'
+    auto_continue = True  # control whether button auto-enabled
+    _log = logging.getLogger('embr_survey')
+
     # abstract away the ugly stuff for having a nested DV
-    def __init__(self, widgets=None):
+    def __init__(self, block_num, device, temperature, settings, widgets=None):
+        super().__init__()
+        self.settings = settings
+        self.device = device
+        self.block_num = block_num
+        self.temperature = temperature
         self._count = 0
+        self.widgets = []
         # widget is a complete page
+        # assumes widgets is a list/iterable
         if widgets:
-            for widget in widgets:
-                widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
-                self.addWidget(widget)
-            desktop = qtw.QDesktopWidget().screenGeometry()
-            self.setFixedWidth(1.2*desktop.height())  # magic number to match host widget size
-            # initial widget should be properly sized
-            self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
-                                               qtw.QSizePolicy.Preferred)
-            self.adjustSize()
+            self.add_widgets(widgets)
+
+    def add_widgets(self, widgets):
+        for widget in widgets:
+            widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+            self.addWidget(widget)
+        desktop = qtw.QDesktopWidget().screenGeometry()
+        self.setFixedWidth(1.2*desktop.height())  # magic number to match host widget size
+        # initial widget should be properly sized
+        self.currentWidget().setSizePolicy(qtw.QSizePolicy.Expanding,
+                                           qtw.QSizePolicy.Expanding)
+        self.currentWidget().adjustSize()
+        self.adjustSize()
+        self.widgets.extend(widgets)  # add to list
 
     def all_ans(self):
         cw = self.currentWidget()  # current widget

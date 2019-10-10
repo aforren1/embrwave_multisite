@@ -10,28 +10,48 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtCore import Qt
 
 from pip._vendor import pytoml as toml
+from embr_survey.dvs.base_block import StackedDV
+from embr_survey.common_widgets import JustText, MultiQuestion
 
-from embr_survey.common_widgets import JustText, MultiQuestion, SpecialStack
+
+class TestText(qtw.QWidget):
+    def __init__(self, txt):
+        super().__init__()
+        text = qtw.QLabel(txt)
+        text.setStyleSheet('font-size:20pt;')
+        text.setWordWrap(True)
+        text.setTextFormat(Qt.RichText)  # allow HTML
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(text)
+        self.setLayout(layout)
 
 
 class CriminalQuestion(qtw.QWidget):
-    def __init__(self, img_name, questions):
-        pass
+    def __init__(self, img_name, header, questions):
+        super().__init__()
+        img = QPixmap(img_name)
+        img_holder = qtw.QLabel()
+        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+        img_holder.setAlignment(Qt.AlignCenter)
+        self.question = MultiQuestion(header, questions)
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(img_holder)
+        layout.addWidget(self.question)
+        self.setLayout(layout)
+
+    def get_responses(self):
+        return self.question.get_responses()
+
+    def all_ans(self):
+        return all([x >= 0 for x in self.get_responses()])
 
 
-class DV06CriminalRating(SpecialStack):
+class DV06CriminalRating(StackedDV):
     long_name = 'dv06_criminal_rating'
     name = 'dv06'
-    _log = logging.getLogger('embr_survey')
-    auto_continue = True  # control whether button auto-enabled
 
-    def __init__(self, block_num, device, temperature, settings):
-        super().__init__()
-        self.settings = settings
-        self.device = device
-        self.block_num = block_num
-        self.temperature = temperature
-        self._count = 0
+    def __init__(self, block_num, device, temperature, settings, widgets=None):
+        super().__init__(block_num, device, temperature, settings, widgets)
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
@@ -43,40 +63,21 @@ class DV06CriminalRating(SpecialStack):
         img_names = ['dv6_%i.png' % i for i in range(1, 9, 1)]
         self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
 
-        self.prompt = translation['prompt'][lang]
+        prompt = translation['prompt'][lang]
         header = translation['header'][lang]
+        qtext = [q[lang] for q in translation['question']]
 
-        self.qs = []
+        widgets = []
+        widgets.append(TestText(prompt))
         self.questions = []
-        # GUI stuff
-        self._prompt = JustText(self.prompt)
         for img in self.img_names:
-            tw = qtw.QWidget()  # temporary widget to hold layout
-            tw.setSizePolicy(qtw.QSizePolicy.Ignored,
-                             qtw.QSizePolicy.Ignored)
-            img_holder = qtw.QLabel()
-            img = QPixmap(img)
-            img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
-            img_holder.setAlignment(Qt.AlignCenter)
-            qtext = [q[lang] for q in translation['question']]
             self.questions.extend(qtext)
-            qs = MultiQuestion(header, qtext)
-            lt = qtw.QVBoxLayout()
-            lt.addWidget(img_holder)
-            lt.addWidget(qs)
-            tw.setLayout(lt)
-            self.addWidget(tw)
-            self.qs.append(qs)
-
-        desktop = qtw.QDesktopWidget().screenGeometry()
-        self.setFixedWidth(1.2*desktop.height())
-        self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
-                                           qtw.QSizePolicy.Preferred)
-        self.adjustSize()
+            widgets.append(CriminalQuestion(img, header, qtext))
+        self.add_widgets(widgets)  # add_widgets also adds to internal list `self.widgets`
 
     def save_data(self):
         # flatten out responses
-        current_answers = [x.get_responses() for x in self.qs]
+        current_answers = [x.get_responses() for x in self.widgets[1:]]
         current_answers = [x for sublist in current_answers for x in sublist]
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
 
@@ -103,15 +104,3 @@ class DV06CriminalRating(SpecialStack):
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
-
-    def all_ans(self):
-        cw = self.currentIndex()
-        return all([x >= 0 for x in self.qs[cw].get_responses()])
-
-    def on_enter(self):
-        self.device.level = self.temperature
-        self._log.info('Temperature set to %i for %s' % (self.temperature,
-                                                         self.long_name))
-
-    def on_exit(self):
-        pass
