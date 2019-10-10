@@ -50,7 +50,6 @@ class StackedDV(SpecialStack):
         self.device = device
         self.block_num = block_num
         self.temperature = temperature
-        self._count = 0
         self.widgets = []
         # widget is a complete page
         # assumes widgets is a list/iterable

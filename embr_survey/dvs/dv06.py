@@ -14,18 +14,6 @@ from embr_survey.dvs.base_block import StackedDV
 from embr_survey.common_widgets import JustText, MultiQuestion
 
 
-class TestText(qtw.QWidget):
-    def __init__(self, txt):
-        super().__init__()
-        text = qtw.QLabel(txt)
-        text.setStyleSheet('font-size:20pt;')
-        text.setWordWrap(True)
-        text.setTextFormat(Qt.RichText)  # allow HTML
-        layout = qtw.QVBoxLayout()
-        layout.addWidget(text)
-        self.setLayout(layout)
-
-
 class CriminalQuestion(qtw.QWidget):
     def __init__(self, img_name, header, questions):
         super().__init__()
@@ -68,7 +56,7 @@ class DV06CriminalRating(StackedDV):
         qtext = [q[lang] for q in translation['question']]
 
         widgets = []
-        widgets.append(TestText(prompt))
+        widgets.append(JustText(prompt))
         self.questions = []
         for img in self.img_names:
             self.questions.extend(qtext)

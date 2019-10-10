@@ -7,22 +7,32 @@ import PySide2.QtWidgets as qtw
 from pip._vendor import pytoml as toml
 
 from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack
-from embr_survey.dvs.base_block import BaseDV
+from embr_survey.dvs.base_block import StackedDV
 
 
-class DV03Utilitarian(SpecialStack):
+class UtilitarianQuestion(qtw.QWidget):
+    def __init__(self, prompt, header, question):
+        super().__init__()
+        txt = JustText(prompt)
+        self.question = SingleQuestion(header, question)
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(txt)
+        layout.addWidget(self.question)
+        self.setLayout(layout)
+
+    def get_responses(self):
+        return self.question.get_responses()
+
+    def all_ans(self):
+        return all([x >= 0 for x in self.get_responses()])
+
+
+class DV03Utilitarian(StackedDV):
     long_name = 'dv03_utilitarian'
     name = 'dv03'
-    _log = logging.getLogger('embr_survey')
-    auto_continue = True  # control whether button auto-enabled
 
-    def __init__(self, block_num, device, temperature, settings):
-        super().__init__()
-        self.settings = settings
-        self.device = device
-        self.block_num = block_num
-        self.temperature = temperature
-        self._count = 0
+    def __init__(self, block_num, device, temperature, settings, widgets=None):
+        super().__init__(block_num, device, temperature, settings, widgets)
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
@@ -38,32 +48,16 @@ class DV03Utilitarian(SpecialStack):
         # new ordering
         random.shuffle(self.questions)
 
-        self.qs = []
-        self._prompt = JustText(prompt)
-
-        # self.addWidget(txt)
+        prompt = JustText(prompt)
+        widgets = []
+        widgets.append(prompt)
         for question in self.questions:
-            tw = qtw.QWidget()  # temporary widget to hold layout
-            tw.setSizePolicy(qtw.QSizePolicy.Ignored,
-                             qtw.QSizePolicy.Ignored)
-            jt = JustText(question[1])
-            qs = SingleQuestion(header, question[2])
-            lt = qtw.QVBoxLayout()
-            lt.addWidget(jt)
-            lt.addWidget(qs)
-            tw.setLayout(lt)
-            self.addWidget(tw)
-            self.qs.append(qs)  # keep questions around in case of GC?
-
-        desktop = qtw.QDesktopWidget().screenGeometry()
-        self.setFixedWidth(1.2*desktop.height())
-        self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
-                                           qtw.QSizePolicy.Preferred)
-        self.adjustSize()
+            widgets.append(UtilitarianQuestion(question[1], header, question[2]))
+        self.add_widgets(widgets)
 
     def save_data(self):
         # flatten out responses
-        current_answers = [x.get_responses() for x in self.qs]
+        current_answers = [x.get_responses() for x in self.widgets[1:]]
         current_answers = [x for sublist in current_answers for x in sublist]
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
 
@@ -88,15 +82,3 @@ class DV03Utilitarian(SpecialStack):
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
-
-    def all_ans(self):
-        cw = self.currentIndex()
-        return all([x >= 0 for x in self.qs[cw].get_responses()])
-
-    def on_enter(self):
-        self.device.level = self.temperature
-        self._log.info('Temperature set to %i for %s' % (self.temperature,
-                                                         self.long_name))
-
-    def on_exit(self):
-        pass
