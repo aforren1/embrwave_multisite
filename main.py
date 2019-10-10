@@ -37,7 +37,7 @@ if __name__ == '__main__':
     # - set language
     # - set localization (i.e. different pics in DV5)
     #settings = intro_dlg(win)
-    settings = {'id': 'test', 'language': 'en', 'locale': 'eu'}
+    settings = {'id': 'test', 'language': 'en', 'locale': 'us'}
     settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
     settings['translation_dir'] = os.path.join(application_path, 'translations/')
     settings['locale_dir'] = os.path.join(application_path, 'locale/')
@@ -87,8 +87,9 @@ if __name__ == '__main__':
     dv11 = [ef.spawn(), dvs.DV11Part1(11, device, temps[10], settings),
             ef.spawn(), dvs.DV11Part2(11, device, temps[10], settings)]
     dv12 = [ef.spawn(), dvs.DV12(12, device, temps[11], settings)]
+    dv13 = [ef.spawn(), dvs.DV13(13, device, temps[12], settings)]
     #stack = [dv1, dv2, dv3, dv4, dv5, dv6, dv7, dv8, dv9, dv10]
-    stack = [dv12]
+    stack = [dv13]
     # shuffle around questions
     random.shuffle(stack)
     stack.insert(0, start)

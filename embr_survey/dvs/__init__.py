@@ -10,3 +10,4 @@ from .dv09 import DV09Loneliness as DV09
 from .dv10 import DV10WillingnessToForgive as DV10
 from .dv11 import DV11Part1, DV11Part2
 from .dv12 import DV12RatingPersonalities as DV12
+from .dv13 import DV13WillingnessToPay as DV13
