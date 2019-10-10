@@ -79,8 +79,7 @@ if __name__ == '__main__':
     dv5 = [ef.spawn(), dvs.DV05(5, device, temps[4], settings)]
     dv6 = [ef.spawn(), dvs.DV06(6, device, temps[5], settings)]
     dv7 = [ef.spawn(), dvs.DV07(7, device, temps[6], settings)]
-    _dv8 = dvs.DV08(8, device, temps[7], settings)
-    dv8 = [ef.spawn(), _dv8._prompt, _dv8]
+    dv8 = [ef.spawn(), dvs.DV08(8, device, temps[7], settings)]
     dv9 = [ef.spawn(), dvs.DV09(9, device, temps[8], settings)]
     dv10 = [ef.spawn(), dvs.DV10(10, device, temps[9], settings)]
     stack = [dv1, dv2, dv3, dv4, dv5, dv6, dv7, dv8, dv9, dv10]
