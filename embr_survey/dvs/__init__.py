@@ -8,3 +8,4 @@ from .dv07 import DV07PerceptualFocus as DV07
 from .dv08 import DV08BrandPersonality as DV08
 from .dv09 import DV09Loneliness as DV09
 from .dv10 import DV10WillingnessToForgive as DV10
+from .dv11 import DV11Part1, DV11Part2

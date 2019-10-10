@@ -115,11 +115,11 @@ class NextButton(qtw.QPushButton):
                 sys.exit(0)
             # move to the next one
             new_widget = self.stack.currentWidget()
+            if passed_data is not None:
+                new_widget.passed_data = passed_data
             if hasattr(new_widget, 'on_enter'):
                 new_widget.on_enter()  # call one-shot things (generally for controlling temperature)
             new_widget._start_time = datetime.now()
-            if passed_data is not None:
-                new_widget.passed_data = passed_data
             new_widget.setSizePolicy(qtw.QSizePolicy.Expanding,
                                      qtw.QSizePolicy.Expanding)
             new_widget.adjustSize()

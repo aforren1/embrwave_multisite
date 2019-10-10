@@ -84,8 +84,10 @@ if __name__ == '__main__':
     dv8 = [ef.spawn(), dvs.DV08(8, device, temps[7], settings)]
     dv9 = [ef.spawn(), dvs.DV09(9, device, temps[8], settings)]
     dv10 = [ef.spawn(), dvs.DV10(10, device, temps[9], settings)]
-    stack = [dv1, dv2, dv3, dv4, dv5, dv6, dv7, dv8, dv9, dv10]
-
+    dv11 = [ef.spawn(), dvs.DV11Part1(11, device, temps[10], settings),
+            ef.spawn(), dvs.DV11Part2(11, device, temps[10], settings)]
+    #stack = [dv1, dv2, dv3, dv4, dv5, dv6, dv7, dv8, dv9, dv10]
+    stack = [dv11]
     # shuffle around questions
     random.shuffle(stack)
     stack.insert(0, start)
