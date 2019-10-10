@@ -6,6 +6,7 @@ if __name__ == '__main__':
     import logging
     import random
     import PySide2.QtWidgets as qtw
+    from PySide2.QtCore import Qt
     from hashlib import md5
     from datetime import datetime
     from embr_survey.window import MainWindow
@@ -71,6 +72,7 @@ if __name__ == '__main__':
     # each one ends up being at least a two-element list
     # [[embr_screen, dv1], [embr_screen, dv2_1, dv2_2], ...]
     start = JustText('Start by pressing the button below.')
+    start.setAlignment(Qt.AlignCenter)
     ef = EmbrFactory('Please wait until the button below turns green.', device)
     dv1 = [ef.spawn(), dvs.DV01(1, device, temps[0], settings)]
     dv2 = [ef.spawn(), dvs.DV02(2, device, temps[1], settings)]
@@ -89,6 +91,7 @@ if __name__ == '__main__':
     stack.insert(0, start)
 
     # stick the personal questionnaire at beginning or end of this stack
+    # use random module
 
     window = MainWindow(stack)
     with device:
