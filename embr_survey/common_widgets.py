@@ -84,10 +84,11 @@ class MultiQuestion(qtw.QWidget):
                            alignment=Qt.AlignCenter | Qt.AlignBottom)
         qbgs = []
         for i, quest in enumerate(questions):
-            q = qtw.QLabel(quest)
+            q = qtw.QLabel()
             q.setWordWrap(True)
             q.setStyleSheet(no_ans)
             q.setTextFormat(Qt.RichText)
+            q.setText(quest)
             grid.addWidget(q, i+1, 0)
             qbg = qtw.QButtonGroup()
             qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))

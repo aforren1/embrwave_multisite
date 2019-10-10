@@ -1,0 +1,35 @@
+[prompt]
+en = "Consider the following person: Person X is intelligent, skillful, and industrious. Person X is also determined, practical, and cautious."
+
+[header]
+en = ['1', '2', '3', '4', '5', '6', '7']
+
+[[question]]
+en = "1 = Ungenerous, \n7 = Generous"
+
+[[question]]
+en = "1 = Unhappy, \n7 = Happy"
+
+[[question]]
+en = "1 = Irritable, \n7 = Good-natured"
+
+[[question]]
+en = "1 = Anti-social, \n7 = Sociable"
+
+[[question]]
+en = "1 = Selfish, \n7 = Caring"
+
+[[question]]
+en = "1 = Unattractive, \n7 = Attractive"
+
+[[question]]
+en = "1 = Serious, \n7 = Carefree"
+
+[[question]]
+en = "1 = Quiet, \n7 = Talkative"
+
+[[question]]
+en = "1 = Weak, \n7 = Strong"
+
+[[question]]
+en = "1 = Dishonest, \n7 = Honest"
