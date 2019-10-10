@@ -27,9 +27,12 @@ class NameInput(qtw.QWidget):
         self.setLayout(layout)
 
     def all_ans(self):
-        low_txt = self.name_input.text.lower()
-        print(low_txt)
-        return low_txt != '' and low_txt not in self.prev_answers
+        name = self.name_input.text().strip(' ')
+        tmp = [x.lower() for x in self.prev_answers]
+        low_txt = name.lower()
+        if low_txt != '' and low_txt not in tmp:
+            self.prev_answers.append(name)
+            return True
 
 
 class RelationshipQuestion(qtw.QWidget):
@@ -76,7 +79,7 @@ class DV11Part1(StackedDV):
 
     def on_exit(self):
         # get all the names
-        self.passed_data = [w.name_input.text() for w in self.widgets]
+        self.passed_data = [w.name_input.text().strip(' ') for w in self.widgets]
 
 
 class DV11Part2(StackedDV):
@@ -85,7 +88,8 @@ class DV11Part2(StackedDV):
     name = 'dv11'
 
     def __init__(self, block_num, device, temperature, settings, widgets=None):
-        super().__init__(block_num, device, temperature, settings, widgets)
+        super().__init__(block_num, device, 0, settings, widgets)
+        self.temperature = temperature # we set the device temp to 0, but record the prev
 
     def on_enter(self):
         # load settings from external TOML
@@ -100,12 +104,14 @@ class DV11Part2(StackedDV):
         header = translation['header'][lang]
 
         widgets = []
+        self.questions = []
         for name in self.passed_data:
-            widgets.append(RelationshipQuestion(circle_img, header, q1_part2 % name))
+            q = q1_part2 % name
+            widgets.append(RelationshipQuestion(circle_img, header, q))
+            self.questions.append(q)
         self.add_widgets(widgets)
         # just to be explicit, I think inserting the
         # in-between section should already have disabled the device
-        self.device.level = 0
         self._log.info('Temperature set to %i for %s' % (self.temperature,
                                                          self.long_name))
 
@@ -118,7 +124,7 @@ class DV11Part2(StackedDV):
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
-        num_q = len(self.name)
+        num_q = len(self.passed_data)
         data = {'participant_id': num_q * [settings['id']],
                 'datetime_start_exp': num_q * [settings['datetime_start']],
                 'datetime_start_block': num_q * [now],
