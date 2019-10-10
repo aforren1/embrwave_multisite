@@ -74,14 +74,11 @@ if __name__ == '__main__':
     ef = EmbrFactory('Please wait until the button below turns green.', device)
     dv1 = [ef.spawn(), dvs.DV01(1, device, temps[0], settings)]
     dv2 = [ef.spawn(), dvs.DV02(2, device, temps[1], settings)]
-    dv3 = dvs.DV03(3, device, temps[2], settings)
-    dv3 = [ef.spawn(), dv3]
+    dv3 = [ef.spawn(), dvs.DV03(3, device, temps[2], settings)]
     dv4 = [ef.spawn(), dvs.DV04(4, device, temps[3], settings)]
     dv5 = [ef.spawn(), dvs.DV05(5, device, temps[4], settings)]
-    dv6 = dvs.DV06(6, device, temps[5], settings)
-    dv6 = [ef.spawn(), dv6]
-    _dv7 = dvs.DV07(7, device, temps[6], settings)
-    dv7 = [ef.spawn(), _dv7._prompt, _dv7]
+    dv6 = [ef.spawn(), dvs.DV06(6, device, temps[5], settings)]
+    dv7 = [ef.spawn(), dvs.DV07(7, device, temps[6], settings)]
     _dv8 = dvs.DV08(8, device, temps[7], settings)
     dv8 = [ef.spawn(), _dv8._prompt, _dv8]
     dv9 = [ef.spawn(), dvs.DV09(9, device, temps[8], settings)]

@@ -12,22 +12,35 @@ from PySide2.QtCore import Qt
 from pip._vendor import pytoml as toml
 
 from embr_survey.common_widgets import JustText, SingleQuestion, SpecialStack
-from embr_survey.dvs.base_block import BaseDV
+from embr_survey.dvs.base_block import StackedDV
 
 
-class DV07PerceptualFocus(SpecialStack):
+class PerceptualQuestion(qtw.QWidget):
+    def __init__(self, img_name, header, question):
+        super().__init__()
+        img = QPixmap(img_name)
+        img_holder = qtw.QLabel()
+        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+        img_holder.setAlignment(Qt.AlignCenter)
+        self.question = SingleQuestion(header, question)
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(img_holder)
+        layout.addWidget(self.question)
+        self.setLayout(layout)
+
+    def get_responses(self):
+        return self.question.get_responses()
+
+    def all_ans(self):
+        return all([x >= 0 for x in self.get_responses()])
+
+
+class DV07PerceptualFocus(StackedDV):
     long_name = 'dv07_perceptual_focus'
     name = 'dv07'
-    _log = logging.getLogger('embr_survey')
-    auto_continue = True  # control whether button auto-enabled
 
-    def __init__(self, block_num, device, temperature, settings):
-        super().__init__()
-        self.settings = settings
-        self.device = device
-        self.block_num = block_num
-        self.temperature = temperature
-        self._count = 0
+    def __init__(self, block_num, device, temperature, settings, widgets=None):
+        super().__init__(block_num, device, temperature, settings, widgets)
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
@@ -41,40 +54,20 @@ class DV07PerceptualFocus(SpecialStack):
 
         self.prompt = translation['prompt'][lang]
         self.prompt2 = translation['prompt2'][lang]
-        self.header = ['A', 'B']
+        header = ['A', 'B']
         question = translation['question'][lang]
         self.qs = []
         self.questions = []
         # GUI stuff
-        self._prompt = JustText(self.prompt)
-        for count, img in enumerate(self.img_names):
-            tw = qtw.QWidget()  # temporary widget to hold layout
-            tw.setSizePolicy(qtw.QSizePolicy.Ignored,
-                             qtw.QSizePolicy.Ignored)
-            img_holder = qtw.QLabel()
-            img = QPixmap(img)
-            img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+        widgets = []
+        widgets.append(JustText(self.prompt))
+        for img in self.img_names:
+            widgets.append(PerceptualQuestion(img, header, question))
             self.questions.append(question)
-            qs = SingleQuestion(self.header, question)
-            lt = qtw.QVBoxLayout()
-            lt.addWidget(img_holder)
-            lt.addWidget(qs)
-            tw.setLayout(lt)
-            self.addWidget(tw)
-            self.qs.append(qs)
-            if count == 0:  # after first one, there's another block of text
-                tw = qtw.QWidget()
-                txt = JustText(self.prompt2)
-                lt = qtw.QVBoxLayout()
-                lt.addWidget(txt)
-                tw.setLayout(lt)
-                self.addWidget(tw)
+            self.qs.append(widgets[-1])  # keep questions in separate list of easy checking
 
-        desktop = qtw.QDesktopWidget().screenGeometry()
-        self.setFixedWidth(1.2*desktop.height())
-        self.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
-                                           qtw.QSizePolicy.Preferred)
-        self.adjustSize()
+        widgets.insert(2, JustText(self.prompt2))
+        self.add_widgets(widgets)
 
     def save_data(self):
         # flatten out responses
@@ -104,20 +97,3 @@ class DV07PerceptualFocus(SpecialStack):
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
-
-    def all_ans(self):
-        cw = self.currentIndex()
-        # hacky handling of index-question relation
-        if cw != 1:
-            if cw > 1:
-                cw -= 1
-            return all([x >= 0 for x in self.qs[cw].get_responses()])
-        return True
-
-    def on_enter(self):
-        self.device.level = self.temperature
-        self._log.info('Temperature set to %i for %s' % (self.temperature,
-                                                         self.long_name))
-
-    def on_exit(self):
-        pass
