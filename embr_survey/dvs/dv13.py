@@ -15,6 +15,7 @@ from embr_survey.dvs.base_block import StackedDV
 # use QDoubleValidator to make it numbers-only
 from PySide2.QtGui import QDoubleValidator
 
+
 class ImageNQuestions(qtw.QWidget):
     def __init__(self, img_name, questions):
         super().__init__()
@@ -30,14 +31,20 @@ class ImageNQuestions(qtw.QWidget):
             hlay = qtw.QHBoxLayout()
             txt = JustText(q)
             ebox = qtw.QLineEdit()
-            ebox.setValidator(QDoubleValidator(0, 100, 2))
+            # not sure how many digits to allow depending on currency
+            ebox.setValidator(QDoubleValidator(0, 10000, 2))
+            ebox.setMaximumWidth(200)
+            fnt = ebox.font()
+            fnt.setPointSize(26)
+            ebox.setFont(fnt)
+            ebox.setStyleSheet('QLineEdit {background-color: yellow; border: 2px solid gray;}')
             self.edit_boxes.append(ebox)
-            hlay.addWidget(txt)
-            hlay.addWidget(ebox)
+            hlay.addWidget(txt, Qt.AlignRight | Qt.AlignVCenter)
+            hlay.addWidget(ebox, Qt.AlignLeft | Qt.AlignVCenter)
             wid.setLayout(hlay)
             layout.addWidget(wid)
         self.setLayout(layout)
-    
+
     def get_responses(self):
         return [x.text() for x in self.edit_boxes]
 
@@ -46,6 +53,8 @@ class ImageNQuestions(qtw.QWidget):
         return all([v != '' for v in vals])
 
 # DV13_willingness_to_pay
+
+
 class DV13WillingnessToPay(StackedDV):
     long_name = 'dv13_willingness_to_pay'
     name = 'dv13'
@@ -70,19 +79,20 @@ class DV13WillingnessToPay(StackedDV):
 
         cake_path = resource_filename('embr_survey', 'images/dv13_cake.png')
 
-        q1 = translation['q1'][lang] # how much would you pay?
-        q2 = translation['q2'][lang] # how much do you think it retails for?
+        q1 = translation['q1'][lang]  # how much would you pay?
+        q2 = translation['q2'][lang]  # how much do you think it retails for?
         battery_txt = translation['battery'][lang]
         cake_txt = translation['cake'][lang]
 
         images = [(battery_txt, battery_path), (cake_txt, cake_path)]
-        #random.shuffle(images)
+        self.img_names = [i[1] for i in images]
+        # random.shuffle(images)
         widgets = []
         self.questions = []
+        currency = locale_settings['currency'][locale]
         for img in images:
-            quests = [q % img[0] for q in [q1, q2]]
+            quests = [(q % img[0]) + (' (%s)' % currency) for q in [q1, q2]]
             self.questions.extend(quests)
-            print(img[1])
             widgets.append(ImageNQuestions(img[1], quests))
         self.add_widgets(widgets)
 
@@ -90,7 +100,7 @@ class DV13WillingnessToPay(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.widgets]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        current_answers = [float(ca) if (ca != '' and float(ca) >= 0) else None for ca in current_answers]
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
@@ -115,4 +125,3 @@ class DV13WillingnessToPay(StackedDV):
             writer = csv.writer(f, delimiter=",")
             writer.writerow(keys)
             writer.writerows(zip(*[data[key] for key in keys]))
-

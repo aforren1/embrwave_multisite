@@ -1,2 +1,5 @@
 [battery_photo]
 us = 'dv13_batteries.png'
+
+[currency]
+us = 'USD'
