@@ -14,7 +14,7 @@ class EmbrVal(object):
     STATE = ('4006', '<B')  # uint8_t
     MANAGEMENT_MODE = ('4007', '<?')
     STOP = ('4008', '<I')  # only useful if writing [0x00, 0x00, 0x00, 0x20]?
-    # LED_DISABLE = ('4009', '<B')
+    LED_DISABLE = ('4009', '<B')
     BATTERY_CHARGE = ('400A', '<B')
     MODE = ('400B', '<II')  # MODE/DURATION are a little more complicated (depends on mode)
     DURATION = ('400C', '<I')  # TODO: not quite correct name?
@@ -22,6 +22,7 @@ class EmbrVal(object):
     COOL_WARM_ONLY = ('400E', '<B')
 
 # generally 800ms between commands
+
 
 class PreEmbr(object):
     # non-bonding version
@@ -46,6 +47,7 @@ class PreEmbr(object):
     def _blink(self, dev):
         dev.char_write('00004003-1112-efde-1523-725a2aab0123', bytearray(b'\x01'))
 
+
 class EmbrWave(object):
     def __init__(self):
         # I don't think using atexit w/ the context manager is *completely* redundant,
@@ -66,6 +68,7 @@ class EmbrWave(object):
         self.blink()
         self.blink()
         self.device.bond()
+        self.disable_leds()
         sleep(1)
         # set warming/cooling to be rather long (we'll end up turning them off manually)
         self.write(EmbrVal.COOL_WARM_ONLY, 0)
@@ -90,6 +93,7 @@ class EmbrWave(object):
             self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
             self.write(EmbrVal.MODE, (7, 2))
             self.write(EmbrVal.DURATION, 131)
+            self.enable_leds()
             self.device.disconnect()
             self.adapter.stop()
 
@@ -118,6 +122,13 @@ class EmbrWave(object):
     @level.setter
     def level(self, value):
         self.stop()
+        # TODO: make sure this sequence actually works
+        # I want to indicate that *something* is happening,
+        # without giving away the settings
+        self.enable_leds()
+        for i in range(3):
+            self.blink()
+        self.disable_leds()
         self.write(EmbrVal.LEVEL, value)
 
     @property
@@ -138,8 +149,18 @@ class EmbrWave(object):
     def stop(self):
         self._write(EmbrVal.STOP, [0x00, 0x00, 0x00, 0x20])
 
+    def disable_leds(self):
+        # turn off all LEDs
+        self._write(EmbrVal.LED_DISABLE, [0x01])
+
+    def enable_leds(self):
+        self._write(EmbrVal.LED_DISABLE, [0x00])
+
     @property
     def state(self):
+        # ends up being less than useful (unless I was using it wrong)
+        # 1 if currently heating/cooling (even once it has peaked)
+        # 0 if stopped
         return self.read(EmbrVal.STATE)
 
 
@@ -187,6 +208,12 @@ class DummyWave(object):
         pass
 
     def stop(self):
+        pass
+
+    def enable_leds(self):
+        pass
+
+    def disable_leds(self):
         pass
 
     @property

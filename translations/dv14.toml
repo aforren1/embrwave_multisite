@@ -1,0 +1,78 @@
+# title page
+[prompt]
+en = "In this next section, we will show you some information about movies and ask what you think about them. You will do this for 6 movies."
+
+[header1]
+en = ["1\nNot at all", '2', '3', '4', '5', '6', "7\nVery much"]
+
+[header2]
+en = ["1\nNot good at all", '2', '3', '4', '5', '6', "7\nVery good"]
+
+
+[question1]
+en = "How much would you like to watch this movie?"
+
+[question2]
+en = "How good do you think this movie would be?"
+
+[question3]
+en = "Have you seen or heard of this movie before?"
+
+# should be a qcombobox (default blank)
+[[ans]]
+en = "Yes – I have seen it"
+
+[[ans]]
+en = "Yes – I have heard of it"
+
+[[ans]]
+en = "No – I didn't know anything about this movie"
+
+# Questions
+[[movie]]
+en = """
+<b>Title</b>: Don
+<b>Genre</b>: Action
+<b>Viewer rating</b>: 7.8/10
+<b>Synopsis</b>: Don, a wanted criminal, dies in a police chase. Detective D'Silva is the only one who knows about his death, and to investigate the gang he trains a Don-lookalike named Vijay. But Vijay faces danger from both the police and from within the gang.
+"""
+
+[[movie]]
+en = """
+<b>Title</b>: The Tough Ones
+<b>Genre</b>: Action
+<b>Viewer rating</b>: 7.0/10
+<b>Synopsis</b>: A tough, rule-bending cop pursues a maniacal, trigger-happy hunchback, a one-handed bank robber and their cronies in an effort to bring Rome's most powerful crime lord to justice.
+"""
+
+[[movie]]
+en = """
+<b>Title</b>: Five Deadly Venoms
+<b>Genre</b>: Action
+<b>Viewer rating</b>: 7.1/10
+<b>Synopsis</b>: The final student of a dying martial arts master is instructed to locate the previous five students and defeat any evil ones among them.
+"""
+
+[[movie]]
+en = """
+<b>Title</b>: The Girl with the Red Scarf
+<b>Genre</b>: Romance
+<b>Viewer rating</b>: 8.7/10
+<b>Synopsis</b>: Asya, a young girl with a strict mother, meets Ilyas, a city man and womanizer. They quickly fall in love and get married. However, after he helps a man one night, Ilyas' life changes forever and he leaves Asya and their son and doesn't come back. Asya takes their son and goes away without knowing where she is heading, until a familiar hand reaches her to help selflessly.
+"""
+
+[[movie]]
+en = """
+<b>Title</b>: I love you, je t'aime
+<b>Genre</b>: Romance
+<b>Viewer rating</b>: 7.5/10
+<b>Synopsis</b>: A French boy (Daniel) and an American girl (Lauren), who go to school in Paris, meet and begin a little romance. They befriend Julius, who enchants them with his storytelling. In an attempt to ensure the teens' love forever, the three journey to Venice.
+"""
+
+[[movie]]
+en = """
+<b>Title</b>: Same Time, Next Year
+<b>Genre</b>: Romance
+<b>Viewer rating</b>: 7.2/10
+<b>Synopsis</b>: A married man and a married woman end up sleeping with each other, and decide to meet at the same place every year on the anniversary of their one night stand. As the years go by, they observe changes in each other and their relationship.
+"""
