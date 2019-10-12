@@ -6,7 +6,7 @@ en = "In this next section, we will show you some information about movies and a
 en = ["1\nNot at all", '2', '3', '4', '5', '6', "7\nVery much"]
 
 [header2]
-en = ["1\nNot good at all", '2', '3', '4', '5', '6', "7\nVery good"]
+en = ["1\nNot at all", '2', '3', '4', '5', '6', "7\nVery good"]
 
 
 [question1]
