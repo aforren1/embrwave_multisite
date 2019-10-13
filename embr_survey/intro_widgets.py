@@ -15,7 +15,8 @@ from embr_survey.embrwave import PreEmbr
 application_path = app_path()
 
 
-def count_keys(files, ref):
+def count_language_keys(files, ref):
+    # must have *all* language keys to work (otherwise, ignore)
     total_keys = []
     final_round = []
     languages = []  # final product (list of languages)
@@ -43,6 +44,25 @@ def count_keys(files, ref):
     return languages
 
 
+def check_locale_keys(files, ref):
+    # must have *at least one* locale key present
+    # defaults to 'us' (or whatever the default ends up being)
+    # if the chosen key doesn't have an entry
+    total_keys = []
+    for tf in files:
+        with open(tf, 'r') as f:
+            dat = toml.load(f)
+        for a in dat.keys():
+            if isinstance(dat[a], list):
+                for v in dat[a]:
+                    total_keys.extend(list(v.keys()))
+            else:
+                total_keys.extend(list(dat[a].keys()))
+    # get uniques
+    res = list(set(total_keys))
+    return res  # TODO: sort by count?
+
+
 def on_activated(self, idx):
     new_lang = self.lang.currentText()
     self.id_label.setText(self.translations['participant'][new_lang])
@@ -56,7 +76,6 @@ def on_blink(sel):
         sel.pre_embr.blink(sel.device.currentText())
     sel.pre_embr.scan()
     sel.device.clear()
-    sel.device.addItems(sel.pre_embr.addrs)
 
 
 class IntroDlg(qtw.QWidget):
@@ -73,16 +92,16 @@ class IntroDlg(qtw.QWidget):
         self.settings['locale_dir'] = os.path.join(application_path, 'locale/')
         # check all translation files, and list only complete ones
 
-        translation_files = glob(os.path.join(self.settings['translation_dir'], 'd*.toml'))
+        translation_files = glob(os.path.join(self.settings['translation_dir'], '*.toml'))
 
         # figure out complete translations, using english as ref
-        languages = count_keys(translation_files, 'en')
+        languages = count_language_keys(translation_files, 'en')
         # now same with localization
         # I think it's "more" ok to have missing keys in localization files,
         # and if the locale has *any* keys it should be allowed (and the default
         # subbed in if missing)
         locale_files = glob(os.path.join(self.settings['locale_dir'], 'd*.toml'))
-        locales = count_keys(locale_files, 'us')
+        locales = check_locale_keys(locale_files, 'us')
 
         # translations for *this* widget
         translation_path = os.path.join(self.settings['translation_dir'], 'misc.toml')
@@ -129,4 +148,4 @@ class IntroDlg(qtw.QWidget):
     # TODO: on exit, should do everything currently done in main-- adding widgets to the stack
     # with proper settings,
     def all_ans(self):
-        return self.id.text != ''
+        return self.id.text() != ''

@@ -7,6 +7,7 @@ import logging
 
 logger = logging.getLogger('embr_survey')
 
+
 def _exit_on_esc(e):
     if e.key() == Qt.Key_Escape:
         logger.warn('Premature escape.')
@@ -66,18 +67,7 @@ class MainWindow(object):
         # accept single widget or list of widgets (for multi-page experiments)
         # alternatively, we could've detected in the button whether the current
         # widget was a StackedWidget or not
-        for widget in widgets:
-            try:
-                widget.setSizePolicy(qtw.QSizePolicy.Ignored,
-                                     qtw.QSizePolicy.Ignored)
-                widget._button = self.next_button
-                self.widgets.addWidget(widget)
-            except AttributeError:  # list of widgets (hopefully)
-                for w2 in widget:
-                    w2.setSizePolicy(qtw.QSizePolicy.Ignored,
-                                     qtw.QSizePolicy.Ignored)
-                    w2._button = self.next_button
-                    self.widgets.addWidget(w2)
+        self.add_widgets(widgets)
         self.widgets.setFixedWidth(1.2*self.height)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
@@ -86,6 +76,25 @@ class MainWindow(object):
         self.main_layout.addWidget(self.next_button, Qt.AlignRight)
 
         self.win.setLayout(self.main_layout)
+
+    def add_widgets(self, widgets):
+        # add (more) widgets from a list of widgets
+        for widget in widgets:
+            try:
+                widget.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                     qtw.QSizePolicy.Ignored)
+                widget._button = self.next_button
+                if isinstance(w2, SpecialStack):
+                    w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+                self.widgets.addWidget(widget)
+            except AttributeError:  # list of widgets (hopefully)
+                for w2 in widget:
+                    w2.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                     qtw.QSizePolicy.Ignored)
+                    w2._button = self.next_button
+                    if isinstance(w2, SpecialStack):
+                        w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+                    self.widgets.addWidget(w2)
 
     def show(self):
         self.win.show()
