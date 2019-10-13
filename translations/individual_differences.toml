@@ -1,0 +1,31 @@
+
+[instructions]
+en = "<b>Instructions</b>: This questionnaire is concerned with how many people you see or talk to on a regular basis including family, friends, workmates, neighbors, etc. Please read and answer each question carefully. Answer follow-up questions where appropriate. "
+
+[q1]
+en = "Which of the following best describes your marital status?"
+
+[q1_ans]
+en = ["currently married & living together, or living with someone in marital-like relationship", 
+      "never married & never lived with someone in a marital-like relationship",
+      "separated",
+      "divorced or formerly lived with someone in a marital-like relationship",
+      "widowed"]
+
+[q2]
+en = "How many children do you have? (If you don't have any children, check '0' and skip to question 3.)"
+
+[q2_ans]
+en = ['1', '2', '3', '4', '5', '6', '7 or more']
+
+[q2a]
+en = "How many of your children do you see or talk to on the phone at least once every 2 weeks?"
+
+[q2a_ans]
+en = ['1', '2', '3', '4', '5', '6', '7 or more']
+
+[q3]
+en = "Are either of your parents living? (If neither is living, check '0' and skip to question 4.)"
+
+[q3_ans]
+en = ['neither', 'mother only', 'father only', 'both']
