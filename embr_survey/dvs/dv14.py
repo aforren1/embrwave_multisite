@@ -77,6 +77,7 @@ class DV14RomanceMovies(StackedDV):
 
         # excludes the default (none) response
         answers = [t[lang] for t in translation['ans']]
+        answers.insert(0, '')
 
         movie_txt = [m[lang] for m in translation['movie']]
 
@@ -84,7 +85,7 @@ class DV14RomanceMovies(StackedDV):
         self.qs = []
         widgets.append(JustText(prompt))
         for mov in movie_txt:
-            self.qs.append([q1, q2, q3])
+            self.qs.extend([q1, q2, q3])
             widgets.append(MovieQuestion([header1, header2],
                                          [q1, q2, q3],
                                          answers,
@@ -95,12 +96,14 @@ class DV14RomanceMovies(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.widgets[1:]]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        for count, ca in enumerate(current_answers):
+            if isinstance(ca, list):
+                current_answers[count] = ca[0] if ca[0] >= 0 else None
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
-        num_q = len(self.questions)
+        num_q = len(self.qs)
         data = {'participant_id': num_q * [settings['id']],
                 'datetime_start_exp': num_q * [settings['datetime_start']],
                 'datetime_start_block': num_q * [now],
