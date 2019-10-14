@@ -31,7 +31,19 @@ class DV05HousesHomelikeness(BaseDV):
             locale_settings = toml.load(f)
 
         # read in all images
-        images = locale_settings['house_photos'][locale]
+        try:
+            images = locale_settings['house_photos'][locale]
+        except KeyError:
+            # use default locale (US)
+            images = locale_settings['house_photos']['us']
+        # now handle localized image location
+        for count, img in enumerate(images):
+            if os.path.split(img)[0] != '':
+                # locale has path specified, look relative to exe
+                images[count] = resource_filename('embr_s')
+            else:
+                # no path for locale, assume it's one of the baked-in ones
+
         images = [resource_filename('embr_survey', 'images/%s' % img) for img in images]
 
         # read in translations, also plugging in locale-specific info
@@ -39,12 +51,20 @@ class DV05HousesHomelikeness(BaseDV):
         self.preprompt = translation['preprompt'][lang]
         self.big_title = translation['big_title'][lang]
 
-        self.background = translation['background'][lang] % locale_settings['house_cost'][locale]
+        try:
+            cost = locale_settings['house_cost'][locale]
+        except KeyError:
+            cost = locale_settings['house_cost']['us']
+        self.background = translation['background'][lang] % from django.conf import settings
         self.subtitle = translation['subtitle'][lang]
 
         self.floor1 = translation['f1'][lang]
-        self.floor2 = translation['f2'][lang] % locale_settings['floor_label'][locale][0]
-        self.floor3 = translation['f3'][lang] % locale_settings['floor_label'][locale][1]
+        try:
+            floor_label = locale_settings['floor_label'][locale]
+        except KeyError:
+            floor_label = locale_settings['floor_label']['us']
+        self.floor2 = translation['f2'][lang] % floor_label[0]
+        self.floor3 = translation['f3'][lang] % floor_label[1]
 
         prompt2 = translation['prompt2'][lang]
         header = translation['header'][lang]

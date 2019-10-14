@@ -10,7 +10,8 @@ from embr_survey.common_widgets import JustText
 from pip._vendor import pytoml as toml
 from pkg_resources import resource_filename
 from PySide2.QtCore import Qt, QTimer
-from embr_survey.embrwave import PreEmbr
+from embr_survey.embrwave import PreEmbr, DummyPreEmbr
+from embr_survey.pygatt.exceptions import NotConnectedError
 
 application_path = app_path()
 
@@ -75,7 +76,7 @@ def on_blink(sel):
     if dev:
         sel.pre_embr.blink(sel.device.currentText())
     sel.pre_embr.scan()
-    sel.device.clear()
+    # sel.device.clear() # TODO: why was this here?
 
 
 class IntroDlg(qtw.QWidget):
@@ -85,11 +86,18 @@ class IntroDlg(qtw.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.pre_embr = PreEmbr()
+        try:
+            self.pre_embr = PreEmbr()
+        except NotConnectedError:
+            # no adapter, so no devices
+            # TODO: log failure (though should be obvious?)
+            self.pre_embr = DummyPreEmbr()
         # id, language, locale
         self.settings = {}
         self.settings['translation_dir'] = os.path.join(application_path, 'translations/')
         self.settings['locale_dir'] = os.path.join(application_path, 'locale/')
+        self.settings['app_path'] = application_path  # allows searching relative
+        # to the location of the executable
         # check all translation files, and list only complete ones
 
         translation_files = glob(os.path.join(self.settings['translation_dir'], '*.toml'))
@@ -100,7 +108,7 @@ class IntroDlg(qtw.QWidget):
         # I think it's "more" ok to have missing keys in localization files,
         # and if the locale has *any* keys it should be allowed (and the default
         # subbed in if missing)
-        locale_files = glob(os.path.join(self.settings['locale_dir'], 'd*.toml'))
+        locale_files = glob(os.path.join(self.settings['locale_dir'], '*.toml'))
         locales = check_locale_keys(locale_files, 'us')
 
         # translations for *this* widget

@@ -44,7 +44,9 @@ QScrollBar::sub-line:vertical {
 class MainWindow(object):
     def __init__(self, widgets):
         self.win = qtw.QWidget()
-        self.win.setStyleSheet('background-color:#ffffff')
+        # TODO: add back once other style sheets are resolved
+        # (currently makes selected thing in dropdown menu invisible)
+        # self.win.setStyleSheet('background-color:#ffffff')
         rect = qtw.QDesktopWidget().screenGeometry()
         self.width, self.height = rect.width(), rect.height()
         self.win.setFixedSize(self.width, self.height)
@@ -84,8 +86,8 @@ class MainWindow(object):
                 widget.setSizePolicy(qtw.QSizePolicy.Ignored,
                                      qtw.QSizePolicy.Ignored)
                 widget._button = self.next_button
-                if isinstance(w2, SpecialStack):
-                    w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+                if isinstance(widget, SpecialStack):
+                    widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                 self.widgets.addWidget(widget)
             except AttributeError:  # list of widgets (hopefully)
                 for w2 in widget:

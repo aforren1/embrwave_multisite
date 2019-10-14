@@ -48,6 +48,17 @@ class PreEmbr(object):
         dev.char_write('00004003-1112-efde-1523-725a2aab0123', bytearray(b'\x01'))
 
 
+class DummyPreEmbr(object):
+    def __init__(self):
+        self.scan()
+
+    def scan(self):
+        self.addrs = ['None (no BLE adapter)']
+
+    def blink(self, addr):
+        pass
+
+
 class EmbrWave(object):
     def __init__(self):
         # I don't think using atexit w/ the context manager is *completely* redundant,
