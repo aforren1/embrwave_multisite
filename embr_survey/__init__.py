@@ -38,15 +38,12 @@ def setup_logger(pth, now):
     embr_logger.addHandler(fh)
 
 
-def app_path():
-    #https://stackoverflow.com/questions/404744/determining-application-path-in-a-python-exe-generated-by-pyinstaller
-    if is_exe:
-        # If the application is run as a bundle, the pyInstaller bootloader
-        # extends the sys module by a flag frozen=True and sets the app 
-        # path into variable _MEIPASS'.
-        application_path = os.path.join(sys.executable, '..') # sys.executable for onefile option
-        print(application_path)
-    else:
-        application_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-    return application_path
-    
+# https://stackoverflow.com/questions/404744/determining-application-path-in-a-python-exe-generated-by-pyinstaller
+if is_exe:
+    # If the application is run as a bundle, the pyInstaller bootloader
+    # extends the sys module by a flag frozen=True and sets the app
+    # path into variable _MEIPASS'.
+    application_path = os.path.join(sys.executable, '..')  # sys.executable for onefile option
+    print(application_path)
+else:
+    application_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')

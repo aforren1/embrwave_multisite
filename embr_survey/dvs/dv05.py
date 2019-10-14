@@ -10,6 +10,7 @@ from PySide2.QtCore import Qt
 from pip._vendor import pytoml as toml
 from embr_survey.common_widgets import JustText, MultiQuestion
 from embr_survey.dvs.base_block import BaseDV
+from embr_survey import application_path
 
 
 class DV05HousesHomelikeness(BaseDV):
@@ -38,13 +39,13 @@ class DV05HousesHomelikeness(BaseDV):
             images = locale_settings['house_photos']['us']
         # now handle localized image location
         for count, img in enumerate(images):
+            # if locale has path specified, look relative to exe location
             if os.path.split(img)[0] != '':
-                # locale has path specified, look relative to exe
-                images[count] = resource_filename('embr_s')
+                # TODO: verify this is the right pattern
+                images[count] = os.path.join(application_path, img)
             else:
                 # no path for locale, assume it's one of the baked-in ones
-
-        images = [resource_filename('embr_survey', 'images/%s' % img) for img in images]
+                images[count] = resource_filename('embr_survey', 'images/%s' % img)
 
         # read in translations, also plugging in locale-specific info
         self.prompt = translation['prompt'][lang]
@@ -55,7 +56,7 @@ class DV05HousesHomelikeness(BaseDV):
             cost = locale_settings['house_cost'][locale]
         except KeyError:
             cost = locale_settings['house_cost']['us']
-        self.background = translation['background'][lang] % from django.conf import settings
+        self.background = translation['background'][lang] % cost
         self.subtitle = translation['subtitle'][lang]
 
         self.floor1 = translation['f1'][lang]

@@ -3,7 +3,6 @@ import csv
 import random
 import itertools
 import PySide2.QtWidgets as qtw
-from embr_survey import app_path
 from embr_survey.common_widgets import JustText
 from pip._vendor import pytoml as toml
 from pkg_resources import resource_filename
@@ -89,7 +88,10 @@ class DV13WillingnessToPay(StackedDV):
         # random.shuffle(images)
         widgets = []
         self.questions = []
-        currency = locale_settings['currency'][locale]
+        try:
+            currency = locale_settings['currency'][locale]
+        except KeyError:
+            currency = locale_settings['currency']['us']
         for img in images:
             quests = [(q % img[0]) + (' (%s)' % currency) for q in [q1, q2]]
             self.questions.extend(quests)

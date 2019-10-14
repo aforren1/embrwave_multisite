@@ -2,7 +2,6 @@
 import os
 import csv
 import PySide2.QtWidgets as qtw
-from embr_survey import app_path
 from embr_survey.common_widgets import JustText
 from pip._vendor import pytoml as toml
 from pkg_resources import resource_filename
@@ -54,6 +53,7 @@ class RelationshipQuestion(qtw.QWidget):
     def all_ans(self):
         return all([x >= 0 for x in self.get_responses()])
 
+
 class DV11Part1(StackedDV):
     long_name = 'dv11_thinkingaboutlovedones'
     name = 'dv11'
@@ -61,7 +61,7 @@ class DV11Part1(StackedDV):
     # no data to save for this one, just data to share
     def __init__(self, block_num, device, temperature, settings, widgets=None):
         super().__init__(block_num, device, temperature, settings, widgets)
-        self.passed_data = [] # hopefully, this will percolate until part 2
+        self.passed_data = []  # hopefully, this will percolate until part 2
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
@@ -69,7 +69,7 @@ class DV11Part1(StackedDV):
             translation = toml.load(f)
 
         q1_part1 = [translation['q1'][lang]]  # think of someone you know
-        q2_part1 = [translation['q2'][lang]]*4 # think of someone else
+        q2_part1 = [translation['q2'][lang]]*4  # think of someone else
 
         q1_part1.extend(q2_part1)
         widgets = []
@@ -89,7 +89,7 @@ class DV11Part2(StackedDV):
 
     def __init__(self, block_num, device, temperature, settings, widgets=None):
         super().__init__(block_num, device, 0, settings, widgets)
-        self.temperature = temperature # we set the device temp to 0, but record the prev
+        self.temperature = temperature  # we set the device temp to 0, but record the prev
 
     def on_enter(self):
         # load settings from external TOML

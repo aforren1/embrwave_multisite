@@ -5,15 +5,13 @@ from functools import partial
 from glob import glob
 
 import PySide2.QtWidgets as qtw
-from embr_survey import app_path
+from embr_survey import application_path
 from embr_survey.common_widgets import JustText
 from pip._vendor import pytoml as toml
 from pkg_resources import resource_filename
 from PySide2.QtCore import Qt, QTimer
 from embr_survey.embrwave import PreEmbr, DummyPreEmbr
 from embr_survey.pygatt.exceptions import NotConnectedError
-
-application_path = app_path()
 
 
 def count_language_keys(files, ref):
