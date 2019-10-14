@@ -3,14 +3,16 @@ if __name__ == '__main__':
     # explicit import allegedly helps PyInstaller find the
     # right dependencies
     import PySide2
-    import PySide2.QtWidgets as qtw
+    from PySide2.QtWidgets import QApplication
     from embr_survey.window import MainWindow
     from embr_survey.intro_widgets import IntroDlg
 
-    app = qtw.QApplication([])
+    app = QApplication([])
     intro_dlg = IntroDlg()
-
+    # note to self: need at least one widget to start
+    # (though this is probably pretty easy to resolve)
+    window = MainWindow([intro_dlg])
     # all of the work is done by on_exit
     # of the IntroDlg
-    window = MainWindow([intro_dlg])
+    # main loop
     app.exec_()

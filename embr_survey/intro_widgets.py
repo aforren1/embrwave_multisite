@@ -2,6 +2,7 @@ import logging
 import os
 from collections import Counter
 from functools import partial
+from datetime import datetime
 from glob import glob
 
 import PySide2.QtWidgets as qtw
@@ -83,6 +84,7 @@ class IntroDlg(qtw.QWidget):
 
     def __init__(self):
         super().__init__()
+        self._window = None  # patched in later (reference to MainWindow)
 
         try:
             self.pre_embr = PreEmbr()
@@ -155,3 +157,7 @@ class IntroDlg(qtw.QWidget):
     # with proper settings,
     def all_ans(self):
         return self.id.text() != ''
+
+    def on_exit(self):
+        # we should now have sufficient info to start the experiment
+        exp_start = datetime.now().strftime('%y%m%d-%H%M%S')

@@ -42,7 +42,7 @@ QScrollBar::sub-line:vertical {
 
 
 class MainWindow(object):
-    def __init__(self, widgets):
+    def __init__(self, widgets=None):
         self.win = qtw.QWidget()
         # TODO: add back once other style sheets are resolved
         # (currently makes selected thing in dropdown menu invisible)
@@ -75,28 +75,29 @@ class MainWindow(object):
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
                                                    qtw.QSizePolicy.Preferred)
         self.widgets.adjustSize()
-        self.main_layout.addWidget(self.next_button, Qt.AlignRight)
+        self.main_layout.addWidget(self.next_button, Qt.AlignCenter)
 
         self.win.setLayout(self.main_layout)
 
     def add_widgets(self, widgets):
         # add (more) widgets from a list of widgets
-        for widget in widgets:
-            try:
-                widget.setSizePolicy(qtw.QSizePolicy.Ignored,
-                                     qtw.QSizePolicy.Ignored)
-                widget._button = self.next_button
-                if isinstance(widget, SpecialStack):
-                    widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
-                self.widgets.addWidget(widget)
-            except AttributeError:  # list of widgets (hopefully)
-                for w2 in widget:
-                    w2.setSizePolicy(qtw.QSizePolicy.Ignored,
-                                     qtw.QSizePolicy.Ignored)
-                    w2._button = self.next_button
-                    if isinstance(w2, SpecialStack):
-                        w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
-                    self.widgets.addWidget(w2)
-
-    def show(self):
-        self.win.show()
+        if widgets:
+            for widget in widgets:
+                try:
+                    widget.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                         qtw.QSizePolicy.Ignored)
+                    widget._button = self.next_button
+                    # make sure even sub-widgets signal a scroll
+                    if isinstance(widget, SpecialStack):
+                        widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+                    self.widgets.addWidget(widget)
+                    widget._window = self  # everyone gets a ref to the top widget
+                except AttributeError:  # list of widgets (hopefully)
+                    for w2 in widget:
+                        w2.setSizePolicy(qtw.QSizePolicy.Ignored,
+                                         qtw.QSizePolicy.Ignored)
+                        w2._button = self.next_button
+                        if isinstance(w2, SpecialStack):
+                            w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+                        self.widgets.addWidget(w2)
+                        w2._window = self
