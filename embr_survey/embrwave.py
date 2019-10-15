@@ -30,12 +30,14 @@ class PreEmbr(object):
         self.adapter = gatt.BGAPIBackend()
         self.adapter.start()
         self.scan()
+        self.adapter.stop()
 
     def scan(self):
         devs = self.adapter.scan()
         self.addrs = [d['address'] for d in devs if d['name'] == 'EmbrWave']
 
     def blink(self, addr):
+        self.adapter.start()
         dev = self.adapter.connect(address=addr, timeout=5,
                                    address_type='BLEAddressType.public',
                                    interval_min=15, interval_max=30,
@@ -43,6 +45,7 @@ class PreEmbr(object):
         for i in range(3):
             self._blink(dev)
         dev.disconnect()
+        self.adapter.stop()
 
     def _blink(self, dev):
         dev.char_write('00004003-1112-efde-1523-725a2aab0123', bytearray(b'\x01'))
@@ -137,10 +140,12 @@ class EmbrWave(object):
         # TODO: make sure this sequence actually works
         # I want to indicate that *something* is happening,
         # without giving away the settings
-        self.enable_leds()
-        for i in range(3):
-            self.blink()
-        self.disable_leds()
+        # self.enable_leds()
+        # for i in range(3):
+        #     self.blink()
+        # self.disable_leds()
+        self.blink()
+        sleep(1)
         self.write(EmbrVal.LEVEL, value)
 
     @property
@@ -246,11 +251,11 @@ if __name__ == '__main__':
         print(embr.battery_charge)
         for i in range(3):
             embr.blink()
-        sleep(4)
+        sleep(2)
         embr.level = -9
         print(embr.level)
-        sleep(3)
+        sleep(8)
         print('now warming')
         embr.level = 9
-        sleep(6)
+        sleep(8)
         print(embr.level)

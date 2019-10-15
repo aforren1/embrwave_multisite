@@ -161,7 +161,7 @@ class BGAPIBackend(BLEBackend):
                 self._ser.read()
                 break
             except (BGAPIError, serial.serialutil.SerialException,
-                    serial_exception):
+                    serial_exception) as e:
                 log.debug("Failed to open serial port", exc_info=True)
                 if self._ser:
                     self._ser.close()

@@ -1,3 +1,4 @@
+import atexit
 import logging
 import os
 from collections import Counter
@@ -13,6 +14,7 @@ from pkg_resources import resource_filename
 from PySide2.QtCore import Qt, QTimer
 from embr_survey.embrwave import PreEmbr, DummyPreEmbr
 from embr_survey.pygatt.exceptions import NotConnectedError
+from embr_survey.embrwave import EmbrWave, DummyWave
 
 
 def count_language_keys(files, ref):
@@ -85,6 +87,8 @@ class IntroDlg(qtw.QWidget):
     def __init__(self):
         super().__init__()
         self._window = None  # patched in later (reference to MainWindow)
+        self._device = DummyWave()
+        self._is_connected = False
 
         try:
             self.pre_embr = PreEmbr()
@@ -138,8 +142,11 @@ class IntroDlg(qtw.QWidget):
         self.locale.addItems(locales)
         self.locale.setCurrentText('us')
 
-        self.blinker = qtw.QPushButton()
+        self.blinker = qtw.QPushButton('Blink')
         self.blinker.clicked.connect(partial(on_blink, self))
+
+        self.connector = qtw.QPushButton('Connect')
+        self.connector.clicked.connect(self.try_connect)
 
         layout.addWidget(self.id_label, 0, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.id, 0, 1, Qt.AlignLeft | Qt.AlignVCenter)
@@ -150,6 +157,7 @@ class IntroDlg(qtw.QWidget):
         layout.addWidget(self.device_label, 3, 0, Qt.AlignRight | Qt.AlignVCenter)
         layout.addWidget(self.device, 3, 1, Qt.AlignLeft | Qt.AlignVCenter)
         layout.addWidget(self.blinker, 3, 2, Qt.AlignLeft | Qt.AlignVCenter)
+        layout.addWidget(self.connector, 3, 3, Qt.AlignLeft | Qt.AlignVCenter)
 
         self.setLayout(layout)
 
@@ -157,13 +165,31 @@ class IntroDlg(qtw.QWidget):
     # with proper settings,
     def all_ans(self):
         return self.id.text() != ''
+    
+    def try_connect(self):
+        try:
+            # connect to the device
+            if not self._is_connected:
+                self.connector.setText('Connecting...')
+                device = EmbrWave(self.device.currentText())
+                atexit.register(device.close)
+                self._log.info('Device: %s' % device.name)
+                self._log.info('Device ID, Firmware: %s, %s' % (device.device_id, device.firmware_version))
+                self._log.info('Device battery remaining: %s' % device.battery_charge)
+                self._log.info('----------')
+                self._is_connected = True
+                self._device = device
+                self.connector.setText('Connected.')
+        except Exception as e:
+            self.connector.setText('Connect')
+            self._is_connected = False
+            self._log.warn(e)
 
     def on_exit(self):
         from embr_survey import application_path
         from embr_survey import setup_logger
         from hashlib import md5
         import random
-        from embr_survey.intro_device import ConnectDevice
 
         # we should now have sufficient info to start the experiment
         exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
@@ -188,4 +214,39 @@ class IntroDlg(qtw.QWidget):
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
         logger.info('----------')
-        self._window.add_widgets([ConnectDevice(settings)])
+        import random
+        from embr_survey.common_widgets import EmbrFactory
+        import embr_survey.dvs as dvs
+        # finally good to go
+
+        temps = random.choices([-9, -5, 5, 9], k=14)
+        dv_order = list(range(14))
+        random.shuffle(dv_order)
+        temps = [temps[val] for val in dv_order]
+        self._log.info('Temperature progression: %s' % temps)
+
+        # TODO: feed in locale
+        device = self._device
+        lang = settings['language']
+        ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
+        dv1 = [ef.spawn(), dvs.DV01(dv_order[0], device, temps[0], settings)]
+        dv2 = [ef.spawn(), dvs.DV02(dv_order[1], device, temps[1], settings)]
+        dv3 = [ef.spawn(), dvs.DV03(dv_order[2], device, temps[2], settings)]
+        dv4 = [ef.spawn(), dvs.DV04(dv_order[3], device, temps[3], settings)]
+        dv5 = [ef.spawn(), dvs.DV05(dv_order[4], device, temps[4], settings)]
+        dv6 = [ef.spawn(), dvs.DV06(dv_order[5], device, temps[5], settings)]
+        dv7 = [ef.spawn(), dvs.DV07(dv_order[6], device, temps[6], settings)]
+        dv8 = [ef.spawn(), dvs.DV08(dv_order[7], device, temps[7], settings)]
+        dv9 = [ef.spawn(), dvs.DV09(dv_order[8], device, temps[8], settings)]
+        dv10 = [ef.spawn(), dvs.DV10(dv_order[9], device, temps[9], settings)]
+        dv11 = [ef.spawn(), dvs.DV11Part1(dv_order[10], device, temps[10], settings),
+                ef.spawn(), dvs.DV11Part2(dv_order[10], device, temps[10], settings)]
+        dv12 = [ef.spawn(), dvs.DV12(dv_order[11], device, temps[11], settings)]
+        dv13 = [ef.spawn(), dvs.DV13(dv_order[12], device, temps[12], settings)]
+        dv14 = [ef.spawn(), dvs.DV14(dv_order[13], device, temps[13], settings)]
+        stack = [dv1, dv2, dv3, dv4, dv5,
+                 dv6, dv7, dv8, dv9, dv10,
+                 dv11, dv12, dv13, dv14]
+        # shuffle around questions
+        stack2 = [stack[i] for i in dv_order]
+        self._window.add_widgets(stack2[:2])
