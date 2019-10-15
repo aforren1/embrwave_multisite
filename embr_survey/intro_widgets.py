@@ -159,5 +159,33 @@ class IntroDlg(qtw.QWidget):
         return self.id.text() != ''
 
     def on_exit(self):
+        from embr_survey import application_path
+        from embr_survey import setup_logger
+        from hashlib import md5
+        import random
+        from embr_survey.intro_device import ConnectDevice
+
         # we should now have sufficient info to start the experiment
         exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
+        settings = {'id': self.id.text(),
+                    'language': self.lang.currentText(),
+                    'locale': self.locale.currentText(),
+                    'device_addr': self.device.currentText()}
+        settings['data_dir'] = os.path.join(application_path, 'data/%s' % settings['id'], '')
+        settings['translation_dir'] = os.path.join(application_path, 'translations/')
+        settings['locale_dir'] = os.path.join(application_path, 'locale/')
+        settings['datetime_start'] = exp_start
+
+        os.makedirs(settings['data_dir'], exist_ok=True)
+        setup_logger(settings['data_dir'], exp_start)
+        seed = md5(settings['id'].encode('utf-8')).hexdigest()
+        random.seed(seed)
+        settings['seed'] = seed
+        logger = logging.getLogger('embr_survey')
+        logger.info('Starting experiment for %s' % settings['id'])
+        logger.info('Datetime of start (YMD-HMS): %s' % exp_start)
+        logger.info('Seed: %s' % seed)
+        logger.info('Language: %s' % settings['language'])
+        logger.info('Locale: %s' % settings['locale'])
+        logger.info('----------')
+        self._window.add_widgets([ConnectDevice(settings)])

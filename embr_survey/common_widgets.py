@@ -45,11 +45,11 @@ class JustText(qtw.QLabel):
 
 class EmbrFactory(object):
     def __init__(self, text, device):
-        self.dev = device
+        self.device = device
         self.text = text
 
     def spawn(self):
-        return EmbrSection(self.text, self.dev)
+        return EmbrSection(self.text, self.device)
 
 
 class EmbrSection(JustText):
@@ -57,7 +57,7 @@ class EmbrSection(JustText):
 
     def __init__(self, text, device):
         super().__init__(text)
-        self.dev = device
+        self.device = device
         self.setAlignment(Qt.AlignCenter)
 
     def on_enter(self):
@@ -65,7 +65,7 @@ class EmbrSection(JustText):
         log.info('Entering neutral EmbrWave section & disabling "next" for 5 seconds.')
         self._button.state = 'neutral'
         QTimer.singleShot(5000, self._enable)
-        self.dev.stop()
+        self.device.stop()
 
     def _enable(self):
         self._button.state = 'complete'

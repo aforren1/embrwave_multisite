@@ -60,7 +60,7 @@ class DummyPreEmbr(object):
 
 
 class EmbrWave(object):
-    def __init__(self):
+    def __init__(self, addr=None):
         # I don't think using atexit w/ the context manager is *completely* redundant,
         # and this keeps us from getting superfluous errors on normal exit
         self.on = True
@@ -71,7 +71,8 @@ class EmbrWave(object):
         devs = self.adapter.scan()
         # TODO: we just pick out the first Embr Wave for now
         # The GUI should let us cycle through multiple devices
-        addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
+        if not addr:
+            addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
         self.device = self.adapter.connect(address=addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,

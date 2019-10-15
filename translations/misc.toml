@@ -23,3 +23,12 @@ fr = 'La langue'
 en = 'Locale'
 es = 'Lugar'
 fr = 'Lieu'
+
+[wait_until_green]
+en = 'Please wait until the button below turns green.'
+
+[connect_device]
+en = 'If you have an Embr Wave, hold the button until the device turns green. After a few seconds, the device will finish connecting. Otherwise, press the button below.'
+
+[is_connected]
+en = 'Device connected? (red = no, green = yes)'
