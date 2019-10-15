@@ -74,7 +74,7 @@ class DV11Part1(StackedDV):
         q1_part1.extend(q2_part1)
         widgets = []
         for num, q in enumerate(q1_part1):
-            widgets.append(NameInput(('%i. ' % num) + q, self.passed_data))
+            widgets.append(NameInput(('%i. ' % (num+1)) + q, self.passed_data))
         self.add_widgets(widgets)
 
     def on_exit(self):

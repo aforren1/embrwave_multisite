@@ -81,25 +81,25 @@ class DV05HousesHomelikeness(BaseDV):
             self.images[img] = ql
 
         layout = qtw.QVBoxLayout()
-
+        layout.addWidget(JustText(self.prompt))  # next, we are going to present...
         layout.addWidget(JustText(self.preprompt))  # what do you think..
-        layout.addWidget(JustText(prompt2))
-        layout.addWidget(self.images['dv5_1.png'])
-        layout.addWidget(JustText('<b>%s</b>' % self.big_title))
+        layout.addWidget(self.images['dv5_1.png'], alignment=Qt.AlignCenter)  # initial image
+        layout.addWidget(JustText('<b>%s</b>' % self.big_title))  # general info
         layout.addWidget(JustText(self.background))  # General info...
         layout.addWidget(JustText(self.subtitle))  # the resale value...
         layout.addWidget(JustText(self.floor1))
         layout.addWidget(JustText(self.floor2))
         layout.addWidget(JustText(self.floor3))
-        layout.addWidget(self.images['dv5_2.png'])
-        layout.addWidget(self.images['dv5_3.png'])
-        layout.addWidget(self.images['dv5_4.png'])
-        layout.addWidget(self.images['dv5_5.png'])
-        layout.addWidget(self.images['dv5_6.png'])
-        layout.addWidget(self.images['dv5_7.png'])
-        layout.addWidget(self.images['dv5_8.png'])
-        layout.addWidget(self.images['dv5_9.png'])
-        layout.addWidget(self.images['dv5_10.png'])
+        layout.addWidget(self.images['dv5_2.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_3.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_4.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_5.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_6.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_7.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_8.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_9.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(self.images['dv5_10.png'], alignment=Qt.AlignCenter)
+        layout.addWidget(JustText(prompt2))
 
         self.qs = MultiQuestion(header, [q[1] for q in self.questions])
         layout.addWidget(self.qs)

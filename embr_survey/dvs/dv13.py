@@ -73,7 +73,11 @@ class DV13WillingnessToPay(StackedDV):
         with open(locale_path, 'r') as f:
             locale_settings = toml.load(f)
         # load images
-        battery_name = locale_settings['battery_photo'][locale]
+        try:
+            battery_name = locale_settings['battery_photo'][locale]
+        except KeyError:
+            # default locale
+            battery_name = locale_settings['battery_photo']['us']
         battery_path = resource_filename('embr_survey', 'images/%s' % battery_name)
 
         cake_path = resource_filename('embr_survey', 'images/dv13_cake.png')
