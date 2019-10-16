@@ -74,6 +74,7 @@ class DV07PerceptualFocus(StackedDV):
         current_answers = [x.get_responses() for x in self.qs]
         current_answers = [x for sublist in current_answers for x in sublist]
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        # TODO: convert to A/B
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
@@ -86,12 +87,12 @@ class DV07PerceptualFocus(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': self.questions,
-                'question_original_order': [q[0] for q in self.questions],
+                # 'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
-                'images': self.img_names}
+                'images': [os.path.basename(i) for i in self.img_names]}
         keys = sorted(data.keys())
         with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
             writer = csv.writer(f, delimiter=",")

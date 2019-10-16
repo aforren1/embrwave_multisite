@@ -220,6 +220,8 @@ class IntroDlg(qtw.QWidget):
         from embr_survey import setup_logger
         from hashlib import md5
         import random
+        from embr_survey.common_widgets import EmbrFactory
+        import embr_survey.dvs as dvs
 
         # we should now have sufficient info to start the experiment
         exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
@@ -244,9 +246,7 @@ class IntroDlg(qtw.QWidget):
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
         logger.info('----------')
-        import random
-        from embr_survey.common_widgets import EmbrFactory
-        import embr_survey.dvs as dvs
+
         # finally good to go
 
         temps = random.choices([-9, -5, 5, 9], k=14)
@@ -259,27 +259,27 @@ class IntroDlg(qtw.QWidget):
         device = self._device
         lang = settings['language']
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
-        dv1 = [ef.spawn(), dvs.DV01(dv_order[0], device, temps[0], settings)]
-        dv2 = [ef.spawn(), dvs.DV02(dv_order[1], device, temps[1], settings)]
-        dv3 = [ef.spawn(), dvs.DV03(dv_order[2], device, temps[2], settings)]
-        dv4 = [ef.spawn(), dvs.DV04(dv_order[3], device, temps[3], settings)]
-        dv5 = [ef.spawn(), dvs.DV05(dv_order[4], device, temps[4], settings)]
-        dv6 = [ef.spawn(), dvs.DV06(dv_order[5], device, temps[5], settings)]
-        dv7 = [ef.spawn(), dvs.DV07(dv_order[6], device, temps[6], settings)]
-        dv8 = [ef.spawn(), dvs.DV08(dv_order[7], device, temps[7], settings)]
-        dv9 = [ef.spawn(), dvs.DV09(dv_order[8], device, temps[8], settings)]
-        dv10 = [ef.spawn(), dvs.DV10(dv_order[9], device, temps[9], settings)]
-        dv11 = [ef.spawn(), dvs.DV11Part1(dv_order[10], device, temps[10], settings),
-                ef.spawn(), dvs.DV11Part2(dv_order[10], device, temps[10], settings)]
-        dv12 = [ef.spawn(), dvs.DV12(dv_order[11], device, temps[11], settings)]
-        dv13 = [ef.spawn(), dvs.DV13(dv_order[12], device, temps[12], settings)]
-        dv14 = [ef.spawn(), dvs.DV14(dv_order[13], device, temps[13], settings)]
+        # +1 is to make block numbering 1-based in data
+        dv1 = [ef.spawn(), dvs.DV01(dv_order[0] + 1, device, temps[0], settings)]
+        dv2 = [ef.spawn(), dvs.DV02(dv_order[1] + 1, device, temps[1], settings)]
+        dv3 = [ef.spawn(), dvs.DV03(dv_order[2] + 1, device, temps[2], settings)]
+        dv4 = [ef.spawn(), dvs.DV04(dv_order[3] + 1, device, temps[3], settings)]
+        dv5 = [ef.spawn(), dvs.DV05(dv_order[4] + 1, device, temps[4], settings)]
+        dv6 = [ef.spawn(), dvs.DV06(dv_order[5] + 1, device, temps[5], settings)]
+        dv7 = [ef.spawn(), dvs.DV07(dv_order[6] + 1, device, temps[6], settings)]
+        dv8 = [ef.spawn(), dvs.DV08(dv_order[7] + 1, device, temps[7], settings)]
+        dv9 = [ef.spawn(), dvs.DV09(dv_order[8] + 1, device, temps[8], settings)]
+        dv10 = [ef.spawn(), dvs.DV10(dv_order[9] + 1, device, temps[9], settings)]
+        dv11 = [ef.spawn(), dvs.DV11Part1(dv_order[10] + 1, device, temps[10], settings),
+                ef.spawn(), dvs.DV11Part2(dv_order[10] + 1, device, temps[10], settings)]
+        dv12 = [ef.spawn(), dvs.DV12(dv_order[11] + 1, device, temps[11], settings)]
+        dv13 = [ef.spawn(), dvs.DV13(dv_order[12] + 1, device, temps[12], settings)]
+        dv14 = [ef.spawn(), dvs.DV14(dv_order[13] + 1, device, temps[13], settings)]
         stack = [dv1, dv2, dv3, dv4, dv5,
                  dv6, dv7, dv8, dv9, dv10,
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        # stack = [dv8]
-        # stack2 = stack
+        stack2 = [dv7]
 
         self._window.add_widgets(stack2)

@@ -81,7 +81,6 @@ class DV06CriminalRating(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': [q[:30] + '...' for q in self.questions],
-                # 'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
                 'dv': num_q * [self.name],
                 'block_number': num_q * [self.block_num],

@@ -76,6 +76,7 @@ class DV08BrandPersonality(StackedDV):
             # two sets of single Qs (different header)
             # these won't end up aligning very well
             self.brand_col.extend([brand]*7)
+            self.questions.extend([warm[1], friendly[1]])
             self.questions.extend(rest_qs)
 
         self.add_widgets(widgets)
