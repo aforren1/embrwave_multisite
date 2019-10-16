@@ -279,7 +279,7 @@ class IntroDlg(qtw.QWidget):
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        stack = [dv8]
-        stack2 = stack
+        # stack = [dv8]
+        # stack2 = stack
 
         self._window.add_widgets(stack2)
