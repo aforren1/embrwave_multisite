@@ -84,7 +84,14 @@ class DV08BrandPersonality(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.widgets[1:]]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        res = []
+        for sublist in current_answers:
+            for subval in sublist:
+                if subval >= 0:
+                    res.append(subval)
+                else:
+                    res.append(None)
+        current_answers = res
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')

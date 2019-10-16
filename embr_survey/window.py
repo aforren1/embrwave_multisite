@@ -20,11 +20,11 @@ def scroll_up(area, removed):
 
 scroll_style = '''
 QScrollBar:vertical {
-    background: #444444;
+    background: #333333;
     width: 40px;
 }
 QScrollBar::handle:vertical {
-    background: #c0c0c0;
+    background: #d0d0d0;
     min-width: 40px;
 }
 QScrollBar::add-line:vertical {

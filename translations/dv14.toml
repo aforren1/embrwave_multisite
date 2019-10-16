@@ -20,13 +20,13 @@ en = "Have you seen or heard of this movie before?"
 
 # should be a qcombobox (default blank)
 [[ans]]
-en = "Yes – I have seen it"
+en = "Yes - I have seen it"
 
 [[ans]]
-en = "Yes – I have heard of it"
+en = "Yes - I have heard of it"
 
 [[ans]]
-en = "No – I didn't know anything about this movie"
+en = "No - I didn't know anything about this movie"
 
 # Questions
 [[movie]]

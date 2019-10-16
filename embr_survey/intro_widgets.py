@@ -15,6 +15,8 @@ from PySide2.QtCore import Qt, QTimer
 from embr_survey.embrwave import PreEmbr, DummyPreEmbr
 from embr_survey.pygatt.exceptions import NotConnectedError
 from embr_survey.embrwave import EmbrWave, DummyWave
+import serial
+from serial.tools import list_ports
 
 base_style = '''
 QPushButton {border:4px solid rgb(0, 0, 0); 
@@ -190,6 +192,7 @@ class IntroDlg(qtw.QWidget):
     def try_connect(self):
         try:
             # connect to the device
+            # blocks progression (TODO: add a note)
             if not self._is_connected:
                 self.connector.setText('Connecting...')
                 device = EmbrWave(self.device.currentText())
@@ -202,6 +205,12 @@ class IntroDlg(qtw.QWidget):
                 self._device = device
                 self.connector.setText('Connected.')
         except Exception as e:
+            # try to disconnect the COM
+            dev_port = next((xx.device for xx in list_ports.comports() if hasattr(xx, 'manufacturer') and xx.manufacturer == 'Bluegiga'), None)
+            if dev_port:
+                tmpser = serial.Serial(baudrate=115200, timeout=0.25)
+                tmpser.port = dev_port
+                tmpser.close()
             self.connector.setText('Connect')
             self._is_connected = False
             self._log.warn(e)
@@ -243,8 +252,8 @@ class IntroDlg(qtw.QWidget):
         temps = random.choices([-9, -5, 5, 9], k=14)
         dv_order = list(range(14))
         random.shuffle(dv_order)
-        temps = [temps[val] for val in dv_order]
-        self._log.info('Temperature progression: %s' % temps)
+        temps2 = [temps[val] for val in dv_order]
+        self._log.info('Temperature progression: %s' % temps2)
 
         # TODO: feed in locale
         device = self._device
@@ -268,8 +277,9 @@ class IntroDlg(qtw.QWidget):
         stack = [dv1, dv2, dv3, dv4, dv5,
                  dv6, dv7, dv8, dv9, dv10,
                  dv11, dv12, dv13, dv14]
-        stack = [dv5]
         # shuffle around questions
-        #stack2 = [stack[i] for i in dv_order]
+        stack2 = [stack[i] for i in dv_order]
+        stack = [dv8]
         stack2 = stack
+
         self._window.add_widgets(stack2)

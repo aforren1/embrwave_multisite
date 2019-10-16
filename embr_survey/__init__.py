@@ -44,6 +44,5 @@ if is_exe:
     # extends the sys module by a flag frozen=True and sets the app
     # path into variable _MEIPASS'.
     application_path = os.path.join(sys.executable, '..')  # sys.executable for onefile option
-    print(application_path)
 else:
     application_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')

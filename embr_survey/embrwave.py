@@ -90,10 +90,10 @@ class EmbrWave(object):
         for val in [6, 7]:  # heating, cooling respectively
             # Blah, this takes awhile?
             self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
-            self.write(EmbrVal.DURATION, 30)  # custom mode, duration of 30 mins
+            self.write(EmbrVal.DURATION, 60)  # custom mode, duration of 60 mins
             self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             self.write(EmbrVal.DURATION, 5)  # ramp up at 1C/s
-
+        
     def __enter__(self):
         return self
 
