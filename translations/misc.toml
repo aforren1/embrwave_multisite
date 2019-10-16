@@ -32,3 +32,6 @@ en = 'If you have an Embr Wave, hold the button until the device turns green. Af
 
 [is_connected]
 en = 'Device connected? (red = no, green = yes)'
+
+[dev_instr]
+en = 'Find/Connect Device'

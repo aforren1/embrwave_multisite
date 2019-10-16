@@ -16,6 +16,15 @@ from embr_survey.embrwave import PreEmbr, DummyPreEmbr
 from embr_survey.pygatt.exceptions import NotConnectedError
 from embr_survey.embrwave import EmbrWave, DummyWave
 
+base_style = '''
+QPushButton {border:4px solid rgb(0, 0, 0); 
+             border-radius:10px;
+             font: bold 26px;padding: 24px;}
+QPushButton:pressed {border-style:inset;}
+QPushButton {background-color: rgb(255, 140, 0);}
+QPushButton:pressed {background-color: rgb(255, 165, 0);}
+'''
+
 
 def count_language_keys(files, ref):
     # must have *all* language keys to work (otherwise, ignore)
@@ -125,16 +134,24 @@ class IntroDlg(qtw.QWidget):
 
         self.id = qtw.QLineEdit()
         self.lang = qtw.QComboBox()
+        fnt = self.lang.font()
+        fnt.setPointSize(26)
+        self.lang.setFont(fnt)
         self.lang.currentIndexChanged.connect(partial(on_activated, self))
         self.locale = qtw.QComboBox()
+        self.locale.setFont(fnt)
         self.device = qtw.QComboBox()
+        self.device.setFont(fnt)
         self.device.addItems(self.pre_embr.addrs)
+
+        self.id.setFont(fnt)
 
         # TODO: these *also* need to be translated...
         self.id_label = JustText(self.translations['participant']['en'])
         self.lang_label = JustText(self.translations['language']['en'])
         self.locale_label = JustText(self.translations['locale']['en'])
         self.device_label = JustText('Embr Wave ID')
+        self.dev_instr = JustText(self.translations['dev_instr']['en'])
 
         # default to english/us, which *should* exist & be complete
         self.lang.addItems(languages)
@@ -148,16 +165,20 @@ class IntroDlg(qtw.QWidget):
         self.connector = qtw.QPushButton('Connect')
         self.connector.clicked.connect(self.try_connect)
 
-        layout.addWidget(self.id_label, 0, 0, Qt.AlignRight | Qt.AlignVCenter)
-        layout.addWidget(self.id, 0, 1, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.lang_label, 1, 0, Qt.AlignRight | Qt.AlignVCenter)
-        layout.addWidget(self.lang, 1, 1, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.locale_label, 2, 0, Qt.AlignRight | Qt.AlignVCenter)
-        layout.addWidget(self.locale, 2, 1, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.device_label, 3, 0, Qt.AlignRight | Qt.AlignVCenter)
-        layout.addWidget(self.device, 3, 1, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.blinker, 3, 2, Qt.AlignLeft | Qt.AlignVCenter)
-        layout.addWidget(self.connector, 3, 3, Qt.AlignLeft | Qt.AlignVCenter)
+        self.blinker.setStyleSheet(base_style)
+        self.connector.setStyleSheet(base_style)
+
+        layout.addWidget(self.id_label, 0, 0, Qt.AlignCenter)
+        layout.addWidget(self.id, 0, 1, Qt.AlignCenter | Qt.AlignLeft)
+        layout.addWidget(self.lang_label, 1, 0, Qt.AlignCenter)
+        layout.addWidget(self.lang, 1, 1, Qt.AlignCenter | Qt.AlignLeft)
+        layout.addWidget(self.locale_label, 2, 0, Qt.AlignCenter)
+        layout.addWidget(self.locale, 2, 1, Qt.AlignCenter | Qt.AlignLeft)
+        layout.addWidget(self.device_label, 3, 0, Qt.AlignCenter)
+        layout.addWidget(self.device, 3, 1, Qt.AlignCenter | Qt.AlignLeft)
+        layout.addWidget(self.dev_instr, 5, 0, Qt.AlignCenter)
+        layout.addWidget(self.blinker, 5, 1, Qt.AlignCenter | Qt.AlignLeft)
+        layout.addWidget(self.connector, 5, 1, Qt.AlignCenter)
 
         self.setLayout(layout)
 
