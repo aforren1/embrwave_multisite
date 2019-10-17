@@ -47,7 +47,7 @@ install:
   - 'python -m pip install .'
 
   # bundle exe
-  - pyinstaller --noconsole --onefile --name embr_survey main.py --add-data "embr_survey/images/*.png;embr_survey/images/" --upx-dir=.\ext\upx-3.95-win64 -y
+  - pyinstaller --noconsole --onefile --name embr_survey main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
   - cp -r translations .\dist\translations
   - cp -r locale .\dist\locale
   - cp readme.md .\dist\readme.md
