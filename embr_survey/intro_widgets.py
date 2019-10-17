@@ -197,10 +197,6 @@ class IntroDlg(qtw.QWidget):
                 self.connector.setText('Connecting...')
                 device = EmbrWave(self.device.currentText())
                 atexit.register(device.close)
-                self._log.info('Device: %s' % device.name)
-                self._log.info('Device ID, Firmware: %s, %s' % (device.device_id, device.firmware_version))
-                self._log.info('Device battery remaining: %s' % device.battery_charge)
-                self._log.info('----------')
                 self._is_connected = True
                 self._device = device
                 self.connector.setText('Connected.')
@@ -245,6 +241,10 @@ class IntroDlg(qtw.QWidget):
         logger.info('Seed: %s' % seed)
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
+        logger.info('----------')
+        logger.info('Device: %s' % device.name)
+        logger.info('Device ID, Firmware: %s, %s' % (device.device_id, device.firmware_version))
+        logger.info('Device battery remaining: %s' % device.battery_charge)
         logger.info('----------')
 
         # finally good to go
