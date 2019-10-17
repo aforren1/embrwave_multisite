@@ -21,11 +21,156 @@ en = ['1', '2', '3', '4', '5', '6', '7 or more']
 [q2a]
 en = "How many of your children do you see or talk to on the phone at least once every 2 weeks?"
 
-[q2a_ans]
-en = ['1', '2', '3', '4', '5', '6', '7 or more']
+# reuse q2_ans for q2a_ans
 
 [q3]
 en = "Are either of your parents living? (If neither is living, check '0' and skip to question 4.)"
 
 [q3_ans]
 en = ['neither', 'mother only', 'father only', 'both']
+
+[q3a]
+en = "Do you see or talk on the phone to either of your parents at least once every 2 weeks?"
+
+# (reuse q3_ans for q3a_ans)
+
+[q4]
+en = "Are either of your in-laws (or partner's parents) living?"
+
+[q4_ans]
+en = ['neither', 'mother only', 'father only', 'both', 'not_applicable']
+
+[q4a]
+en = "Do you see or talk on the phone to either of your partner's parents at least once every 2 weeks?"
+
+# (reuse q3_ans for q4a_ans, remove the 'not applicable' option)
+
+[q5]
+en = "How many other relatives (other than your spouse, parents & children) do you feel close to?"
+
+# q5_ans is q2_ans
+
+[q5a]
+en = "How many of these relatives do you see or talk to on the phone at least once every 2 weeks?"
+
+# q5a_ans is q2_ans
+
+[q6]
+en = "How many close friends do you have? (meaning people that you feel at ease with, can talk to about private matters, and can call on for help)"
+
+# q6_ans is q2_ans
+
+[q6a]
+en = "How many of these friends do you see or talk to at least once every 2 weeks?"
+
+[q7]
+en = "Do you belong to a church, temple, or other religious group?"
+
+[q7_ans]
+en = ['no', 'yes']
+
+[q7a]
+en = "How many members of your church or religious group do you talk to at least once every 2 weeks? (This includes at group meetings and services.)"
+
+# q7a_ans is q2_ans
+
+[q8]
+en = "Do you attend any classes (school, university, technical training, or adult education) on a regular basis?"
+
+# q8_ans is q7_ans
+
+[q8a]
+en = "How many fellow students or teachers do you talk to at least once every 2 weeks? (This includes at class meetings.)"
+
+# q8a_ans is q2_ans
+
+[q9]
+en = "Are you currently employed either full or part-time?"
+
+[q9_ans]
+en = ["no", "yes, self-employed", "yes, employed by others"]
+
+[q9a]
+en = "How many people do you supervise?"
+
+# q9a_ans is q2_ans
+
+[q9b]
+en = "How many people at work (other than those you supervise) do you talk to at least once every 2 weeks?"
+
+# q9b_ans is q2_ans
+
+[q10]
+en = "How many of your neighbors do you visit or talk to at least once every 2 weeks?"
+
+# q10_ans is q2_ans
+
+[q11]
+en = "Are you currently involved in regular volunteer work?"
+
+# q11_ans is q7_ans
+
+[q11a]
+en = "How many people involved in this volunteer work do you talk to about volunteering-related issues at least once every 2 weeks?"
+
+# q11a_ans is q2_ans
+
+[q12]
+en = "Do you belong to any groups in which you talk to one or more members of the group about group-related issues at least once every 2 weeks? Examples include social clubs, recreational groups, trade unions, commercial groups, professional organizations, groups concerned with children like the PTA or Boy Scouts, groups concerned with community service, etc."
+
+# q12_ans is q7_ans
+
+[q12a]
+en = "Consider those groups in which you talk to a fellow group member at least once every 2 
+weeks. Please provide the following information for each such group: the name or type of group and the total number of members in that group that you talk to at least once every 2 weeks."
+
+[q12a_header]
+en = ["Group name", "Total number of group members that you talk to at least once every two weeks"]
+
+##############
+# Intimate relationships
+#######
+
+[intimate_prompt]
+en = "The statements below concern how you feel in emotionally intimate relationships. We are interested in how you generally experience relationships, not just in what is happening in a current relationship. Respond to each statement by selecting an option to indicate how much you agree or disagree with the statement:"
+
+[intimate_header]
+en = ["1\nstrongly disagree", "2", "3", "4", "5", "6", "7\nstrongly agree"]
+
+[relationship_qs]
+en = ["I'm afraid that I will lose my partner's love"
+      "I often worry that my partner will not want to stay with me."
+      "I often worry that my partner doesn't really love me."
+      "I worry that romantic partners won’t care about me as much as I care about them."
+      "I often wish that my partner's feelings for me were as strong as my feelings for him or her."
+      "I worry a lot about my relationships."
+      "When my partner is out of sight, I worry that he or she might become interested in someone else."
+      "When I show my feelings for romantic partners, I'm afraid they will not feel the same about me."
+      "I rarely worry about my partner leaving me."
+      "My romantic partner makes me doubt myself."
+      "I do not often worry about being abandoned."
+      "I find that my partner(s) don't want to get as close as I would like."
+      "Sometimes romantic partners change their feelings about me for no apparent reason."
+      "My desire to be very close sometimes scares people away."
+      "I'm afraid that once a romantic partner gets to know me, he or she won't like who I really am."
+      "It makes me mad that I don't get the affection and support I need from my partner."
+      "I worry that I won't measure up to other people."
+      "My partner only seems to notice me when I’m angry."
+      "I prefer not to show a partner how I feel deep down."
+      "I feel comfortable sharing my private thoughts and feelings with my partner."
+      "I find it difficult to allow myself to depend on romantic partners."
+      "I am very comfortable being close to romantic partners."
+      "I don't feel comfortable opening up to romantic partners."
+      "I prefer not to be too close to romantic partners."
+      "I get uncomfortable when a romantic partner wants to be very close."
+      "I find it relatively easy to get close to my partner."
+      "It's not difficult for me to get close to my partner."
+      "I usually discuss my problems and concerns with my partner."
+      "It helps to turn to my romantic partner in times of need."
+      "I tell my partner just about everything."
+      "I talk things over with my partner."
+      "I am nervous when partners get too close to me."
+      "I feel comfortable depending on romantic partners."
+      "I find it easy to depend on romantic partners."
+      "It's easy for me to be affectionate with my partner."
+      "My partner really understands me and my needs."]

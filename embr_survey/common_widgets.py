@@ -74,7 +74,6 @@ class EmbrSection(JustText):
 
 
 class MultiQuestion(qtw.QWidget):
-    # TODO: logging responses
     def __init__(self, header, questions):
         super().__init__()
         grid = qtw.QGridLayout()
