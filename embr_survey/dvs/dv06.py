@@ -19,7 +19,7 @@ class CriminalQuestion(qtw.QWidget):
         super().__init__()
         img = QPixmap(img_name)
         img_holder = qtw.QLabel()
-        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         img_holder.setAlignment(Qt.AlignCenter)
         self.question = MultiQuestion(header, questions)
         layout = qtw.QVBoxLayout()
@@ -80,9 +80,9 @@ class DV06CriminalRating(StackedDV):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': [q[:30] + '...' for q in self.questions],
+                'questions': ['...' + q[-40:] for q in self.questions],
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
                 'images': rep_img_names}

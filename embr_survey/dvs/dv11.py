@@ -39,7 +39,7 @@ class RelationshipQuestion(qtw.QWidget):
         super().__init__()
         img = QPixmap(img_name)
         img_holder = qtw.QLabel()
-        img_holder.setPixmap(img.scaled(1000, 500, Qt.KeepAspectRatio))
+        img_holder.setPixmap(img.scaled(1000, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         img_holder.setAlignment(Qt.AlignCenter)
         self.question = SingleQuestion(header, question)
         layout = qtw.QVBoxLayout()
@@ -131,10 +131,9 @@ class DV11Part2(StackedDV):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': self.questions,
                 'names': self.passed_data,
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature]}
         keys = sorted(data.keys())

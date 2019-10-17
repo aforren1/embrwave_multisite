@@ -104,9 +104,9 @@ class DV08BrandPersonality(StackedDV):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': [q[:30] + '...' for q in self.questions],
+                'questions': [q[:40] + '...' for q in self.questions],
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
                 'brands': self.brand_col}

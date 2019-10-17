@@ -47,9 +47,9 @@ class DV10WillingnessToForgive(BaseDV):
                 'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': [settings['language']],
                 'locale': [settings['locale']],
-                'questions': [self.question[:30]],
+                'questions': [self.question],
                 'responses': current_answers,
-                'dv': [self.name],
+                'dv': [self.long_name],
                 'block_number': [self.block_num],
                 'embr_temperature': [self.temperature]}
         keys = sorted(data.keys())

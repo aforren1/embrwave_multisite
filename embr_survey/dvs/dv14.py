@@ -9,6 +9,7 @@ import PySide2.QtWidgets as qtw
 from PySide2.QtCore import Qt
 
 from pip._vendor import pytoml as toml
+from embr_survey import strip_tags
 from embr_survey.dvs.base_block import StackedDV
 from embr_survey.common_widgets import JustText, SingleQuestion
 # similar to DV06
@@ -83,8 +84,10 @@ class DV14RomanceMovies(StackedDV):
 
         widgets = []
         self.qs = []
+        self.movs = []
         widgets.append(JustText(prompt))
         for mov in movie_txt:
+            self.movs.extend([mov]*3)
             self.qs.extend([q1, q2, q3])
             widgets.append(MovieQuestion([header1, header2],
                                          [q1, q2, q3],
@@ -110,10 +113,10 @@ class DV14RomanceMovies(StackedDV):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': [q[:30] + '...' for q in self.qs],
-                # 'question_original_order': [q[0] for q in self.questions],
+                'questions': [q[:40] + '...' for q in self.qs],
+                'movie_txt': [strip_tags(q[:40]) + '...' for q in self.movs],
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature]}
         keys = sorted(data.keys())

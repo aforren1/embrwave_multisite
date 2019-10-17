@@ -20,7 +20,7 @@ class PerceptualQuestion(qtw.QWidget):
         super().__init__()
         img = QPixmap(img_name)
         img_holder = qtw.QLabel()
-        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio))
+        img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         img_holder.setAlignment(Qt.AlignCenter)
         self.question = SingleQuestion(header, question)
         layout = qtw.QVBoxLayout()
@@ -74,7 +74,10 @@ class DV07PerceptualFocus(StackedDV):
         current_answers = [x.get_responses() for x in self.qs]
         current_answers = [x for sublist in current_answers for x in sublist]
         current_answers = [ca if ca >= 0 else None for ca in current_answers]
-        # TODO: convert to A/B
+        # Convert from 0/1 to A/B
+        for count, ca in enumerate(current_answers):
+            if ca is not None:
+                current_answers[count] = 'A' if not ca else 'B'
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
@@ -89,7 +92,7 @@ class DV07PerceptualFocus(StackedDV):
                 'questions': self.questions,
                 # 'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature],
                 'images': [os.path.basename(i) for i in self.img_names]}

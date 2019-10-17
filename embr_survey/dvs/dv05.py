@@ -77,7 +77,7 @@ class DV05HousesHomelikeness(BaseDV):
         self.images = {os.path.basename(n): QPixmap(n) for n in images}
         for img in self.images:
             ql = qtw.QLabel()
-            ql.setPixmap(self.images[img].scaled(800, 500, Qt.KeepAspectRatio))
+            ql.setPixmap(self.images[img].scaled(800, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             self.images[img] = ql
 
         layout = qtw.QVBoxLayout()
@@ -119,10 +119,10 @@ class DV05HousesHomelikeness(BaseDV):
                 'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
-                'questions': [q[1][:30] + '...' for q in self.questions],
+                'questions': [q[1][:40] + '...' for q in self.questions],
                 'question_original_order': [q[0] for q in self.questions],
                 'responses': current_answers,
-                'dv': num_q * [self.name],
+                'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature]}
         keys = sorted(data.keys())
