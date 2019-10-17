@@ -21,7 +21,7 @@ en = "How often do you feel that there is no one you can turn to?"
 en = "How often do you feel alone?"
 
 [[question]]
-en = "Hoe often do you feel part of a group of friends?"
+en = "How often do you feel part of a group of friends?"
 
 [[question]]
 en = "How often do you feel that you have a lot in common with the people around you?"
@@ -52,6 +52,9 @@ en = "How often do you feel isolated from others?"
 
 [[question]]
 en = "How often do you feel that you can find companionship when you want it?"
+
+[[question]]
+en = "How often do you feel that there are people who really understand you?"
 
 [[question]]
 en = "How often do you feel shy?"

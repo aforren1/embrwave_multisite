@@ -19,6 +19,13 @@ The only way to save the lives of the five workmen is to push this stranger off 
 en = "Is it appropriate for you to push the stranger on to the tracks in order to save the five workmen?"
 
 [[subprompt]]
+en = """It is wartime and you and your two children, ages eight and five, are living in a territory that has been occupied by the enemy. At the enemy's headquarters is a doctor who performs painful experiments on humans that inevitably lead to death.
+He intends to perform experiments on one of your children, but he will allow you to choose which of your children will be experimented upon. You have twenty-four hours to bring one of your children to his laboratory. If you refuse to bring one of your children to his laboratory he will find them both and experiment on both of them."""
+
+[[question]]
+en = "Is it appropriate for you to bring one of your children to the laboratory in order to avoid having them both die?"
+
+[[subprompt]]
 en = """You are the leader of a mountaineering expedition that is stranded in the wilderness. Your expedition includes a family of six that has a genetically caused vitamin deficiency. A few people's kidneys contain large amounts of this vitamin.
 There is one such person in your party. The only way to save the lives of the six members of this family is to remove one of this man's kidneys so that the necessary vitamins may be extracted from it. The man will not die if you do this, but his health will be compromised. The man is opposed to this plan, but you have the power to do as you see fit."""
 
