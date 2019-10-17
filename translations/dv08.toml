@@ -3,7 +3,7 @@ en = "In this next section, we will ask for your impressions of three major shoe
 
 [prompt2]
 # Please place the %s wherever the brand name should appear in the translation.
-en = "Please answer the following questions about %s."
+en = "Please answer the following questions about <b>%s</b>."
 # for example (directly pulled from google translate, so
 # may not be correct translation)
 #fr = "Veuillez répondre aux questions suivantes sur %s."

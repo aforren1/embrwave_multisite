@@ -1,5 +1,8 @@
 [prompt]
-en = "Consider the following person: Person X is intelligent, skillful, and industrious. Person X is also determined, practical, and cautious."
+en = """Consider the following person: Person X is intelligent, skillful, and industrious. Person X is also determined, practical, and cautious.
+
+How would you rate this person on the following traits?
+"""
 
 [header]
 en = ['1', '2', '3', '4', '5', '6', '7']
