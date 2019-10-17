@@ -19,7 +19,7 @@ import serial
 from serial.tools import list_ports
 
 base_style = '''
-QPushButton {border:4px solid rgb(0, 0, 0); 
+QPushButton {border:4px solid rgb(0, 0, 0);
              border-radius:10px;
              font: bold 26px;padding: 24px;}
 QPushButton:pressed {border-style:inset;}
@@ -27,6 +27,15 @@ QPushButton {background-color: rgb(255, 140, 0);}
 QPushButton:pressed {background-color: rgb(255, 165, 0);}
 '''
 
+green_style = '''
+QPushButton {border:4px solid rgb(0, 0, 0); 
+             border-radius:10px;
+             font: bold 26px;padding: 24px;}
+QPushButton:pressed {border-style:inset;}
+QPushButton {background-color: rgb(120, 255, 0);}
+QPushButton:pressed {background-color: rgb(120, 255, 0);}
+
+'''
 
 def count_language_keys(files, ref):
     # must have *all* language keys to work (otherwise, ignore)
@@ -164,7 +173,7 @@ class IntroDlg(qtw.QWidget):
         self.blinker = qtw.QPushButton('Blink')
         self.blinker.clicked.connect(partial(on_blink, self))
 
-        self.connector = qtw.QPushButton('Connect')
+        self.connector = qtw.QPushButton('Connect (will freeze\ntemporarily)')
         self.connector.clicked.connect(self.try_connect)
 
         self.blinker.setStyleSheet(base_style)
@@ -194,12 +203,13 @@ class IntroDlg(qtw.QWidget):
             # connect to the device
             # blocks progression (TODO: add a note)
             if not self._is_connected:
-                self.connector.setText('Connecting...')
+                self.connector.setText('Connecting... (will freeze)')
                 device = EmbrWave(self.device.currentText())
                 atexit.register(device.close)
                 self._is_connected = True
                 self._device = device
                 self.connector.setText('Connected.')
+                self.connector.setStyleSheet(green_style)
         except Exception as e:
             # try to disconnect the COM
             dev_port = next((xx.device for xx in list_ports.comports() if hasattr(xx, 'manufacturer') and xx.manufacturer == 'Bluegiga'), None)
@@ -214,6 +224,7 @@ class IntroDlg(qtw.QWidget):
     def on_exit(self):
         from embr_survey import application_path
         from embr_survey import setup_logger
+        from embr_survey._version import __version__
         from hashlib import md5
         import random
         from embr_survey.common_widgets import EmbrFactory
@@ -241,6 +252,7 @@ class IntroDlg(qtw.QWidget):
         logger.info('Seed: %s' % seed)
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
+        logger.info('embr_survey version: %s' % __version__)
         logger.info('----------')
         device = self._device
         logger.info('Device: %s' % device.name)

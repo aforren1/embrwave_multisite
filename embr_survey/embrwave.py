@@ -137,13 +137,6 @@ class EmbrWave(object):
     @level.setter
     def level(self, value):
         self.stop()
-        # TODO: make sure this sequence actually works
-        # I want to indicate that *something* is happening,
-        # without giving away the settings
-        # self.enable_leds()
-        # for i in range(3):
-        #     self.blink()
-        # self.disable_leds()
         self.blink()
         sleep(1)
         self.write(EmbrVal.LEVEL, value)
