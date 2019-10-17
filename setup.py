@@ -29,6 +29,7 @@ setuptools.setup(
     url="https://github.com/aforren1/embrwave-multisite",
     packages=setuptools.find_packages(),
     package_data={'embr_survey': ['images/*']},
+    python_requires='>=3.7',
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",

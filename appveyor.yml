@@ -48,6 +48,7 @@ install:
   - pyinstaller --noconsole --onefile --name embr_survey main.py --add-data "embr_survey/images/*.png;embr_survey/images/"
   - cp -r translations .\dist\translations
   - cp -r locale .\dist\locale
+  - cp readme.md .\dist\readme.md
   - dir .\dist
   - 7z a embr_survey.zip .\dist\*
 
