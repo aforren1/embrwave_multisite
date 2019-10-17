@@ -1,0 +1,36 @@
+[q_purpose]
+en = "What do you think the purpose of this study was?"
+
+# q_purpose_ans is free text
+
+[q_related]
+en = "Do you think the temperature settings of the Embr Wave were related to the questions you were asked?"
+
+[q_related_ans]
+en = ["Yes", "No", "I Don't know"]
+
+[q_how] # TODO: conditional (only if yes to previous?)
+en = "How do you think the temperature settings were related to the questions?"
+
+# q_how_ans is free text
+
+[q_influence]
+en = "Do you think the Embr Wave changed your answers to our questions?"
+
+# q_influence_ans is q_related_ans
+
+[q_how_influence] # TODO: conditional on last
+en = "How do you think the Embr Wave changed your answers to our questions?"
+
+[fin]
+en = """Thank you for your participation. As we indicated, we are investigating the efficacy of the Embr Wave. However, we are also interested in how you responded to the included scales and whether the Embr Wave affected those responses. These scales were in fact not unrelated -- rather, they were selected because prior studies have found participants respond differently on these scales depending on how warm or cold they feel. This field of research is called Social Thermoregulation, and indicates that physical temperature has a role in our social relationships.
+
+The independent variable in this case was the temperature of the Embr Wave (that's what we changed). The dependent variables were the questionnaires we asked you, regarding topics like: how similar you perceive objects, how "belong" you feel, how utilitarian you are in moral judgments, feelings of nostalgia, how you judge a house as being a home, intuitions about criminals, how you categorize objects, how you perceive brands, whether you feel lonely, your capacity for forgiveness, which loved ones come to mind first, how you judge people, how much you would pay for consumer goods, and what types of movies you prefer. If you'd like to learn more about the specific items, please ask your experimenter or visit our research page: https://osf.io/eydwm/. 
+
+Because we didn't want to draw your attention to the link between the EmbrWave and the questionnaires, we did not disclose this part of our research question to you. In addition, to protect the integrity of this work, we ask that you do not discuss these research ideas with any friends who may participate in this research. We would like to confirm that you permit us to use your data in our research: [Yes, I permit the researchers to use my responses / No, I do not want my data to be analyzed].
+"""
+
+# q_fin_ans is just first two of q_related_ans
+
+[fin2]
+en = "Feel free to ask your experimenter if you have any questions. Otherwise, you are finished with the study."

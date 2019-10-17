@@ -12,5 +12,6 @@ A few notes:
    the "Connect" button in the GUI, or else the connection won't happen and subsequent attempts
    will fail (as of Oct 16, 2019).
  - When writing new translations, note that HTML is allowed, e.g. `<br>` will insert a line break.
+ - When writing new translations, prefer double quotes (`"`) in the TOML files. Some of the formatting (e.g. newlines) doesn't seem to work with single quotes. 
  - Assuming Python 3.7 (later versions should also work fine)
  - Targeting Windows 10, but other operating systems should work with minimal changes
