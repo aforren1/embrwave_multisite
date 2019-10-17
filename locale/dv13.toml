@@ -5,3 +5,4 @@ eu = 'locale/saft.png'
 
 [currency]
 us = 'USD'
+eu = 'Euros'
