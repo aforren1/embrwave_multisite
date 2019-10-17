@@ -55,20 +55,22 @@ class EmbrFactory(object):
 class EmbrSection(JustText):
     auto_continue = False
 
-    def __init__(self, text, device):
+    def __init__(self, text, device, temperature=0, duration=5000):
         super().__init__(text)
         self.device = device
         self.setAlignment(Qt.AlignCenter)
+        self.temp = temperature
+        self.dur = duration
 
     def on_enter(self):
         # button ref is injected
-        log.info('Entering neutral EmbrWave section & disabling "next" for 5 seconds.')
         self._button.state = 'neutral'
-        QTimer.singleShot(5000, self._enable)
-        self.device.stop()
+        QTimer.singleShot(self.dur, self._enable)
+        self.device.level = self.temp
 
     def _enable(self):
         self._button.state = 'complete'
+        self.device.stop()
 
 
 class MultiQuestion(qtw.QWidget):

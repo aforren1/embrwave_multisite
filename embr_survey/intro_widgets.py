@@ -227,7 +227,7 @@ class IntroDlg(qtw.QWidget):
         from embr_survey._version import __version__
         from hashlib import md5
         import random
-        from embr_survey.common_widgets import EmbrFactory
+        from embr_survey.common_widgets import EmbrFactory, EmbrSection
         import embr_survey.dvs as dvs
 
         # we should now have sufficient info to start the experiment
@@ -272,6 +272,10 @@ class IntroDlg(qtw.QWidget):
         lang = settings['language']
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
         # +1 is to make block numbering 1-based in data
+        dv0 = [dvs.DV00Intro_1(device, settings), 
+               EmbrSection(self.translations['wait_until_green'][lang], device, 9, 10000),
+               EmbrSection(self.translations['wait_until_green'][lang], device, -9, 10000),
+               dvs.DV00Intro_2(device, settings)]
         dv1 = [ef.spawn(), dvs.DV01(dv_order.index(0) + 1, device, temps2[0], settings)]
         dv2 = [ef.spawn(), dvs.DV02(dv_order.index(1) + 1, device, temps2[1], settings)]
         dv3 = [ef.spawn(), dvs.DV03(dv_order.index(2) + 1, device, temps2[2], settings)]
@@ -293,4 +297,5 @@ class IntroDlg(qtw.QWidget):
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
 
+        self._window.add_widgets([dv0])
         self._window.add_widgets(stack2)
