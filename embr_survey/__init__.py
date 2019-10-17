@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 
 class MLStripper(HTMLParser):
     def __init__(self):
+        super().__init__()
         self.reset()
         self.strict = False
         self.convert_charrefs = True
@@ -18,6 +19,8 @@ class MLStripper(HTMLParser):
 
     def get_data(self):
         return ''.join(self.fed)
+
+# remove HTML tags from strings
 
 
 def strip_tags(html):

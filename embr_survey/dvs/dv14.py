@@ -50,8 +50,8 @@ class MovieQuestion(qtw.QWidget):
                 self.question3.get_responses()]
 
     def all_ans(self):
-        if (all(x >= 0 for x in self.question1.get_responses()) and
-                all(x >= 0 for x in self.question2.get_responses()) and
+        if (all(x >= 1 for x in self.question1.get_responses()) and
+                all(x >= 1 for x in self.question2.get_responses()) and
                 self.question3.get_responses() != self.question3._default_ans):
             return True
         return False
@@ -101,7 +101,7 @@ class DV14RomanceMovies(StackedDV):
         current_answers = [x for sublist in current_answers for x in sublist]
         for count, ca in enumerate(current_answers):
             if isinstance(ca, list):
-                current_answers[count] = ca[0] if ca[0] >= 0 else None
+                current_answers[count] = ca[0] if ca[0] >= 1 else None
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')

@@ -9,7 +9,7 @@ class DV09Loneliness(SimpleDV):
 
     def save_data(self):
         current_answers = self.qs.get_responses()
-        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        current_answers = [ca if ca >= 1 else None for ca in current_answers]
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
         csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))

@@ -32,7 +32,7 @@ class PerceptualQuestion(qtw.QWidget):
         return self.question.get_responses()
 
     def all_ans(self):
-        return all([x >= 0 for x in self.get_responses()])
+        return all([x >= 1 for x in self.get_responses()])
 
 
 class DV07PerceptualFocus(StackedDV):
@@ -73,7 +73,7 @@ class DV07PerceptualFocus(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.qs]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [ca if ca >= 0 else None for ca in current_answers]
+        current_answers = [ca if ca >= 1 else None for ca in current_answers]
         # Convert from 0/1 to A/B
         for count, ca in enumerate(current_answers):
             if ca is not None:

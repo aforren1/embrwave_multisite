@@ -108,7 +108,7 @@ class MultiQuestion(qtw.QWidget):
         self.setLayout(grid)
 
     def get_responses(self):
-        resps = [bg.checkedId() for bg in self.qbgs]
+        resps = [bg.checkedId() + 1 for bg in self.qbgs]
         return resps
 
 

@@ -38,7 +38,7 @@ class ThatsMyBrand(qtw.QWidget):
 
     def all_ans(self):
         resps = self.get_responses()
-        return all([x >= 0 for sublist in resps for x in sublist])
+        return all([x >= 1 for sublist in resps for x in sublist])
 
 
 class DV08BrandPersonality(StackedDV):
@@ -88,7 +88,7 @@ class DV08BrandPersonality(StackedDV):
         res = []
         for sublist in current_answers:
             for subval in sublist:
-                if subval >= 0:
+                if subval >= 1:
                     res.append(subval)
                 else:
                     res.append(None)
