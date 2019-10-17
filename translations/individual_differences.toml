@@ -173,3 +173,40 @@ en = ["I'm afraid that I will lose my partner's love",
       "I find it easy to depend on romantic partners.",
       "It's easy for me to be affectionate with my partner.",
       "My partner really understands me and my needs."]
+
+#######
+# Part 3
+####
+
+[part3_prompt]
+en = """Below is a list of statements. Please read each statement carefully and rate how frequently you feel or act in the manner described. If you strongly disagree with the statement, please select 1; if you disagree, please select 2; if you don't feel like you agree or disagree, please select 3; if you agree 4; finally, if you strongly agree select 5. There are no right or wrong answers, but we are solely interested in how you feel. If you are not currently in a dating or marital relationship with someone, answer the questions pertaining a partner with respect to a former partner or a relationship that you would like to have with someone.
+
+After you have answered the questions below, you can continue to the next page."""
+
+[part3_header]
+en = ["1\nCompletely disagree", "2\nDisagree", "3\nNeutral", "4\nAgree", "5\nCompletely agree"]
+
+[part3_qs]
+en = ["I am sensitive to heat",
+      "I find warm days pleasant",
+      "I find hot days pleasant",
+      "I don't like when it's too hot",
+      "When I feel warm I do not want to do anything",
+      "I can’t focus when it is too hot",
+      "I prefer to relax in a cold place",
+      "I usually have more physical contact with others than most people",
+      "When people are close to me, I like to be really close to them",
+      "When I feel cold I seek someone to cuddle with",
+      "I like to warm up my hands or feet by touching someone who I am close to",
+      "I prefer to warm up with someone rather than with something",
+      "I am not sensitive to coldness",
+      "When it is cold, I more quickly turn up the heater than others",
+      "When it is cold, I wear more clothing than others",
+      "I can’t focus when it is too cold",
+      "When I feel cold I don't turn on the heater",
+      "When I am troubled I like to take a long warm shower to clear up my thoughts",
+      "A warm beverage always helps me relax when I am down",
+      "If am feeling distressed I seek a warm place to calm down",
+      "I try to maintain myself in familiar places",
+      "I don’t trust people I have not met before",
+      "I try to be accompanied by people that I know at all times"]
