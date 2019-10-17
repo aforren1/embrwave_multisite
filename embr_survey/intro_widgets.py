@@ -260,21 +260,21 @@ class IntroDlg(qtw.QWidget):
         lang = settings['language']
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
         # +1 is to make block numbering 1-based in data
-        dv1 = [ef.spawn(), dvs.DV01(dv_order[0] + 1, device, temps[0], settings)]
-        dv2 = [ef.spawn(), dvs.DV02(dv_order[1] + 1, device, temps[1], settings)]
-        dv3 = [ef.spawn(), dvs.DV03(dv_order[2] + 1, device, temps[2], settings)]
-        dv4 = [ef.spawn(), dvs.DV04(dv_order[3] + 1, device, temps[3], settings)]
-        dv5 = [ef.spawn(), dvs.DV05(dv_order[4] + 1, device, temps[4], settings)]
-        dv6 = [ef.spawn(), dvs.DV06(dv_order[5] + 1, device, temps[5], settings)]
-        dv7 = [ef.spawn(), dvs.DV07(dv_order[6] + 1, device, temps[6], settings)]
-        dv8 = [ef.spawn(), dvs.DV08(dv_order[7] + 1, device, temps[7], settings)]
-        dv9 = [ef.spawn(), dvs.DV09(dv_order[8] + 1, device, temps[8], settings)]
-        dv10 = [ef.spawn(), dvs.DV10(dv_order[9] + 1, device, temps[9], settings)]
-        dv11 = [ef.spawn(), dvs.DV11Part1(dv_order[10] + 1, device, temps[10], settings),
-                ef.spawn(), dvs.DV11Part2(dv_order[10] + 1, device, temps[10], settings)]
-        dv12 = [ef.spawn(), dvs.DV12(dv_order[11] + 1, device, temps[11], settings)]
-        dv13 = [ef.spawn(), dvs.DV13(dv_order[12] + 1, device, temps[12], settings)]
-        dv14 = [ef.spawn(), dvs.DV14(dv_order[13] + 1, device, temps[13], settings)]
+        dv1 = [ef.spawn(), dvs.DV01(dv_order.index(0) + 1, device, temps2[0], settings)]
+        dv2 = [ef.spawn(), dvs.DV02(dv_order.index(1) + 1, device, temps2[1], settings)]
+        dv3 = [ef.spawn(), dvs.DV03(dv_order.index(2) + 1, device, temps2[2], settings)]
+        dv4 = [ef.spawn(), dvs.DV04(dv_order.index(3) + 1, device, temps2[3], settings)]
+        dv5 = [ef.spawn(), dvs.DV05(dv_order.index(4) + 1, device, temps2[4], settings)]
+        dv6 = [ef.spawn(), dvs.DV06(dv_order.index(5) + 1, device, temps2[5], settings)]
+        dv7 = [ef.spawn(), dvs.DV07(dv_order.index(6) + 1, device, temps2[6], settings)]
+        dv8 = [ef.spawn(), dvs.DV08(dv_order.index(7) + 1, device, temps2[7], settings)]
+        dv9 = [ef.spawn(), dvs.DV09(dv_order.index(8) + 1, device, temps2[8], settings)]
+        dv10 = [ef.spawn(), dvs.DV10(dv_order.index(9) + 1, device, temps2[9], settings)]
+        dv11 = [ef.spawn(), dvs.DV11Part1(dv_order.index(10) + 1, device, temps2[10], settings),
+                ef.spawn(), dvs.DV11Part2(dv_order.index(10) + 1, device, temps2[10], settings)]
+        dv12 = [ef.spawn(), dvs.DV12(dv_order.index(11) + 1, device, temps2[11], settings)]
+        dv13 = [ef.spawn(), dvs.DV13(dv_order.index(12) + 1, device, temps2[12], settings)]
+        dv14 = [ef.spawn(), dvs.DV14(dv_order.index(13) + 1, device, temps2[13], settings)]
         stack = [dv1, dv2, dv3, dv4, dv5,
                  dv6, dv7, dv8, dv9, dv10,
                  dv11, dv12, dv13, dv14]

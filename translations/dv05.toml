@@ -27,9 +27,7 @@ en = """%s:
 Here is the 5th bedroom."""
 
 [prompt2]
-en = """Now, we will ask you to rate how you feel about the house on several different dimensions. The scale is always the same: 1 = not at all, 7 = to a great extent
-
-To what extent does the property seem (or feel)..."""
+en = """Now, we will ask you to rate how you feel about the house on several different dimensions. The scale is always the same: 1 = not at all, 7 = to a great extent.<br><br>To what extent does the property seem (or feel)..."""
 
 [header]
 en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nTo a great\nextent"]
