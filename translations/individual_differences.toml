@@ -121,8 +121,7 @@ en = "Do you belong to any groups in which you talk to one or more members of th
 # q12_ans is q7_ans
 
 [q12a]
-en = "Consider those groups in which you talk to a fellow group member at least once every 2 
-weeks. Please provide the following information for each such group: the name or type of group and the total number of members in that group that you talk to at least once every 2 weeks."
+en = "Consider those groups in which you talk to a fellow group member at least once every 2 weeks. Please provide the following information for each such group: the name or type of group and the total number of members in that group that you talk to at least once every 2 weeks."
 
 [q12a_header]
 en = ["Group name", "Total number of group members that you talk to at least once every two weeks"]
@@ -138,39 +137,39 @@ en = "The statements below concern how you feel in emotionally intimate relation
 en = ["1\nstrongly disagree", "2", "3", "4", "5", "6", "7\nstrongly agree"]
 
 [relationship_qs]
-en = ["I'm afraid that I will lose my partner's love"
-      "I often worry that my partner will not want to stay with me."
-      "I often worry that my partner doesn't really love me."
-      "I worry that romantic partners won’t care about me as much as I care about them."
-      "I often wish that my partner's feelings for me were as strong as my feelings for him or her."
-      "I worry a lot about my relationships."
-      "When my partner is out of sight, I worry that he or she might become interested in someone else."
-      "When I show my feelings for romantic partners, I'm afraid they will not feel the same about me."
-      "I rarely worry about my partner leaving me."
-      "My romantic partner makes me doubt myself."
-      "I do not often worry about being abandoned."
-      "I find that my partner(s) don't want to get as close as I would like."
-      "Sometimes romantic partners change their feelings about me for no apparent reason."
-      "My desire to be very close sometimes scares people away."
-      "I'm afraid that once a romantic partner gets to know me, he or she won't like who I really am."
-      "It makes me mad that I don't get the affection and support I need from my partner."
-      "I worry that I won't measure up to other people."
-      "My partner only seems to notice me when I’m angry."
-      "I prefer not to show a partner how I feel deep down."
-      "I feel comfortable sharing my private thoughts and feelings with my partner."
-      "I find it difficult to allow myself to depend on romantic partners."
-      "I am very comfortable being close to romantic partners."
-      "I don't feel comfortable opening up to romantic partners."
-      "I prefer not to be too close to romantic partners."
-      "I get uncomfortable when a romantic partner wants to be very close."
-      "I find it relatively easy to get close to my partner."
-      "It's not difficult for me to get close to my partner."
-      "I usually discuss my problems and concerns with my partner."
-      "It helps to turn to my romantic partner in times of need."
-      "I tell my partner just about everything."
-      "I talk things over with my partner."
-      "I am nervous when partners get too close to me."
-      "I feel comfortable depending on romantic partners."
-      "I find it easy to depend on romantic partners."
-      "It's easy for me to be affectionate with my partner."
+en = ["I'm afraid that I will lose my partner's love",
+      "I often worry that my partner will not want to stay with me.",
+      "I often worry that my partner doesn't really love me.",
+      "I worry that romantic partners won't care about me as much as I care about them.",
+      "I often wish that my partner's feelings for me were as strong as my feelings for him or her.",
+      "I worry a lot about my relationships.",
+      "When my partner is out of sight, I worry that he or she might become interested in someone else.",
+      "When I show my feelings for romantic partners, I'm afraid they will not feel the same about me.",
+      "I rarely worry about my partner leaving me.",
+      "My romantic partner makes me doubt myself.",
+      "I do not often worry about being abandoned.",
+      "I find that my partner(s) don't want to get as close as I would like.",
+      "Sometimes romantic partners change their feelings about me for no apparent reason.",
+      "My desire to be very close sometimes scares people away.",
+      "I'm afraid that once a romantic partner gets to know me, he or she won't like who I really am.",
+      "It makes me mad that I don't get the affection and support I need from my partner.",
+      "I worry that I won't measure up to other people.",
+      "My partner only seems to notice me when I'm angry.",
+      "I prefer not to show a partner how I feel deep down.",
+      "I feel comfortable sharing my private thoughts and feelings with my partner.",
+      "I find it difficult to allow myself to depend on romantic partners.",
+      "I am very comfortable being close to romantic partners.",
+      "I don't feel comfortable opening up to romantic partners.",
+      "I prefer not to be too close to romantic partners.",
+      "I get uncomfortable when a romantic partner wants to be very close.",
+      "I find it relatively easy to get close to my partner.",
+      "It's not difficult for me to get close to my partner.",
+      "I usually discuss my problems and concerns with my partner.",
+      "It helps to turn to my romantic partner in times of need.",
+      "I tell my partner just about everything.",
+      "I talk things over with my partner.",
+      "I am nervous when partners get too close to me.",
+      "I feel comfortable depending on romantic partners.",
+      "I find it easy to depend on romantic partners.",
+      "It's easy for me to be affectionate with my partner.",
       "My partner really understands me and my needs."]
