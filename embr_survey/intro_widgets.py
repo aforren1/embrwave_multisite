@@ -242,6 +242,7 @@ class IntroDlg(qtw.QWidget):
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
         logger.info('----------')
+        device = self._device
         logger.info('Device: %s' % device.name)
         logger.info('Device ID, Firmware: %s, %s' % (device.device_id, device.firmware_version))
         logger.info('Device battery remaining: %s' % device.battery_charge)
@@ -256,7 +257,6 @@ class IntroDlg(qtw.QWidget):
         self._log.info('Temperature progression: %s' % temps2)
 
         # TODO: feed in locale
-        device = self._device
         lang = settings['language']
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
         # +1 is to make block numbering 1-based in data

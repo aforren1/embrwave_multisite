@@ -21,6 +21,9 @@ class DropDownQuestion(qtw.QWidget):
         layout = qtw.QHBoxLayout()
         q = JustText(question)
         self.answer = qtw.QComboBox()
+        fnt = self.answer.font()
+        fnt.setPointSize(26)
+        self.answer.setFont(fnt)
         self.answer.addItems(answers)
         self._default_ans = answers[0]
         layout.addWidget(q, Qt.AlignRight | Qt.AlignVCenter)
