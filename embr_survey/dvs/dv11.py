@@ -19,14 +19,14 @@ class NameInput(qtw.QWidget):
         super().__init__()
         self.prev_answers = names
         prompt = JustText(prompt)
-        layout = qtw.QHBoxLayout()
-        layout.addWidget(prompt, alignment=Qt.AlignRight | Qt.AlignVCenter)
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(prompt, alignment=Qt.AlignVCenter)
         self.name_input = qtw.QLineEdit()
-        self.name_input.setMaximumWidth(200)
+        self.name_input.setMaximumWidth(300)
         fnt = self.name_input.font()
         fnt.setPointSize(26)
         self.name_input.setFont(fnt)
-        layout.addWidget(self.name_input, alignment=Qt.AlignLeft | Qt.AlignVCenter)
+        layout.addWidget(self.name_input, alignment=Qt.AlignVCenter)
         self.setLayout(layout)
 
     def all_ans(self):
