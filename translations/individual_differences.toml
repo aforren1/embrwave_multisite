@@ -210,3 +210,29 @@ en = ["I am sensitive to heat",
       "I try to maintain myself in familiar places",
       "I don’t trust people I have not met before",
       "I try to be accompanied by people that I know at all times"]
+
+#######
+# Part 4
+##
+
+[q_tall]
+en = "How tall are you?"
+
+[less_than]
+en = "Less than"
+
+[more_than]
+en = "More than"
+
+
+[q_weight]
+en = "How much do you weigh?"
+
+# should just be text input?
+[q_lang]
+en = "What is your native language? For example; English, French, Spanish, German, Portuguese..."
+
+[q_sex]
+en = "What is your sex?"
+
+
