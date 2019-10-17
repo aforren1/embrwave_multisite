@@ -1,5 +1,6 @@
 [battery_photo]
 us = 'dv13_batteries.png'
+eu = 'locale/saft.png'
 # TODO: if includes a path, look there (relative to app_path, AFAIK)
 
 [currency]

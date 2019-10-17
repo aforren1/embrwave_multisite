@@ -1,8 +1,8 @@
 [q1]
-en = "How much would you be willing to pay for this %s?"
+en = "How much would you be willing to pay for this %s? Please enter a number."
 
 [q2]
-en = "How much do you think a %s retails for?"
+en = "How much do you think a %s retails for? Please enter a number."
 
 [battery]
 en = "pack of batteries"

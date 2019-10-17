@@ -10,7 +10,7 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QPixmap
 from embr_survey.common_widgets import JustText
 from embr_survey.dvs.base_block import StackedDV
-
+from embr_survey import application_path
 # use QDoubleValidator to make it numbers-only
 from PySide2.QtGui import QDoubleValidator
 
@@ -72,13 +72,18 @@ class DV13WillingnessToPay(StackedDV):
 
         with open(locale_path, 'r') as f:
             locale_settings = toml.load(f)
+        
         # load images
         try:
             battery_name = locale_settings['battery_photo'][locale]
         except KeyError:
             # default locale
             battery_name = locale_settings['battery_photo']['us']
-        battery_path = resource_filename('embr_survey', 'images/%s' % battery_name)
+        
+        if os.path.split(battery_name)[0] != '':
+            battery_path = os.path.join(application_path, battery_name)
+        else:
+            battery_path = resource_filename('embr_survey', 'images/%s' % battery_name)
 
         cake_path = resource_filename('embr_survey', 'images/dv13_cake.png')
 
