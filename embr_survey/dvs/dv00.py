@@ -7,7 +7,7 @@
 # 5. Max cool 10s
 # 6. working?
 # 7. If not working, please find experimenter
-# 8. EmbrWave will continue...
+# 8. Embr Wave will continue...
 
 import csv
 import logging
@@ -20,6 +20,7 @@ from pip._vendor import pytoml as toml
 
 from embr_survey.common_widgets import JustText, SingleQuestion
 from embr_survey.dvs.base_block import StackedDV
+
 
 class ComfortQuestion(qtw.QWidget):
     def __init__(self, prompt, header, question):
@@ -37,6 +38,7 @@ class ComfortQuestion(qtw.QWidget):
     def all_ans(self):
         return all([x >= 1 for x in self.get_responses()])
 
+
 class DV00Intro_1(StackedDV):
     long_name = 'dv00_intro'
     name = 'dv00'
@@ -47,13 +49,14 @@ class DV00Intro_1(StackedDV):
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
         with open(translation_path, 'r') as f:
             translation = toml.load(f)
-        
+
         sec1 = JustText(translation['sec1'][lang])
         sec2 = JustText(translation['sec2'][lang])
 
         self.q = ComfortQuestion('', translation['q1_header'][lang], translation['q1'][lang])
-        
+
         self.add_widgets([sec1, sec2, self.q])
+
 
 class DV00Intro_2(StackedDV):
     long_name = 'dv00_intro'
@@ -68,5 +71,5 @@ class DV00Intro_2(StackedDV):
 
         working = JustText(translation['confirm'][lang])
         continuing = JustText(translation['continue'][lang])
-        
+
         self.add_widgets([working, continuing])

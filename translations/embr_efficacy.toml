@@ -10,13 +10,13 @@ en = "At this moment, what temperature does the room feel like to you?"
 
 # TODO: Embr<space>Wave?
 [hot_cold]
-en = "How hot or cold did the EmbrWave feel during the prior screen?"
+en = "How hot or cold did the Embr Wave feel during the prior screen?"
 
 [hot_cold_header]
 en = ["1\nVery cold", '2', '3', "4\nNeither hot\nnor cold", '5', '6', "7\nVery hot"]
 
 [comfort_q]
-en = "Was the EmbrWave comfortable during the last trial?"
+en = "Was the Embr Wave comfortable during the last trial?"
 
 [comfort_header]
 en = ["1\nNot at all\ncomfortable", '2', '3', '4', '5', '6', "7\nVery comfortable"]

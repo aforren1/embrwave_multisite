@@ -1,10 +1,10 @@
 # intro material (after ID screen)
 
 [sec1]
-en = "We are testing the efficacy of a new consumer product: the EmbrWave, produced by EmbrLabs. The EmbrWave is a device that you wear that can serve as an individualized heater or cooler. We are working with EmbrLabs to test their product for them. We want to test this for them in a situation intended to mimic everyday life, when you might wear the EmbrWave while doing other things. To make full use of your time, we will ask you to wear this product while you complete some surveys for our psychology department. All instructions will be presented on the computer screen. The device will heat and cool at different intervals, but you don't have to pay much attention to it. At the start and end of the session, we will ask you some questions about what you thought of the EmbrWave, whether you would want to purchase it, and whether you would recommend the product to others."
+en = "We are testing the efficacy of a new consumer product: the Embr Wave, produced by EmbrLabs. The Embr Wave is a device that you wear that can serve as an individualized heater or cooler. We are working with EmbrLabs to test their product for them. We want to test this for them in a situation intended to mimic everyday life, when you might wear the Embr Wave while doing other things. To make full use of your time, we will ask you to wear this product while you complete some surveys for our psychology department. All instructions will be presented on the computer screen. The device will heat and cool at different intervals, but you don't have to pay much attention to it. At the start and end of the session, we will ask you some questions about what you thought of the Embr Wave, whether you would want to purchase it, and whether you would recommend the product to others."
 
 [sec2]
-en = "Welcome to the study. Remember that the EmbrWave will heat and cool repeatedly during this study. If you are uncomfortable at any point, please remove the device and find your experimenter. Please begin when you are ready."
+en = "Welcome to the study. Remember that the Embr Wave will heat and cool repeatedly during this study. If you are uncomfortable at any point, please remove the device and find your experimenter. Please begin when you are ready."
 
 [q1]
 en = "At the moment, are you too cold, comfortable, or too hot?"
@@ -16,7 +16,7 @@ en = ["1\nToo cold", "2", "3", "4\nComfortable", "5", "6", "7\nToo hot"]
 en = "Please wait."
 
 [confirm]
-en = "To confirm whether the EmbrWave was working, did you feel the EmbrWave heat up and cool down during this demonstration? If so, press below to continue. If the EmbWave was not heating and cooling, please find your experimenter so they can troubleshoot the device."
+en = "To confirm whether the Embr Wave was working, did you feel the Embr Wave heat up and cool down during this demonstration? If so, press below to continue. If the EmbWave was not heating and cooling, please find your experimenter so they can troubleshoot the device."
 
 [continue]
-en = "The EmbrWave will now continue to heat and cool but we will not ask you anymore questions about it until the end. There may also be long periods where it does not heat or cool - do not be alarmed about this. Please simply respond to the various questions and scenarios we present to you."
+en = "The Embr Wave will now continue to heat and cool but we will not ask you anymore questions about it until the end. There may also be long periods where it does not heat or cool - do not be alarmed about this. Please simply respond to the various questions and scenarios we present to you."
