@@ -1,6 +1,6 @@
 import sys
 from time import sleep
-from PySide2.QtCore import Qt, QTimer
+from PySide2.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve
 import PySide2.QtWidgets as qtw
 from functools import partial
 from datetime import datetime
@@ -73,7 +73,8 @@ class NextButton(qtw.QPushButton):
             if choice != qtw.QMessageBox.Yes:
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
-        self._callback_pt2()
+        self._animate(current, 300, 1, 0, self._callback_pt2)
+        #self._callback_pt2()
 
     # part 2
     # need to:
@@ -96,6 +97,12 @@ class NextButton(qtw.QPushButton):
                 c3.adjustSize()
                 current_widget.adjustSize()
                 self.stack.adjustSize()
+                if getattr(c3, 'auto_continue', True):
+                    cb = self._callback_pt3
+                #QTimer.singleShot(1000, self._callback_pt3)
+                else:
+                    cb = self._dummy
+                self._animate(c3, 700, 0, 1, cb)
 
         # if we're ready to go to the next widget
         if not isinstance(current_widget, SpecialStack) or current_widget.count() <= 0:
@@ -124,9 +131,29 @@ class NextButton(qtw.QPushButton):
                                      qtw.QSizePolicy.Expanding)
             new_widget.adjustSize()
             self.stack.adjustSize()
+
             if getattr(new_widget, 'auto_continue', True):
-                QTimer.singleShot(1000, self._callback_pt3)
+                cb = self._callback_pt3
+                #QTimer.singleShot(1000, self._callback_pt3)
+            else:
+                cb = self._dummy
+            self._animate(new_widget, 700, 0, 1, cb)
+
+    def _dummy(self):
+        pass
 
     def _callback_pt3(self):
         # re-enable the button on completion
         self.state = 'complete'
+
+    def _animate(self, current, duration, start, end, callback):
+        self.eff = qtw.QGraphicsOpacityEffect()
+        current.setGraphicsEffect(self.eff)
+        a = QPropertyAnimation(self.eff, b'opacity')
+        a.setDuration(duration)
+        a.setStartValue(start)
+        a.setEndValue(end)
+        a.setEasingCurve(QEasingCurve.Linear)
+        a.finished.connect(callback)
+        a.start(QPropertyAnimation.DeleteWhenStopped)
+        self.a = a
