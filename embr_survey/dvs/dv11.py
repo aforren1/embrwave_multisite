@@ -22,6 +22,10 @@ class NameInput(qtw.QWidget):
         layout = qtw.QHBoxLayout()
         layout.addWidget(prompt, alignment=Qt.AlignRight | Qt.AlignVCenter)
         self.name_input = qtw.QLineEdit()
+        self.name_input.setMaximumWidth(200)
+        fnt = self.name_input.font()
+        fnt.setPointSize(26)
+        self.name_input.setFont(fnt)
         layout.addWidget(self.name_input, alignment=Qt.AlignLeft | Qt.AlignVCenter)
         self.setLayout(layout)
 
