@@ -8,6 +8,7 @@ The source can be found at:
 https://github.com/aforren1/embrwave_multisite
 
 A few notes:
+ - When running the executable version for the first time, you may get a message from Windows like "Windows protected this PC". To continue, click "More info" and "Run anyway".
  - Make sure to put the Embr Wave in pairing mode (hold the button until green) before hitting
    the "Connect" button in the GUI, or else the connection won't happen and subsequent attempts
    will fail (as of Oct 16, 2019).
