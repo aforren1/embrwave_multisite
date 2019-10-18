@@ -90,7 +90,7 @@ class EmbrWave(object):
         for val in [6, 7]:  # heating, cooling respectively
             # Blah, this takes awhile?
             self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
-            self.write(EmbrVal.DURATION, 60)  # custom mode, duration of 60 mins
+            self.write(EmbrVal.DURATION, 30)  # custom mode, duration of 60 mins
             self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             self.write(EmbrVal.DURATION, 5)  # ramp up at 1C/s
         
@@ -106,7 +106,7 @@ class EmbrWave(object):
             self.stop()
             self.write(EmbrVal.MODE, (6, 1))
             self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
-            self.write(EmbrVal.MODE, (7, 2))
+            self.write(EmbrVal.MODE, (7, 1))
             self.write(EmbrVal.DURATION, 131)
             self.enable_leds()
             self.device.disconnect()
@@ -249,6 +249,6 @@ if __name__ == '__main__':
         print(embr.level)
         sleep(8)
         print('now warming')
-        embr.level = 9
+        embr.level = -9
         sleep(8)
         print(embr.level)

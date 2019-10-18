@@ -291,10 +291,13 @@ class IntroDlg(qtw.QWidget):
         dv12 = [ef.spawn(), dvs.DV12(dv_order.index(11) + 1, device, temps2[11], settings)]
         dv13 = [ef.spawn(), dvs.DV13(dv_order.index(12) + 1, device, temps2[12], settings)]
         dv14 = [ef.spawn(), dvs.DV14(dv_order.index(13) + 1, device, temps2[13], settings)]
+
+        efficacy = dvs.EfficacyBlock(device, settings)
         stack = [dv1, dv2, dv3, dv4, dv5,
                  dv6, dv7, dv8, dv9, dv10,
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        self._window.add_widgets([dv0])
+        #self._window.add_widgets([dv0])
+        stack2 = [efficacy]
         self._window.add_widgets(stack2)

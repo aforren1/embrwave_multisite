@@ -88,6 +88,8 @@ class NextButton(qtw.QPushButton):
             c2 = current_widget.currentWidget()
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
+            if hasattr(c2, 'on_exit'):
+                c2.on_exit()
             # move to the next subwidget
             current_widget.removeWidget(c2)
             if current_widget.count() > 0:
@@ -97,6 +99,8 @@ class NextButton(qtw.QPushButton):
                 c3.adjustSize()
                 current_widget.adjustSize()
                 self.stack.adjustSize()
+                if hasattr(c3, 'on_enter'):
+                    c3.on_enter()
                 if getattr(c3, 'auto_continue', True):
                     cb = self._callback_pt3
                 #QTimer.singleShot(1000, self._callback_pt3)

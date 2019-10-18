@@ -89,6 +89,8 @@ class MainWindow(object):
                     widget._button = self.next_button
                     # make sure even sub-widgets signal a scroll
                     if isinstance(widget, SpecialStack):
+                        for w3 in widget.widgets:
+                            w3._button = self.next_button
                         widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                     self.widgets.addWidget(widget)
                     widget._window = self  # everyone gets a ref to the top widget
@@ -98,6 +100,8 @@ class MainWindow(object):
                                          qtw.QSizePolicy.Ignored)
                         w2._button = self.next_button
                         if isinstance(w2, SpecialStack):
+                            for w3 in w2.widgets:
+                                w3._button = self.next_button
                             w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                         self.widgets.addWidget(w2)
                         w2._window = self
