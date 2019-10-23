@@ -37,6 +37,7 @@ QPushButton:pressed {background-color: rgb(120, 255, 0);}
 
 '''
 
+
 def count_language_keys(files, ref):
     # must have *all* language keys to work (otherwise, ignore)
     total_keys = []
@@ -57,7 +58,6 @@ def count_language_keys(files, ref):
         for lang in counts:
             if counts[lang] == count_en:
                 final_round.append(lang)
-
     final_c = Counter(final_round)
     count_en = final_c[ref]
     for lang in final_c:
@@ -272,7 +272,7 @@ class IntroDlg(qtw.QWidget):
         lang = settings['language']
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
         # +1 is to make block numbering 1-based in data
-        dv0 = [dvs.DV00Intro_1(device, settings), 
+        dv0 = [dvs.DV00Intro_1(device, settings),
                EmbrSection(self.translations['wait_until_green'][lang], device, 9, 10000),
                EmbrSection(self.translations['wait_until_green'][lang], device, -9, 10000),
                dvs.DV00Intro_2(device, settings)]
@@ -299,5 +299,5 @@ class IntroDlg(qtw.QWidget):
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
         stack2.append(efficacy)
-        #self._window.add_widgets([dv0])
+        # self._window.add_widgets([dv0])
         self._window.add_widgets(stack2)

@@ -1,32 +1,40 @@
 # title page
 [prompt]
 en = "In this next section, we will show you some information about movies and ask what you think about them. You will do this for 6 movies."
+fr = "Dans cette partie, nous allons vous montrer des informations au sujet de films et vous demander ce que vous en pensez. Vous ferez ceci pour 6 films."
 
 [header1]
 en = ["1<br>Not at all", '2', '3', '4', '5', '6', "7<br>Very much"]
+fr = ["1<br>Pas du tout", '2', '3', '4', '5', '6', "7<br>Beaucoup"]
 
 [header2]
 en = ["1<br>Not at all", '2', '3', '4', '5', '6', "7<br>Very good"]
-
+fr = ["1<br>Pas du tout", '2', '3', '4', '5', '6', "7<br>Beaucoup"]
 
 [question1]
 en = "How much would you like to watch this movie?"
+fr = "À quel point aimeriez-vous voir ce film ?"
 
 [question2]
 en = "How good do you think this movie would be?"
+fr = "À quel point pensez-vous que ce film serait bien ?"
 
 [question3]
 en = "Have you seen or heard of this movie before?"
+fr = "Avez-vous déjà vu ou entendu parler de ce film auparavant ?"
 
 # should be a qcombobox (default blank)
 [[ans]]
 en = "Yes - I have seen it"
+fr = "Oui - je l'ai déjà vu"
 
 [[ans]]
 en = "Yes - I have heard of it"
+fr = "Oui - j'en ai déjà entendu parler"
 
 [[ans]]
 en = "No - I didn't know anything about this movie"
+fr = "Non - je ne connaissais pas du tout ce film"
 
 # Questions
 [[movie]]
@@ -36,6 +44,12 @@ en = """
 <b>Viewer rating</b>: 7.8/10<br>
 <b>Synopsis</b>: Don, a wanted criminal, dies in a police chase. Detective D'Silva is the only one who knows about his death, and to investigate the gang he trains a Don-lookalike named Vijay. But Vijay faces danger from both the police and from within the gang.
 """
+fr = """
+<b>Titre</b> : Don<br>
+<b>Genre</b> : Action<br>
+<b>Note</b> : 7.8/10<br>
+<b>Synopsis</b> : Don, un criminel recherché, meurt au cours d’une poursuite policière. Le détective D’Silva est le seul à être au courant de sa mort, et dans le but d’investiguer le gang de Don, il décide d’entraîner Vijay, parfait sosie de Don. Or, Vijay se retrouve à la fois traqué par la police et par les membres du gang.
+"""
 
 [[movie]]
 en = """
@@ -43,6 +57,12 @@ en = """
 <b>Genre</b>: Action<br>
 <b>Viewer rating</b>: 7.0/10<br>
 <b>Synopsis</b>: A tough, rule-bending cop pursues a maniacal, trigger-happy hunchback, a one-handed bank robber and their cronies in an effort to bring Rome's most powerful crime lord to justice.
+"""
+fr = """
+<b>Titre</b> : Brigade spéciale<br>
+<b>Genre</b> : Action<br>
+<b>Note</b> : 7.0/10<br>
+<b>Synopsis</b> : Un policier aux méthodes un peu extrêmes, poursuit un bossu à la gâchette facile, un voleur de banque à une seule main et leurs acolytes dans le but d’amener en justice le plus grand criminel de Rome.
 """
 
 [[movie]]
@@ -52,6 +72,12 @@ en = """
 <b>Viewer rating</b>: 7.1/10<br>
 <b>Synopsis</b>: The final student of a dying martial arts master is instructed to locate the previous five students and defeat any evil ones among them.
 """
+fr = """
+<b>Titre</b> : Five Deadly Venoms<br>
+<b>Genre</b> : Action<br>
+<b>Note</b> : 7.1/10<br>
+<b>Synopsis</b> : Le dernier élève d’un maître d’arts martiaux sur le point de mourir est chargé de retrouver les cinq élèves précédents de ce dernier et de tuer ceux ayant de mauvaises intentions.
+"""
 
 [[movie]]
 en = """
@@ -59,6 +85,12 @@ en = """
 <b>Genre</b>: Romance<br>
 <b>Viewer rating</b>: 8.7/10<br>
 <b>Synopsis</b>: Asya, a young girl with a strict mother, meets Ilyas, a city man and womanizer. They quickly fall in love and get married. However, after he helps a man one night, Ilyas' life changes forever and he leaves Asya and their son and doesn't come back. Asya takes their son and goes away without knowing where she is heading, until a familiar hand reaches her to help selflessly.
+"""
+fr = """
+<b>Titre</b> : The Girl with the Red Scarf<br>
+<b>Genre</b> : Romance<br>
+<b>Note</b> : 8.7/10<br>
+<b>Synopsis</b> : Asya, une jeune fille avec une mère stricte, rencontre Ilyas, un coureur de jupons venant de la ville. Ils tombent rapidement amoureux et se marient. Or, une nuit, après avoir apporté son aide à un homme, la vie d’Ilyas change drastiquement et abandonne Asya et leur fils, sans revenir. Asya prend leur fils et s’en va loin, sans savoir où elle va, jusqu’à ce qu’une main familière vienne à son aide.
 """
 
 [[movie]]
@@ -68,6 +100,12 @@ en = """
 <b>Viewer rating</b>: 7.5/10<br>
 <b>Synopsis</b>: A French boy (Daniel) and an American girl (Lauren), who go to school in Paris, meet and begin a little romance. They befriend Julius, who enchants them with his storytelling. In an attempt to ensure the teens' love forever, the three journey to Venice.
 """
+fr = """
+<b>Titre</b> : I love you, je t’aime<br>
+<b>Genre</b> : Romance<br>
+<b>Note</b> : 7.5/10<br>
+<b>Synopsis</b> : Un garçon français (Daniel) et une fille américaine (Lauren) qui vont à l’école à Paris, se rencontrent et débutent leur petite histoire d’amour. Ils font ensuite la connaissance de Julius avec qui ils se lient d’amitié et prennent plaisir à écouter ses contes. Dans l’optique de solidifier leurs amours d’adolescents, ils partent en séjour à Venise.
+"""
 
 [[movie]]
 en = """
@@ -75,4 +113,10 @@ en = """
 <b>Genre</b>: Romance<br>
 <b>Viewer rating</b>: 7.2/10<br>
 <b>Synopsis</b>: A married man and a married woman end up sleeping with each other, and decide to meet at the same place every year on the anniversary of their one night stand. As the years go by, they observe changes in each other and their relationship.
+"""
+fr = """
+<b>Titre</b> : Même heure, l’année prochaine<br>
+<b>Genre</b> : Romance<br>
+<b>Note</b> : 7.2/10<br>
+<b>Synopsis</b> : Un homme et une femme mariés (pas ensemble) finissent par coucher ensemble et décident de se revoir chaque année, au même endroit et à la même heure, pour l’anniversaire de leur première nuit ensemble. Au fur des années qui passent, ils se rendent compte des changements chez l’un et l’autre, et des changements dans leur relation.
 """

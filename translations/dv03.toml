@@ -1,62 +1,88 @@
 [prompt]
 en = "In this next section, we will ask you to read several scenarios and indicate your opinion about them."
+fr = "Dans cette partie nous allons vous demander de lire quelques scénarios et d’indiquer votre opinion à leur sujet."
 
 [header]
 en = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
+fr = ["1\nComplètement\ninnaproprié", "2", "3", "4", "5", "6", "7\nComplètement\napproprié"]
 
 [[subprompt]]
-en =  """Enemy soldiers have taken over your village. They have orders to kill all remaining civilians. You and some of your townspeople have sought refuge in the cellar of a large house. Outside you hear the voices of soldiers who have come to search the house for valuables.
+en = """Enemy soldiers have taken over your village. They have orders to kill all remaining civilians. You and some of your townspeople have sought refuge in the cellar of a large house. Outside you hear the voices of soldiers who have come to search the house for valuables.
 Your baby begins to cry loudly. You cover his mouth to block the sound. If you remove your hand from his mouth his crying will summon the attention of the soldiers who will kill you, your child, and the others hiding out in the cellar. To save yourself and the others you must smother your child to death."""
+fr = """Des soldats ennemis ont pris d’assaut notre village. Ils ont ordre de tuer tous les civils restants. Vous et quelques autres habitants ont été cherchés refuge dans la cave d’une grande maison. Dehors, vous entendez le bruit de soldats qui sont venus pour piller la maison à la recherche d’objets de valeur.
+Votre bébé commence à pleurer bruyamment. Vous couvrez sa bouche pour bloquer le bruit de ses pleurs. Si vous enlevez votre main de sa bouche, ses pleurs vont attirer l’attention des soldats qui vous tueront vous, votre enfant, ainsi que le reste des habitants qui sont cachés dans la cave. Pour sauver votre vie et celle des autres, vous devez étouffer votre bébé."""
 
 [[question]]
 en = "Is it appropriate for you to smother your child in order to save yourself and the other townspeople?"
+fr = "Est-il approprié de votre part d’étouffer votre enfant afin de sauver votre vie et celle des autres habitants ?"
 
 [[subprompt]]
 en = """A runaway trolley is heading down the tracks toward five workmen who will be killed if the trolley proceeds on its present course. You are on a footbridge over the tracks, in between the approaching trolley and the five workmen. Next to you on this footbridge is a stranger who happens to be very large.
 The only way to save the lives of the five workmen is to push this stranger off the bridge and onto the tracks below where his large body will stop the trolley. The stranger will die if you do this, but the five workmen will be saved."""
+fr = """Un tramway hors de contrôle se dirige vers cinq ouvriers situés sur les rails. Si le tramway continue dans sa direction actuelle, les cinq ouvriers se feront écrasés. Vous êtes sur un pont sous lequel passe le tramway, et se situant entre le tramway en approche et les cinq ouvriers. Sur le pont, à côté de vous, se trouve un homme très obèse.
+Le seul moyen de sauver la vie de ces cinq ouvriers est de pousser cet inconnu pour qu’il tombe sur les rails et bloque le tramway dans sa course. Si vous faites cela, l’inconnu mourra mais les cinq ouvriers seront sauvés."""
 
 [[question]]
 en = "Is it appropriate for you to push the stranger on to the tracks in order to save the five workmen?"
+fr = "Est-il approprié de votre part de pousser cet étranger sur les rails dans l’intention de sauver ces cinq ouvriers ?"
 
 [[subprompt]]
 en = """It is wartime and you and your two children, ages eight and five, are living in a territory that has been occupied by the enemy. At the enemy's headquarters is a doctor who performs painful experiments on humans that inevitably lead to death.
 He intends to perform experiments on one of your children, but he will allow you to choose which of your children will be experimented upon. You have twenty-four hours to bring one of your children to his laboratory. If you refuse to bring one of your children to his laboratory he will find them both and experiment on both of them."""
+fr = """C’est un temps de guerre et vous et vos deux enfants, âgés de 8 et 5 ans, vivent dans un territoire occupé par l’ennemi. Au quartier général ennemi, se trouve un docteur réalisant des expériences douloureuses sur des humains qui mènent inévitablement à la mort.
+Il a l’intention de réaliser des expériences sur l’un de vos enfants, mais il vous autorise à choisir lequel des deux subira les expériences. Vous avez vingt-quatre heures pour emmener l’un de vos enfants à son laboratoire. Si vous refusez d’amener l’un de vos enfants à son laboratoire, il viendra chercher les deux et les deux subiront ses expériences."""
 
 [[question]]
 en = "Is it appropriate for you to bring one of your children to the laboratory in order to avoid having them both die?"
+fr = "Est-il approprié de votre part d’emmener l’un de vos enfants au laboratoire dans le but d’éviter que les deux ne meurent ?"
 
 [[subprompt]]
 en = """You are the leader of a mountaineering expedition that is stranded in the wilderness. Your expedition includes a family of six that has a genetically caused vitamin deficiency. A few people's kidneys contain large amounts of this vitamin.
 There is one such person in your party. The only way to save the lives of the six members of this family is to remove one of this man's kidneys so that the necessary vitamins may be extracted from it. The man will not die if you do this, but his health will be compromised. The man is opposed to this plan, but you have the power to do as you see fit."""
+fr = """Vous êtes le chef d’une expédition en montagne qui s’est échouée dans la nature sauvage. Votre expédition comprend une famille de six ayant une carence en vitamine de cause génétique. Quelques personnes ont des reins contenant cette vitamine en grande quantité.
+Dans votre groupe se trouve une personne dont c’est le cas. Le seul moyen de sauver la vie des six membres de cette famille est de retirer l’un des reins de cet homme afin que les vitamines nécessaires puissent en être extraites. Cet homme ne mourra pas de cette opération, mais sa santé sera compromise. Cet homme est opposé à cette idée, mais vous détenez l’autorité de le faire si vous en jugez nécessaire."""
 
 [[question]]
 en = "Is it appropriate for you to forcibly remove this man's kidney in order to save the lives of the six vitamin-deficient people?"
+fr = "Est-il approprié de votre part de retirer de force le rein de cet homme dans le but de sauver la vie des six personnes en carence de vitamines ?"
 
 [[subprompt]]
 en = """You are the leader of a small army that consists of warriors from two tribes, the hill tribe and the river tribe. You belong to neither tribe. During the night a hill tribesman got into an argument with a river tribesman and murdered him. The river tribe will attack the hill tribe unless the murderer is put to death, but the hill tribe refuses to kill one of its own warriors.
 The only way for you to avoid a war between the two tribes that will costs hundreds of lives is to publicly execute the murderer by cutting off is head with your sword."""
+fr = """Vous êtes le chef d’une petite armée constituée de guerriers de deux tribus, la tribu de la colline et la tribu de la rivière. Vous n’appartenez à aucune de ces deux tribus. Durant la nuit, un membre de la tribu de la colline s’est disputé avec un membre de la tribu de la rivière et l’a assassiné. À moins que le meurtrier ne soit exécuté à mort, la tribu de la rivière attaquera la tribu de la colline. Or, la tribu de la colline refuse de tuer l’un de ses propres guerriers.
+Le seul moyen d’éviter une guerre entre les deux tribus qui coûterait la vie de centaines de personnes est d’exécuter publiquement le meurtrier en lui coupant la tête avec votre épée."""
 
 [[question]]
 en = "Is it appropriate for you to cut off this man's head in order to prevent the two tribes from fighting a war that will cost hundreds of lives?"
+fr = "Est-il approprié de votre part de couper la tête de cet homme dans le but d’empêcher une guerre entre les deux tribus qui coûterait la vie à des centaines de personnes ?"
 
 [[subprompt]]
 en = """You are negotiating with a powerful and determined terrorist who is about to set off a bomb in a crowded area. Your one advantage is that you have his teen-age son in your custody.
 There is only one thing that you can do to stop him from detonating his bomb, which will kill thousands of people if detonated. To stop him, you must contact him over the satellite hook-up that he has established and, in front of the camera, break one of his son's arms and then threaten to break the other one if he does not give himself up."""
+fr = """Vous êtes en train de négocier avec un terroriste puissant et déterminé qui est sur le point de faire exploser une bombe dans un endroit bondé. Votre seul avantage est que vous détenez en otage son fils adolescent.
+Il n’y a qu’une seule chose que vous pouvez faire pour l’empêcher de détonner sa bombe, qui tuerait des milliers de personnes si détonnée. Pour l’arrêter, vous devez prendre contact avec lui via la liaison satellite qu’il a établi et, en face de la caméra, casser l’un des bras de son fils et le menacer de casser l’autre s’il ne se rend pas."""
 
 [[question]]
 en = "Is it appropriate for you to break the terrorist's son's arm in order to prevent the terrorist from killing thousands of people with his bomb?"
+fr = "Est-il approprié de votre part de casser le bras du fils du terroriste dans le but de l’empêcher de tuer de milliers de personnes avec sa bombe ?"
 
 [[subprompt]]
 en = """You are the captain of a military submarine travelling underneath a large iceberg. An onboard explosion has caused you to lose most of your oxygen supply and has injured one of your crew who is quickly losing blood. The injured crew member is going to die from his wounds no matter what happens.
 The remaining oxygen is not sufficient for the entire crew to make it to the surface. The only way to save the other crew members is to shoot dead the injured crew member so that there will be just enough oxygen for the rest of the crew to survive."""
+fr = """Vous êtes le capitaine d’un sous-marin militaire se déplaçant sous un large iceberg. Une explosion à bord a causé la perte de la majorité de votre stock en oxygène et a blessé l’un des membres de votre équipage qui est en train de perdre du sang rapidement. Quoi qu’il arrive, le membre de l’équipage blessé mourra de ses blessures.
+L’oxygène restant est insuffisant pour permettre à l’ensemble de l’équipage de survivre jusqu’à atteindre la surface. Le seul moyen de sauver les autres membres de l’équipage est de tirer une balle sur le membre blessé, ainsi il devrait rester juste assez d’oxygène pour permettre aux autres membres de l’équipage de survivre."""
 
 [[question]]
 en = "Is it appropriate for you to kill the fatally injured crew member in order to save the lives of the remaining crew members?"
+fr = "Est-il approprié de votre part de tuer le membre de l’équipage mortellement blessé dans le but de sauver la vie des membres restants de l’équipage ?"
 
 [[subprompt]]
 en = """You are a doctor. One of your patients, whom you diagnosed as HIV positive, is about to be released from the hospital. He has told you, in the confidence of your doctor-patient relationship, that he intends to infect as many people as possible with HIV starting that evening.
 Because you are bound by doctor-patient confidentiality, there is no legal way to stop this man from carrying out his plan. It occurs to you that you could contaminate his medication with an untraceable poison that will kill him before he gets a chance to infect others."""
+fr = """Vous êtes docteur. L’un de vos patients, que vous avez diagnostiqué séropositif, est sur le point d’être relâché de l’hôpital. Il vous a dit, dans le cadre du secret professionnel qui lie votre relation docteur-patient, qu’à partir de ce soir il a l’intention d’infecter autant de personnes que possibles avec le VIH.
+Puisque vous êtes tenu par votre engagement de confidentialité docteur-patient, il n’y a aucun moyen légal d’arrêter cet homme de mettre son plan à exécution. Il vous vient à l’esprit que vous pourriez contaminer les médicaments de cet homme à l’aide d’un poison impossible à identifier qui le tuera avant qu’il n’ait la chance d’infecter d’autres personnes."""
 
 [[question]]
 en = "Is it appropriate for you to poison this man in order to prevent him from spreading HIV?"
+fr = "Est-il approprié de votre part d’empoisonner cet homme afin de l’empêcher de répandre le VIH ?"
 

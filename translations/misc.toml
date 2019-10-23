@@ -3,11 +3,12 @@
 [next]
 en = 'Next'
 es = 'Próxima'
-fr = 'Suivante'
+fr = 'Suivant'
 
 
 [next_incomplete]
 en = 'Next (questions unanswered)'
+fr = 'Suivant (questions sans réponse)'
 
 [participant]
 en = 'Participant ID'
@@ -17,7 +18,7 @@ fr = 'ID de participant'
 [language]
 en = 'Language'
 es = 'Idioma'
-fr = 'La langue'
+fr = 'Langue'
 
 [locale]
 en = 'Locale'
@@ -26,12 +27,16 @@ fr = 'Lieu'
 
 [wait_until_green]
 en = 'Please wait until the button below turns green.'
+fr = 'Veuillez attendre que le bouton ci-dessous soit vert.'
 
 [connect_device]
 en = 'If you have an Embr Wave, hold the button until the device turns green. After a few seconds, the device will finish connecting. Otherwise, press the button below.'
+fr = "Si vous avez un Embr Wave, appuyez sur le bouton jusqu'à ce que le dispositif soit vert. Après quelques secondes, le dispositif terminera de se connecter. Autrement, appuyez sur le bouton ci-dessous."
 
 [is_connected]
 en = 'Device connected? (red = no, green = yes)'
+fr = 'Dispositif connecté? (rouge = non, vert = oui)'
 
 [dev_instr]
 en = 'Find/Connect Device'
+fr = 'Trouver/Connecter le Dispositif'

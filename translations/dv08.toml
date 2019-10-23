@@ -1,40 +1,51 @@
 [prompt]
 en = "In this next section, we will ask for your impressions of three major shoe brands. If you are not familiar with the shoe brand, simply skip the questions about that brand."
+fr = "Dans cette partie nous vous demanderons votre avis concernant trois grandes marques de chaussures. Si vous n’êtes pas familier avec la marque de chaussure, passez simplement les questions portant sur cette marque."
 
 [prompt2]
 # Please place the %s wherever the brand name should appear in the translation.
 en = "Please answer the following questions about <b>%s</b>."
 # for example (directly pulled from google translate, so
 # may not be correct translation)
-#fr = "Veuillez répondre aux questions suivantes sur %s."
+fr = "Veuillez répondre aux questions suivantes concernant <b>%s</b>."
 #estonian = "Palun vastake järgmistele %s kohta käivatele küsimustele."
 
 [warm]
 en = 'How "warm" do you consider this brand?'
+fr = 'À quel point trouvez-vous cette marque “chaleureuse” ?'
 
 [warm_header]
 en = ["1\nNot at\nall \"warm\"", '2', '3', '4', '5', '6', "7\nVery \"warm\""]
+fr = ["1\nPas \"chaleureuse\" du tout", '2', '3', '4', '5', '6', "7\nTrès \"chaleureuse\""]
 
 [friendly]
 en = 'How friendly do you consider this brand?'
+fr = 'À quel point considérez-vous cette marque comme étant amicale ?'
 
 [friendly_header]
 en = ["1\nNot at\nall friendly", '2', '3', '4', '5', '6', "7\nVery friendly"]
+fr = ["1\nPas \"amicale\" du tout", '2', '3', '4', '5', '6', "7\nTrès \"amicale\""]
 
 [intentions]
 en = 'This brand has good intentions toward ordinary people.'
+fr = 'Cette marque a de bonnes intentions envers les personnes ordinaires.'
 
 [rest_header]
 en = ["1\nTotally disagree", '2', '3', '4', '5', '6', "7\nTotally agree"]
+fr = ["1\nPas du tout d'accord", '2', '3', '4', '5', '6', "7\nTout à fait d'accord"]
 
 [public_interest]
 en = "This brand consistently acts with the public's best interest in mind."
+fr = "Cette marque agit constamment dans le meilleur intérêt de son public."
 
 [rugged]
 en = "This brand is rugged."
+fr = "Cette marque est durable."
 
 [competence]
 en = "This brand represents competence."
+fr = "Cette marque représente la compétence."
 
 [aggressive]
 en = "This brand is aggressive."
+fr = "Cette marque est agressive."

@@ -1,11 +1,15 @@
 [q1]
 en = "How much would you be willing to pay for this %s? Please enter a number."
+fr = "Combien seriez-vous prêt à payer pour ce %s ? Veuillez indiquer seulement des chiffres."
 
 [q2]
 en = "How much do you think a %s retails for? Please enter a number."
+fr = "À votre avis, quel est le prix de vente de ce %s ? Veuillez indiquer seulement des chiffres."
 
 [battery]
 en = "pack of batteries"
+fr = "lot de piles électriques"
 
 [cake]
 en = "piece of cake"
+fr = "gâteau"
