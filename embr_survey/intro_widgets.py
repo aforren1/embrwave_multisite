@@ -14,7 +14,7 @@ from pkg_resources import resource_filename
 from PySide2.QtCore import Qt, QTimer
 from embr_survey.embrwave import PreEmbr, DummyPreEmbr
 from embr_survey.pygatt.exceptions import NotConnectedError
-from embr_survey.embrwave import EmbrWave, DummyWave
+from embr_survey.embrwave import EmbrWave, DummyWave, gatt_ble
 import serial
 from serial.tools import list_ports
 
@@ -112,12 +112,11 @@ class IntroDlg(qtw.QWidget):
         self._device = DummyWave()
         self._is_connected = False
 
-        try:
-            self.pre_embr = PreEmbr()
-        except NotConnectedError:
-            # no adapter, so no devices
-            # TODO: log failure (though should be obvious?)
+        if not gatt_ble:
             self.pre_embr = DummyPreEmbr()
+        else:
+            self.pre_embr = PreEmbr()
+
         # id, language, locale
         self.settings = {}
         self.settings['translation_dir'] = os.path.join(application_path, 'translations/')
@@ -201,11 +200,16 @@ class IntroDlg(qtw.QWidget):
         return self.id.text() != ''
 
     def try_connect(self):
+        if not self._is_connected:
+            self.connector.setText('Connecting...\n(frozen)')
+            QTimer.singleShot(50, self._single_shot)
+
+        
+    def _single_shot(self):
         try:
             # connect to the device
             # blocks progression (TODO: add a note)
             if not self._is_connected:
-                self.connector.setText('Connecting... (will freeze)')
                 device = EmbrWave(self.device.currentText())
                 atexit.register(device.close)
                 self._is_connected = True

@@ -22,8 +22,11 @@ class EmbrVal(object):
     COOL_WARM_ONLY = ('400E', '<B')
 
 # generally 800ms between commands
-gatt_ble = gatt.BGAPIBackend()
-gatt_ble.start()
+try:
+    gatt_ble = gatt.BGAPIBackend()
+    gatt_ble.start()
+except gatt.exceptions.NotConnectedError:
+    gatt_ble = None
 
 
 class PreEmbr(object):
