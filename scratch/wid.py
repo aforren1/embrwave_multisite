@@ -20,13 +20,16 @@ class RadioGroupQ(qtw.QWidget):
         unchk_pth = resource_filename('embr_survey', 'images/radio_unchecked.png')
         chk_pth = chk_pth.replace('\\', '/')
         unchk_pth = unchk_pth.replace('\\', '/')
-        style = 'QRadioButton::indicator{width:80px; height:80px; image:url(%s);} QRadioButton::indicator::checked{image:url(%s);};font-size:20;' % (unchk_pth, chk_pth)
+        style = 'QRadioButton::indicator{width:80px; height:80px; image:url(%s);} QRadioButton::indicator::checked{image:url(%s);};' % (unchk_pth, chk_pth)
         self.resp = qtw.QButtonGroup()
         layout = qtw.QVBoxLayout()
         # add question to stretch across top
         layout.addWidget(q_txt)
         for count in range(len(answers)):
             rad = qtw.QRadioButton()
+            fnt = rad.font()
+            fnt.setPixelSize(26)
+            rad.setFont(fnt)
             rad.setText(answers[count])
             rad.setStyleSheet(style)
             self.resp.addButton(rad)
