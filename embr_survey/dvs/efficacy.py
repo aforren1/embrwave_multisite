@@ -101,16 +101,16 @@ class EfficacyBlock(StackedDV):
         lang = settings['language']
         locale = settings['locale']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         translation_path = os.path.join(self.settings['translation_dir'], 'misc.toml')
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             misc_translations = toml.load(f)
 
         locale_path = os.path.join(settings['locale_dir'], '%s.toml' % self.name)
 
-        with open(locale_path, 'r') as f:
+        with open(locale_path, 'r', encoding='utf8') as f:
             locale_settings = toml.load(f)
         
         try:

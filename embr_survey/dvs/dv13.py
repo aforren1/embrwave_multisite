@@ -64,13 +64,13 @@ class DV13WillingnessToPay(StackedDV):
         lang = settings['language']
         locale = settings['locale']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         # we want to be able to localize the batteries
         locale_path = os.path.join(settings['locale_dir'], '%s.toml' % self.name)
 
-        with open(locale_path, 'r') as f:
+        with open(locale_path, 'r', encoding='utf8') as f:
             locale_settings = toml.load(f)
         
         # load images

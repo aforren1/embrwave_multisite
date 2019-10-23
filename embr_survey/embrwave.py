@@ -22,22 +22,21 @@ class EmbrVal(object):
     COOL_WARM_ONLY = ('400E', '<B')
 
 # generally 800ms between commands
+gatt_ble = gatt.BGAPIBackend()
+gatt_ble.start()
 
 
 class PreEmbr(object):
     # non-bonding version
     def __init__(self):
-        self.adapter = gatt.BGAPIBackend()
-        self.adapter.start()
+        self.adapter = gatt_ble
         self.scan()
-        self.adapter.stop()
 
     def scan(self):
         devs = self.adapter.scan()
         self.addrs = [d['address'] for d in devs if d['name'] == 'EmbrWave']
 
     def blink(self, addr):
-        self.adapter.start()
         dev = self.adapter.connect(address=addr, timeout=5,
                                    address_type='BLEAddressType.public',
                                    interval_min=15, interval_max=30,
@@ -45,7 +44,6 @@ class PreEmbr(object):
         for i in range(3):
             self._blink(dev)
         dev.disconnect()
-        self.adapter.stop()
 
     def _blink(self, dev):
         dev.char_write('00004003-1112-efde-1523-725a2aab0123', bytearray(b'\x01'))
@@ -68,31 +66,33 @@ class EmbrWave(object):
         # and this keeps us from getting superfluous errors on normal exit
         self.on = True
         self.name = 'EmbrWave'
-        self.adapter = gatt.BGAPIBackend()
-        self.adapter.start()
+        self.adapter = gatt_ble
 
-        devs = self.adapter.scan()
-        # TODO: we just pick out the first Embr Wave for now
-        # The GUI should let us cycle through multiple devices
         if not addr:
+            devs = self.adapter.scan()
             addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
         self.device = self.adapter.connect(address=addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
                                            supervision_timeout=400, latency=0)
-        self.blink()
-        self.blink()
-        self.device.bond()
-        self.disable_leds()
-        sleep(1)
-        # set warming/cooling to be rather long (we'll end up turning them off manually)
-        self.write(EmbrVal.COOL_WARM_ONLY, 0)
-        for val in [6, 7]:  # heating, cooling respectively
-            # Blah, this takes awhile?
-            self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
-            self.write(EmbrVal.DURATION, 30)  # custom mode, duration of 60 mins
-            self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
-            self.write(EmbrVal.DURATION, 5)  # ramp up at 1C/s
+        try:
+            self.blink()
+            self.blink()
+            self.device.bond()
+            #self.disable_leds()
+            sleep(1)
+            # set warming/cooling to be rather long (we'll end up turning them off manually)
+            self.write(EmbrVal.COOL_WARM_ONLY, 0)
+            for val in [6, 7]:  # heating, cooling respectively
+                # Blah, this takes awhile?
+                #pass
+                self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
+                self.write(EmbrVal.DURATION, 129)  # extended mode
+                #self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
+            # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
+        except Exception as e:
+            self.device.disconnect()
+            raise e
         
     def __enter__(self):
         return self
@@ -101,6 +101,7 @@ class EmbrWave(object):
         self.close()
 
     def close(self):
+        # called at the end of the task
         if self.on:
             self.on = False
             self.stop()
@@ -120,7 +121,7 @@ class EmbrWave(object):
             value = [value]
         new_val = struct.pack(uuid[1], *value)
         self._write(uuid, new_val)
-        sleep(0.8)  # TODO: check if this should be longer/shorter
+        sleep(2)  # TODO: check if this should be longer/shorter
 
     def _write(self, uuid, value):
         self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
@@ -136,8 +137,8 @@ class EmbrWave(object):
 
     @level.setter
     def level(self, value):
-        self.stop()
         self.blink()
+        self.stop()
         sleep(1)
         self.write(EmbrVal.LEVEL, value)
 
@@ -235,20 +236,25 @@ if __name__ == '__main__':
     # device already needs to be in pairing mode!
     try:
         embr = EmbrWave()  # TODO: explicitly pass in address?
-    except Exception:
+    except Exception as e:
         embr = DummyWave()
 
     with embr:
         print(embr.device_id)
         print(embr.firmware_version)
         print(embr.battery_charge)
-        for i in range(3):
+        for i in range(2):
             embr.blink()
         sleep(2)
         embr.level = -9
-        print(embr.level)
-        sleep(8)
+        sleep(60)
+        #print(embr.level)
+        #embr.level = -9
+        #print('bump')
+        #embr.level = -9
+        #print('bump')
+        #sleep(5)
         print('now warming')
-        embr.level = -9
-        sleep(8)
+        embr.level = 9
+        sleep(60)
         print(embr.level)

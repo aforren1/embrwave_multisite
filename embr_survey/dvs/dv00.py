@@ -47,7 +47,7 @@ class DV00Intro_1(StackedDV):
         super().__init__(-1, device, 0, settings, None)
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         sec1 = JustText(translation['sec1'][lang])
@@ -66,7 +66,7 @@ class DV00Intro_2(StackedDV):
         super().__init__(-1, device, 0, settings, None)
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         working = JustText(translation['confirm'][lang])

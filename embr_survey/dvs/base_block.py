@@ -90,7 +90,7 @@ class SimpleDV(BaseDV):
         super().__init__(block_num, device, temperature, settings)
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         prompt = translation['prompt'][lang]

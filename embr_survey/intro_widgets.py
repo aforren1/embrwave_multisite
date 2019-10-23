@@ -44,7 +44,7 @@ def count_language_keys(files, ref):
     final_round = []
     languages = []  # final product (list of languages)
     for tf in files:
-        with open(tf, 'r') as f:
+        with open(tf, 'r', encoding='utf8') as f:
             dat = toml.load(f)
         for a in dat.keys():
             if isinstance(dat[a], list):
@@ -72,7 +72,7 @@ def check_locale_keys(files, ref):
     # if the chosen key doesn't have an entry
     total_keys = []
     for tf in files:
-        with open(tf, 'r') as f:
+        with open(tf, 'r', encoding='utf8') as f:
             dat = toml.load(f)
         for a in dat.keys():
             if isinstance(dat[a], list):
@@ -93,11 +93,13 @@ def on_activated(self, idx):
 
 
 def on_blink(sel):
+    sel.pre_embr.scan()
+
     dev = sel.device.currentText()
     if dev:
         sel.pre_embr.blink(sel.device.currentText())
-    sel.pre_embr.scan()
-    # sel.device.clear() # TODO: why was this here?
+    sel.device.clear() # TODO: why was this here?
+    sel.device.addItems(sel.pre_embr.addrs)
 
 
 class IntroDlg(qtw.QWidget):
@@ -137,7 +139,7 @@ class IntroDlg(qtw.QWidget):
 
         # translations for *this* widget
         translation_path = os.path.join(self.settings['translation_dir'], 'misc.toml')
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             self.translations = toml.load(f)
 
         # widgets and layout
@@ -211,15 +213,9 @@ class IntroDlg(qtw.QWidget):
                 self.connector.setText('Connected.')
                 self.connector.setStyleSheet(green_style)
         except Exception as e:
-            # try to disconnect the COM
-            dev_port = next((xx.device for xx in list_ports.comports() if hasattr(xx, 'manufacturer') and xx.manufacturer == 'Bluegiga'), None)
-            if dev_port:
-                tmpser = serial.Serial(baudrate=115200, timeout=0.25)
-                tmpser.port = dev_port
-                tmpser.close()
-            self.connector.setText('Connect')
+            self.connector.setText('Connection failed.\nTry to click again\n(or restart program)?')
             self._is_connected = False
-            self._log.warn(e)
+            self._log.warn(repr(e))
 
     def on_exit(self):
         from embr_survey import application_path

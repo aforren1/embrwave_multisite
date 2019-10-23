@@ -69,7 +69,7 @@ class DV11Part1(StackedDV):
         # load settings from external TOML
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         q1_part1 = [translation['q1'][lang]]  # think of someone you know
@@ -100,7 +100,7 @@ class DV11Part2(StackedDV):
         settings = self.settings
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], '%s.toml' % self.name)
-        with open(translation_path, 'r') as f:
+        with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
         circle_img = resource_filename('embr_survey', 'images/dv11_1.png')
