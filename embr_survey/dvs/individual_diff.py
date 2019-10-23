@@ -14,13 +14,14 @@ from embr_survey.common_widgets import JustText, SingleQuestion, EmbrSection
 from embr_survey.dvs.base_block import StackedDV
 import random
 
+
 class ConditionalWidget(qtw.QWidget):
     # pair of widgets-- one "main" question, one hidden one
     def __init__(self, main_widget, hidden_widget, callback):
         super().__init__()
         self.main_widget = main_widget
         self.hidden_widget = hidden_widget
-        self.hidden_widget.setHidden(True) # hide until resp
+        self.hidden_widget.setHidden(True)  # hide until resp
 
 
 class RadioGroupQ(qtw.QWidget):
@@ -43,9 +44,10 @@ class RadioGroupQ(qtw.QWidget):
             # add button and text
             layout.addWidget(rad, -1, 0, 1, 1, Qt.AlignCenter)
             layout.addWidget(JustText(answers[count]), -1, 1, 1, 1, Qt.AlignLeft)
+        self.setLayout(layout)
 
-#def deal_with_toggle(slf, ):
-    
+# def deal_with_toggle(slf, ):
+
 
 class IndividualDifferencesPt1(qtw.QWidget):
     # just 1 page
@@ -59,7 +61,7 @@ class IndividualDifferencesPt1(qtw.QWidget):
 
         self.block_num = block_num
         self.settings = settings
-        self.device = device # just to disable it
+        self.device = device  # just to disable it
         layout = qtw.QVBoxLayout()
 
         layout.addWidget(JustText(translation['instructions'][lang]))
