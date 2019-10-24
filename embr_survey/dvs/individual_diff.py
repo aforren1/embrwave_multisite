@@ -11,8 +11,9 @@ from PySide2.QtCore import Qt, QTimer
 from PySide2.QtGui import QIntValidator
 from pip._vendor import pytoml as toml
 
-from embr_survey.common_widgets import JustText, SingleQuestion, EmbrSection, RadioGroupQ, DropDownQuestion
+from embr_survey.common_widgets import JustText, MultiQuestion, EmbrSection, RadioGroupQ, DropDownQuestion
 from embr_survey.dvs.base_block import StackedDV
+from embr_survey.dvs.base_block import BaseDV
 
 
 class ConditionalWidget(qtw.QWidget):
@@ -125,7 +126,7 @@ class Question12(qtw.QWidget):
 
 
 
-class IndividualDifferencesPt1(qtw.QWidget):
+class IndividualDifferencesPart1(qtw.QWidget):
     # just 1 page
     # these are most of the conditional ones
     def __init__(self, block_num, device, settings):
@@ -201,3 +202,68 @@ class IndividualDifferencesPt1(qtw.QWidget):
     def on_enter(self):
         # need to set each time, at least to keep connection alive
         self.device.level = 0
+    
+    def on_exit(self):
+        self.device.level = 0
+    
+    def all_ans(self):
+        # 
+        pass
+
+    def save_data(self):
+        # write to csv
+        pass
+
+
+class IndividualDifferencesPart2(BaseDV):
+    long_name = 'individual_differences_relationships'
+    name = 'ind_diff_rel'
+
+    def __init__(self, block_num, device, temperature, settings):
+        super().__init__(block_num, device, temperature, settings)
+        lang = settings['language']
+        translation_path = os.path.join(settings['translation_dir'], 'individual_differences.toml')
+        with open(translation_path, 'r', encoding='utf8') as f:
+            translation = toml.load(f)
+
+        prompt = translation['intimate_prompt'][lang]
+        header = translation['intimate_header'][lang]
+        self.questions = [('q%i' % i, q) for i, q in enumerate(translation['relationship_qs'][lang])]
+        random.shuffle(self.questions)
+
+        layout = qtw.QVBoxLayout()
+        self.qs = MultiQuestion(header, [q[1] for q in self.questions])
+        head = qtw.QLabel(prompt)
+        head.setStyleSheet('font-size:26pt;')
+        head.setWordWrap(True)
+        layout.addWidget(head)
+        layout.addWidget(self.qs)
+        self.setLayout(layout)
+
+    def save_data(self):
+        current_answers = self.qs.get_responses()
+        current_answers = [ca if ca >= 1 else None for ca in current_answers]
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        num_q = len(self.questions)
+        data = {'participant_id': num_q * [settings['id']],
+                'datetime_start_exp': num_q * [settings['datetime_start']],
+                'datetime_start_block': num_q * [now],
+                'datetime_end_block': num_q * [self._end_time.strftime('%y%m%d_%H%M%S')],
+                'language': num_q * [settings['language']],
+                'locale': num_q * [settings['locale']],
+                'questions': [q[1][:40] + '...' for q in self.questions],
+                'question_original_order': [q[0] for q in self.questions],
+                'responses': current_answers,
+                'dv': num_q * [self.long_name],
+                'block_number': num_q * [self.block_num],
+                'embr_temperature': num_q * [self.temperature]}
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
+
+    def all_ans(self):
+        return all([x >= 1 for x in self.qs.get_responses()])
