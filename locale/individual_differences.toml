@@ -1,0 +1,8 @@
+[height]
+us = 'inches'
+eu = 'cm'
+
+[weight]
+us = 'pounds'
+eu = 'kg'
+

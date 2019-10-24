@@ -14,6 +14,7 @@ from pip._vendor import pytoml as toml
 from embr_survey.common_widgets import JustText, MultiQuestion, EmbrSection, RadioGroupQ, DropDownQuestion
 from embr_survey.dvs.base_block import StackedDV
 from embr_survey.dvs.base_block import BaseDV
+from embr_survey.dvs.dv11 import NameInput
 
 
 class ConditionalWidget(qtw.QWidget):
@@ -281,3 +282,165 @@ class IndividualDifferencesPart3(IndividualDifferencesPart2_3):
     def __init__(self, block_num, device, temperature, settings, prompt_key='part3_prompt',
                  header_key='part3_header', q_key='part3_qs'):
         super().__init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key)
+
+class IndividualDifferencesPart4(qtw.QWidget):
+    def __init__(self, block_num, device, settings):
+        super().__init__()
+        lang = settings['language']
+        translation_path = os.path.join(settings['translation_dir'], 'individual_differences.toml')
+        with open(translation_path, 'r', encoding='utf8') as f:
+            translation = toml.load(f)
+
+        # separate out the translation we care about
+        translation = {k: translation[k][lang] for k in translation.keys()}
+        self.block_num = block_num
+        self.settings = settings
+        self.device = device  # just to disable it
+
+        # localization
+        locale = settings['locale']
+        locale_path = os.path.join(settings['locale_dir'], '%s.toml' % self.name)
+        with open(locale_path, 'r', encoding='utf8') as f:
+            locale_settings = toml.load(f)
+        
+        layout = qtw.QVBoxLayout()
+
+        if locale_settings['height'] == 'inches':
+            h_min, h_max = 47, 83
+        else:
+            h_min, h_max = 120, 210
+
+        if locale_settings['weight'] == 'pounds':
+            w_min, w_max = 66, 353
+        else:
+            w_min, w_max = 30, 160
+
+        lt, gt = translation['less_than'], translation['more_than']
+        no_resp = translation['q_sex_ans'][0] # prefer not to respond
+
+        height_opts = [no_resp, '%s %i %s' % (lt, h_min, locale_settings['height'])]
+        height_opts.extend(range(h_min+1, h_max))
+        height_opts.append('%s %i %s' % (gt, h_max, locale_settings['height']))
+        self.q_height = DropDownQuestion(translation['q_tall'], height_opts)
+
+        weight_opts = [no_resp, '%s %i %s' % (lt, h_min, locale_settings['weight'])]
+        weight_opts.extend(range(h_min+1, h_max))
+        weight_opts.append('%s %i %s' % (gt, h_max, locale_settings['weight']))
+        self.q_weight = DropDownQuestion(translation['q_weight'], weight_opts)
+
+        self.q_lang = NameInput(translation['q_lang'], [])
+
+        self.q_sex = RadioGroupQ(translation['q_sex'], translation['q_sex_ans'])
+
+        age_range = list(range(18, 100))
+        age_range.append('100+')
+        self.q_age = DropDownQuestion(translation['q_age'], age_range)
+
+        self.relationship = RadioGroupQ(translation['q_relationship'], translation['q_relationship_ans'])
+
+        self.q_tobacco = RadioGroupQ(translation['q_tobacco'], translation['q_tobacco_ans'])
+        num_cigs = list(range(0, 100))
+        num_cigs.append('100+')
+        self.q_tobacco2 = DropDownQuestion(translation['q_tobacco_2'], num_cigs)
+        self.q_tobacco_grp = ConditionalWidget(self.q_tobacco, self.q_tobacco2, 
+                                               translation['q_tobacco_ans'][0])
+        layout.addWidget(self.q_height)
+        layout.addWidget(self.q_weight)
+        layout.addWidget(self.q_lang)
+        layout.addWidget(self.q_sex)
+        layout.addWidget(self.q_age)
+        layout.addWidget(self.relationship)
+        layout.addWidget(self.q_tobacco_grp)
+
+        self.setLayout(layout)
+
+    def on_enter(self):
+        # need to set each time, at least to keep connection alive
+        self.device.level = 0
+    
+    def on_exit(self):
+        self.device.level = 0
+
+    def all_ans(self):
+        # 
+        pass
+
+    def save_data(self):
+        # write to csv
+        pass
+
+class IndividualDifferencesPart5(qtw.QWidget):
+    # female part 1
+    def __init__(self, block_num, device, settings):
+        super().__init__()
+        lang = settings['language']
+        translation_path = os.path.join(settings['translation_dir'], 'individual_differences.toml')
+        with open(translation_path, 'r', encoding='utf8') as f:
+            translation = toml.load(f)
+
+        # separate out the translation we care about
+        translation = {k: translation[k][lang] for k in translation.keys()}
+        self.block_num = block_num
+        self.settings = settings
+        self.device = device  # just to disable it
+
+        self.q_contra = RadioGroupQ(translation['q_contra'], translation['q_relationship_ans'])
+        self.q_period = RadioGroupQ(translation['q_period'], translation['q_relationship_ans'])
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(self.q_contra)
+        layout.addWidget(self.q_period)
+        self.setLayout(layout)
+
+
+class IndividualDifferencesPart6(qtw.QWidget):
+    # female part 2
+    def __init__(self, block_num, device, settings):
+        super().__init__()
+        lang = settings['language']
+        translation_path = os.path.join(settings['translation_dir'], 'individual_differences.toml')
+        with open(translation_path, 'r', encoding='utf8') as f:
+            translation = toml.load(f)
+
+        # separate out the translation we care about
+        translation = {k: translation[k][lang] for k in translation.keys()}
+        self.block_num = block_num
+        self.settings = settings
+        self.device = device  # just to disable it
+        ans = list(range(24, 35))
+        cycle_len_extra = translation['q_cycle_len_ans']
+        ans.insert(0, cycle_len_extra[0])
+        ans.insert(0, cycle_len_extra[1])
+        ans.append(cycle_len_extra[2])
+        self.q_cycle = DropDownQuestion(translation['q_cycle_len'], ans)
+
+        self.confidence = RadioGroupQ(translation['q_confidence'], translation['q_confidence_ans'])
+
+        days_since_extra = translation['q_days_since_ans']
+        ans = list(range(1, 35))
+        ans.insert(0, days_since_extra[0])
+        ans.insert(1, days_since_extra[1])
+        ans.append(days_since_extra[2])
+        self.days_since = DropDownQuestion(translation['q_days_since'], ans)
+
+        self.days_until = DropDownQuestion(translation['q_days_until'], ans)
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(self.q_cycle)
+        layout.addWidget(self.confidence)
+        layout.addWidget(self.days_since)
+        layout.addWidget(self.days_until)
+        self.setLayout(layout)
+
+    def on_enter(self):
+        # need to set each time, at least to keep connection alive
+        self.device.level = 0
+    
+    def on_exit(self):
+        self.device.level = 0
+    
+    def all_ans(self):
+        # 
+        pass
+
+    def save_data(self):
+        # write to csv
+        pass
