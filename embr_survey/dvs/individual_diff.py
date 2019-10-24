@@ -273,7 +273,7 @@ class IndividualDifferencesPart2(IndividualDifferencesPart2_3):
 
     def __init__(self, block_num, device, temperature, settings, prompt_key='intimate_prompt',
                  header_key='intimate_header', q_key='relationship_qs'):
-        super().__init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key)
+        super().__init__(block_num, device, temperature, settings, prompt_key, header_key, q_key)
 
 class IndividualDifferencesPart3(IndividualDifferencesPart2_3):
     long_name = 'individual_differences_part3'
@@ -281,7 +281,7 @@ class IndividualDifferencesPart3(IndividualDifferencesPart2_3):
 
     def __init__(self, block_num, device, temperature, settings, prompt_key='part3_prompt',
                  header_key='part3_header', q_key='part3_qs'):
-        super().__init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key)
+        super().__init__(block_num, device, temperature, settings, prompt_key, header_key, q_key)
 
 class IndividualDifferencesPart4(qtw.QWidget):
     def __init__(self, block_num, device, settings):
