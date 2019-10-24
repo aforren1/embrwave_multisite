@@ -215,20 +215,18 @@ class IndividualDifferencesPart1(qtw.QWidget):
         pass
 
 
-class IndividualDifferencesPart2(BaseDV):
-    long_name = 'individual_differences_relationships'
-    name = 'ind_diff_rel'
-
-    def __init__(self, block_num, device, temperature, settings):
+class IndividualDifferencesPart2_3(BaseDV):
+    # mostly copy/paste of SimpleDV, but keys are generally different
+    def __init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key):
         super().__init__(block_num, device, temperature, settings)
         lang = settings['language']
         translation_path = os.path.join(settings['translation_dir'], 'individual_differences.toml')
         with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
-        prompt = translation['intimate_prompt'][lang]
-        header = translation['intimate_header'][lang]
-        self.questions = [('q%i' % i, q) for i, q in enumerate(translation['relationship_qs'][lang])]
+        prompt = translation[prompt_key][lang]
+        header = translation[header_key][lang]
+        self.questions = [('q%i' % i, q) for i, q in enumerate(translation[q_key][lang])]
         random.shuffle(self.questions)
 
         layout = qtw.QVBoxLayout()
@@ -267,3 +265,19 @@ class IndividualDifferencesPart2(BaseDV):
 
     def all_ans(self):
         return all([x >= 1 for x in self.qs.get_responses()])
+
+class IndividualDifferencesPart2(IndividualDifferencesPart2_3):
+    long_name = 'individual_differences_part2'
+    name = 'ind_diff_2'
+
+    def __init__(self, block_num, device, temperature, settings, prompt_key='intimate_prompt',
+                 header_key='intimate_header', q_key='relationship_qs'):
+        super().__init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key)
+
+class IndividualDifferencesPart3(IndividualDifferencesPart2_3):
+    long_name = 'individual_differences_part3'
+    name = 'ind_diff_3'
+
+    def __init__(self, block_num, device, temperature, settings, prompt_key='part3_prompt',
+                 header_key='part3_header', q_key='part3_qs'):
+        super().__init__(self, block_num, device, temperature, settings, prompt_key, header_key, q_key)
