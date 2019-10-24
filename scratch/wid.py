@@ -1,6 +1,15 @@
 import PySide2.QtWidgets as qtw
 from PySide2.QtCore import Qt, QTimer
+from PySide2.QtGui import QIntValidator
 from pkg_resources import resource_filename
+
+no_ans = '''
+border-radius: 10px;background-color: #ffa7a1;font-size:18pt;padding:5px;
+'''
+
+ans = '''
+border-radius: 10px;background-color: #a1ffb2;font-size:18pt;padding:5px;
+'''
 
 
 class JustText(qtw.QLabel):
@@ -15,6 +24,7 @@ class RadioGroupQ(qtw.QWidget):
     def __init__(self, question, answers):
         super().__init__()
         q_txt = JustText(question)
+        q_txt.setStyleSheet(no_ans)
         self.resp = qtw.QButtonGroup()
         chk_pth = resource_filename('embr_survey', 'images/radio_checked.png')
         unchk_pth = resource_filename('embr_survey', 'images/radio_unchecked.png')
@@ -22,6 +32,8 @@ class RadioGroupQ(qtw.QWidget):
         unchk_pth = unchk_pth.replace('\\', '/')
         style = 'QRadioButton::indicator{width:60px; height:60px; image:url(%s);} QRadioButton::indicator::checked{image:url(%s);};' % (unchk_pth, chk_pth)
         self.resp = qtw.QButtonGroup()
+        self.resp.buttonClicked.connect(self.grn_txt)
+        self.q_txt = q_txt
         layout = qtw.QVBoxLayout()
         # add question to stretch across top
         layout.addWidget(q_txt)
@@ -36,6 +48,9 @@ class RadioGroupQ(qtw.QWidget):
             layout.addWidget(rad)
 
         self.setLayout(layout)
+    
+    def grn_txt(self):
+        self.q_txt.setStyleSheet(ans)
 
 class ConditionalWidget(qtw.QWidget):
     # pair of widgets-- one "main" question, one hidden one
@@ -61,6 +76,31 @@ class ConditionalWidget(qtw.QWidget):
             self.hidden_widget.setHidden(True)
         self.parentWidget().parentWidget().adjustSize()
 
+class Question12(qtw.QWidget):
+    def __init__(self, headers, n_elements=6):
+        super().__init__()
+        layout = qtw.QGridLayout()
+        layout.addWidget(JustText(headers[0]), 0, 0, Qt.AlignCenter)
+        layout.addWidget(JustText(headers[1]), 0, 1, Qt.AlignCenter)
+        validator = QIntValidator(1, 1000)
+        self.groups = []
+        self.nums = []
+        for i in range(n_elements):
+            group_name = qtw.QLineEdit()
+            group_name.setMaximumWidth(200)
+            fnt = group_name.font()
+            fnt.setPointSize(26)
+            group_name.setFont(fnt)
+            num_people = qtw.QLineEdit()
+            num_people.setMaximumWidth(200)
+            num_people.setFont(fnt)
+            num_people.setValidator(validator)
+            self.groups.append(group_name)
+            self.nums.append(num_people)
+            layout.addWidget(group_name, i + 1, 0, Qt.AlignCenter)
+            layout.addWidget(num_people, i + 1, 1, Qt.AlignCenter)
+        self.setLayout(layout)
+
 
 if __name__ == '__main__':
     from PySide2.QtWidgets import QApplication
@@ -80,6 +120,9 @@ if __name__ == '__main__':
     layout = qtw.QVBoxLayout()
     layout.addWidget(both)
     layout.addWidget(both2)
+
+    q12 = Question12(['Group Name', 'Total number of<br>group members<br>you talk to'])
+    layout.addWidget(q12)
     combo.setLayout(layout)
     window = MainWindow([combo])
     # all of the work is done by on_exit
