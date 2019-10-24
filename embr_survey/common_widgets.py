@@ -116,3 +116,56 @@ class MultiQuestion(qtw.QWidget):
 class SingleQuestion(MultiQuestion):
     def __init__(self, header, question):
         super().__init__(header, [question])
+
+class RadioGroupQ(qtw.QWidget):
+    def __init__(self, question, answers):
+        super().__init__()
+        q_txt = JustText(question)
+        q_txt.setStyleSheet(no_ans)
+        self.resp = qtw.QButtonGroup()
+        chk_pth = resource_filename('embr_survey', 'images/radio_checked.png')
+        unchk_pth = resource_filename('embr_survey', 'images/radio_unchecked.png')
+        chk_pth = chk_pth.replace('\\', '/')
+        unchk_pth = unchk_pth.replace('\\', '/')
+        style = 'QRadioButton::indicator{width:60px; height:60px; image:url(%s);} QRadioButton::indicator::checked{image:url(%s);};' % (unchk_pth, chk_pth)
+        self.resp = qtw.QButtonGroup()
+        self.resp.buttonClicked.connect(self.grn_txt)
+        self.q_txt = q_txt
+        layout = qtw.QVBoxLayout()
+        # add question to stretch across top
+        layout.addWidget(q_txt)
+        for count in range(len(answers)):
+            rad = qtw.QRadioButton()
+            fnt = rad.font()
+            fnt.setPointSize(26)
+            rad.setFont(fnt)
+            rad.setText(answers[count])
+            rad.setStyleSheet(style)
+            self.resp.addButton(rad)
+            layout.addWidget(rad)
+
+        self.setLayout(layout)
+    
+    def grn_txt(self):
+        self.q_txt.setStyleSheet(ans)
+    
+    def get_responses(self):
+        return self.resp.checkedId() + 1
+
+class DropDownQuestion(qtw.QWidget):
+    def __init__(self, question, answers):
+        super().__init__()
+        layout = qtw.QHBoxLayout()
+        q = JustText(question)
+        self.answer = qtw.QComboBox()
+        fnt = self.answer.font()
+        fnt.setPointSize(26)
+        self.answer.setFont(fnt)
+        self.answer.addItems(answers)
+        self._default_ans = answers[0]
+        layout.addWidget(q, Qt.AlignRight | Qt.AlignVCenter)
+        layout.addWidget(self.answer, Qt.AlignLeft | Qt.AlignCenter)
+        self.setLayout(layout)
+
+    def get_responses(self):
+        return self.answer.currentText()

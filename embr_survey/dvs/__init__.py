@@ -14,3 +14,4 @@ from .dv12 import DV12RatingPersonalities as DV12
 from .dv13 import DV13WillingnessToPay as DV13
 from .dv14 import DV14RomanceMovies as DV14
 from .efficacy import EfficacyBlock
+from .individual_diff import IndividualDifferencesPt1

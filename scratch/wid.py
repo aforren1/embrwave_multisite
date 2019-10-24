@@ -19,6 +19,23 @@ class JustText(qtw.QLabel):
         self.setWordWrap(True)
         self.setTextFormat(Qt.RichText)  # allow HTML
 
+class DropDownQuestion(qtw.QWidget):
+    def __init__(self, question, answers):
+        super().__init__()
+        layout = qtw.QHBoxLayout()
+        q = JustText(question)
+        self.answer = qtw.QComboBox()
+        fnt = self.answer.font()
+        fnt.setPointSize(26)
+        self.answer.setFont(fnt)
+        self.answer.addItems(answers)
+        self._default_ans = answers[0]
+        layout.addWidget(q, Qt.AlignRight | Qt.AlignVCenter)
+        layout.addWidget(self.answer, Qt.AlignLeft | Qt.AlignCenter)
+        self.setLayout(layout)
+
+    def get_responses(self):
+        return self.answer.currentText()
 
 class RadioGroupQ(qtw.QWidget):
     def __init__(self, question, answers):
@@ -51,9 +68,13 @@ class RadioGroupQ(qtw.QWidget):
     
     def grn_txt(self):
         self.q_txt.setStyleSheet(ans)
+    
+    def get_responses(self):
+        return self.resp.checkedId() + 1
 
 class ConditionalWidget(qtw.QWidget):
     # pair of widgets-- one "main" question, one hidden one
+    # first one is always a QButtonGroup
     def __init__(self, main_widget, hidden_widget, valid):
         super().__init__()
         self.main_widget = main_widget
@@ -69,16 +90,27 @@ class ConditionalWidget(qtw.QWidget):
     
     def check_valid(self):
         val = self.main_widget.resp.checkedButton().text()
-        print(val)
         if val in self.valid:
             self.hidden_widget.setHidden(False)
         else:
             self.hidden_widget.setHidden(True)
         self.parentWidget().parentWidget().adjustSize()
+    
+    # if not in valid range, return initial answer & None (always tuple)
+    def get_responses(self):
+        r1 = self.main_widget.get_responses()
+        val = self.main_widget.resp.checkedButton().text()
+        r2 = None
+        if val in self.valid:
+            r2 = self.hidden_widget.get_responses()
+        return r1, r2
 
 class Question12(qtw.QWidget):
-    def __init__(self, headers, n_elements=6):
+    def __init__(self, prompt, headers, n_elements=6):
         super().__init__()
+        layout2 = qtw.QVBoxLayout()
+        
+        grid_wid = qtw.QWidget()
         layout = qtw.QGridLayout()
         layout.addWidget(JustText(headers[0]), 0, 0, Qt.AlignCenter)
         layout.addWidget(JustText(headers[1]), 0, 1, Qt.AlignCenter)
@@ -99,7 +131,14 @@ class Question12(qtw.QWidget):
             self.nums.append(num_people)
             layout.addWidget(group_name, i + 1, 0, Qt.AlignCenter)
             layout.addWidget(num_people, i + 1, 1, Qt.AlignCenter)
-        self.setLayout(layout)
+        
+        grid_wid.setLayout(layout)
+        layout2.addWidget(JustText(prompt))
+        layout2.addWidget(grid_wid)
+        self.setLayout(layout2)
+    
+    def get_responses(self):
+        return [(x.text(), y.text()) for x, y in zip(self.groups, self.nums)]
 
 
 if __name__ == '__main__':
@@ -121,8 +160,14 @@ if __name__ == '__main__':
     layout.addWidget(both)
     layout.addWidget(both2)
 
-    q12 = Question12(['Group Name', 'Total number of<br>group members<br>you talk to'])
+    q12 = Question12('Big long prompt<br>that is long',
+                     ['Group Name', 'Total number of<br>group members<br>you talk to'])
     layout.addWidget(q12)
+    
+    ages = ['Prefer not to answer']
+    ages.extend([str(i) for i in range(50)])
+    age = DropDownQuestion('What is your age?', ages)
+    layout.addWidget(age)
     combo.setLayout(layout)
     window = MainWindow([combo])
     # all of the work is done by on_exit
