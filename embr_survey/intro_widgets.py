@@ -305,6 +305,6 @@ class IntroDlg(qtw.QWidget):
         stack2 = [stack[i] for i in dv_order]
         stack2.append(efficacy)
         #stack2 = [individ_diff, individ_diff2]
-        stack2 = [debriefing]
-        # self._window.add_widgets([dv0])
+        #stack2 = [debriefing]
+        self._window.add_widgets([dv0])
         self._window.add_widgets(stack2)
