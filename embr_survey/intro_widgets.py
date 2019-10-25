@@ -262,7 +262,7 @@ class IntroDlg(qtw.QWidget):
 
         # finally good to go
 
-        temps = random.choices([-9, -5, 5, 9], k=14)
+        temps = random.choices([-9, -5, 5, 7], k=14)
         dv_order = list(range(14))
         random.shuffle(dv_order)
         temps2 = [temps[val] for val in dv_order]

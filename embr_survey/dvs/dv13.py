@@ -93,8 +93,8 @@ class DV13WillingnessToPay(StackedDV):
         cake_txt = translation['cake'][lang]
 
         images = [(battery_txt, battery_path), (cake_txt, cake_path)]
+        random.shuffle(images)
         self.img_names = [i[1] for i in images]
-        # random.shuffle(images)
         widgets = []
         self.questions = []
         try:

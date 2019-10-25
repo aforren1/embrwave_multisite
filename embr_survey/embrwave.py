@@ -82,7 +82,7 @@ class EmbrWave(object):
             self.blink()
             self.blink()
             self.device.bond()
-            #self.disable_leds()
+            self.disable_leds() # for debugging, comment this out
             sleep(1)
             # set warming/cooling to be rather long (we'll end up turning them off manually)
             self.write(EmbrVal.COOL_WARM_ONLY, 0)
@@ -249,7 +249,7 @@ if __name__ == '__main__':
         for i in range(2):
             embr.blink()
         sleep(2)
-        embr.level = -9
+        embr.level = 7
         sleep(60)
         #print(embr.level)
         #embr.level = -9
@@ -257,7 +257,7 @@ if __name__ == '__main__':
         #embr.level = -9
         #print('bump')
         #sleep(5)
-        print('now warming')
-        embr.level = 9
-        sleep(60)
+        #print('now warming')
+        #embr.level = 9
+        #sleep(60)
         print(embr.level)

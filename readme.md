@@ -16,3 +16,4 @@ A few notes:
  - When writing new translations, prefer double quotes (`"`) in the TOML files. Some of the formatting (e.g. newlines) doesn't seem to work with single quotes. 
  - Assuming Python 3.7 (later versions should also work fine)
  - Targeting Windows 10, but other operating systems should work with minimal changes
+ - If running on a high DPI screen, try disabling desktop scaling for the experiment (right-click the desktop -> display settings -> "Change the size of text, ..." to 100%)

@@ -6,6 +6,7 @@ import csv
 class DV09Loneliness(SimpleDV):
     long_name = 'dv09_loneliness'
     name = 'dv09'
+    # TODO: should this one be randomized? (currently is)
 
     def save_data(self):
         current_answers = self.qs.get_responses()

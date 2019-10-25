@@ -47,9 +47,9 @@ class DV06CriminalRating(StackedDV):
             translation = toml.load(f)
 
         # load images
-        # TODO: shuffle images?
         img_names = ['dv6_%i.png' % i for i in range(1, 9, 1)]
         self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
+        random.shuffle(self.img_names)
 
         prompt = translation['prompt'][lang]
         header = translation['header'][lang]

@@ -84,6 +84,7 @@ class DV14RomanceMovies(StackedDV):
         answers.insert(0, '')
 
         movie_txt = [m[lang] for m in translation['movie']]
+        random.shuffle(movie_txt)
 
         widgets = []
         self.qs = []

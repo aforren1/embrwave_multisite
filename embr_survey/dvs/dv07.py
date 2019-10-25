@@ -51,6 +51,7 @@ class DV07PerceptualFocus(StackedDV):
         # TODO: shuffle images?
         img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
         self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
+        random.shuffle(self.img_names)
 
         self.prompt = translation['prompt'][lang]
         self.prompt2 = translation['prompt2'][lang]
