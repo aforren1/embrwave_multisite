@@ -8,8 +8,8 @@ en = "Which of the following best describes your marital status?"
 fr = "Laquelle des réponses suivantes décrit le mieux votre statut marital ?"
 
 [q1_ans]
-en = ["currently married & living together, or living with someone in marital-like relationship", 
-      "never married & never lived with someone in a marital-like relationship",
+en = ["currently married && living together, or living with someone in marital-like relationship", 
+      "never married && never lived with someone in a marital-like relationship",
       "separated",
       "divorced or formerly lived with someone in a marital-like relationship",
       "widowed"]
@@ -62,7 +62,7 @@ fr = "Voyez-vous ou parlez-vous au téléphone à l’un de vos beaux-parents au
 # (reuse q3_ans for q4a_ans, remove the 'not applicable' option)
 
 [q5]
-en = "How many other relatives (other than your spouse, parents & children) do you feel close to?"
+en = "How many other relatives (other than your spouse, parents && children) do you feel close to?"
 fr = "De combien d’autres membres de votre famille (autres que votre époux/se, conjoint-e, parents et enfants) vous sentez-vous proche ? (Si '0', cochez cette case et passez à la question suivante.)"
 
 # q5_ans is q2_ans

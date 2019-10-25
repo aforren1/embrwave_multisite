@@ -36,6 +36,7 @@ class NextButton(qtw.QPushButton):
         self.stack = stack
         self.clicked.connect(self._callback)
         self.state = 'complete'
+        self.incomplete_txt = 'Are you sure? You left some blank.'
 
     @property
     def state(self):
@@ -68,7 +69,7 @@ class NextButton(qtw.QPushButton):
             return
         if self.state == 'incomplete' or not all_ans:
             choice = qtw.QMessageBox.question(None, '',
-                                              'Are you sure? You left some blank.',
+                                              self.incomplete_txt,
                                               qtw.QMessageBox.Yes | qtw.QMessageBox.No)
             if choice != qtw.QMessageBox.Yes:
                 return

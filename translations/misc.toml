@@ -5,6 +5,9 @@ en = 'Next'
 es = 'Próxima'
 fr = 'Suivant'
 
+[incomplete]
+en = "Are you sure? You left some blank."
+fr = "Êtes-vous sûr? Tu as laissé des blancs."
 
 [next_incomplete]
 en = 'Next (questions unanswered)'

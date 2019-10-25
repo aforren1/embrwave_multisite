@@ -137,7 +137,7 @@ class RadioGroupQ(qtw.QWidget):
         for count in range(len(answers)):
             rad = qtw.QRadioButton()
             fnt = rad.font()
-            fnt.setPointSize(26)
+            fnt.setPointSize(16)
             rad.setFont(fnt)
             rad.setText(answers[count])
             rad.setStyleSheet(style)
