@@ -119,6 +119,9 @@ class EfficacyBlock(StackedDV):
             temperature_units = locale_settings['units']['us']
 
         first = random.choice([-9, 7])
+        second = [-9, 7]
+        second.remove(first)
+        second = second[0]
         temp_q = translation['temp_q'][lang]
         temp_header = translation['temp_header'][lang]
         room_q = translation['room_q'][lang]
