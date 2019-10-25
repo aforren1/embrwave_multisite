@@ -125,11 +125,14 @@ class Question12(qtw.QWidget):
         self.setLayout(layout2)
     
     def get_responses(self):
-        return [(x.text(), y.text()) for x, y in zip(self.groups, self.nums)]
+        val = [(x.text(), y.text()) for x, y in zip(self.groups, self.nums)]
+        return val
 
 
 
 class IndividualDifferencesPart1(qtw.QWidget):
+    long_name = 'individual_differences_part1'
+    name = 'ind_diff_1'
     # just 1 page
     # these are most of the conditional ones
     def __init__(self, block_num, device, settings):
@@ -141,6 +144,7 @@ class IndividualDifferencesPart1(qtw.QWidget):
 
         # separate out the translation we care about
         translation = {k: translation[k][lang] for k in translation.keys()}
+        self.translation = translation
         self.block_num = block_num
         self.settings = settings
         self.device = device  # just to disable it
@@ -215,8 +219,39 @@ class IndividualDifferencesPart1(qtw.QWidget):
 
     def save_data(self):
         # write to csv
-        pass
-
+        names = ['q1', 'q2', 'q2a', 'q3', 'q3a', 'q4', 'q4a', 'q5', 'q5a', 
+                 'q6', 'q6a', 'q7', 'q7a', 'q8', 'q8a', 'q9', 'q9a', 'q9b',
+                 'q10', 'q11', 'q11a', 'q12', 'q12a']
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        ans = [x.get_responses() for x in [self.q1, self.q2, self.q2a, self.q3, self.q3a,
+                                           self.q4, self.q4a, self.q5, self.q5a, self.q6, 
+                                           self.q6a, self.q7, self.q7a, self.q8, self.q8a,
+                                           self.q9, self.q9a, self.q9b, self.q10, self.q11,
+                                           self.q11a, self.q12]]
+        ans = [x if x >= 0 else None for x in ans]
+        # question 12 is special; free response
+        q12 = ';'.join([';'.join(r) for r in self.q12a.get_responses()])
+        ans.append(q12)
+        lq = len(ans)
+        data = {'participant_id': [settings['id']]*lq,
+                'datetime_start_exp': [settings['datetime_start']]*lq,
+                'datetime_start_block': [now]*lq,
+                'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')]*lq,
+                'language': [settings['language']]*lq,
+                'locale': [settings['locale']]*lq,
+                'questions': [self.translation[x] for x in names],
+                'responses': ans,
+                'dv': [self.long_name]*lq,
+                'block_number': [self.block_num]*lq,
+                'embr_temperature': [0]*lq
+                }
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
 
 class IndividualDifferencesPart2_3(BaseDV):
     # mostly copy/paste of SimpleDV, but keys are generally different
@@ -286,6 +321,8 @@ class IndividualDifferencesPart3(IndividualDifferencesPart2_3):
         super().__init__(block_num, device, temperature, settings, prompt_key, header_key, q_key)
 
 class IndividualDifferencesPart4(qtw.QWidget):
+    long_name = 'individual_differences_part4'
+    name = 'ind_diff_4'
     def __init__(self, block_num, device, settings):
         super().__init__()
         lang = settings['language']
@@ -298,6 +335,8 @@ class IndividualDifferencesPart4(qtw.QWidget):
         self.block_num = block_num
         self.settings = settings
         self.device = device  # just to disable it
+
+        self.qs = []
 
         # localization
         locale = settings['locale']
@@ -334,12 +373,16 @@ class IndividualDifferencesPart4(qtw.QWidget):
         height_opts = [no_resp, '%s %i %s' % (lt, h_min, height)]
         height_opts.extend(range(h_min+1, h_max))
         height_opts.append('%s %i %s' % (gt, h_max, height))
-        self.q_height = DropDownQuestion(translation['q_tall'] + (' (%s)'% height), height_opts)
+        h_name = translation['q_tall'] + (' (%s)'% height)
+        self.qs.append(h_name)
+        self.q_height = DropDownQuestion(h_name, height_opts)
 
         weight_opts = [no_resp, '%s %i %s' % (lt, h_min, weight)]
         weight_opts.extend(range(h_min+1, h_max))
         weight_opts.append('%s %i %s' % (gt, h_max, weight))
-        self.q_weight = DropDownQuestion(translation['q_weight'] + (' (%s)'% weight), weight_opts)
+        w_name = translation['q_weight'] + (' (%s)'% weight)
+        self.qs.append(w_name)
+        self.q_weight = DropDownQuestion(w_name, weight_opts)
 
         self.q_lang = NameInput(translation['q_lang'], [])
 
@@ -365,6 +408,9 @@ class IndividualDifferencesPart4(qtw.QWidget):
         layout.addWidget(self.relationship)
         layout.addWidget(self.q_tobacco_grp)
 
+        self.qs.extend([translation[x] for x in ['q_lang', 'q_sex', 'q_age', 'q_relationship', 'q_tobacco',
+                                                 'q_tobacco_2']])
+
         self.setLayout(layout)
 
     def on_enter(self):
@@ -377,16 +423,36 @@ class IndividualDifferencesPart4(qtw.QWidget):
         if self.q_sex.get_responses() == 3:
             self._window.insert_widget(IndividualDifferencesPart5(self.block_num, self.device, self.settings), 1)
 
-    def all_ans(self):
-        # 
-        pass
-
     def save_data(self):
         # write to csv
-        pass
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        ans = [x.get_responses() for x in [self.q_height, self.q_weight, self.q_lang, self.q_sex,
+                                           self.q_age, self.relationship, self.q_tobacco, self.q_tobacco2]]
+        lq = len(ans)
+        data = {'participant_id': [settings['id']]*lq,
+                'datetime_start_exp': [settings['datetime_start']]*lq,
+                'datetime_start_block': [now]*lq,
+                'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')]*lq,
+                'language': [settings['language']]*lq,
+                'locale': [settings['locale']]*lq,
+                'questions': self.qs,
+                'responses': ans,
+                'dv': [self.long_name]*lq,
+                'block_number': [self.block_num]*lq,
+                'embr_temperature': [0]*lq
+                }
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
 
-# parts 5 and 6 are patched in dynamically-- only if answer to q_sex is index 
+# parts 5 is patched in dynamically-- only if answer to q_sex is index 3 (female)
 class IndividualDifferencesPart5(qtw.QWidget):
+    long_name = 'individual_differences_part5'
+    name = 'ind_diff_5'
     # female part 1
     def __init__(self, block_num, device, settings):
         super().__init__()
@@ -427,17 +493,41 @@ class IndividualDifferencesPart5(qtw.QWidget):
         layout.addWidget(self.q_contra)
         self.big_q = ComplexConditionalWidget(self.q_period, self.q_cycle, self.confidence, 
                                               self.days_since, self.days_until, translation['q_relationship_ans'][0])
-        #layout.addWidget(self.q_period)
         layout.addWidget(self.big_q)
         self.setLayout(layout)
+        self.qs = [translation[x] for x in ['q_contra', 'q_period', 'q_cycle_len', 'q_confidence', 'q_days_since', 'q_days_until']]
     
     def on_enter(self):
         self.device.level = 0
 
     def on_exit(self):
-        # patch in part 6 here
         self.device.level = 0
 
+    def save_data(self):
+        # write to csv
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        ans = [x.get_responses() for x in [self.q_contra, self.q_period, self.q_cycle, self.confidence,
+                                           self.days_since, self.days_until]]
+        lq = len(ans)
+        data = {'participant_id': [settings['id']]*lq,
+                'datetime_start_exp': [settings['datetime_start']]*lq,
+                'datetime_start_block': [now]*lq,
+                'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')]*lq,
+                'language': [settings['language']]*lq,
+                'locale': [settings['locale']]*lq,
+                'questions': self.qs,
+                'responses': ans,
+                'dv': [self.long_name]*lq,
+                'block_number': [self.block_num]*lq,
+                'embr_temperature': [0]*lq
+                }
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
 
 
 class ComplexConditionalWidget(qtw.QWidget):
@@ -478,14 +568,6 @@ class ComplexConditionalWidget(qtw.QWidget):
         self.parentWidget().adjustSize()
         self.parentWidget().parentWidget().adjustSize()
         self.parentWidget().parentWidget().parentWidget().adjustSize()
-
-    # def get_responses(self):
-    #     r1 = self.main_widget.get_responses()
-    #     val = self.main_widget.resp.checkedButton().text()
-    #     r2 = None
-    #     if val in self.valid:
-    #         r2 = self.hidden_widget.get_responses()
-    #     return r1, r2
 
 
 class ConditionalComboBox(qtw.QWidget):

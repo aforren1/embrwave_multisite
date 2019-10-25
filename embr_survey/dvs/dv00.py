@@ -40,7 +40,7 @@ class ComfortQuestion(qtw.QWidget):
 
 
 class DV00Intro_1(StackedDV):
-    long_name = 'dv00_intro'
+    long_name = 'dv00_intro1'
     name = 'dv00'
 
     def __init__(self, device, settings):
@@ -57,9 +57,31 @@ class DV00Intro_1(StackedDV):
 
         self.add_widgets([sec1, sec2, self.q])
 
+    def save_data(self):
+        current_answers = self.q.get_responses()
+        current_answers = [ca if ca >= 1 else None for ca in current_answers]
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        data = {'participant_id': [settings['id']],
+                'datetime_start_exp': [settings['datetime_start']],
+                'datetime_start_block': [now],
+                'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')],
+                'language': [settings['language']],
+                'locale': [settings['locale']],
+                'questions': [self.question],
+                'responses': current_answers,
+                'dv': [self.long_name],
+                'block_number': [self.block_num],
+                'embr_temperature': [self.temperature]}
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))
 
 class DV00Intro_2(StackedDV):
-    long_name = 'dv00_intro'
+    long_name = 'dv00_intro2'
     name = 'dv00'
 
     def __init__(self, device, settings):
@@ -73,3 +95,26 @@ class DV00Intro_2(StackedDV):
         continuing = JustText(translation['continue'][lang])
 
         self.add_widgets([working, continuing])
+
+    def save_data(self):
+        current_answers = self.q.get_responses()
+        current_answers = [ca if ca >= 1 else None for ca in current_answers]
+        settings = self.settings
+        now = self._start_time.strftime('%y%m%d_%H%M%S')
+        csv_name = os.path.join(settings['data_dir'], '%s_%s.csv' % (self.name, now))
+        data = {'participant_id': [settings['id']],
+                'datetime_start_exp': [settings['datetime_start']],
+                'datetime_start_block': [now],
+                'datetime_end_block': [self._end_time.strftime('%y%m%d_%H%M%S')],
+                'language': [settings['language']],
+                'locale': [settings['locale']],
+                'questions': [self.question],
+                'responses': current_answers,
+                'dv': [self.long_name],
+                'block_number': [self.block_num],
+                'embr_temperature': [self.temperature]}
+        keys = sorted(data.keys())
+        with open(csv_name, 'w', newline='\n', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=",")
+            writer.writerow(keys)
+            writer.writerows(zip(*[data[key] for key in keys]))

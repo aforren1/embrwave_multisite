@@ -36,6 +36,10 @@ class NameInput(qtw.QWidget):
         if low_txt != '' and low_txt not in tmp:
             self.prev_answers.append(name)
             return True
+    
+    def get_responses(self):
+        name = self.name_input.text().strip(' ')
+        return name
 
 
 class RelationshipQuestion(qtw.QWidget):
