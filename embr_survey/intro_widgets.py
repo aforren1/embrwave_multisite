@@ -273,7 +273,7 @@ class IntroDlg(qtw.QWidget):
         ef = EmbrFactory(self.translations['wait_until_green'][lang], device)
         # +1 is to make block numbering 1-based in data
         dv0 = [dvs.DV00Intro_1(device, settings),
-               EmbrSection(self.translations['wait_until_green'][lang], device, 9, 10000),
+               EmbrSection(self.translations['wait_until_green'][lang], device, 7, 10000),
                EmbrSection(self.translations['wait_until_green'][lang], device, -9, 10000),
                dvs.DV00Intro_2(device, settings)]
         dv1 = [ef.spawn(), dvs.DV01(dv_order.index(0) + 1, device, temps2[0], settings)]
@@ -293,9 +293,16 @@ class IntroDlg(qtw.QWidget):
         dv14 = [ef.spawn(), dvs.DV14(dv_order.index(13) + 1, device, temps2[13], settings)]
 
         efficacy = dvs.EfficacyBlock(device, settings)
-        individ_diff = dvs.IndividualDifferencesPart1(0, device, settings)
-        individ_diff2 = dvs.IndividualDifferencesPart2(0, device, 0, settings)
-        individ_diff3 = dvs.IndividualDifferencesPart3(0, device, 0, settings)
+        # Parts 5 and 6 depend on answers to part 4
+        begin_or_end = random.choice([0, 1])
+        block_num = 0
+        if begin_or_end:
+            block_num = 15
+
+        individ_diffs = [dvs.IndividualDifferencesPart1(block_num, device, settings),
+                         dvs.IndividualDifferencesPart2(block_num, device, 0, settings),
+                         dvs.IndividualDifferencesPart3(block_num, device, 0, settings),
+                         dvs.IndividualDifferencesPart4(block_num, device, settings)]
 
         debriefing = dvs.Debriefing(-1, device, 0, settings)
         stack = [dv1, dv2, dv3, dv4, dv5,
@@ -303,8 +310,11 @@ class IntroDlg(qtw.QWidget):
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        stack2.append(efficacy)
-        #stack2 = [individ_diff, individ_diff2]
-        #stack2 = [debriefing]
-        self._window.add_widgets([dv0])
+        stack2.append(efficacy) # always right after DVs
+        if random.choice([0, 1]):
+            stack2.append(individ_diffs)
+        else:
+            stack2.insert(0, individ_diffs)
+        stack2.append(debriefing)
+        self._window.add_widgets([dv0]) # always first (sanity check)
         self._window.add_widgets(stack2)
