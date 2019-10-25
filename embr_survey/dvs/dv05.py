@@ -90,14 +90,15 @@ class DV05HousesHomelikeness(BaseDV):
         layout.addWidget(JustText(self.floor1))
         layout.addWidget(JustText(self.floor2))
         layout.addWidget(JustText(self.floor3))
-        layout.addWidget(self.images['dv5_2.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_3.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_4.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_5.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_6.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_7.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_8.png'], alignment=Qt.AlignCenter)
-        layout.addWidget(self.images['dv5_9.png'], alignment=Qt.AlignCenter)
+        imgs = [('dv5_2.png', 'dv5_3.png'), ('dv5_4.png', 'dv5_5.png'),
+                ('dv5_6.png', 'dv5_7.png'), ('dv5_8.png', 'dv5_9.png')]
+        for im1, im2 in imgs:
+            r1 = qtw.QHBoxLayout()
+            r1.addWidget(self.images[im1])
+            r1.addWidget(self.images[im2])
+            w1 = qtw.QWidget()
+            w1.setLayout(r1)
+            layout.addWidget(w1, alignment=Qt.AlignCenter)
         layout.addWidget(self.images['dv5_10.png'], alignment=Qt.AlignCenter)
         layout.addWidget(JustText(prompt2))
 
