@@ -90,6 +90,8 @@ def on_activated(self, idx):
     self.id_label.setText(self.translations['participant'][new_lang])
     self.lang_label.setText(self.translations['language'][new_lang])
     self.locale_label.setText(self.translations['locale'][new_lang])
+    self._button.incomplete_txt = self.translations['incomplete'][new_lang]
+    self._button.setText(self.translations['next'][new_lang])
 
 
 def on_blink(sel):
