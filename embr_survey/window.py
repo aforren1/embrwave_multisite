@@ -105,3 +105,11 @@ class MainWindow(object):
                             w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                         self.widgets.addWidget(w2)
                         w2._window = self
+    
+    def insert_widget(self, widget, index=1):
+        # insert one widget
+        widget.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
+        widget._button = self.next_button
+        #widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
+        #widget._window = self
+        self.widgets.insertWidget(index, widget)

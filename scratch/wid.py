@@ -37,6 +37,42 @@ class DropDownQuestion(qtw.QWidget):
     def get_responses(self):
         return self.answer.currentText()
 
+
+class ConditionalSpinbox(qtw.QWidget):
+    # pair of widgets-- one "main" question, one hidden one
+    # first one is always a QButtonGroup
+    def __init__(self, main_widget, hidden_widget, valid):
+        super().__init__()
+        self.main_widget = main_widget
+        self.valid = valid
+        # assumes qcombobox
+        main_widget.answer.currentIndexChanged.connect(self.check_valid)
+        self.hidden_widget = hidden_widget
+        self.hidden_widget.setHidden(True)  # hide until resp
+        layout = qtw.QVBoxLayout()
+        layout.addWidget(self.main_widget)
+        layout.addWidget(self.hidden_widget)
+        self.setLayout(layout)
+        self.setSizePolicy(qtw.QSizePolicy.Expanding, qtw.QSizePolicy.Expanding)
+
+    def check_valid(self):
+        val = self.main_widget.answer.currentText()
+        if val in self.valid:
+            self.hidden_widget.setHidden(False)
+        else:
+            self.hidden_widget.setHidden(True)
+        self.parentWidget().adjustSize()
+        self.parentWidget().parentWidget().adjustSize()
+    
+    # if not in valid range, return initial answer & None (always tuple)
+    def get_responses(self):
+        r1 = self.main_widget.get_responses()
+        val = self.main_widget.answer.currentText()
+        r2 = None
+        if val in self.valid:
+            r2 = self.hidden_widget.get_responses()
+        return r1, r2
+
 class RadioGroupQ(qtw.QWidget):
     def __init__(self, question, answers):
         super().__init__()
@@ -169,7 +205,9 @@ if __name__ == '__main__':
     age = DropDownQuestion('What is your age?', ages)
     layout.addWidget(age)
     combo.setLayout(layout)
-    window = MainWindow([combo])
+
+    xx = ConditionalSpinbox(age, opt2, ['5'])
+    window = MainWindow([xx])
     # all of the work is done by on_exit
     # of the IntroDlg
     # main loop

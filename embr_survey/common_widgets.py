@@ -141,7 +141,7 @@ class RadioGroupQ(qtw.QWidget):
             rad.setFont(fnt)
             rad.setText(answers[count])
             rad.setStyleSheet(style)
-            self.resp.addButton(rad)
+            self.resp.addButton(rad, count)
             layout.addWidget(rad)
 
         self.setLayout(layout)
@@ -155,6 +155,7 @@ class RadioGroupQ(qtw.QWidget):
 class DropDownQuestion(qtw.QWidget):
     def __init__(self, question, answers):
         super().__init__()
+        answers = [str(a) for a in answers]
         layout = qtw.QHBoxLayout()
         q = JustText(question)
         self.answer = qtw.QComboBox()
