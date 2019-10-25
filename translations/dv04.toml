@@ -1,0 +1,87 @@
+[prompt]
+en = "Using the following scale, select a number to indicate what you miss right now about when you were younger and how much you miss it: 1 = not at all, 7 = very much."
+fr = "En vous aidant de l’échelle suivante et en pensant à lorsque vous étiez plus jeune, choisissez un nombre pour indiquer ce qui vous manque actuellement et à quel point cela vous manque : 1 = pas du tout, 7 = beaucoup"
+
+[header]
+en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nVery much"]
+fr = ["1\nPas du tout", "2", "3", "4", "5", "6", "7\nBeaucoup"]
+
+[[question]]
+en = "Family"
+fr = "Famille"
+
+[[question]]
+en = "Heroes or heroines"
+fr = "Héros ou héroïnes"
+
+[[question]]
+en = "Not having to worry"
+fr = "Ne pas avoir à vous inquiéter"
+
+[[question]]
+en = "Places"
+fr = "Lieux"
+
+[[question]]
+en = "Music"
+fr = "Musique"
+
+[[question]]
+en = "Someone you loved"
+fr = "Quelqu'un que vous aimiez"
+
+[[question]]
+en = "Friends"
+fr = "Amis"
+
+[[question]]
+en = "Things you did"
+fr = "Choses que vous avez faites"
+
+[[question]]
+en = "Toys"
+fr = "Jouets"
+
+[[question]]
+en = "The way people were"
+fr = "La façon dont les gens étaient"
+
+[[question]]
+en = "Feelings you had"
+fr = "Sentiments que vous aviez"
+
+[[question]]
+en = "TV shows, movies"
+fr = "Émissions TV, films"
+
+[[question]]
+en = "School"
+fr = "École"
+
+[[question]]
+en = "Having someone to depend on"
+fr = "Avoir quelqu'un de qui dépendre"
+
+[[question]]
+en = "Holidays"
+fr = "Vacances"
+
+[[question]]
+en = "The way society was"
+fr = "La façon dont la société était"
+
+[[question]]
+en = "Pet or pets"
+fr = "Animal ou animaux de compagnie"
+
+[[question]]
+en = "Not knowing sad or evil things"
+fr = "Ne pas connaître de choses tristes ou mauvaises"
+
+[[question]]
+en = "Church or temple, etc."
+fr = "Église, temple, etc."
+
+[[question]]
+en = "Your house"
+fr = "Votre maison"

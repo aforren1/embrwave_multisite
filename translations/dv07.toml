@@ -1,0 +1,11 @@
+[prompt]
+en = """In this next section, you will be asked to assess 6 figures. A 'target object' will be shown at the top of the screen, with two other objects below it. The goal is for you to judge which of the two objects looks like the one at the top. Do not think too long, instead use your first instinct. There is no right or wrong!\n\nFirst, we will give you a sample question so you know what it looks like."""
+fr = """Dans cette partie nous allons vous demander d’évaluer 6 figures. Un ‘objet cible’ sera affiché en haut de l’écran, et deux autres objets seront affichés en-dessous de ce dernier. Votre objectif sera de juger lequel des deux objets ressemble à celui au-dessus. Ne réfléchissez pas trop longtemps, fiez-vous à votre première intuition. Il n’y a pas de bonnes ou de mauvaises réponses ! \n\nNous allons tout d’abord vous donner un exemple de question afin que vous sachiez à quoi cela ressemble."""
+
+[prompt2]
+en = "That was the sample question. You will get 6 more figures to evaluate. The question remains the same: Which object (A or B) most resembles the target object to you? Good luck!"
+fr = "Ceci était un exemple de question. Vous aurez 6 figures de plus à évaluer. La question reste la même : Selon vous, quel objet (A ou B) ressemble le plus à l’objet cible ? Bonne chance !"
+
+[question]
+en = "Which object most resembles the target object to you? [Object A/Object B]"
+fr = "Selon vous, quel objet ressemble le plus à l’objet cible ? [Objet A/Objet B]"

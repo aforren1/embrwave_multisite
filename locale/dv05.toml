@@ -1,0 +1,22 @@
+# if missing key, take US as default?
+[house_cost]
+us = '$225,000'
+eu = '205,740 euros'
+fr = '220 000€'
+
+[floor_label]
+us = ['Second floor', 'Third floor']
+eu = ['First floor', 'Second floor'] # TODO: check (wikipedia told me this)
+fr = ['Premier étage', 'Deuxième étage']
+
+[house_photos]
+# note: if you need a different house picture, make sure it is named
+# 'dv5_*.png' (i.e. put it in 'locale/dv5_*.png')
+us = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
+      'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
+
+eu = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
+      'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
+
+fr = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
+      'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']

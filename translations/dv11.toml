@@ -1,0 +1,16 @@
+[q1]
+en = "Please think of someone who you know. Write the name of the first person to come to mind:"
+fr = "Veuillez penser à une personne que vous connaissez. Écrivez le nom de la première personne qui vous est venu à l’esprit :"
+
+[q2] # used 4x more times
+en = "Please think of someone else who you know, but do not repeat someone's name you used previously in this exercise. Write the name of the first person to come to mind:"
+fr = "Veuillez penser à une autre personne que vous connaissez, mais ne répétez pas le nom d’une personne que vous avez déjà utilisé précédemment dans cette tâche. Écrivez le nom de la première personne qui vous est venu à l’esprit :"
+
+[q_sub]
+# note the need for the %s to substitute the name in
+en = "Which picture best describes your relationship with %s?"
+fr = "Quelle image représente le mieux votre relation avec %s?"
+
+[header]
+en = ['1', '2', '3', '4', '5', '6', '7']
+fr = ['1', '2', '3', '4', '5', '6', '7']
