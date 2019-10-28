@@ -21,6 +21,7 @@ class EmbrVal(object):
     # DFU = '400D' # not implementing in this interface
     COOL_WARM_ONLY = ('400E', '<B')
 
+
 # generally 800ms between commands
 try:
     gatt_ble = gatt.BGAPIBackend()
@@ -82,21 +83,21 @@ class EmbrWave(object):
             self.blink()
             self.blink()
             self.device.bond()
-            self.disable_leds() # for debugging, comment this out
+            self.disable_leds()  # for debugging, comment this out
             sleep(1)
             # set warming/cooling to be rather long (we'll end up turning them off manually)
             self.write(EmbrVal.COOL_WARM_ONLY, 0)
             for val in [6, 7]:  # heating, cooling respectively
                 # Blah, this takes awhile?
-                #pass
+                # pass
                 self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
                 self.write(EmbrVal.DURATION, 129)  # extended mode
-                #self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
+                # self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
         except Exception as e:
             self.device.disconnect()
             raise e
-        
+
     def __enter__(self):
         return self
 
@@ -141,6 +142,7 @@ class EmbrWave(object):
     @level.setter
     def level(self, value):
         self.blink()
+        sleep(1)
         self.stop()
         sleep(1)
         self.write(EmbrVal.LEVEL, value)
@@ -251,13 +253,13 @@ if __name__ == '__main__':
         sleep(2)
         embr.level = 7
         sleep(60)
-        #print(embr.level)
+        # print(embr.level)
         #embr.level = -9
-        #print('bump')
+        # print('bump')
         #embr.level = -9
-        #print('bump')
-        #sleep(5)
+        # print('bump')
+        # sleep(5)
         #print('now warming')
         #embr.level = 9
-        #sleep(60)
+        # sleep(60)
         print(embr.level)
