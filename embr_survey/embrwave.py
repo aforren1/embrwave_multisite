@@ -1,6 +1,10 @@
 import embr_survey.pygatt as gatt
 import struct
 from time import sleep
+import logging
+
+logging.basicConfig()
+logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 
 class EmbrVal(object):
