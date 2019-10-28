@@ -7,7 +7,7 @@ fr = 'Suivant'
 
 [incomplete]
 en = "Are you sure? You left some blank."
-fr = "Êtes-vous sûr? Tu as laissé des blancs."
+fr = "Êtes-vous sûr? Vous avez laissé des blancs."
 
 [next_incomplete]
 en = 'Next (questions unanswered)'
