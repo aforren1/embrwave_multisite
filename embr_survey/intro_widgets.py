@@ -1,4 +1,6 @@
 import atexit
+import signal
+from functools import partial
 import logging
 import os
 from collections import Counter
@@ -209,7 +211,6 @@ class IntroDlg(qtw.QWidget):
             self.connector.setText('Connecting...\n(frozen)')
             QTimer.singleShot(50, self._single_shot)
 
-        
     def _single_shot(self):
         try:
             # connect to the device
@@ -217,6 +218,7 @@ class IntroDlg(qtw.QWidget):
             if not self._is_connected:
                 device = EmbrWave(self.device.currentText())
                 atexit.register(device.close)
+                signal.signal(signal.SIGINT, partial(handle_sig, device))
                 self._is_connected = True
                 self._device = device
                 self.connector.setText('Connected.')
@@ -299,9 +301,9 @@ class IntroDlg(qtw.QWidget):
 
         efficacy = dvs.EfficacyBlock(device, settings)
         # Parts 5 and 6 depend on answers to part 4
-        begin_or_end = random.choice([0, 1])
+        is_end = random.choice([0, 1])
         block_num = 0
-        if begin_or_end:
+        if is_end:
             block_num = 15
 
         individ_diffs = [dvs.IndividualDifferencesPart1(block_num, device, settings),
@@ -316,10 +318,15 @@ class IntroDlg(qtw.QWidget):
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
         stack2.append(efficacy) # always right after DVs
-        if random.choice([0, 1]):
+        if is_end:
             stack2.extend(individ_diffs)
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
         self._window.add_widgets([dv0]) # always first (sanity check)
         self._window.add_widgets(stack2)
+
+def handle_sig(dev, *args):
+    print('Premature CTRL+C.')
+    dev.close()
+    qtw.QApplication.instance().quit()
