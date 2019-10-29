@@ -377,9 +377,9 @@ class IndividualDifferencesPart4(qtw.QWidget):
         self.qs.append(h_name)
         self.q_height = DropDownQuestion(h_name, height_opts)
 
-        weight_opts = [no_resp, '%s %i %s' % (lt, h_min, weight)]
-        weight_opts.extend(range(h_min+1, h_max))
-        weight_opts.append('%s %i %s' % (gt, h_max, weight))
+        weight_opts = [no_resp, '%s %i %s' % (lt, w_min, weight)]
+        weight_opts.extend(range(w_min+1, w_max))
+        weight_opts.append('%s %i %s' % (gt, w_max, weight))
         w_name = translation['q_weight'] + (' (%s)'% weight)
         self.qs.append(w_name)
         self.q_weight = DropDownQuestion(w_name, weight_opts)

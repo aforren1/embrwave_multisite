@@ -14,10 +14,6 @@ def _exit_on_esc(e):
         qtw.QApplication.instance().quit()
 
 
-def scroll_up(area, removed):
-    area.verticalScrollBar().setValue(0)
-
-
 scroll_style = '''
 QScrollBar:vertical {
     background: #333333;
@@ -63,9 +59,8 @@ class MainWindow(object):
 
         # next button iterates through the stack
         self.widgets = SpecialStack()
-        self.next_button = NextButton(self.height, self.widgets)
+        self.next_button = NextButton(self.height, self.widgets, self)
 
-        self.widgets.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
         # accept single widget or list of widgets (for multi-page experiments)
         # alternatively, we could've detected in the button whether the current
         # widget was a StackedWidget or not
@@ -76,7 +71,6 @@ class MainWindow(object):
                                                    qtw.QSizePolicy.Preferred)
         self.widgets.adjustSize()
         self.main_layout.addWidget(self.next_button, Qt.AlignCenter)
-
         self.win.setLayout(self.main_layout)
 
     def add_widgets(self, widgets):
@@ -91,7 +85,6 @@ class MainWindow(object):
                     if isinstance(widget, SpecialStack):
                         for w3 in widget.widgets:
                             w3._button = self.next_button
-                        widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                     self.widgets.addWidget(widget)
                     widget._window = self  # everyone gets a ref to the top widget
                 except AttributeError:  # list of widgets (hopefully)
@@ -102,7 +95,6 @@ class MainWindow(object):
                         if isinstance(w2, SpecialStack):
                             for w3 in w2.widgets:
                                 w3._button = self.next_button
-                            w2.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
                         self.widgets.addWidget(w2)
                         w2._window = self
     
@@ -113,3 +105,6 @@ class MainWindow(object):
         #widget.widgetRemoved.connect(partial(scroll_up, self.scroll_area))
         #widget._window = self
         self.widgets.insertWidget(index, widget)
+
+    def scroll_up(self):
+        self.scroll_area.verticalScrollBar().setValue(0)

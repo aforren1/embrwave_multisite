@@ -6,7 +6,7 @@ fr = "À votre avis, quel était le but de l’étude ?"
 
 [q_related]
 en = "Do you think the temperature settings of the Embr Wave were related to the questions you were asked?"
-fr = "Pensez-vous que les paramètres de température de l’EmbrWave étaient liés aux questions qui vous ont été posées ?"
+fr = "Pensez-vous que les paramètres de température de l’Embr Wave étaient liés aux questions qui vous ont été posées ?"
 
 [q_related_ans]
 en = ["Yes", "No", "I Don't know"]
@@ -14,32 +14,32 @@ fr = ["Oui", "Non", "Je ne sais pas"]
 
 [q_how] # TODO: conditional (only if yes to previous?)
 en = "How do you think the temperature settings were related to the questions?"
-fr = "En quoi pensez-vous que les paramètres (/réglages) de température étaient liés aux questions ?"
+fr = "En quoi pensez-vous que les paramètres de température étaient liés aux questions ?"
 
 # q_how_ans is free text
 
 [q_influence]
 en = "Do you think the Embr Wave changed your answers to our questions?"
-fr = "Pensez-vous que l’EmbrWave a changé vos réponses à nos questions ?"
+fr = "Pensez-vous que l’Embr Wave a changé vos réponses à nos questions ?"
 
 # q_influence_ans is q_related_ans
 
 [q_how_influence] # TODO: conditional on last
 en = "How do you think the Embr Wave changed your answers to our questions?"
-fr = "En quoi pensez-vous que l’EmbrWave a changé vos réponses à nos questions ?"
+fr = "En quoi pensez-vous que l’Embr Wave a changé vos réponses à nos questions ?"
 
 [fin]
 en = """Thank you for your participation. As we indicated, we are investigating the efficacy of the Embr Wave. However, we are also interested in how you responded to the included scales and whether the Embr Wave affected those responses. These scales were in fact not unrelated -- rather, they were selected because prior studies have found participants respond differently on these scales depending on how warm or cold they feel. This field of research is called Social Thermoregulation, and indicates that physical temperature has a role in our social relationships.
 
 The independent variable in this case was the temperature of the Embr Wave (that's what we changed). The dependent variables were the questionnaires we asked you, regarding topics like: how similar you perceive objects, how "belong" you feel, how utilitarian you are in moral judgments, feelings of nostalgia, how you judge a house as being a home, intuitions about criminals, how you categorize objects, how you perceive brands, whether you feel lonely, your capacity for forgiveness, which loved ones come to mind first, how you judge people, how much you would pay for consumer goods, and what types of movies you prefer. If you'd like to learn more about the specific items, please ask your experimenter or visit our research page: https://osf.io/eydwm/. 
 
-Because we didn't want to draw your attention to the link between the EmbrWave and the questionnaires, we did not disclose this part of our research question to you. In addition, to protect the integrity of this work, we ask that you do not discuss these research ideas with any friends who may participate in this research. We would like to confirm that you permit us to use your data in our research: [Yes, I permit the researchers to use my responses / No, I do not want my data to be analyzed].
+Because we didn't want to draw your attention to the link between the Embr Wave and the questionnaires, we did not disclose this part of our research question to you. In addition, to protect the integrity of this work, we ask that you do not discuss these research ideas with any friends who may participate in this research. We would like to confirm that you permit us to use your data in our research: [Yes, I permit the researchers to use my responses / No, I do not want my data to be analyzed].
 """
-fr = """Nous vous remercions de votre participation. Comme dit précédemment, nous nous intéressons à l’efficacité de l’EmbrWave. Cependant, nous nous intéressions aussi à la façon dont vous répondiez aux échelles inclues et si l’EmbrWave affectait ces réponses. De fait, ces échelles n’étaient pas indépendantes – au contraire, elles ont été sélectionnées car des études antérieures ont montré que les participants répondaient différemment à ces échelles selon à quel point ils avaient chaud ou froid. Ce domaine de recherche s’appelle la Thermorégulation Sociale, et indique que la température physique possède un rôle dans nos relations sociales.
+fr = """Nous vous remercions de votre participation. Comme dit précédemment, nous nous intéressons à l’efficacité de l’Embr Wave. Cependant, nous nous intéressions aussi à la façon dont vous répondiez aux échelles inclues et si l’Embr Wave affectait ces réponses. De fait, ces échelles n’étaient pas indépendantes – au contraire, elles ont été sélectionnées car des études antérieures ont montré que les participants répondaient différemment à ces échelles selon à quel point ils avaient chaud ou froid. Ce domaine de recherche s’appelle la Thermorégulation Sociale, et indique que la température physique possède un rôle dans nos relations sociales.
 
-Dans ce cas, la variable indépendante était la température de l’EmbrWave (c’est ce que nous avons changé). Les variables indépendantes étaient les questionnaires que vous avez rempli, concernant des sujets tels que : à quel point vos percevez certains objets comme similaire, à quel point vous vous sentez “inclus”, à quel point vous êtes utilitaire/utilitariste dans vos jugements moraux, sentiments nostalgiques, à quel point vous jugez une maison comme étant une maison (« chez-soi »), intuitions vis-à-vis de criminels, comment vous catégoriser des objets, comment vous percevez des marques, si vous vous sentez seul(e), votre capacité à pardonner, quels proches vous viennent à l’esprit en premier, comment vous jugez les gens, combien vous seriez prêt à dépenser pour des biens de consommation, et quels types de films vous préférez. Si vous souhaitez en savoir plus sur les items en particulier, veuillez demander votre expérimentateur ou bien visiter notre page dédiée à cette étude : https://osf.io/eydwm/.
+Dans ce cas, la variable indépendante était la température de l’Embr Wave (c’est ce que nous avons changé). Les variables indépendantes étaient les questionnaires que vous avez rempli, concernant des sujets tels que : à quel point vos percevez certains objets comme similaire, à quel point vous vous sentez “inclus”, à quel point vous êtes utilitaire/utilitariste dans vos jugements moraux, sentiments nostalgiques, à quel point vous jugez une maison comme étant une maison (« chez-soi »), intuitions vis-à-vis de criminels, comment vous catégoriser des objets, comment vous percevez des marques, si vous vous sentez seul(e), votre capacité à pardonner, quels proches vous viennent à l’esprit en premier, comment vous jugez les gens, combien vous seriez prêt à dépenser pour des biens de consommation, et quels types de films vous préférez. Si vous souhaitez en savoir plus sur les items en particulier, veuillez demander votre expérimentateur ou bien visiter notre page dédiée à cette étude : https://osf.io/eydwm/.
 
-Puisque nous ne voulions pas attirer votre attention sur le lien entre l’EmbrWave et les questionnaires, nous ne vous avons pas dévoilé cette partie de notre question de recherche. De plus, afin de protéger l’intégrité de cette étude, nous vous demandons de ne pas divulguer le contenu de cette recherche avec vos amis qui sont susceptibles de participer à cette étude. Nous souhaiterions confirmer que vous nous autorisez à utiliser vos données dans notre recherche : [Oui, j’autorise les chercheurs à utiliser mes réponses / Non, je ne veux pas que mes données soient analysées].
+Puisque nous ne voulions pas attirer votre attention sur le lien entre l’Embr Wave et les questionnaires, nous ne vous avons pas dévoilé cette partie de notre question de recherche. De plus, afin de protéger l’intégrité de cette étude, nous vous demandons de ne pas divulguer le contenu de cette recherche avec vos amis qui sont susceptibles de participer à cette étude. Nous souhaiterions confirmer que vous nous autorisez à utiliser vos données dans notre recherche : [Oui, j’autorise les chercheurs à utiliser mes réponses / Non, je ne veux pas que mes données soient analysées].
 """
 
 # q_fin_ans is just first two of q_related_ans

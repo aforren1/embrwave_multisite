@@ -12,7 +12,7 @@ fr = "En ce moment-même, à combien de degrés estimeriez-vous la température 
 
 [hot_cold]
 en = "How hot or cold did the Embr Wave feel during the prior screen?"
-fr = "Lors de l’écran précédent, à quel point l’EmbrWave vous a-t-il paru chaud ou froid ?"
+fr = "Lors de l’écran précédent, à quel point l’Embr Wave vous a-t-il paru chaud ou froid ?"
 
 [hot_cold_header]
 en = ["1\nVery cold", '2', '3', "4\nNeither hot\nnor cold", '5', '6', "7\nVery hot"]
@@ -20,7 +20,7 @@ fr = ["1\nTrès froid", '2', '3', "4\nNi chaud\nni froid", '5', '6', "7\nTrès c
 
 [comfort_q]
 en = "Was the Embr Wave comfortable during the last trial?"
-fr = "Lors de l’essai précédent, la température de l’EmbrWave vous a-t-elle parut confortable ?"
+fr = "Lors de l’essai précédent, la température de l’Embr Wave vous a-t-elle parut confortable ?"
 
 [comfort_header]
 en = ["1\nNot at all\ncomfortable", '2', '3', '4', '5', '6', "7\nVery comfortable"]

@@ -29,7 +29,7 @@ QPushButton {background-color: rgb(120, 120, 120);color:rgb(40,40,40);}
 
 
 class NextButton(qtw.QPushButton):
-    def __init__(self, height, stack):
+    def __init__(self, height, stack, win):
         super().__init__('Next')
         self.setFixedHeight(0.1*height)
         self.setStyleSheet(base_style)
@@ -37,6 +37,7 @@ class NextButton(qtw.QPushButton):
         self.clicked.connect(self._callback)
         self.state = 'complete'
         self.incomplete_txt = 'Are you sure? You left some blank.'
+        self.win = win
 
     @property
     def state(self):
@@ -152,6 +153,8 @@ class NextButton(qtw.QPushButton):
         self.state = 'complete'
 
     def _animate(self, current, duration, start, end, callback):
+        if end == 1:
+            self.win.scroll_up()
         self.eff = qtw.QGraphicsOpacityEffect()
         current.setGraphicsEffect(self.eff)
         a = QPropertyAnimation(self.eff, b'opacity')

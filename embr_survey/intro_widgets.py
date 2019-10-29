@@ -86,12 +86,15 @@ def check_locale_keys(files, ref):
 
 
 def on_activated(self, idx):
-    new_lang = self.lang.currentText()
-    self.id_label.setText(self.translations['participant'][new_lang])
-    self.lang_label.setText(self.translations['language'][new_lang])
-    self.locale_label.setText(self.translations['locale'][new_lang])
-    self._button.incomplete_txt = self.translations['incomplete'][new_lang]
-    self._button.setText(self.translations['next'][new_lang])
+    try:
+        new_lang = self.lang.currentText()
+        self.id_label.setText(self.translations['participant'][new_lang])
+        self.lang_label.setText(self.translations['language'][new_lang])
+        self.locale_label.setText(self.translations['locale'][new_lang])
+        self._button.incomplete_txt = self.translations['incomplete'][new_lang]
+        self._button.setText(self.translations['next'][new_lang])
+    except AttributeError:
+        pass
 
 
 def on_blink(sel):
@@ -314,7 +317,7 @@ class IntroDlg(qtw.QWidget):
         stack2 = [stack[i] for i in dv_order]
         stack2.append(efficacy) # always right after DVs
         if random.choice([0, 1]):
-            stack2.append(individ_diffs)
+            stack2.extend(individ_diffs)
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
