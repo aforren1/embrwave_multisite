@@ -72,7 +72,7 @@ class DV13WillingnessToPay(StackedDV):
 
         with open(locale_path, 'r', encoding='utf8') as f:
             locale_settings = toml.load(f)
-        
+
         # load images
         try:
             battery_name = locale_settings['battery_photo'][locale]
@@ -111,7 +111,7 @@ class DV13WillingnessToPay(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.widgets]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [float(ca) if (ca != '' and float(ca) >= 1) else None for ca in current_answers]
+        current_answers = [ca if ca != '' else None for ca in current_answers]
 
         settings = self.settings
         now = self._start_time.strftime('%y%m%d_%H%M%S')
