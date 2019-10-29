@@ -18,5 +18,5 @@ us = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
 eu = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
       'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
 
-fr = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
-      'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
+fr = ['locale/fr/dv5_1.png', 'locale/fr/dv5_2.png', 'locale/fr/dv5_3.png', 'locale/fr/dv5_4.png', 'locale/fr/dv5_5.png',
+      'locale/fr/dv5_6.png', 'locale/fr/dv5_7.png', 'locale/fr/dv5_8.png', 'locale/fr/dv5_9.png', 'locale/fr/dv5_10.png']
