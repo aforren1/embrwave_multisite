@@ -38,7 +38,7 @@ class StreamToLogger(object):
     Fake file-like stream object that redirects writes to a logger instance.
     """
 
-    def __init__(self, logger, log_level=logging.INFO):
+    def __init__(self, logger, log_level=logging.DEBUG):
         self.logger = logger
         self.log_level = log_level
         self.linebuf = ''
@@ -50,14 +50,14 @@ class StreamToLogger(object):
 
 def setup_logger(pth, now):
     embr_logger = logging.getLogger('embr_survey')
-    embr_logger.setLevel(logging.INFO)
+    embr_logger.setLevel(logging.DEBUG)
     sh = logging.StreamHandler()
-    sh.setLevel(logging.INFO)
+    sh.setLevel(logging.DEBUG)
     fh = logging.FileHandler(os.path.join(pth, '%slog.log' % now))
-    fh.setLevel(logging.INFO)
+    fh.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
-    sl = StreamToLogger(embr_logger, logging.ERROR)
+    sl = StreamToLogger(embr_logger, logging.DEBUG)
     if is_exe:
         sys.stderr = sl
     embr_logger.addHandler(fh)
