@@ -62,6 +62,10 @@ def setup_logger(pth, now):
         sys.stderr = sl
     embr_logger.addHandler(fh)
 
+    gatt_logger = logging.getLogger('pygatt')
+    gatt_logger.setLevel(logging.DEBUG)
+    gatt_logger.addHandler(fh)
+
 
 # https://stackoverflow.com/questions/404744/determining-application-path-in-a-python-exe-generated-by-pyinstaller
 if is_exe:
