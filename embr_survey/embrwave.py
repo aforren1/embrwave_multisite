@@ -4,7 +4,7 @@ from time import sleep
 import logging
 
 logging.basicConfig()
-logging.getLogger('pygatt').setLevel(logging.DEBUG)
+gatt_log = logging.getLogger('pygatt')
 
 
 class EmbrVal(object):
@@ -67,7 +67,6 @@ class DummyPreEmbr(object):
     def blink(self, addr):
         pass
 
-
 class EmbrWave(object):
     def __init__(self, addr=None):
         # I don't think using atexit w/ the context manager is *completely* redundant,
@@ -79,6 +78,7 @@ class EmbrWave(object):
         if not addr:
             devs = self.adapter.scan()
             addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
+        self.addr = addr
         self.device = self.adapter.connect(address=addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
@@ -96,11 +96,35 @@ class EmbrWave(object):
                 # pass
                 self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
                 self.write(EmbrVal.DURATION, 129)  # extended mode
+                #self.write(EmbrVal.DURATION, 60) # custom duration (60s)
                 # self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
         except Exception as e:
             self.device.disconnect()
             raise e
+    
+    def reconnect(self):
+        # try to reconnect after a time out
+        # assumes we've already set it up once
+        self.device = self.adapter.connect(address=self.addr, timeout=5,
+                                           address_type='BLEAddressType.public',
+                                           interval_min=15, interval_max=30,
+                                           supervision_timeout=400, latency=0)
+        sleep(2)
+        self.device.bond()
+        sleep(1)
+
+    def reconnect_if_fail(method):
+        def _maybe_fails(self, *args, **kwargs):
+            # try thing; if fails
+            try:
+                method(self, *args, **kwargs)
+            except gatt.backends.bgapi.exceptions.ExpectedResponseTimeout:
+                print('timed out, trying again')
+                self.reconnect()
+                method(self, *args, **kwargs)
+        return _maybe_fails
+
 
     def __enter__(self):
         return self
@@ -108,6 +132,7 @@ class EmbrWave(object):
     def __exit__(self, *args):
         self.close()
 
+    @reconnect_if_fail
     def close(self):
         # called at the end of the task
         if self.on:
@@ -121,6 +146,7 @@ class EmbrWave(object):
             self.device.disconnect()
             self.adapter.stop()
 
+    @reconnect_if_fail
     def write(self, uuid, value):
         # converts to bytes, *then* write for real
         try:  # convert non-iterables to iterables
@@ -134,6 +160,7 @@ class EmbrWave(object):
     def _write(self, uuid, value):
         self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
 
+    @reconnect_if_fail
     def read(self, uuid):
         res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
         sleep(0.2)  # TODO: check if this should be longer/shorter
