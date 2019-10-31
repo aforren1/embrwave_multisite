@@ -63,7 +63,7 @@ class CurrentTempQuestion(qtw.QWidget):
         self.setLayout(layout)
 
     def all_ans(self):
-        return True
+        return self.get_responses() != ''
     
     def get_responses(self):
         return self.temp_input.currentText()
@@ -178,4 +178,4 @@ class EfficacyBlock(StackedDV):
             writer.writerows(zip(*[data[key] for key in keys]))
 
     def all_ans(self):
-        return True
+        return self.currentWidget().all_ans()

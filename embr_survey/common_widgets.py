@@ -111,6 +111,9 @@ class MultiQuestion(qtw.QWidget):
     def get_responses(self):
         resps = [bg.checkedId() + 1 for bg in self.qbgs]
         return resps
+    
+    def all_ans(self):
+        return all([x > 0 for x in self.get_responses()])
 
 
 class SingleQuestion(MultiQuestion):
