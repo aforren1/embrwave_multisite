@@ -234,6 +234,7 @@ class IntroDlg(qtw.QWidget):
         from embr_survey._version import __version__
         from hashlib import md5
         import random
+        from time import time
         from embr_survey.common_widgets import EmbrFactory, EmbrSection
         import embr_survey.dvs as dvs
 
@@ -250,7 +251,7 @@ class IntroDlg(qtw.QWidget):
 
         os.makedirs(settings['data_dir'], exist_ok=True)
         setup_logger(settings['data_dir'], exp_start)
-        seed = md5(settings['id'].encode('utf-8')).hexdigest()
+        seed = int(time()) # seconds since Unix epoch
         random.seed(seed)
         settings['seed'] = seed
         logger = logging.getLogger('embr_survey')
