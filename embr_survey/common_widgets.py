@@ -154,6 +154,10 @@ class RadioGroupQ(qtw.QWidget):
     
     def get_responses(self):
         return self.resp.checkedId() + 1
+    
+    def all_ans(self):
+        return self.get_responses() > 0
+
 
 class DropDownQuestion(qtw.QWidget):
     def __init__(self, question, answers):
@@ -173,3 +177,6 @@ class DropDownQuestion(qtw.QWidget):
 
     def get_responses(self):
         return self.answer.currentText()
+    
+    def all_ans(self):
+        return self.get_responses() != self._default_ans
