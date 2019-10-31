@@ -46,17 +46,16 @@ class CurrentTempQuestion(qtw.QWidget):
         prompt = JustText(text)
         layout = qtw.QVBoxLayout()
         layout.addWidget(prompt, alignment=Qt.AlignVCenter)
-        self.temp_input = qtw.QSpinBox()
+        #self.temp_input = qtw.QSpinBox()
+        self.temp_input = qtw.QComboBox()
         if units == 'C':
-            minmax = (0, 100)
-            default = 21
+            minmax = (4, 43)
         elif units == 'F':
-            minmax = (32, 212)
-            default = 70
-        self.temp_input.setRange(*minmax)
-        self.temp_input.setSingleStep(1)
-        self.temp_input.setSuffix('°' + units)
-        self.temp_input.setValue(default)
+            minmax = (40, 110)
+        units = '°' + units
+        vals = [str(v) + units for v in range(*minmax)]
+        self.temp_input.addItem('')
+        self.temp_input.addItems(vals)
         fnt = self.temp_input.font()
         fnt.setPointSize(26)
         self.temp_input.setFont(fnt)
@@ -67,7 +66,7 @@ class CurrentTempQuestion(qtw.QWidget):
         return True
     
     def get_responses(self):
-        return self.temp_input.value()
+        return self.temp_input.currentText()
     
     def on_exit(self):
         self.device.level = 0
