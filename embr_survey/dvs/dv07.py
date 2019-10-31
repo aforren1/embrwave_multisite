@@ -49,10 +49,7 @@ class DV07PerceptualFocus(StackedDV):
 
         # load images
         img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
-        if lang == 'fr':
-            self.img_names = [os.path.join(settings['translation_dir'], 'fr/%s' % x) for x in img_names]
-        else: # english
-            self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
+        self.img_names = [os.path.join(settings['translation_dir'], '%s/%s' % (lang, x)) for x in img_names]
         random.shuffle(self.img_names)
 
         self.prompt = translation['prompt'][lang]

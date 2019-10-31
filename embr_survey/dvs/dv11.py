@@ -107,10 +107,8 @@ class DV11Part2(StackedDV):
         with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
-        if lang == 'fr':
-            circle_img = os.path.join(settings['translation_dir'], 'fr/dv11_1.png')
-        else:
-            circle_img = resource_filename('embr_survey', 'images/dv11_1.png')
+        circle_img = os.path.join(settings['translation_dir'], ('%s/dv11_1.png' % lang))
+
         q1_part2 = translation['q_sub'][lang]
         header = translation['header'][lang]
 
