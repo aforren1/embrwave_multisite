@@ -223,6 +223,7 @@ class IntroDlg(qtw.QWidget):
                 self._device = device
                 self.connector.setText('Connected.')
                 self.connector.setStyleSheet(green_style)
+                self.layout().addWidget(JustText('<b>Battery level: %i</b>' % device.battery_charge), 6, 0, 2, 2, Qt.AlignCenter)
         except Exception as e:
             self.connector.setText('Connection failed.\nTry to click again\n(or restart program)?')
             self._is_connected = False

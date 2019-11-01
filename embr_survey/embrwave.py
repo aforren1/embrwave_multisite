@@ -70,7 +70,7 @@ class DummyPreEmbr(object):
 # Callback for receiving battery level number from device
 def handle_battery(handle, value):
     battery = struct.unpack('<B',value)[0]
-    print("Battery: %s" % battery)
+    print("******Battery: %s" % battery)
 
 def handle_device_state(handle, value):
     device_state = struct.unpack('<B',value)[0]
