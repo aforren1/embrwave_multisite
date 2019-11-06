@@ -1,27 +1,34 @@
 [prompt]
 en = "In this section we will ask several questions about how you are feeling. For each question, please select the number that best represents your current feelings."
 fr = "Dans cette partie nous allons vous poser quelques questions sur comment vous vous sentez. Pour chaque question, veuillez choisir le nombre qui représente le mieux vos sentiments actuels."
+pol = "W tej części zadamy Ci kilka pytań dotyczących tego, jak się czujesz. Przy każdym pytaniu zaznacz numer, który najlepiej odzwierciedla Twoje obecne odczucia. "
 
 [header]
 en = ["1\nNot at all", "2", "3", "4", "5\nExtremely"]
 fr = ["1\nPas du tout", "2", "3", "4", "5\nExtrêmement"]
+pol = ["1\nzupełnie tak się nie czuję", "2", "3", "4", "5\nczuję się tak w ekstremalnym stopniu"]
 
 [[question]]
 en = 'I feel "disconnected"'
 fr = 'Je me sens "déconnecté"'
+pol = 'Czuję się "odłączony od świata"'
 
 [[question]]
 en = 'I feel rejected'
 fr = 'Je me sens rejeté'
+pol = 'Czuję się odrzucony'
 
 [[question]]
 en = 'I feel like an outsider'
 fr = 'Je me sens comme un étranger'
+pol = 'Czuję się jak outsider'
 
 [[question]]
 en = 'I feel I belong'
 fr = "J'ai l'impression d'appartenir à une communauté"
+pol = "Czuję, że przynależę"
 
 [[question]]
 en = 'I feel other people interact with me a lot'
 fr = 'J’ai l’impression que les autres interagissent beaucoup avec moi'
+pol = 'Czuję, że inni wchodzą ze mną często w interakcje'

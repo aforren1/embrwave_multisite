@@ -2,13 +2,15 @@
 [instructions]
 en = "<b>Instructions</b>: This questionnaire is concerned with how many people you see or talk to on a regular basis including family, friends, workmates, neighbors, etc. Please read and answer each question carefully. Answer follow-up questions where appropriate. "
 fr = "<b>Instructions</b>: Ce questionnaire concerne le nombre de personnes que vous voyez ou à qui vous parlez de manière régulière, incluant famille, amis, collègues de travail, voisins, etc. S’il vous plaît, lisez et répondez à chaque question attentivement. Répondez aux questions suivantes quand cela est approprié."
+pol = "<b>Instrukcja</b>: Ten kwestionariusz odnosi się do tego, z iloma osobami się regularnie spotykasz lub rozmawiasz, włączając w to rodzinę, przyjaciół, znajomych z pracy, sąsiadów, itd. Proszę przeczytaj i uważnie odpowiedz na każde pytanie. Odpowiedz również na pytania uzupełniające tam, gdzie będzie to stosowne."
 
 [q1]
 en = "Which of the following best describes your marital status?"
 fr = "Laquelle des réponses suivantes décrit le mieux votre statut marital ?"
+pol = "1)\tKtóre z poniższych twierdzeń najlepiej opisuje Twój stan cywilny?"
 
 [q1_ans]
-en = ["currently married && living together, or living with someone in marital-like relationship", 
+en = ["currently married && living together, or living with someone in marital-like relationship",
       "never married && never lived with someone in a marital-like relationship",
       "separated",
       "divorced or formerly lived with someone in a marital-like relationship",
@@ -18,148 +20,182 @@ fr = ["vous êtes actuellement marié-e et vivez avec votre conjoint-e, ou vivez
       "séparé-e",
       "divorcé-e ou avez vécu autrefois en concubinage",
       "veuf ou veuve"]
+pol = ["W związku małżeńskim oraz mieszkający wspólnie, lub mieszkający wspólnie w związku przypominającym małżeński",
+      "Nigdy niezamężna/nieżonaty oraz nigdy nie mieszkający z nikim w związku przypominającym małżeński",
+      "W separacji",
+      "Rozwiedziony/rozwiedziona lub zamieszkujący wcześniej z kimś w związku przypominającym małżeński",
+      "Owdowiały/owdowiała"]
+
 
 [q2]
 en = "How many children do you have? (If you don't have any children, check '0' and skip to question 3.)"
 fr = "Combien d’enfants avez-vous ? (Si vous n’en avez pas, cochez ‘0’ et passez à la question 3.)"
+pol = "Ile masz dzieci? (Jeśli nie masz dzieci zaznacz \"0\" i przejdź do pytania 3.)"
 
 [q2_ans]
 en = ['0', '1', '2', '3', '4', '5', '6', '7 or more']
 fr = ['0', '1', '2', '3', '4', '5', '6', '7 ou plus']
+pol = ['0', '1', '2', '3', '4', '5', '6', '7 lub więcej']
 
 [q2a]
 en = "How many of your children do you see or talk to on the phone at least once every 2 weeks?"
 fr = "À combien d’enfants parlez-vous au téléphone, ou voyez-vous, au moins une fois toutes les deux semaines ?"
+pol = "Z iloma spośród swoich dzieci widzisz się lub rozmawiasz przez telefon przynajmniej raz na dwa tygodnie?"
 
 # reuse q2_ans for q2a_ans
 
 [q3]
 en = "Are either of your parents living? (If neither is living, check '0' and skip to question 4.)"
 fr = "L’un de vos parents est-il encore en vie ? (Si aucun n’est encore en vie, cochez ‘0’ et passez à la question 4.)"
+pol = "Czy któreś z Twoich rodziców żyje? (jeśli żadne, zaznacz \"0\" i przejdź do pytania 4.)"
 
 [q3_ans]
 en = ['neither', 'mother only', 'father only', 'both']
 fr = ['aucun des deux', 'mère seulement', 'père seulement', 'les deux']
+pol = ['żadne', 'tylko matka', 'tylko ojciec', 'oboje']
 
 [q3a]
 en = "Do you see or talk on the phone to either of your parents at least once every 2 weeks?"
 fr = "Voyez-vous ou parlez-vous au téléphone à l’un de vos parents, au moins une fois toutes les deux semaines ?"
+pol = "Czy widzisz się lub rozmawiasz przez telefon z którymś ze swoich rodziców przynajmniej raz na dwa tygodnie?"
 
 # (reuse q3_ans for q3a_ans)
 
 [q4]
 en = "Are either of your in-laws (or partner's parents) living?"
 fr = "L’un de vos beaux-parents (les parents de votre conjoint-e) est-il encore en vie ? (Si vous n’en avez aucun, cochez la case appropriée et passez à la question 5.)"
+pol = "Czy któreś z Twoich teściów (lub rodziców partnera) żyje? (jeśli żadne, zaznacz \"0\" i przejdź do pytania 5.)"
 
 [q4_ans]
 en = ['neither', 'mother only', 'father only', 'both', 'not_applicable']
 fr = ['aucun', 'belle-mère seulement', 'beau-père seulement', 'les deux', "ne s'applique pas à moi"]
+pol = ['żadne', 'tylko matka', 'tylko ojciec', 'oboje', "Wolę nie odpowiadać"]
 
 [q4a]
 en = "Do you see or talk on the phone to either of your partner's parents at least once every 2 weeks?"
 fr = "Voyez-vous ou parlez-vous au téléphone à l’un de vos beaux-parents au moins une fois toutes les deux semaines ?"
+pol = "Czy widzisz się lub rozmawiasz przez telefon z którymś ze swoich teściów (lub rodziców partnera) przynajmniej raz na dwa tygodnie?"
 
 # (reuse q3_ans for q4a_ans, remove the 'not applicable' option)
 
 [q5]
 en = "How many other relatives (other than your spouse, parents && children) do you feel close to?"
 fr = "De combien d’autres membres de votre famille (autres que votre époux/se, conjoint-e, parents et enfants) vous sentez-vous proche ? (Si '0', cochez cette case et passez à la question suivante.)"
+pol = "W stosunku do ilu innych krewnych (innych niż małżonek/żona, rodzice i dzieci) czujesz się blisko? (jeśli do żadnego, zaznacz \"0\" i przejdź do pytania 6.)"
 
 # q5_ans is q2_ans
 
 [q5a]
 en = "How many of these relatives do you see or talk to on the phone at least once every 2 weeks?"
 fr = "À combien de ces personnes parlez-vous au téléphone, ou voyez-vous au moins une fois toutes les deux semaines ?"
+pol = "Z iloma spośród tych krewnych widzisz się lub rozmawiasz przez telefon przynajmniej raz na dwa tygodnie?"
 
 # q5a_ans is q2_ans
 
 [q6]
 en = "How many close friends do you have? (meaning people that you feel at ease with, can talk to about private matters, and can call on for help)"
 fr = "Combien d’amis proches avez-vous ? (c’est-à-dire des personnes avec qui vous êtes à l’aise, avec qui vous pouvez parler de choses privées et que vous pouvez appeler quand vous avez besoin d’aide)"
+pol = "Ilu masz bliskich przyjaciół? (oznaczających ludzi z którymi czujesz się swobodnie, możesz rozmawiać na osobiste tematy i których możesz wezwać na pomoc)"
 
 # q6_ans is q2_ans
 
 [q6a]
 en = "How many of these friends do you see or talk to at least once every 2 weeks?"
 fr = "À combien de ces amis parlez-vous au téléphone ou voyez-vous au moins une fois toutes les deux semaines ?"
+pol = "Z iloma spośród tych przyjaciół widzisz się lub rozmawiasz przynajmniej raz na dwa tygodnie?"
 
 [q7]
 en = "Do you belong to a church, temple, or other religious group?"
 fr = "Appartenez-vous à une église, un temple ou un autre groupe religieux ? (Si ‘non’, cochez la case appropriée et passez à la question 8.)"
+pol = "Czy należysz do kościoła, świątyni lub innej grupy religijnej? (jeśli nie, zaznacz \"nie\" i przejdź do pytania 8.)"
 
 [q7_ans]
 en = ['no', 'yes']
 fr = ['non', 'oui']
+pol = ['Nie', 'Tak']
 
 [q7a]
 en = "How many members of your church or religious group do you talk to at least once every 2 weeks? (This includes at group meetings and services.)"
 fr = "À combien de personnes de votre église ou de vos groups religieux parlez-vous au moins une fois toutes les deux semaines ? (Cela inclut les réunions et les services.)"
+pol = "Z iloma spośród członków Twojego kościoła lub grupy religijnej rozmawiasz przynajmniej raz na dwa tygodnie? (włączając w to spotkania grupowe oraz ceremonie)"
 
 # q7a_ans is q2_ans
 
 [q8]
 en = "Do you attend any classes (school, university, technical training, or adult education) on a regular basis?"
 fr = "Suivez-vous des cours (école, université, formations ou cours du soir) régulièrement ? (Si ‘non’, cochez la case appropriée et passez à la question 9.)"
+pol = "Suivez-vous des cours (école, université, formations ou cours du soir) régulièrement ? (Si ‘non’, cochez la case appropriée et passez à la question 9.)"
 
 # q8_ans is q7_ans
 
 [q8a]
 en = "How many fellow students or teachers do you talk to at least once every 2 weeks? (This includes at class meetings.)"
 fr = "À combien de vos camarades ou professeurs parlez-vous au moins une fois toutes les deux semaines ? (Cela inclut les réunions de classe.)"
+pol = "Z iloma spośród innych uczniów/studentów lub nauczycieli rozmawiasz przynajmniej raz na dwa tygodnie? (włączając w to spotkania na zajęciach)"
 
 # q8a_ans is q2_ans
 
 [q9]
 en = "Are you currently employed either full or part-time?"
 fr = "Êtes-vous actuellement employé-e à temps plein ou partiel ? (Si ‘non’, cochez la case appropriée et passez à la question 10)"
+pol = "Czy jesteś obecnie zatrudniony/zatrudniona na pełen etat lub jego część? )? (jeśli nie, zaznacz \"nie\" i przejdź do pytania 10)"
 
 [q9_ans]
 en = ["no", "yes, self-employed", "yes, employed by others"]
 fr = ["non", "oui, travailleur indépendant", "oui, salarié"]
+pol = ["Nie", "Tak, samozatrudnienie", "Tak, zatrudniony/zatrudniona przez kogoś"]
 
 [q9a]
 en = "How many people do you supervise?"
 fr = "Combien de personnes supervisez-vous dans votre travail ?"
+pol = "Iloma ludźmi kierujesz?"
 
 # q9a_ans is q2_ans
 
 [q9b]
 en = "How many people at work (other than those you supervise) do you talk to at least once every 2 weeks?"
 fr = "À combien de personnes au travail (autres que celles que vous supervisez) parlez-vous au moins une fois toutes les deux semaines ?"
+pol = "Z iloma ludźmi z pracy (innymi niż ci, którymi kierujesz) rozmawiasz przynajmniej raz na dwa tygodnie?"
 
 # q9b_ans is q2_ans
 
 [q10]
 en = "How many of your neighbors do you visit or talk to at least once every 2 weeks?"
 fr = "À combien de vos voisins rendez-vous visite ou parlez-vous au moins une fois toutes les deux semaines ?"
+pol = "Ilu sąsiadów odwiedzasz lub z iloma rozmawiasz przynajmniej raz na dwa tygodnie"
 
 # q10_ans is q2_ans
 
 [q11]
 en = "Are you currently involved in regular volunteer work?"
 fr = "Êtes-vous actuellement impliqué dans du bénévolat, et ce de façon régulière ? (Si ‘non’, cochez la case appropriée et passez à la question 12.)"
+pol = "Czy jesteś obecnie regularnie zaangażowany w pracę jako wolontariusz? (jeśli nie, zaznacz \"nie\" i przejdź do pytania 12.)"
 
 # q11_ans is q7_ans
 
 [q11a]
 en = "How many people involved in this volunteer work do you talk to about volunteering-related issues at least once every 2 weeks?"
 fr = "À combien d’autres bénévoles parlez-vous au sujet de ce bénévolat (volontariat) au moins une fois toutes les deux semaines ?"
+pol = "Z iloma innymi wolontariuszami zaangażowanymi w tę pracę rozmawiasz na tematy powiązane z wolontariatem przynajmniej raz na dwa tygodnie?"
 
 # q11a_ans is q2_ans
 
 [q12]
 en = "Do you belong to any groups in which you talk to one or more members of the group about group-related issues at least once every 2 weeks? Examples include social clubs, recreational groups, trade unions, commercial groups, professional organizations, groups concerned with children like the PTA or Boy Scouts, groups concerned with community service, etc."
 fr = "Appartenez-vous à un ou plusieurs groupes dans lesquels vous parlez avec un ou plusieurs membres concernant des sujets liés à ce groupe au moins une fois toutes les deux semaines ? Exemple de groupes : « clubs sociaux », groupes de loisirs, syndicats, groupes commerciaux, organisations professionnelles, groupes s’occupant d’enfants (Scouts…), travaux d’intérêts généraux, etc. (Si vous n’appartenez à aucun groupe tel que ceux-là, cochez ‘non’ et passez à la section ci-dessous."
+pol = "Appartenez-vous à un ou plusieurs groupes dans lesquels vous parlez avec un ou plusieurs membres concernant des sujets liés à ce groupe au moins une fois toutes les deux semaines ? Exemple de groupes : « clubs sociaux », groupes de loisirs, syndicats, groupes commerciaux, organisations professionnelles, groupes s’occupant d’enfants (Scouts…), travaux d’intérêts généraux, etc. (Si vous n’appartenez à aucun groupe tel que ceux-là, cochez ‘non’ et passez à la section ci-dessous."
 
 # q12_ans is q7_ans
 
 [q12a]
 en = "Consider those groups in which you talk to a fellow group member at least once every 2 weeks. Please provide the following information for each such group: the name or type of group and the total number of members in that group that you talk to at least once every 2 weeks."
 fr = "Pensez à ces groupes dans lesquels vous parlez à un ou des membres au moins une fois toutes les deux semaines. Veuillez s’il-vous-plaît indiquer les informations suivantes pour chacun des groupes : le nom ou le type de groupe à qui vous parlez au moins une fois toutes les deux semaines."
+pol = "12)\tCzy przynależysz do jakichś grup w których rozmawiasz z jednym lub więcej członkiem grupy na tematy powiązane z tą grupą przynajmniej raz na 2 tygodnie? Przykłady takich grup to kluby osiedlowe, grupy rekreacyjne, związki zawodowe, stowarzyszenia handlowe, organizacje zawodowe, grupy powiązane z dziećmi, takie jak rada rodziców, związek harcerski, grupy powiązane z pracą na rzecz społeczności lokalnej, itd."
 
 [q12a_header]
 en = ["Group name", "Total number of group members that you talk to at least once every two weeks"]
 fr = ["Nom du groupe", "Nombre total des membres auxquels vous parlez au moins une fois toutes les deux semaines"]
+pol = ["Nazwa grupy", "liczba członków tej grupy z którymi rozmawiasz przynajmniej raz na 2 tygodnie"]
 
 ##############
 # Intimate relationships
@@ -168,10 +204,12 @@ fr = ["Nom du groupe", "Nombre total des membres auxquels vous parlez au moins u
 [intimate_prompt]
 en = "The statements below concern how you feel in emotionally intimate relationships. We are interested in how you generally experience relationships, not just in what is happening in a current relationship. Respond to each statement by selecting an option to indicate how much you agree or disagree with the statement:"
 fr = "Les énoncés suivants se rapportent à la manière dont vous vous sentez à l’intérieur de vos relations amoureuses. Nous nous intéressons à la manière dont vous vivez généralement ces relations et non seulement à ce que vous vivez dans votre relation actuelle. Répondez à chaque énoncé en entourant le chiffre correspondant à votre degré d’accord."
+pol = "Twierdzenia poniżej dotyczą tego jak czujesz się w intymnych emocjonalnie związkach. Jesteśmy zainteresowani tym jak generalnie doświadczasz związków, nie tylko tym co się dzieje w obecnym związku. Odpowiedz na każde twierdzenie poprzez wybranie opcji oznaczającej jak bardzo zgadzasz się lub nie zgadzasz z każdym twierdzeniem."
 
 [intimate_header]
 en = ["1\nstrongly disagree", "2", "3", "4", "5", "6", "7\nstrongly agree"]
 fr = ["1\nPas du tout d'accord", "2", "3", "4", "5", "6", "7\nTout à fait d'accord"]
+pol = ["1\nZdecydowanie się nie zgadzam", "2", "3", "4", "5", "6", "7\nZdecydowanie się zgadzam"]
 
 [relationship_qs]
 en = ["I'm afraid that I will lose my partner's love",
@@ -246,6 +284,42 @@ fr = ["J’ai peur de perdre l’amour de mon/ma partenaire.",
       "Il est facile pour moi de compter sur mes partenaires amoureux(ses).",
       "Je suis à l’aise pour montrer de l’affection à mon/ma partenaire.",
       "Mon/ma partenaire me comprend vraiment bien et comprend ce dont j’ai besoin."]
+pol = ["Boję się, że stracę miłość mojego partnera.",
+      "Często boję się, że mój partner nie będzie chciał ze mną zostać.",
+      "Często martwię się, że mój partner tak naprawdę mnie nie kocha.",
+      "Martwię się że partnerzy nie będą się o mnie troszczyć tak bardzo jak ja się o nich troszczę.",
+      "Często pragnę, by uczucia mojego partnera do mnie były tak silne jak moje uczucia do niego lub do niej.",
+      "Bardzo się martwię o moje związki.",
+      "Kiedy nie widzę mojego partnera, martwię się że on lub ona może zacząć interesować się kimś innym.",
+      "Kiedy okazuję moje uczucia partnerom, boję się że oni nie będą czuli do mnie tego samego.",
+      "Rzadko martwię się że mój partner mnie opuści.",
+      "Mój romantyczny partner sprawia że w siebie wątpię.",
+      "Nieczęsto martwię się że zostanę opuszczony/opuszczona.",
+      "Uważam że mój partner nie chce zbliżyć się tak bardzo jak ja bym chciał/chciała.",
+      "Czasem partnerzy zmieniają swoje uczucia w stosunku do mnie bez widocznej przyczyny.",
+      "Moja chęć bycia bardzo blisko czasem odstrasza ludzi.",
+      "Boję się, że gdy tylko partner mnie pozna, jemu lub jej nie spodoba się kim naprawdę jestem.",
+      "Doprowadza mnie do szału to, że od mojego partnera nie otrzymuję uczucia i wsparcia których potrzebuję.",
+      "Martwię się, że nie dorównam innym ludziom.",
+      "Mój partner zdaje się dostrzegać mnie tylko wtedy, kiedy jestem zły/zła.",
+      "Wolę nie pokazywać mojemu partnerowi jak się czuję w głębi duszy.",
+      "Czuję się swobodnie dzieląc się moimi osobistymi przemyśleniami i uczuciami z moim partnerem.",
+      "Trudno jest mi pozwolić sobie na zależność od partnerów.",
+      "Czuję się bardzo dobrze będąc blisko z partnerami.",
+      "Nie czuję się swobodnie otwierając się na partnerów.",
+      "Wolę nie być zbyt blisko partnerów.",
+      "Czuję się niezręcznie gdy partner chce być bardzo blisko.",
+      "Zbliżenie się do mojego partnera wydaje mi się dość łatwe.",
+      "Nie jest mi trudno zbliżyć się do mojego partnera.",
+      "Zazwyczaj omawiam moje problemy i zmartwienia z moim partnerem.",
+      "Pomaga mi zwracanie się do mojego partnera w potrzebie.",
+      "Mówię mojemu partnerowi wszystko.",
+      "\"Przegaduję\" rzeczy z moim partnerem.",
+      "Jestem zalękniona/y kiedy mój partner zbyt się do mnie zbliży.",
+      "Czuję się swobodnie polegając na partnerach.",
+      "Zależność od partnerów wydaje mi się łatwa.",
+      "Łatwo mi jest być czułym w związku z moim partnerem.",
+      "Mój partner naprawdę rozumie mnie i moje potrzeby."]
 
 #######
 # Part 3
@@ -258,10 +332,14 @@ After you have answered the questions below, you can continue to the next page."
 fr = """Vous trouverez ci-dessous une liste de phrases. Merci de lire avec attention ces phrases et de noter la fréquence à laquelle vous vous sentez ou agissez de la manière décrite. Si vous êtes fortement en désaccord avec la phrase, sélectionnez la réponse 1 ; si vous êtes en désaccord, sélectionnez la réponse 2 ; si vous n’êtes ni d’accord ni pas d’accord, sélectionnez la réponse 3 ; si vous êtes d’accord, sélectionnez la réponse 4 ; et enfin, si vous êtes fortement d’accord, sélectionnez la réponse 5. Il n’y a pas de bonnes ou de mauvaises réponses, nous sommes simplement intéressés par la façon dont vous vous sentez. Si vous n’êtes actuellement dans une relation amoureuse ou marié-e, répondez aux questions se rapportant à un-e partenaire en vous référant à un-e ex-partenaire ou à une relation que vous aimeriez avoir avec quelqu’un.
 
 Après avoir répondu aux questions ci-dessous, vous pourrez passer à la page suivante."""
+pol = """Poniżej znajduje się lista twierdzeń. Przeczytaj proszę uważnie każde zdanie i oceń jak często czujesz się lub postępujesz w wymieniony sposób. Jeśli zdecydowanie nie zgadzasz się z jakimś twierdzeniem wybierz 1; jeśli się nie zgadzasz wybierz 2; jeśli nie czujesz że zgadzasz się lub nie zgadzasz, zaznacz 3; jeśli się zgadzasz wybierz 4; jeśli zdecydowanie się zgadzasz wybierz 5. Nie ma dobrych i złych odpowiedzi, jesteśmy zainteresowani jedynie tym, jak Ty się czujesz. Jeśli obecnie nie spotykasz się z nikim lub nie jesteś z nikim w związku małżeńskim, odpowiedz na pytania dotyczące partnera odnosząc się do poprzedniego partnera, lub do związku jaki chciałbyś/chciałabyś z kimś stworzyć.
+
+Po tym jak odpowiesz na poniższe pytania, możesz kontynuować do następnej strony."""
 
 [part3_header]
 en = ["1\nCompletely disagree", "2\nDisagree", "3\nNeutral", "4\nAgree", "5\nCompletely agree"]
 fr = ["1\nPas du tout d'accord", "2\nPas d'accord", "3\nNeutre", "4\nD'accord", "5\nTout à fait d'accord"]
+pol = ["1\nZdecydowanie się nie zgadzam", "2\nNie zgadzam się", "3\nAni się zgadzam, ani nie zgadzam", "4\nZgadzam się", "5\nZdecydowanie się zgadzam"]
 
 [part3_qs]
 en = ["I am sensitive to heat",
@@ -310,6 +388,29 @@ fr = ["Je suis sensible à la chaleur",
       "J’essaie de rester dans des endroits familiers",
       "Je ne fais pas confiance aux gens que je n’ai pas encore rencontrés",
       "J’essaie tout le temps d’être accompagné-e par des personnes que je connais"]
+pol = ["Jestem wrażliwy na ciepło",
+      "Uważam ciepłe dni za przyjemne",
+      "Uważam gorące dni za przyjemne",
+      "Nie lubię gdy jest zbyt gorąco",
+      "Kiedy jest mi ciepło nie chcę nic robić",
+      "Nie mogę się skupić kiedy jest zbyt gorąco",
+      "Wolę relaksować się w zimnym miejscu",
+      "Zazwyczaj mam więcej kontaktu fizycznego z innymi niż większość ludzi",
+      "Kiedy ludzie są blisko mnie, lubię być z nimi bardzo blisko",
+      "Kiedy czuję chłód, szukam kogoś z kim mogę się poprzytulać",
+      "Lubię ogrzewać swoje dłonie lub stopy dotykając kogoś z kim jestem blisko",
+      "Wolę rozgrzewać się dzięki komuś niż dzięki czemuś",
+      "Nie jestem wrażliwy na zimno",
+      "Kiedy jest zimno, włączam grzejnik szybciej niż inni",
+      "Kiedy jest zimno, noszę więcej ubrań niż inni",
+      "Nie mogę się skupić kiedy jest zbyt zimno",
+      "Kiedy jest mi zimno, nie włączam grzejnika",
+      "Kiedy jestem w rozterce lubię wziąć długi, gorący prysznic by oczyścić myśli",
+      "Ciepły napój zawsze pomaga mi się zrelaksować kiedy jestem w dołku",
+      "Jeśli jestem roztrzęsiony, szukam ciepłego miejsca by się uspokoić",
+      "Staram się trzymać się znajomych miejsc",
+      "Nie ufam ludziom, których wcześniej nie spotkałem/am",
+      "Staram się zawsze trzymać w towarzystwie ludzi których znam"]
 
 #######
 # Part 4
@@ -318,55 +419,68 @@ fr = ["Je suis sensible à la chaleur",
 [q_tall]
 en = "How tall are you?"
 fr = "Quelle est votre taille ?"
+pol = "Ile masz wzrostu?"
 
 [less_than]
 en = "Less than"
 fr = "Moins de"
+pol = "Mniej niż"
 
 [more_than]
 en = "More than"
 fr = "Plus de"
+pol = "Więcej niż"
 
 [q_weight]
 en = "How much do you weigh?"
 fr = "Quel est votre poids ?"
+pol = "Ile ważysz?"
 
 # should just be text input?
 [q_lang]
 en = "What is your native language? For example; English, French, Spanish, German, Portuguese..."
 fr = "Quelle est votre langue natale? Par exemple; Anglais, Français, Espagnol, Allemand, Portugais, Chinois, Néerlandais..."
+pol = "Jaki jest twój język ojczysty? Angielski/Francuski/Hiszpański/Niemiecki/Portugalski/Chiński/Polski/Rosyjski/Ukraiński/Czeski/Inny..."
 
 [q_sex]
 en = "What is your sex?"
 fr = "Quel est votre sexe ?"
+pol = "Jakiej jesteś płci?"
 
 [q_sex_ans]
 en = ["I prefer not to respond", "male", "female", "I do not identify as male or female"]
 fr = ["Je ne souhaite pas répondre", "homme", "femme", "je ne m'identifie ni comme homme ni comme femme"]
+pol = ["Wolę nie odpowiadać", "mężczyzna", "kobieta", "Nie identyfikuję się ani jako mężczyzna ani jako kobieta"]
 
 [q_age]
 en = "What is your age?"
 fr = "Quel est votre âge ?"
+pol = "Ile masz lat?"
 
 [q_relationship]
 en = "Are you currently in a romantic relationship?"
 fr = "Êtes-vous actuellement dans une relation amoureuse ?"
+pol = "Czy jesteś obecnie w związku romantycznym?"
 
 [q_relationship_ans]
 en = ["yes", "no", "prefer not to respond"]
 fr = ["oui", "non", "je ne souhaite pas répondre"]
+pol = ["tak", "nie", "wolę nie odpowiadać"]
 
 [q_tobacco]
 en = "Do you smoke tobacco?"
 fr = "Fumez-vous du tabac ?"
+pol = "Czy palisz tytoń?"
 
 [q_tobacco_ans]
 en = ["yes", "no"]
 fr = ["oui", "non"]
+pol = ["tak", "nie"]
 
 [q_tobacco_2]
 en = "If you smoke, how many cigarettes do you smoke per day?"
 fr = "En lien avec la question précédente, si oui, combien de cigarettes fumez-vous par jour ?"
+pol = "Jeśli palisz, ile papierosów dziennie palisz? Podaj liczbę."
 
 # q_tobacco_2_ans is a text field (numeric only)
 ############
@@ -376,12 +490,14 @@ fr = "En lien avec la question précédente, si oui, combien de cigarettes fumez
 [q_contra]
 en = "Are you currently using hormonal contraceptives?"
 fr = "Utilisez-vous actuellement des contraceptifs hormonaux (pilule, implant…) ?"
+pol = "Czy używasz obecnie hormonalnych środków antykoncepcyjnych?"
 
 # q_contra_ans is q_relationship_ans
 
 [q_period]
 en = "Do you menstruate regularly (on average, once per month)?"
 fr = "Vos règles sont-elles régulières (en moyenne, une fois par mois) ?"
+pol = "Czy miesiączkujesz regularnie (zazwyczaj raz w miesiącu)?"
 
 # q_period_ans is q_relationship_ans
 
@@ -392,32 +508,38 @@ fr = "Vos règles sont-elles régulières (en moyenne, une fois par mois) ?"
 [q_cycle_len]
 en = "How long is your typical menstrual cycle (the number of days between the start of one period until the next period starts)?"
 fr = "Quelle est la durée moyenne de votre cycle menstruel (le nombre de jours entre le début d’un cycle et le début du prochain cycle) ?"
+pol = "Jak długi jest Twój typowy cykl miesiączkowy (liczba dni między początkiem jednego okresu a początkiem następnego okresu)?"
 
 # ans is a spinbox or dropdown (min: 23 days or less, max: 35 days or more)
 
 [q_cycle_len_ans]
 en = ["I prefer not to respond", "23 days or less", "35 days or more"]
 fr = ["Je ne souhaite pas répondre", "23 jours ou moins", "35 jours ou moins"]
+pol = ["Wolę nie odpowiadać", "23 dni lub mniej", "35 dni lub więcej"]
 
 [q_confidence]
 en = "How confident are you in your estimate of your average cycle length?"
 fr = "Dans quelle mesure êtes-vous sûre de la durée de votre cycle menstruel ?"
+pol = "Jak pewna jesteś Twojego oszacowania długości swojego cyklu?"
 
 [q_confidence_ans]
 en = ["1\nNot at all", '2', '3', '4', '5', '6', '7', '8', "9\nTotally"]
 fr = ["1\nPas du tout", '2', '3', '4', '5', '6', '7', '8', "9\nTout à fait"]
+pol = ["1\nwcale", '2', '3', '4', '5', '6', '7', '8', "9\ncałkowicie"]
 
 [q_days_since]
 en = "How many days has it been since your last period started? (Please make your best guess)"
 fr = "Combien de jours se sont écoulés depuis le début de vos dernières règles ? (Veuillez donner une estimation la plus précise possible)"
+pol = "Ile dni minęło od początku ostatniej miesiączki? (postaraj się proszę oszacować jak najdokładniej)"
 
 [q_days_since_ans]
 en = ["I prefer not to respond", "0 days", "35 days or more"]
 fr = ["Je ne souhaite pas répondre", "0 jours", "35 jours ou plus"]
+pol = ["Wolę nie odpowiadać", "0 dni", "35 dni lub więcej"]
 
 [q_days_until]
 en = "How many days will it be until your next period begins? (Please make your best guess)"
 fr = "Combien de jours reste-t-il avant le début de vos prochaines règles ? (Veuillez donner une estimation la plus précise possible)"
+pol = "Za ile dni zacznie się Twoja następna miesiączka? (postaraj się proszę oszacować jak najdokładniej)"
 
 # q_days_until_ans is q_days_since_ans
-

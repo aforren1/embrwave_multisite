@@ -2,8 +2,10 @@
 us = 'inches'
 eu = 'cm'
 fr = 'cm'
+pol = 'cm'
 
 [weight]
 us = 'pounds'
 eu = 'kg'
 fr = 'kg'
+pol = 'kg'

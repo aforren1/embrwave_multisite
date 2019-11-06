@@ -1,11 +1,14 @@
 [prompt]
 en = "You and your classmate A attended a course that required a term paper. Upon A's request, you gave your paper to A for reference. However, the professor later told you that your paper was identical to A's and asked you to rewrite it or you would receive no credit for the course."
 fr = "Votre camarade de classe A et vous-même avez suivi un cours qui demandait un travail final à rendre. À la demande de A, vous lui avez donné votre travail comme référence. Cependant, plus tard le professeur vous a dit que votre travail était identique à celui de A et vous a demandé de le réécrire sous peine de ne recevoir aucun crédit pour ce cours."
+pol = "Ty i Twój kolega z grupy – A – uczęszczaliście na kurs, do którego zaliczenia potrzebne było napisanie pracy semestralnej. Na prośbę A dałeś/dałaś mu swoją pracę do odniesienia/rozważenia. Jednakże, profesor powiedział Ci później, że Twoja praca była identyczna jak praca A i poprosił Cię o ponowne napisanie pracy, inaczej nie otrzymałbyś/nie otrzymałabyś punktów za ten kurs."
 
 [question]
 en = 'How willing would you be to forgive your classmate?'
 fr = 'À quel point seriez-vous prêt à pardonner votre camarade de classe ?'
+pol = 'Jak bardzo skłonny byłbyś wybaczyć swojemu koledze z grupy?'
 
 [header]
 en = ["1\nCertainly Not", "2", "3", "4", "5", "6", "7", "8", "9", "10\nCertainly"]
 fr = ["1\nCertainement pas", "2", "3", "4", "5", "6", "7", "8", "9", "10\nCertainement"]
+pol = ["1\nZdecydowanie nie", "2", "3", "4", "5", "6", "7", "8", "9", "10\nz pewnością"]

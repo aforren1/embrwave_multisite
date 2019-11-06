@@ -53,7 +53,7 @@ def setup_logger(pth, now):
     embr_logger.setLevel(logging.DEBUG)
     sh = logging.StreamHandler()
     sh.setLevel(logging.DEBUG)
-    fh = logging.FileHandler(os.path.join(pth, '%slog.log' % now))
+    fh = logging.FileHandler(os.path.join(pth, '%slog.log' % now), encoding='utf-8')
     fh.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)

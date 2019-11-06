@@ -1,6 +1,7 @@
 [prompt]
 en = "In this next section, we will ask for your impressions of three major shoe brands. If you are not familiar with the shoe brand, simply skip the questions about that brand."
 fr = "Dans cette partie nous vous demanderons votre avis concernant trois grandes marques de chaussures. Si vous n’êtes pas familier avec la marque de chaussure, passez simplement les questions portant sur cette marque."
+pol = "W tej części zapytamy Cię o Twoje odczucia dotyczące trzech wiodących marek produkujących buty. Jeśli nie znasz określonej marki, po prostu pomiń pytania na jej temat."
 
 [prompt2]
 # Please place the %s wherever the brand name should appear in the translation.
@@ -9,43 +10,54 @@ en = "Please answer the following questions about <b>%s</b>."
 # may not be correct translation)
 fr = "Veuillez répondre aux questions suivantes concernant <b>%s</b>."
 #estonian = "Palun vastake järgmistele %s kohta käivatele küsimustele."
+pol = "Odpowiedz na poniższe pytania dotyczące marki <b>%s</b>."
 
 [warm]
 en = 'How "warm" do you consider this brand?'
-fr = 'À quel point trouvez-vous cette marque “chaleureuse” ?'
+fr = 'À quel point trouvez-vous cette marque "chaleureuse" ?'
+pol = 'Jak bardzo "ciepła" wydaje Ci się ta marka?'
 
 [warm_header]
 en = ["1\nNot at\nall \"warm\"", '2', '3', '4', '5', '6', "7\nVery \"warm\""]
 fr = ["1\nPas \"chaleureuse\" du tout", '2', '3', '4', '5', '6', "7\nTrès \"chaleureuse\""]
+pol = ["1\nZupełnie\nnie jest \"ciepła\"", '2', '3', '4', '5', '6', "7\nJest bardzo \"ciepła\""]
 
 [friendly]
 en = 'How friendly do you consider this brand?'
 fr = 'À quel point considérez-vous cette marque comme étant amicale ?'
+pol = 'Jak bardzo przyjazna wydaje Ci się ta marka?'
 
 [friendly_header]
 en = ["1\nNot at\nall friendly", '2', '3', '4', '5', '6', "7\nVery friendly"]
 fr = ["1\nPas \"amicale\" du tout", '2', '3', '4', '5', '6', "7\nTrès \"amicale\""]
+pol = ["1\nZupełnie \nnie jest przyjazna", '2', '3', '4', '5', '6', "7\nJest bardzo przyjazna"]
 
 [intentions]
 en = 'This brand has good intentions toward ordinary people.'
 fr = 'Cette marque a de bonnes intentions envers les personnes ordinaires.'
+pol = 'Ta marka ma dobre intencje wobec zwykłych ludzi.'
 
 [rest_header]
 en = ["1\nTotally disagree", '2', '3', '4', '5', '6', "7\nTotally agree"]
 fr = ["1\nPas du tout d'accord", '2', '3', '4', '5', '6', "7\nTout à fait d'accord"]
+pol = ["1\nZupełnie się nie zgadzam", '2', '3', '4', '5', '6', "7\nCałkowicie się zgadzam"]
 
 [public_interest]
 en = "This brand consistently acts with the public's best interest in mind."
 fr = "Cette marque agit constamment dans le meilleur intérêt de son public."
+pol = "Marka ta konsekwentnie działa w najlepszym interesie publicznym."
 
 [rugged]
 en = "This brand is rugged."
 fr = "Cette marque est durable."
+pol = "Ta marka jest wytrzymała"
 
 [competence]
 en = "This brand represents competence."
 fr = "Cette marque représente la compétence."
+pol = "Ta marka prezentuje kompetencje"
 
 [aggressive]
 en = "This brand is aggressive."
 fr = "Cette marque est agressive."
+pol = "Ta marka jest agresywna"

@@ -3,11 +3,13 @@
 us = '$225,000'
 eu = '205,740 euros'
 fr = '220 000€'
+pol = '900 000 PLN'
 
 [floor_label]
 us = ['Second floor', 'Third floor']
-eu = ['First floor', 'Second floor'] # TODO: check (wikipedia told me this)
+eu = ['First floor', 'Second floor']
 fr = ['Premier étage', 'Deuxième étage']
+pol = ['Pierwsze piętro', 'Drugie piętro']
 
 [house_photos]
 # note: if you need a different house picture, make sure it is named
@@ -20,3 +22,6 @@ eu = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
 
 fr = ['locale/fr/dv5_1.png', 'locale/fr/dv5_2.png', 'locale/fr/dv5_3.png', 'locale/fr/dv5_4.png', 'locale/fr/dv5_5.png',
       'locale/fr/dv5_6.png', 'locale/fr/dv5_7.png', 'locale/fr/dv5_8.png', 'locale/fr/dv5_9.png', 'locale/fr/dv5_10.png']
+
+pol = ['dv5_1.png', 'dv5_2.png', 'dv5_3.png', 'dv5_4.png', 'dv5_5.png',
+       'dv5_6.png', 'dv5_7.png', 'dv5_8.png', 'dv5_9.png', 'dv5_10.png']
