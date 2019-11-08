@@ -79,23 +79,24 @@ class MultiQuestion(qtw.QWidget):
         super().__init__()
         grid = qtw.QGridLayout()
         grid.setSizeConstraint(qtw.QLayout.SetMinimumSize)
+        self.setLayout(grid)
         for count, head in enumerate(header):
             h = qtw.QLabel(head)
             h.setStyleSheet('font-size:18pt;')
             h.setAlignment(Qt.AlignCenter)
-            grid.addWidget(h, 0, count + 1,
+            grid.addWidget(h, 0, count + 2,
                            alignment=Qt.AlignCenter | Qt.AlignBottom)
         qbgs = []
         for i, quest in enumerate(questions):
             q = qtw.QLabel()
-            q.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
+            q.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.MinimumExpanding)
+            q.setTextFormat(Qt.RichText)
             q.setWordWrap(True)
             q.setStyleSheet(no_ans)
-            q.setTextFormat(Qt.RichText)
             q.setText(quest)
             q.ensurePolished()
             qfm = QFontMetrics(q.font())
-            grid.addWidget(q, i+1, 0)
+            grid.addWidget(q, i+1, 0, 1, 2)
             qbg = qtw.QButtonGroup()
             qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))
             qbgs.append(qbg)
@@ -108,10 +109,10 @@ class MultiQuestion(qtw.QWidget):
                 rad = qtw.QRadioButton()
                 rad.setStyleSheet(style)
                 qbg.addButton(rad, count)
-                grid.addWidget(rad, i+1, count+1, alignment=Qt.AlignCenter)
+                grid.addWidget(rad, i+1, count+2, alignment=Qt.AlignCenter)
 
+        self.updateGeometry()
         self.qbgs = qbgs
-        self.setLayout(grid)
 
     def get_responses(self):
         resps = [bg.checkedId() + 1 for bg in self.qbgs]

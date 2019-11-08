@@ -164,13 +164,13 @@ class EmbrWave(object):
     @level.setter
     def level(self, value):
         # stop qtimer if it exists
+        self._level = value
         self._timer.stop()
         self.blink()
         sleep(1)
         self.stop()
         sleep(1)
         # only bother writing if the new value is meaningful?
-        self._level = value
         if value != 0:
             self.write(EmbrVal.LEVEL, value)
             self._timer.start(10000) # run every 8 secs

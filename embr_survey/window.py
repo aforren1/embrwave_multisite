@@ -65,7 +65,7 @@ class MainWindow(object):
         # alternatively, we could've detected in the button whether the current
         # widget was a StackedWidget or not
         self.add_widgets(widgets)
-        self.widgets.setFixedWidth(1.2*self.height)
+        self.widgets.setFixedWidth(1.4*self.height)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
                                                    qtw.QSizePolicy.Preferred)
