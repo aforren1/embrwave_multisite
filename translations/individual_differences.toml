@@ -209,7 +209,7 @@ pol = "Twierdzenia poniżej dotyczą tego jak czujesz się w intymnych emocjonal
 [intimate_header]
 en = ["1\nstrongly disagree", "2", "3", "4", "5", "6", "7\nstrongly agree"]
 fr = ["1\nPas du tout d'accord", "2", "3", "4", "5", "6", "7\nTout à fait d'accord"]
-pol = ["1\nZdecydowanie się nie zgadzam", "2", "3", "4", "5", "6", "7\nZdecydowanie się zgadzam"]
+pol = ["1\nZdecydowanie się\nnie zgadzam", "2", "3", "4", "5", "6", "7\nZdecydowanie się\nzgadzam"]
 
 [relationship_qs]
 en = ["I'm afraid that I will lose my partner's love",
@@ -339,7 +339,7 @@ Po tym jak odpowiesz na poniższe pytania, możesz kontynuować do następnej st
 [part3_header]
 en = ["1\nCompletely disagree", "2\nDisagree", "3\nNeutral", "4\nAgree", "5\nCompletely agree"]
 fr = ["1\nPas du tout d'accord", "2\nPas d'accord", "3\nNeutre", "4\nD'accord", "5\nTout à fait d'accord"]
-pol = ["1\nZdecydowanie się nie zgadzam", "2\nNie zgadzam się", "3\nAni się zgadzam, ani nie zgadzam", "4\nZgadzam się", "5\nZdecydowanie się zgadzam"]
+pol = ["1\nZdecydowanie się\nnie zgadzam", "2\nNie zgadzam się", "3\nAni się zgadzam, ani nie zgadzam", "4\nZgadzam się", "5\nZdecydowanie się\nzgadzam"]
 
 [part3_qs]
 en = ["I am sensitive to heat",

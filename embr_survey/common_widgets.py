@@ -1,4 +1,5 @@
 from PySide2.QtCore import Qt, QTimer
+from PySide2.QtGui import QFontMetrics
 import PySide2.QtWidgets as qtw
 from functools import partial
 import logging
@@ -38,7 +39,7 @@ class SpecialStack(qtw.QStackedWidget):
 class JustText(qtw.QLabel):
     def __init__(self, text):
         super().__init__(text)
-        self.setStyleSheet('font-size:20pt;')
+        self.setStyleSheet('font-size:18pt;')
         self.setWordWrap(True)
         self.setTextFormat(Qt.RichText)  # allow HTML
 
@@ -77,6 +78,7 @@ class MultiQuestion(qtw.QWidget):
     def __init__(self, header, questions):
         super().__init__()
         grid = qtw.QGridLayout()
+        grid.setSizeConstraint(qtw.QLayout.SetMinimumSize)
         for count, head in enumerate(header):
             h = qtw.QLabel(head)
             h.setStyleSheet('font-size:18pt;')
@@ -86,10 +88,13 @@ class MultiQuestion(qtw.QWidget):
         qbgs = []
         for i, quest in enumerate(questions):
             q = qtw.QLabel()
+            q.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.Preferred)
             q.setWordWrap(True)
             q.setStyleSheet(no_ans)
             q.setTextFormat(Qt.RichText)
             q.setText(quest)
+            q.ensurePolished()
+            qfm = QFontMetrics(q.font())
             grid.addWidget(q, i+1, 0)
             qbg = qtw.QButtonGroup()
             qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))

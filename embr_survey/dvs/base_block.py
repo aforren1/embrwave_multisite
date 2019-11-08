@@ -101,7 +101,7 @@ class SimpleDV(BaseDV):
         layout = qtw.QVBoxLayout()
         self.qs = MultiQuestion(header, [q[1] for q in self.questions])
         head = qtw.QLabel(prompt)
-        head.setStyleSheet('font-size:26pt;')
+        head.setStyleSheet('font-size:18pt;')
         head.setWordWrap(True)
         layout.addWidget(head)
         layout.addWidget(self.qs)

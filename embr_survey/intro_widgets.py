@@ -118,6 +118,7 @@ class IntroDlg(qtw.QWidget):
         self._window = None  # patched in later (reference to MainWindow)
         self._device = DummyWave()
         self._is_connected = False
+        self._already_done = False
 
         if not gatt_ble:
             self.pre_embr = DummyPreEmbr()
@@ -154,7 +155,7 @@ class IntroDlg(qtw.QWidget):
         self.id = qtw.QLineEdit()
         self.lang = qtw.QComboBox()
         fnt = self.lang.font()
-        fnt.setPointSize(26)
+        fnt.setPointSize(20)
         self.lang.setFont(fnt)
         self.lang.currentIndexChanged.connect(partial(on_activated, self))
         self.locale = qtw.QComboBox()
@@ -230,6 +231,11 @@ class IntroDlg(qtw.QWidget):
             self._log.warn(repr(e))
 
     def on_exit(self):
+        if not self._already_done:
+            self._already_done = True
+            self._part2()
+    
+    def _part2(self):
         from embr_survey import application_path
         from embr_survey import setup_logger
         from embr_survey._version import __version__
@@ -326,6 +332,7 @@ class IntroDlg(qtw.QWidget):
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
         self._window.add_widgets([dv0]) # always first (sanity check)
+        #stack2 = [dv10]
         self._window.add_widgets(stack2)
 
 def handle_sig(dev, *args):

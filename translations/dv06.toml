@@ -6,7 +6,7 @@ pol = "W tej sekcji pokażemy Ci zdjęcia osób, które dopuściły się zbrodni
 [header]
 en = ["1\nVery unlikely", "2", "3", "4", "5", "6", "7\nVery likely"]
 fr = ["1\nTrès peu probable", "2", "3", "4", "5", "6", "7\nTrès probable"]
-pol = ["1\nbardzo mało prawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo prawdopodobne"]
+pol = ["1\nbardzo mało\nprawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo\nprawdopodobne"]
 
 [[question]]
 # NB that HTML tags are accepted (bold in this case)

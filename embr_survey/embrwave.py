@@ -2,6 +2,7 @@ import embr_survey.pygatt as gatt
 import struct
 from time import sleep
 import logging
+from PySide2.QtCore import QTimer
 
 logging.basicConfig()
 gatt_log = logging.getLogger('pygatt')
@@ -83,6 +84,9 @@ class EmbrWave(object):
         self.on = True
         self.name = 'EmbrWave'
         self.adapter = gatt_ble
+        self._level = 0
+        self._timer = QTimer()
+        self._timer.timeout.connect(self._level_setter)
 
         if not addr:
             devs = self.adapter.scan()
@@ -159,11 +163,28 @@ class EmbrWave(object):
 
     @level.setter
     def level(self, value):
+        # stop qtimer if it exists
+        self._timer.stop()
         self.blink()
         sleep(1)
         self.stop()
         sleep(1)
-        self.write(EmbrVal.LEVEL, value)
+        # only bother writing if the new value is meaningful?
+        self._level = value
+        if value != 0:
+            self.write(EmbrVal.LEVEL, value)
+            self._timer.start(10000) # run every 8 secs
+    
+    def _level_setter(self):
+        # runs every 10 sec in the background
+        self._write(EmbrVal.STOP, [0x00, 0x00, 0x00, 0x20])
+        if self._level != 0:
+            self._tmptimer = QTimer.singleShot(2000, self._level2)
+
+    def _level2(self):
+        # build in delay, so that 
+        nv = struct.pack(EmbrVal.LEVEL[1], self._level)
+        self._write(EmbrVal.LEVEL, nv)
 
     @property
     def battery_charge(self):

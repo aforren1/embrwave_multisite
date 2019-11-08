@@ -31,4 +31,4 @@ pol = "Czy noszenie Embr Wave było komfortowe podczas ostatniej próby?"
 [comfort_header]
 en = ["1\nNot at all\ncomfortable", '2', '3', '4', '5', '6', "7\nVery comfortable"]
 fr = ["1\nPas confortable\ndu tout", '2', '3', '4', '5', '6', "7\nTout à fait confortable"]
-pol = ["1\ncałkowicie komfortowo", '2', '3', '4', '5', '6', "7\nbardzo komfortowo"]
+pol = ["1\ncałkowicie\nkomfortowo", '2', '3', '4', '5', '6', "7\nbardzo\nkomfortowo"]
