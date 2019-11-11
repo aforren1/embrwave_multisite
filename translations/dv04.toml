@@ -2,108 +2,130 @@
 en = "Using the following scale, select a number to indicate what you miss right now about when you were younger and how much you miss it: 1 = not at all, 7 = very much."
 fr = "En vous aidant de l’échelle suivante et en pensant à lorsque vous étiez plus jeune, choisissez un nombre pour indiquer ce qui vous manque actuellement et à quel point cela vous manque : 1 = pas du tout, 7 = beaucoup"
 pol = "Za pomocą następującej skali, wskaż za czym teraz tęsknisz z okresu, kiedy byłeś młodszy (-a) i jak bardzo za tym tęsknisz: 1 = w ogóle nie tęsknię, 7 = bardzo tęsknię."
+gr = "Wählen Sie auf der folgenden Skala eine Zahl aus, die angibt, was Sie gerade aus der Zeit, in der Sie jünger waren, vermissen und wie sehr Sie es vermissen: 1 = überhaupt nicht, 7 = sehr viel."
 
 [header]
 en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nVery much"]
 fr = ["1\nPas du tout", "2", "3", "4", "5", "6", "7\nBeaucoup"]
 pol = ["1\nw ogóle nie tęsknię", "2", "3", "4", "5", "6", "7\nbardzo tęsknię"]
+gr = ["1\nüberhaupt nicht", "2", "3", "4", "5", "6", "7\nsehr viel"]
 
 [[question]]
 en = "Family"
 fr = "Famille"
 pol = "Rodzina"
+gr = "Familie"
 
 [[question]]
 en = "Heroes or heroines"
 fr = "Héros ou héroïnes"
 pol = "Bohaterowie lub bohaterki"
+gr = "Helden oder Heldinnen"
 
 [[question]]
 en = "Not having to worry"
 fr = "Ne pas avoir à vous inquiéter"
 pol = "Że nie było trzeba się martwić"
+gr = "Sich keine Sorgen machen müssen"
 
 [[question]]
 en = "Places"
 fr = "Lieux"
 pol = "Miejsca"
+gr = "Orte"
 
 [[question]]
 en = "Music"
 fr = "Musique"
 pol = "Muzyka"
+gr = "Musik"
 
 [[question]]
 en = "Someone you loved"
 fr = "Quelqu'un que vous aimiez"
 pol = "Ktoś kogo kochałeś (-aś)"
+gr = "Jemanden den Sie geliebt haben"
 
 [[question]]
 en = "Friends"
 fr = "Amis"
 pol = "Przyjaciele"
+gr = "Freunde"
 
 [[question]]
 en = "Things you did"
 fr = "Choses que vous avez faites"
 pol = "Rzeczy, które robiłes (-aś)"
+gr = "Dinge die Sie getan haben"
 
 [[question]]
 en = "Toys"
 fr = "Jouets"
 pol = "Zabawki"
+gr = "Spielzeug"
 
 [[question]]
 en = "The way people were"
 fr = "La façon dont les gens étaient"
 pol = "Za tym, jacy byli ludzie"
+gr = "Die Art wie Menschen waren"
 
 [[question]]
 en = "Feelings you had"
 fr = "Sentiments que vous aviez"
 pol = "Uczucia, jakie miałeś (-aś)"
+gr = "Gefühle die Sie hatten"
 
 [[question]]
 en = "TV shows, movies"
 fr = "Émissions TV, films"
 pol = "Programy telewizyjne, filmy"
+gr = "Fernsehsendungen, Filme"
 
 [[question]]
 en = "School"
 fr = "École"
 pol = "Szkoła"
+gr = "Schule"
 
 [[question]]
 en = "Having someone to depend on"
 fr = "Avoir quelqu'un de qui dépendre"
 pol = "Za tym, że miałeś (-aś) kogoś, na kim można było polegać"
+gr = "Jemanden haben, auf den man sich verlassen kann"
 
 [[question]]
 en = "Holidays"
 fr = "Vacances"
 pol = "Wakacje"
+gr = "Ferien"
 
 [[question]]
 en = "The way society was"
 fr = "La façon dont la société était"
 pol = "Za tym, jakie było społeczeństwo"
+gr = "Die Art wie die Gesellschaft war"
 
 [[question]]
 en = "Pet or pets"
 fr = "Animal ou animaux de compagnie"
 pol = "Zwierzęta domowe"
+gr = "Haustiere"
 
 [[question]]
 en = "Not knowing sad or evil things"
 fr = "Ne pas connaître de choses tristes ou mauvaises"
 pol = "Za tym, że nie znało się smutku i złych rzeczy"
+gr = "Keine traurigen oder böse Dinge zu kennen"
 
 [[question]]
 en = "Church or temple, etc."
 fr = "Église, temple, etc."
 pol = "Kościoły, świątynie itp."
+gr = "Kirche oder Tempel, etc."
 
 [[question]]
 en = "Your house"
 fr = "Votre maison"
 pol = "Twój dom"
+gr = "Ihr Haus/Wohnung"

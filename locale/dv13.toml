@@ -3,6 +3,7 @@ us = 'dv13_batteries.png'
 eu = 'locale/saft.png'
 fr = 'dv13_batteries.png'
 pol = 'dv13_batteries.png'
+gr = 'dv13_batteries.png'
 # If includes a path, look there (relative to app_path, AFAIK)
 
 [currency]
@@ -10,3 +11,4 @@ us = 'USD'
 eu = 'Euros'
 fr = 'euros'
 pol = 'PLN'
+gr = '€'

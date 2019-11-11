@@ -2,11 +2,13 @@
 en = "In this next section, we will ask you to read several scenarios and indicate your opinion about them."
 fr = "Dans cette partie nous allons vous demander de lire quelques scénarios et d’indiquer votre opinion à leur sujet."
 pol = "W tej części, poprosimy Cię o przeczytanie kilku scenariuszy I wyrażenie swojej opinii na ich temat."
+gr = "Wir bitten Sie im folgenden Abschnitt einige Szenarien zu lesen und Ihre Meinung zu diesen zu äußern."
 
 [header]
 en = ["1\nCompletely\ninappropriate", "2", "3", "4", "5", "6", "7\nCompletely\nappropriate"]
 fr = ["1\nComplètement\ninnaproprié", "2", "3", "4", "5", "6", "7\nComplètement\napproprié"]
 pol = ["1\ncałkowicie\nniewłaściwe", "2", "3", "4", "5", "6", "7\ncałkowicie\nwłaściwe"]
+gr = ["1\nsehr\nunangemessen", "2", "3", "4", "5", "6", "7\nsehr\nangemessen"]
 
 [[subprompt]]
 en = """Enemy soldiers have taken over your village. They have orders to kill all remaining civilians. You and some of your townspeople have sought refuge in the cellar of a large house. Outside you hear the voices of soldiers who have come to search the house for valuables.
@@ -15,11 +17,14 @@ fr = """Des soldats ennemis ont pris d’assaut notre village. Ils ont ordre de 
 Votre bébé commence à pleurer bruyamment. Vous couvrez sa bouche pour bloquer le bruit de ses pleurs. Si vous enlevez votre main de sa bouche, ses pleurs vont attirer l’attention des soldats qui vous tueront vous, votre enfant, ainsi que le reste des habitants qui sont cachés dans la cave. Pour sauver votre vie et celle des autres, vous devez étouffer votre bébé."""
 pol = """Żołnierze wroga przejęli twoją wioskę. Mają rozkaz zabicia wszystkich cywilów. Ty i niektórzy mieszkańcy miasta szukaliście schronienia w piwnicy dużego domu. Na zewnątrz słyszysz głosy żołnierzy, którzy przyszli przeszukać dom w poszukiwaniu cennych przedmiotów.
 Twoje malutkie dziecko zaczyna głośno płakać. Zakrywasz mu usta, aby go uciszyć. Jeśli zabierzesz rękę z jego ust, jego płacz zwróci uwagę żołnierzy, którzy zabiją ciebie, twoje dziecko i innych ukrywających się w piwnicy. Aby uratować siebie i innych, musisz udusić swoje dziecko."""
+gr = """Feindliche Soldaten haben Ihr Dorf eingenommen. Sie haben den Befehl, alle verbleibenden Zivilisten zu töten. Sie und einige Ihrer Mitbürger haben im Keller eines großen Hauses Zuflucht gesucht. Draußen hört man die Stimmen von Soldaten, die gekommen sind, um das Haus nach Wertsachen zu durchsuchen.
+Ihr Baby fängt an laut zu weinen. Sie bedecken seinen Mund, um es ruhig zu stellen. Wenn Sie Ihre Hand von seinem Mund nehmen, wird sein Weinen die Aufmerksamkeit der Soldaten auf sich ziehen, die Sie, Ihr Kind und die anderen, die sich im Keller verstecken, töten werden. Um sich selbst und die anderen zu retten, müssen Sie Ihr Kind ersticken."""
 
 [[question]]
 en = "Is it appropriate for you to smother your child in order to save yourself and the other townspeople?"
 fr = "Est-il approprié de votre part d’étouffer votre enfant afin de sauver votre vie et celle des autres habitants ?"
 pol = "Czy dla Ciebie jest to właściwe, by udusić swoje dziecko w celu uratowania siebie i innych mieszkańców miasta?"
+gr = "Halten Sie es für angemessen, dass Sie Ihr Kind ersticken, um sich selbst und die anderen Bewohner der Stadt zu retten?"
 
 [[subprompt]]
 en = """A runaway trolley is heading down the tracks toward five workmen who will be killed if the trolley proceeds on its present course. You are on a footbridge over the tracks, in between the approaching trolley and the five workmen. Next to you on this footbridge is a stranger who happens to be very large.
@@ -28,11 +33,15 @@ fr = """Un tramway hors de contrôle se dirige vers cinq ouvriers situés sur le
 Le seul moyen de sauver la vie de ces cinq ouvriers est de pousser cet inconnu pour qu’il tombe sur les rails et bloque le tramway dans sa course. Si vous faites cela, l’inconnu mourra mais les cinq ouvriers seront sauvés."""
 pol = """Wagon zmierza w dół torów w kierunku pięciu robotników, którzy zostaną zabici, jeśli wagon będzie kontynuował swój obecny kurs. Jesteś na kładce nad torami, pomiędzy zbliżającym się wagonem, a pięcioma robotnikami. Obok ciebie na tej kładce znajduje się nieznajomy, który jest bardzo dużą osobą.
 Jedynym sposobem na uratowanie życia pięciu robotników jest zepchnięcie nieznajomego z mostu na tory poniżej, gdzie jego duże ciało zatrzyma wózek. Jeśli to zrobisz, nieznajomy umrze, ale pięciu robotników zostanie uratowanych."""
+gr = """Ein außer Kontrolle geratener Wagon fährt auf fünf Arbeiter zu, die sich auf den Gleisen befinden und getötet werden, wenn der Wagon seinen derzeitigen Kurs beibehält. Sie stehen auf einer Fußgängerbrücke über den Gleisen zwischen dem herannahenden Wagon und den fünf Arbeitern. Neben Ihnen steht ein Fremder auf der Fußgängerbrücke, der zufällig sehr groß ist.
+
+Die einzige Möglichkeit, das Leben der fünf Arbeiter zu retten, besteht darin, diesen Fremden von der Brücke auf die Gleise darunter zu stoßen, wo sein großer Körper den Wagon anhält. Der Fremde stirbt, wenn Sie dies tun, die fünf Arbeiter werden aber gerettet."""
 
 [[question]]
 en = "Is it appropriate for you to push the stranger on to the tracks in order to save the five workmen?"
 fr = "Est-il approprié de votre part de pousser cet étranger sur les rails dans l’intention de sauver ces cinq ouvriers ?"
 pol = "Czy dla Ciebie jest to właściwe, by popchnąć nieznajomego na tory w celu uratowania pięciu robotników?"
+gr = "Halten Sie es für angemessen, den Fremden auf die Gleise zu stoßen, um die fünf Arbeiter zu retten?"
 
 [[subprompt]]
 en = """It is wartime and you and your two children, ages eight and five, are living in a territory that has been occupied by the enemy. At the enemy's headquarters is a doctor who performs painful experiments on humans that inevitably lead to death.
@@ -41,11 +50,15 @@ fr = """C’est un temps de guerre et vous et vos deux enfants, âgés de 8 et 5
 Il a l’intention de réaliser des expériences sur l’un de vos enfants, mais il vous autorise à choisir lequel des deux subira les expériences. Vous avez vingt-quatre heures pour emmener l’un de vos enfants à son laboratoire. Si vous refusez d’amener l’un de vos enfants à son laboratoire, il viendra chercher les deux et les deux subiront ses expériences."""
 pol = """Jest wojna, a ty i dwójka twoich dzieci, w wieku ośmiu i pięciu lat, żyjecie na terytorium, które zostało zajęte przez wroga. W kwaterze głównej wroga znajduje się lekarz przeprowadzający bolesne eksperymenty na ludziach, które nieuchronnie prowadzą do śmierci.
 Zamierza on przeprowadzić eksperymenty na jednym z waszych dzieci, ale pozwoli wam wybrać, które to będzie dziecko. Masz 24 godziny na przyprowadzenie jednego z dzieci do jego laboratorium. Jeśli odmówisz, znajdzie was i przeprowadzi eksperymenty na dwójce Twoich dzieci."""
+gr = """Es ist Krieg und Sie und Ihre beiden Kinder im Alter von acht und fünf Jahren leben in einem Gebiet, das vom Feind besetzt wurde. Im Hauptquartier des Feindes befindet sich ein Arzt, der schmerzhafte Experimente an Menschen durchführt, die unweigerlich zum Tod führen.
+
+Er beabsichtigt, Experimente an einem Ihrer Kinder durchzuführen, aber er erlaubt Ihnen, auszuwählen, an welchem Ihrer Kinder experimentiert werden soll. Sie haben 24 Stunden Zeit, eines Ihrer Kinder in sein Labor zu bringen. Wenn Sie sich weigern, eines Ihrer Kinder in sein Labor zu bringen, wird er beide finden und an beiden experimentieren. """
 
 [[question]]
 en = "Is it appropriate for you to bring one of your children to the laboratory in order to avoid having them both die?"
 fr = "Est-il approprié de votre part d’emmener l’un de vos enfants au laboratoire dans le but d’éviter que les deux ne meurent ?"
 pol = "Czy dla Ciebie jest to właściwe, by przyprowadzić jedno z dzieci do laboratorium w celu uniknięcia śmierci ich obojga?"
+gr = "Halten Sie es für angemessen, eines Ihrer Kinder in das Labor zu bringen, um zu vermeiden, dass beide sterben?"
 
 [[subprompt]]
 en = """You are the leader of a mountaineering expedition that is stranded in the wilderness. Your expedition includes a family of six that has a genetically caused vitamin deficiency. A few people's kidneys contain large amounts of this vitamin.
@@ -54,11 +67,15 @@ fr = """Vous êtes le chef d’une expédition en montagne qui s’est échouée
 Dans votre groupe se trouve une personne dont c’est le cas. Le seul moyen de sauver la vie des six membres de cette famille est de retirer l’un des reins de cet homme afin que les vitamines nécessaires puissent en être extraites. Cet homme ne mourra pas de cette opération, mais sa santé sera compromise. Cet homme est opposé à cette idée, mais vous détenez l’autorité de le faire si vous en jugez nécessaire."""
 pol = """Jesteś kierownikiem wyprawy wspinaczkowej, która utknęła gdzieś na pustkowiu. Twoja wyprawa obejmuje sześcioosobową rodzinę, która ma genetycznie zdeterminowany niedobór pewnej witaminy. Wiadomo, że nerki niektórych osób zawierają duże ilości tej witaminy.
 Na Twojej wyprawie jest jeden taki mężczyzna. Jedynym sposobem na uratowanie życia sześciu członków tej rodziny jest usunięcie jednej z nerek tego mężczyzny, aby można było z niej wydobyć niezbędne witaminy. Ten mężczyzna nie umrze, jeśli to zrobisz, ale jego zdrowie na tym ucierpi. Człowiek ten sprzeciwia się takiemu zabiegowi, ale masz możliwości, aby zrobić to, co uważasz za stosowne."""
+gr = """Sie sind Anführer einer Bergsteigerexpedition, die in der Wildnis gestrandet ist. Ihre Expedition umfasst eine sechsköpfige Familie mit einem genetisch bedingten Vitaminmangel. Die Nieren weniger Menschen enthalten große Mengen dieses Vitamins.
+
+In Ihrer Gruppe gibt so eine Person. Die einzige Möglichkeit, das Leben der sechs Mitglieder dieser Familie zu retten, besteht darin, eine der Nieren dieses Mannes zu entfernen, sodass die notwendigen Vitamine daraus gewonnen werden können. Der Mann wird nicht sterben, wenn Sie dies tun, aber seine Gesundheit wird beeinträchtigt werden. Der Mann ist gegen diesen Plan, aber Sie haben die Macht zu tun, was Sie für richtig halten."""
 
 [[question]]
 en = "Is it appropriate for you to forcibly remove this man's kidney in order to save the lives of the six vitamin-deficient people?"
 fr = "Est-il approprié de votre part de retirer de force le rein de cet homme dans le but de sauver la vie des six personnes en carence de vitamines ?"
 pol = "Czy dla Ciebie jest to właściwe, by siłą usunąć nerkę mężczyźnie w celu uratowania życia sześcioosobowej rodzinie?"
+gr = "Ist es für Sie angemessen, die Niere dieses Mannes gewaltsam zu entfernen, um das Leben der sechs Menschen mit Vitaminmangel zu retten?"
 
 [[subprompt]]
 en = """You are the leader of a small army that consists of warriors from two tribes, the hill tribe and the river tribe. You belong to neither tribe. During the night a hill tribesman got into an argument with a river tribesman and murdered him. The river tribe will attack the hill tribe unless the murderer is put to death, but the hill tribe refuses to kill one of its own warriors.
@@ -67,11 +84,15 @@ fr = """Vous êtes le chef d’une petite armée constituée de guerriers de deu
 Le seul moyen d’éviter une guerre entre les deux tribus qui coûterait la vie de centaines de personnes est d’exécuter publiquement le meurtrier en lui coupant la tête avec votre épée."""
 pol = """Jesteś przywódcą małej armii, która składa się z wojowników z dwóch plemion - plemienia górskiego i plemienia rzecznego. Nie należysz do żadnego z tych plemion. W nocy, mężczyzna z plemienia górskiego wdał się w spór z mężczyzną z plemienia rzecznego i ostatecznie go zamordował. Plemię rzeczne postanowiło, że zaatakuje plemię górskie, chyba że morderca zostanie zabity. Plemię górskie odmawia jednak zabicia swojego człowieka.
 Jedynym sposobem na uniknięcie wojny pomiędzy dwoma plemionami, która będzie kosztować setki istnień ludzkich, jest publiczne ścięcie mordercy głowy Twoim mieczem."""
+gr = """Sie sind Anführer einer kleinen Armee, die aus Kriegern zweier Stämme besteht, dem Bergstamm und dem Flussstamm. Sie gehören keinem Stamm an. In der Nacht geriet ein Bergstamm-Mitglied mit einem Flussstamm-Mitglied in einen Streit und ermordete ihn. Der Flussstamm wird den Bergstamm angreifen, es sei denn, der Mörder wird getötet, aber der Bergstamm weigert sich, einen seiner eigenen Krieger zu töten.
+
+Der einzige Weg für Sie, einen Krieg zwischen den beiden Stämmen zu vermeiden, der Hunderte von Leben kosten wird, besteht darin, den Mörder öffentlich zu exekutieren, indem Sie ihm den Kopf mit Ihrem Schwert abtrennen."""
 
 [[question]]
 en = "Is it appropriate for you to cut off this man's head in order to prevent the two tribes from fighting a war that will cost hundreds of lives?"
 fr = "Est-il approprié de votre part de couper la tête de cet homme dans le but d’empêcher une guerre entre les deux tribus qui coûterait la vie à des centaines de personnes ?"
 pol = "Czy dla Ciebie jest to właściwe, by ściąć temu mężczyźnie głowę w celu uniknięcia wojny, w skutek której zginą setki ludzi?"
+gr = "Ist es für Sie angemessen, dass Sie diesem Mann den Kopf abtrennen, um zu verhindern, dass die beiden Stämme einen Krieg führen, der Hunderte von Leben kosten wird?"
 
 [[subprompt]]
 en = """You are negotiating with a powerful and determined terrorist who is about to set off a bomb in a crowded area. Your one advantage is that you have his teen-age son in your custody.
@@ -80,11 +101,15 @@ fr = """Vous êtes en train de négocier avec un terroriste puissant et détermi
 Il n’y a qu’une seule chose que vous pouvez faire pour l’empêcher de détonner sa bombe, qui tuerait des milliers de personnes si détonnée. Pour l’arrêter, vous devez prendre contact avec lui via la liaison satellite qu’il a établi et, en face de la caméra, casser l’un des bras de son fils et le menacer de casser l’autre s’il ne se rend pas."""
 pol = """Negocjujesz z potężnym i zdeterminowanym terrorystą, który ma zamiar zdetonować bombę na obszarze pełnym ludzi. Twoją jedyną przewagą jest to, że masz w areszcie jego nastoletniego syna.
 Jest tylko jedna rzecz, którą możesz zrobić, aby powstrzymać go przed zdetonowaniem jego bomby, która zabije tysiące ludzi. Aby go powstrzymać, musisz skontaktować się z nim przez satelitę i przed kamerą złamać jedną rękę jego synowi, a następnie zagrozić, że złamiesz drugą, jeśli się nie podda."""
+gr = """Sie verhandeln mit einem mächtigen und entschlossenen Terroristen, der im Begriff ist, eine Bombe in einem überfüllten Gebiet zu zünden. Ihr einziger Vorteil ist, dass Sie seinen Sohn im Teenageralter in Ihrem Gewahrsam haben.
+
+Die Detonation der Bombe wird tausende von Menschen töten. Es gibt nur eine Sache, die Sie tun können, um ihn vom Zünden seiner Bombe abzuhalten.  Sie müssen ihn über die von ihm eingerichtete Satellitenverbindung kontaktieren. Vor der Kamera müssen Sie einen Arm seines Sohnes brechen und damit drohen, den anderen zu brechen, wenn er sich nicht ergibt. """
 
 [[question]]
 en = "Is it appropriate for you to break the terrorist's son's arm in order to prevent the terrorist from killing thousands of people with his bomb?"
 fr = "Est-il approprié de votre part de casser le bras du fils du terroriste dans le but de l’empêcher de tuer de milliers de personnes avec sa bombe ?"
 pol = "Czy dla Ciebie jest to właściwe, by złamać synowi terrorysty rękę w celu uniknięcia śmierci tysiąca ludzi przez zdetonowaną bombę?"
+gr = "Ist es für Sie angemessen, dem Sohn des Terroristen den Arm zu brechen, um den Terroristen daran zu hindern, Tausende von Menschen mit seiner Bombe zu töten?"
 
 [[subprompt]]
 en = """You are the captain of a military submarine travelling underneath a large iceberg. An onboard explosion has caused you to lose most of your oxygen supply and has injured one of your crew who is quickly losing blood. The injured crew member is going to die from his wounds no matter what happens.
@@ -93,11 +118,15 @@ fr = """Vous êtes le capitaine d’un sous-marin militaire se déplaçant sous 
 L’oxygène restant est insuffisant pour permettre à l’ensemble de l’équipage de survivre jusqu’à atteindre la surface. Le seul moyen de sauver les autres membres de l’équipage est de tirer une balle sur le membre blessé, ainsi il devrait rester juste assez d’oxygène pour permettre aux autres membres de l’équipage de survivre."""
 pol = """Jesteś kapitanem wojskowego okrętu podwodnego płynącego pod dużą górą lodową. Eksplozja na pokładzie spowodowała, że straciłeś większość zapasów tlenu i zraniony został jeden z członków załogi, który szybko traci krew. Umrze on od swoich ran bez względu na to, co się stanie.
 Pozostały tlen nie wystarczy do tego, aby cała załoga wyszła na powierzchnię. Jedynym sposobem na uratowanie pozostałych członków załogi jest zastrzelenie owego rannego mężczyzny po to, by pozostała część załogi miała wystarczająco dużo tlenu do przeżycia."""
+gr = """Sie sind Kapitän eines militärischen U-Bootes, das unter einem großen Eisberg fährt. Eine Explosion an Bord hat dazu geführt, dass Sie den größten Teil Ihrer Sauerstoffversorgung verloren haben und ein  Besatzungsmitglied verletzt wurde, dass schnell Blut verliert. Das verletzte Besatzungsmitglied wird an seinen Wunden sterben, egal was passiert.
+
+Der verbleibende Sauerstoff reicht nicht für die gesamte Besatzung aus, um an die Oberfläche zu gelangen. Die einzige Möglichkeit, die anderen Besatzungsmitglieder zu retten, besteht darin, das verletzte Besatzungsmitglied zu erschießen, sodass gerade genug Sauerstoff für den Rest der Besatzung vorhanden sein wird, um zu überleben."""
 
 [[question]]
 en = "Is it appropriate for you to kill the fatally injured crew member in order to save the lives of the remaining crew members?"
 fr = "Est-il approprié de votre part de tuer le membre de l’équipage mortellement blessé dans le but de sauver la vie des membres restants de l’équipage ?"
 pol = "Czy dla Ciebie jest to właściwe, by zabić fatalnie zranionego członka załogi w celu uratowania pozostałych?"
+gr = "Ist es für Sie angemessen, das tödlich verletzte Besatzungsmitglied zu töten, um die Leben der verbleibenden Besatzungsmitglieder zu retten?"
 
 [[subprompt]]
 en = """You are a doctor. One of your patients, whom you diagnosed as HIV positive, is about to be released from the hospital. He has told you, in the confidence of your doctor-patient relationship, that he intends to infect as many people as possible with HIV starting that evening.
@@ -106,8 +135,12 @@ fr = """Vous êtes docteur. L’un de vos patients, que vous avez diagnostiqué 
 Puisque vous êtes tenu par votre engagement de confidentialité docteur-patient, il n’y a aucun moyen légal d’arrêter cet homme de mettre son plan à exécution. Il vous vient à l’esprit que vous pourriez contaminer les médicaments de cet homme à l’aide d’un poison impossible à identifier qui le tuera avant qu’il n’ait la chance d’infecter d’autres personnes."""
 pol = """Jesteś lekarzem. Jeden z Twoich pacjentów, u którego zdiagnozowałeś zakażenie wirusem HIV, zostanie wkrótce wypuszczony ze szpitala. Powiedział Ci w zaufaniu, że zamierza zarazić wirusem HIV jak największą liczbę osób, począwszy od tego wieczora.
 Ponieważ jesteś związany tajemnicą lekarską, nie ma prawnego sposobu, aby powstrzymać tego człowieka od realizacji jego planu. Jednak masz możliwość, by zanieczyścić jego leki, niedającą się wykryć trucizną, która zabije go, zanim zdąży zainfekować innych."""
+gr = """Sie sind Arzt/Ärztin. Einer Ihrer Patienten, den Sie als HIV-positiv diagnostiziert haben, steht kurz vor der Entlassung aus dem Krankenhaus. Er hat Ihnen im Vertrauen Ihrer Arzt-Patienten-Beziehung mitgeteilt, dass er beabsichtigt, ab diesem Abend so viele Menschen wie möglich mit HIV zu infizieren.
+
+Da Sie an die Schweigepflicht gebunden sind, gibt es keine legale Möglichkeit, diesen Mann vom Ausführen seines Plans abzuhalten. Es fällt Ihnen ein, dass Sie seine Medikamente mit einem nicht nachweisbaren Gift kontaminieren könnten, das ihn töten wird, bevor er die Chance hat, andere zu infizieren."""
 
 [[question]]
 en = "Is it appropriate for you to poison this man in order to prevent him from spreading HIV?"
 fr = "Est-il approprié de votre part d’empoisonner cet homme afin de l’empêcher de répandre le VIH ?"
 pol = "Czy dla Ciebie jest to właściwe, by otruć tego mężczyznę w celu zapobiegnięcia rozprzestrzeniania przez niego wirusa HIV?"
+gr = "Ist es für Sie angemessen diesen Mann zu vergiften, um zu verhindern, dass er HIV verbreitet?"

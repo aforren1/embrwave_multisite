@@ -3,47 +3,56 @@
 en = "In this next section, we will show you some information about movies and ask what you think about them. You will do this for 6 movies."
 fr = "Dans cette partie, nous allons vous montrer des informations au sujet de films et vous demander ce que vous en pensez. Vous ferez ceci pour 6 films."
 pol = "W następnej sekcji będziemy pokazywać Ci pewne informacje na temat filmów i zapytamy, co o nich myślisz. Pytania będą dotyczyły 6 filmów."
+gr = "In diesem nächsten Abschnitt werden wir Ihnen einige Informationen über Filme zeigen und fragen, was Sie über diese denken. Sie werden dies für sechs Filme machen."
 
 [header1]
 en = ["1<br>Not at all", '2', '3', '4', '5', '6', "7<br>Very much"]
 fr = ["1<br>Pas du tout", '2', '3', '4', '5', '6', "7<br>Beaucoup"]
 pol = ["1<br>Wcale", '2', '3', '4', '5', '6', "7<br>Bardzo"]
+gr = ["1<br>überhaupt nicht", '2', '3', '4', '5', '6', "7<br>sehr"]
 
 [header2]
 en = ["1<br>Not at all", '2', '3', '4', '5', '6', "7<br>Very good"]
 fr = ["1<br>Pas du tout", '2', '3', '4', '5', '6', "7<br>Beaucoup"]
 pol = ["1<br>Wcale", '2', '3', '4', '5', '6', "7<br>Bardzo"]
+gr = ["1<br>überhaupt nicht", '2', '3', '4', '5', '6', "7<br>sehr"]
 
 [question1]
 en = "How much would you like to watch this movie?"
 fr = "À quel point aimeriez-vous voir ce film ?"
 pol = "Jak bardzo chciałbyś/chciałabyś zobaczyć ten film?"
+gr = "Wie sehr möchten Sie diesen Film sehen?"
 
 [question2]
 en = "How good do you think this movie would be?"
 fr = "À quel point pensez-vous que ce film serait bien ?"
 pol = "Jak dobry będzie Twoim zdaniem ten film?"
+gr = "Wie gut denken Sie ist dieser Film?"
 
 [question3]
 en = "Have you seen or heard of this movie before?"
 fr = "Avez-vous déjà vu ou entendu parler de ce film auparavant ?"
 pol = "Czy widziałeś/widziałaś ten film lub słyszałeś/słyszałaś o nim wcześniej?"
+gr = "Haben Sie diesen Film schon gesehen oder von ihm gehört?"
 
 # should be a qcombobox (default blank)
 [[ans]]
 en = "Yes - I have seen it"
 fr = "Oui - je l'ai déjà vu"
 pol = "Tak - widziałem/widziałam go"
+gr = "Ja – Ich habe ihn gesehen"
 
 [[ans]]
 en = "Yes - I have heard of it"
 fr = "Oui - j'en ai déjà entendu parler"
 pol = "Tak - słyszałem/słyszałam o nim"
+gr = "Ja – Ich habe von ihm gehört"
 
 [[ans]]
 en = "No - I didn't know anything about this movie"
 fr = "Non - je ne connaissais pas du tout ce film"
 pol = "Nie – nie wiedziałem/nie wiedziałam nic o tym filmie"
+gr = "Nein – Ich habe diesen Film nicht gekannt"
 
 # Questions
 [[movie]]
@@ -65,6 +74,12 @@ pol = """
 <b>Ocena oglądających</b>: 7,8/10<br>
 <b>Streszczenie</b>: Don, poszukiwany kryminalista, umiera w pościgu policyjnym. Detektyw D’Silva jest jedynym, który wie o jego śmierci i żeby przeprowadzić śledztwo w sprawie gangu trenuje przypominającego Dona Vijaya. Jednak Vijay staje w obliczu niebezpieczeństwa zarówno ze strony policji jak i ze strony gangu.
 """
+gr = """
+<b>Titel</b>: Don<br>
+<b>Genre</b>: Action<br>
+<b>Zuschauerbewertung</b>: 7.8/10<br>
+<b>Zusammenfassung</b>: Don, ein gesuchter Verbrecher, stirbt bei einer Polizeiverfolgung. Detektiv D'Silva ist der einzige, der über seinen Tod Bescheid weiß und um die Bande zu untersuchen, bildet er einen Don-Doppelgänger namens Vijay aus. Aber Vijay ist sowohl von der Polizei als auch von der Bande bedroht.
+"""
 
 [[movie]]
 en = """
@@ -84,6 +99,12 @@ pol = """
 <b>Gatunek</b>: Akcja<br>
 <b>Ocena oglądających</b>: 7,0/10<br>
 <b>Streszczenie</b>: Twardy, naginający zasady gliniarz ściga maniakalnego, skłonnego do przemocy garbusa, jednorękiego bandytę napadającego na banki oraz ich kumpli aby oddać najsilniejszego, rzymskiego króla przestępczości w ręce sprawiedliwości.
+"""
+gr = """
+<b>Titel</b>: Die Harten<br>
+<b>Genre</b>: Action<br>
+<b>Zuschauerbewertung</b>: 7.0/10<br>
+<b>Zusammenfassung</b>: Ein harter, regelwidriger Polizist verfolgt einen wahnsinnigen, schießwütigen Buckligen, einen einhändigen Bankräuber und deren Kumpanen, um Roms mächtigsten Verbrecher vor Gericht zu stellen.
 """
 
 [[movie]]
@@ -105,6 +126,12 @@ pol = """
 <b>Ocena oglądających</b>: 7,1/10<br>
 <b>Streszczenie</b>: Ostatni uczeń umierającego mistrza sztuk walki zostaje poinstruowany by namierzyć poprzednich pięciu uczniów i pokonać wszystkich spośród nich którzy są źli.
 """
+gr = """
+<b>Titel</b>: Fünf tödliche Gifte<br>
+<b>Genre</b>: Action<br>
+<b>Zuschauerbewertung</b>: 7.1/10<br>
+<b>Zusammenfassung</b>: Der letzte Schüler eines sterbenden Kampfkunstmeisters wird angewiesen, die vorherigen fünf Schüler ausfindig zu machen und alle bösen unter ihnen zu besiegen.
+"""
 
 [[movie]]
 en = """
@@ -124,6 +151,12 @@ pol = """
 <b>Gatunek</b>: Romans<br>
 <b>Ocena oglądających</b>: 8,7/10<br>
 <b>Streszczenie</b>: Asya, młoda dziewczyna mająca surową matkę, poznaje Ilyasa, handlowca i kobieciarza. Szybko się zakochują i biorą ślub. Jednakże, po tym gdy jednej nocy Ilyas pomaga pewnemu mężczyźnie, jego życie zmienia się na zawsze, zostawia Asyę i ich syna i nie wraca. Asya bierze swojego syna i odchodzi nie wiedząc dokąd się udaje, aż znajoma ręka dosięga jej by jej bezinteresownie pomóc.
+"""
+gr = """
+<b>Titel</b>: Das Mädchen mit dem roten Schal<br>
+<b>Genre</b>: Romanze<br>
+<b>Zuschauerbewertung</b>: 8.7/10<br>
+<b>Zusammenfassung</b>: Asya, ein junges Mädchen mit einer strengen Mutter, lernt Ilyas, einen Stadtmenschen und Frauenheld, kennen. Sie verlieben sich schnell und heiraten. Nachdem er jedoch eines Nachts einem Mann geholfen hat, ändert sich Ilyas Leben für immer und er verlässt Asya und ihren Sohn und kommt nicht zurück. Asya nimmt ihren Sohn und geht, ohne zu wissen wohin, bis eine vertraute Hand sie erreicht, um selbstlos zu helfen.
 """
 
 [[movie]]
@@ -145,6 +178,12 @@ pol = """
 <b>Ocena oglądających</b>: 7,5/10<br>
 <b>Streszczenie</b>: Francuski chłopak (Daniel) i amerykańska dziewczyna (Lauren), uczęszczający do szkoły w Paryżu, spotykają się i wdają się w mały romans . Zaprzyjaźniają się z Juliusem, który oczarowuje ich swoją zdolnością do opowiadania historii. W próbie zachowania nastoletniej miłości na zawsze, cała trójka podróżuje do Wenecji.
 """
+gr = """
+<b>Titel</b>: Ich liebe dich, je t’aime<br>
+<b>Genre</b>: Romanze<br>
+<b>Zuschauerbewertung</b>: 7.5/10<br>
+<b>Zusammenfassung</b>: Ein französischer Junge (Daniel) und ein amerikanisches Mädchen (Lauren), die in Paris zur Schule gehen, treffen sich und beginnen eine kleine Romanze. Sie freunden sich mit Julius an, der sie mit seinem Geschichtenerzählen verzaubert. In einem Versuch, die Liebe der Teenager für immer zu sichern, reisen die drei nach Venedig.
+"""
 
 [[movie]]
 en = """
@@ -164,4 +203,10 @@ pol = """
 <b>Gatunek</b>: Romans<br>
 <b>Ocena oglądających</b>: 7,2/10<br>
 <b>Streszczenie</b>: Żonaty mężczyzna i zamężna kobieta kończą razem w łóżku i decydują się spotkać w tym samym miejscu każdego roku w rocznicę swojej jednonocnej przygody. Z upływem lat, obserwują zmiany w sobie i w swoim związku.
+"""
+gr = """
+<b>Titel</b>: Gleiche Zeit, nächstes Jahr<br>
+<b>Genre</b>: Romanze<br>
+<b>Zuschauerbewertung</b>: 7.2/10<br>
+<b>Zusammenfassung</b>: Ein verheirateter Mann und eine verheiratete Frau schlafen miteinander und beschließen, sich jedes Jahr am Jahrestag ihres One-Night-Standes am selben Ort zu treffen. Im Laufe der Jahre beobachten sie Veränderungen beieinander und in ihrer Beziehung.
 """

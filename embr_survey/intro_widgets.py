@@ -244,6 +244,9 @@ class IntroDlg(qtw.QWidget):
         from time import time
         from embr_survey.common_widgets import EmbrFactory, EmbrSection
         import embr_survey.dvs as dvs
+        import os
+        import sys
+        import platform
 
         # we should now have sufficient info to start the experiment
         exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
@@ -259,6 +262,8 @@ class IntroDlg(qtw.QWidget):
         os.makedirs(settings['data_dir'], exist_ok=True)
         setup_logger(settings['data_dir'], exp_start)
         seed = int(time()) # seconds since Unix epoch
+        # TESTING: one of the bad runs
+        #seed = 1573207638
         random.seed(seed)
         settings['seed'] = seed
         logger = logging.getLogger('embr_survey')
@@ -267,6 +272,10 @@ class IntroDlg(qtw.QWidget):
         logger.info('Seed: %s' % seed)
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
+        logger.info('System platform: %s' % platform.platform())
+        logger.info('Machine: %s' % platform.machine())
+        logger.info('Python version: %s' % platform.python_version())
+
         logger.info('embr_survey version: %s' % __version__)
         logger.info('----------')
         device = self._device
@@ -282,6 +291,7 @@ class IntroDlg(qtw.QWidget):
         random.shuffle(dv_order)
         temps2 = [temps[val] for val in dv_order]
         self._log.info('Temperature progression: %s' % temps2)
+        self._log.info('DV order: %s' % dv_order)
 
         # TODO: feed in locale
         lang = settings['language']

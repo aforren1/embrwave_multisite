@@ -2,19 +2,23 @@
 en = "In this section we will show you pictures of people who committed crimes ('mugshots') from an online database. Each of these individuals committed a crime, but we will ask you about the type of crime you think each one committed."
 fr = "Dans cette partie nous allons vous montrer des photos de personnes ayant commis des crimes (‘photographies d’identité judiciaire’) tirées d’une base de données en ligne. Chacun de ces individus ont commis un crime, mais nous vous interrogerons sur le type de crime que vous pensez que chacun a commis."
 pol = "W tej sekcji pokażemy Ci zdjęcia osób, które dopuściły się zbrodni, z internetowej policyjnej bazy danych. Każda z tych osób popełniła jakąś zbrodnię - prosimy Cię o to, abyś wskazał (-a) jakiego rodzaju mogła być to zbrodnia w przypadku każdej z osób."
+gr = "In diesem Abschnitt werden wir Ihnen Bilder von Personen zeigen, die Verbrechen begangen haben. Die Bilder stammen aus einer Online-Datenbank für Fahndungsfotos. Jede dieser Personen hat ein Verbrechen begangen, aber wir werden Sie nach der Art des Verbrechens fragen, von dem Sie denken, dass es von der jeweiligen Person begangen wurde."
 
 [header]
 en = ["1\nVery unlikely", "2", "3", "4", "5", "6", "7\nVery likely"]
 fr = ["1\nTrès peu probable", "2", "3", "4", "5", "6", "7\nTrès probable"]
-pol = ["1\nbardzo mało\nprawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo\nprawdopodobne"]
+pol = ["1\nbardzo mało prawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo prawdopodobne"]
+gr = ["1\nsehr unwahrscheinlich", "2", "3", "4", "5", "6", "7\nsehr wahrscheinlich"]
 
 [[question]]
 # NB that HTML tags are accepted (bold in this case)
 en = "How likely is it that this person committed a <b>premeditated crime</b>?"
 fr = "Quelle est la probabilité que cette personne ait commis un <b>crime prémédité</b> ?"
 pol = "Jak bardzo prawdopodobne jest, że ta osoba popełniła <b>zbrodnię z premedytacją?</b>"
+gr = "Wie wahrscheinlich ist es, dass diese Person ein <b>vorsätzliches Verbrechen</b> begangen hat?"
 
 [[question]]
 en = "How likely is it that this person committed an <b>impulsive crime</b>?"
 fr = "Quelle est la probabilité que cette personne ait commis un <b>crime impulsif</b> ?"
 pol = "Jak bardzo prawdopodobne jest, że ta osoba popełniła <b>zbrodnię pod wpływem impulsu?</b>"
+gr = "Wie wahrscheinlich ist es, dass diese Person ein <b>Verbrechen im Affekt</b> begangen hat?"

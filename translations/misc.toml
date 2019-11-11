@@ -5,51 +5,61 @@ en = 'Next'
 es = 'Próxima'
 fr = 'Suivant'
 pol = 'Kolejny'
+gr = 'Nächster'
 
 [incomplete]
 en = "Are you sure? You left some blank."
 fr = "Êtes-vous sûr? Vous avez laissé des blancs."
 pol = "Jesteś pewny? Zostawiłeś trochę pustych."
+gr = "Bist du sicher? Sie ließen etwas leer."
 
 [next_incomplete]
 en = 'Next (questions unanswered)'
 fr = 'Suivant (questions sans réponse)'
 pol = 'Dalej (pytania bez odpowiedzi)'
+gr = 'Weiter (Fragen offen)'
 
 [participant]
 en = 'Participant ID'
 es = 'ID del participante'
 fr = 'ID de participant'
 pol = 'Numer uczestnika'
+gr = 'Teilnehmernummer'
 
 [language]
 en = 'Language'
 es = 'Idioma'
 fr = 'Langue'
 pol = 'Język'
+gr = 'Sprache'
 
 [locale]
 en = 'Locale'
 es = 'Lugar'
 fr = 'Lieu'
 pol = 'Widownia'
+gr = 'Gebietsschema'
 
 [wait_until_green]
 en = 'Please wait until the button below turns green.'
 fr = 'Veuillez attendre que le bouton ci-dessous soit vert.'
 pol = 'Poczekaj, aż poniższy przycisk zmieni kolor na zielony.'
+gr = 'Bitte warten Sie, bis die Schaltfläche unten grün wird.'
 
 [connect_device]
 en = 'If you have an Embr Wave, hold the button until the device turns green. After a few seconds, the device will finish connecting. Otherwise, press the button below.'
 fr = "Si vous avez un Embr Wave, appuyez sur le bouton jusqu'à ce que le dispositif soit vert. Après quelques secondes, le dispositif terminera de se connecter. Autrement, appuyez sur le bouton ci-dessous."
 pol = 'Jeśli masz falę Embr, przytrzymaj przycisk, aż urządzenie zmieni kolor na zielony. Po kilku sekundach urządzenie zakończy połączenie. W przeciwnym razie naciśnij przycisk poniżej.'
+gr = 'Wenn Sie eine Embr Wave haben, halten Sie die Taste gedrückt, bis das Gerät grün wird. Nach einigen Sekunden ist die Verbindung zum Gerät hergestellt. Andernfalls drücken Sie die Taste unten.'
 
 [is_connected]
 en = 'Device connected? (red = no, green = yes)'
 fr = 'Dispositif connecté? (rouge = non, vert = oui)'
 pol = 'Urządzenie podłączone? (czerwony = nie, zielony = tak)'
+gr = 'Gerät angeschlossen? (rot = nein, grün = ja)'
 
 [dev_instr]
 en = 'Find/Connect Device'
 fr = 'Trouver/Connecter le Dispositif'
 pol = 'Znajdź / podłącz urządzenie'
+gr = 'Gerät suchen / verbinden'

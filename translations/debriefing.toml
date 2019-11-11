@@ -2,6 +2,7 @@
 en = "What do you think the purpose of this study was?"
 fr = "À votre avis, quel était le but de l’étude ?"
 pol = "Jak myślisz, jaki był cel tej sesji badawczej?"
+gr = "Was war Ihrer Meinung nach der Zweck dieser Studie?"
 
 # q_purpose_ans is free text
 
@@ -9,16 +10,19 @@ pol = "Jak myślisz, jaki był cel tej sesji badawczej?"
 en = "Do you think the temperature settings of the Embr Wave were related to the questions you were asked?"
 fr = "Pensez-vous que les paramètres de température de l’Embr Wave étaient liés aux questions qui vous ont été posées ?"
 pol = "Czy myślisz że ustawienia temperatury Embr Wave były powiązane z pytaniami jakie Ci zadawano?"
+gr = "Denken Sie, dass die Temperatureinstellungen der Embr Wave mit den Fragen zusammenhängen, die Ihnen gestellt wurden?"
 
 [q_related_ans]
 en = ["Yes", "No", "I Don't know"]
 fr = ["Oui", "Non", "Je ne sais pas"]
 pol = ["Tak", "Nie", "Nie wiem"]
+gr = ["Ja", "Nein", "Ich weiß nicht"]
 
 [q_how] # TODO: conditional (only if yes to previous?)
 en = "How do you think the temperature settings were related to the questions?"
 fr = "En quoi pensez-vous que les paramètres de température étaient liés aux questions ?"
 pol = "Jak myślisz, w jaki sposób ustawienia temperatury były powiązane z pytaniami?"
+gr = "Was denken Sie wie die Temperatureinstellungen mit den Fragen zusammenhängen?"
 
 # q_how_ans is free text
 
@@ -26,6 +30,7 @@ pol = "Jak myślisz, w jaki sposób ustawienia temperatury były powiązane z py
 en = "Do you think the Embr Wave changed your answers to our questions?"
 fr = "Pensez-vous que l’Embr Wave a changé vos réponses à nos questions ?"
 pol = "Czy myślisz że Embr Wave zmienił Twoje odpowiedzi na nasze pytania?"
+gr = "Glauben Sie, der Embr Wave hat Ihre Antworten auf unsere Fragen verändert?"
 
 # q_influence_ans is q_related_ans
 
@@ -33,6 +38,7 @@ pol = "Czy myślisz że Embr Wave zmienił Twoje odpowiedzi na nasze pytania?"
 en = "How do you think the Embr Wave changed your answers to our questions?"
 fr = "En quoi pensez-vous que l’Embr Wave a changé vos réponses à nos questions ?"
 pol = "Jak myślisz, w jaki sposób Embr Wave zmienił Twoje odpowiedzi na nasze pytania?"
+gr = "Was denken Sie, wie der Embr Wave Ihre Antworten auf unsere Fragen verändert hat?"
 
 [fin]
 en = """Thank you for your participation. As we indicated, we are investigating the efficacy of the Embr Wave. However, we are also interested in how you responded to the included scales and whether the Embr Wave affected those responses. These scales were in fact not unrelated -- rather, they were selected because prior studies have found participants respond differently on these scales depending on how warm or cold they feel. This field of research is called Social Thermoregulation, and indicates that physical temperature has a role in our social relationships.
@@ -53,10 +59,16 @@ Zmienną niezależną w tym przypadku była temperatura Embr Wave (a więc ta, k
 
 Ponieważ nie chcieliśmy zwrócić Twojej uwagi na związek pomiędzy Embr Wave a kwestionariuszami, nie ujawniliśmy Ci tej części naszego pytania badawczego. Ponadto, aby chronić rzetelność tego badania prosimy o to, abyś nie omawiał(a-) tych pomysłów badawczych z Twoimi znajomymi i przyjaciółmi, którzy wiesz, że mogą uczestniczyć w tym badaniu. Chcielibyśmy też potwierdzić, że wyrażasz zgodę na wykorzystanie Twoich odpowiedzi w naszych badaniach (będą one analizowane jedynie zbiorczo, nie indywidualnie): Tak, pozwalam badaczom korzystać z moich odpowiedzi / Nie, nie chcę, aby moje dane były analizowane.
 """
+gr = """Danke für Ihre Teilnahme. Wie bereits erwähnt, untersuchen wir die Wirksamkeit von Embr Wave. Wir sind jedoch auch daran interessiert, wie Sie auf die enthaltenen Fragen geantwortet haben und ob die Embr Wave diese Antworten beeinflusst hat. Diese Skalen waren in der Tat nicht unzusammenhängend - vielmehr wurden sie ausgewählt, weil in früheren Studien festgestellt wurde, dass Teilnehmer auf diesen Skalen unterschiedlich antworten, je nachdem, wie warm oder kalt ihnen ist. Dieses Forschungsgebiet wird als soziale Thermoregulation bezeichnet und zeigt, dass die Körpertemperatur eine Rolle in unseren sozialen Beziehungen spielt.
 
+Die unabhängige Variable war in diesem Fall die Temperatur der Embr Wave (das haben wir verändert). Die abhängigen Variablen waren die Fragebögen, die wir Ihnen unter anderem zu folgenden Themen gestellt haben: Wie ähnlich Sie Objekte wahrnehmen, wie zugehörend Sie sich fühlen, wie utilitaristisch Sie bei moralischen Urteilen sind, Nostalgiegefühle, wie Sie ein Haus als Zuhause beurteilen, Intuitionen über Kriminelle, wie Sie Objekte kategorisieren, wie Sie Marken wahrnehmen, ob Sie sich einsam fühlen, Ihre Fähigkeit zur Vergebung, welche Angehörigen zuerst in den Sinn kommen, wie Sie Menschen beurteilen, wie viel Sie für Konsumgüter bezahlen würden und welche Filmarten Sie bevorzugen. Wenn Sie mehr über die einzelnen Elemente erfahren möchten, wenden Sie sich an Ihren Experimentalleiter oder besuchen Sie unsere Forschungsseite: https://osf.io/eydwm/.
+
+Da wir Ihre Aufmerksamkeit nicht auf den Zusammenhang zwischen der Embr Wave und den Fragebögen lenken wollten, haben wir Ihnen diesen Teil unserer Forschungsfrage nicht offengelegt. Um die Integrität dieser Arbeit zu schützen, bitten wir Sie außerdem, diese Forschungsideen nicht mit Freunden zu diskutieren, die möglicherweise an dieser Forschung teilnehmen. Wir möchten bestätigen, dass Sie uns gestatten, Ihre Daten für unsere Forschung zu verwenden: [Ja, ich gestatte den Forschern, meine Antworten zu verwenden / Nein, ich möchte nicht, dass meine Daten analysiert werden].
+"""
 # q_fin_ans is just first two of q_related_ans
 
 [fin2]
 en = "Feel free to ask your experimenter if you have any questions. Otherwise, you are finished with the study."
 fr = "N’hésitez pas à demander à votre expérimentateur si vous avez des questions. Si vous n’avez aucune question, vous en avez terminé avec l’étude."
 pol = "Jeśli masz jakiekolwiek pytania, zapytaj eksperymentatora. Jeśli nie, badanie skończone! Dziękujemy!"
+gr = "Bei Fragen wenden Sie sich bitte an Ihren Experimentalleiter. Ansonsten sind Sie mit der Studie fertig."

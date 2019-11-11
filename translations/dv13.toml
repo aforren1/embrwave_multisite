@@ -2,18 +2,22 @@
 en = "How much would you be willing to pay for this %s? Please enter a number."
 fr = "Combien seriez-vous prêt à payer pour ce %s ? Veuillez indiquer seulement des chiffres."
 pol = "Ile byłbyś/byłabyś skłonny/skłonna zapłacić za %s? Proszę wpisz jedynie liczbę."
+gr = "Wie viel wären Sie bereit für diese %s zu bezahlen? (bitte schreiben Sie nur eine Zahl)"
 
 [q2]
 en = "How much do you think a %s retails for? Please enter a number."
 fr = "À votre avis, quel est le prix de vente de ce %s ? Veuillez indiquer seulement des chiffres."
 pol = "Jak myślisz, ile %s kosztuje w sprzedaży detalicznej? Proszę wpisz jedynie liczbę."
+gr = "Was denken Sie wie viel diese %s kostet? (bitte schreiben Sie nur eine Zahl)"
 
 [battery]
 en = "pack of batteries"
 fr = "lot de piles électriques"
 pol = "tę paczkę baterii"
+gr = "Packung Batterien"
 
 [cake]
 en = "piece of cake"
 fr = "gâteau"
 pol = "ten kawałek ciasta"
+gr = "Kuchenstück"

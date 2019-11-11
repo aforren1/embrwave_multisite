@@ -2,26 +2,31 @@
 en = "Next, we are going to present you with a house. After reading the information and examining the photos, we'll ask you what you think about the house."
 fr = "Nous allons maintenant vous présenter une maison. Après avoir lu les informations et examiner les photos, nous vous demanderons ce que vous pensez de la maison."
 pol = "Teraz przedstawimy Ci pewien dom. Po przeczytaniu informacji i obejrzeniu zdjęć, zapytamy Cię, co o nim sądzisz."
+gr = "Als nächstes werden wir Ihnen ein Haus präsentieren. Nachdem Sie die Informationen gelesen haben und die Fotos betrachtet haben, werden wir Sie fragen, was Sie über das Haus denken."
 
 [preprompt]
 en = 'What do you think about this house?'
 fr = 'Que pensez-vous de cette maison?'
 pol = 'Co myślisz o tym domu?'
+gr = 'Was denken Sie über dieses Haus?'
 
 [big_title]
 en = "General Information"
 fr = "Informations générales"
 pol = "Ogólne informacje"
+gr = "Allgemeine Informationen"
 
 [background]
 en = "The resale value of the house is %s. It has six bedrooms, it's located close to several parks, schools, and public transportation. The property has a large master bedroom, kitchen, and backyard."
 fr = "La valeur de revente de cette maison est de %s. Elle possède six pièces, elle est localisée prêt de plusieurs parcs, écoles, et transports publics. La propriété possède une grande chambre principale, cuisine, et cour."
 pol = "Wartość domu wynosi %s. Posiada on sześć sypialni, znajduje się w pobliżu kilku parków, szkół i komunikacji miejskiej. Nieruchomość posiada dużą główną sypialnię, kuchnię i ogród."
+gr = "Der Wiederverkaufswert des Hauses beträgt %s. Es hat sechs Schlafzimmer, liegt in der Nähe mehrerer Parks, Schulen und öffentlichen Verkehrsmittel. Die Immobilie verfügt über ein Hauptschlafzimmer, Küche und Garten."
 
 [subtitle]
 en = "Layout"
 fr = "Agencement"
 pol = "Układ"
+gr = "Grundriss"
 
 [f1]
 en = """Ground floor:
@@ -30,6 +35,8 @@ fr = """Rez-de-chaussée :
 Couloir, toilettes et évier, et escalier menant au premier étage. Cuisine à l’avant de la maison, salon et salle à manger situés à l’arrière de la maison."""
 pol = """Parter:
 Przedpokój, toaleta z umywalką, schody na pierwsze piętro. Salon od strony wejściowej, jadalnia i otwarta kuchnia z tyłu domu."""
+gr = """Erdgeschoss:
+Flur, Toilette und Waschbecken und Treppen in den ersten Stock. Wohnzimmer im vorderen Bereich des Hauses, Essbereich und offene Küche im hinteren Bereich des Hauses."""
 
 [f2]
 # sub in locale info
@@ -39,6 +46,8 @@ fr = """%s:
 Couloir donnant sur quatre chambres et une salle de bain. Deux chambres sont situées à l’avant de la maison, et deux chambres sont situées à l’arrière."""
 pol = """%s:
 Przedpokój prowadzący do czterech sypialni i łazienki. Dwie sypialnie znajdują się z przodu domu, a dwie sypialnie z tyłu."""
+gr = """%s:
+Flur mit Zugang zu vier Schlafzimmern und einem Bad. Zwei Schlafzimmer befinden sich im vorderen Bereich des Hauses und zwei Schlafzimmer befinden sich im Hinteren"""
 
 [f3]
 en = """%s:
@@ -47,58 +56,71 @@ fr = """%s:
 Ici se trouve la 5ème chambre."""
 pol = """%s:
 Tutaj znajduje się 5 sypialnia."""
+gr = """%s:
+Hier ist das fünfte Schlafzimmer."""
 
 [prompt2]
 en = """Now, we will ask you to rate how you feel about the house on several different dimensions. The scale is always the same: 1 = not at all, 7 = to a great extent.<br><br>To what extent does the property seem (or feel)..."""
 fr = """À présent, nous allons vous demander d’évaluer comment vous vous sentez vis-à-vis de cette maison sur différentes dimensions. L’échelle est toujours la même : 1 = pas du tout, 7 = tout à fait.<br><br>À quel point la propriété vous semble-t-elle (ou vous donne l’impression d’être)..."""
 pol = """Teraz poprosimy Cię o ocenę tego domu na kilku różnych wymiarach. Skala jest zawsze taka sama: 1 = w ogóle taki nie jest, 7 = jest taki w dużym stopniu..."""
+gr = """Nun bitten wir Sie, Ihre Meinung zum Haus in einigen verschiedenen Dimensionen zu bewerten. Die Skala ist immer gleich: 1 = überhaupt nicht, 7 = in hohem Maße..."""
 
 [header]
 en = ["1\nNot at all", "2", "3", "4", "5", "6", "7\nTo a great\nextent"]
 fr = ["1\nPas du tout", "2", "3", "4", "5", "6", "7\nTout à fait"]
 pol = ["1\nw ogóle taka nie jest", "2", "3", "4", "5", "6", "7\njest taka w dużym stopniu"]
+gr = ["1\nüberhaupt nicht", "2", "3", "4", "5", "6", "7\nin hohem Maße"]
 
 [[question]]
 en = "Safe"
 fr = "En sécurité"
 pol = "Bezpieczna"
+gr = "sicher"
 
 [[question]]
 en = "Familiar"
 fr = "Familiaire"
 pol = "Znajoma"
+gr = "bekannt"
 
 [[question]]
 en = "Warm"
 fr = "Chaleureuse"
 pol = "Ciepła"
+gr = "warm"
 
 [[question]]
 en = "Like a 'home'"
 fr = "Comme un 'chez-soi'"
 pol = "Jak prawdziwy 'dom'"
+gr = "Wie ein 'Zuhause'"
 
 [[question]]
 en = "Soothing"
 fr = "Apaisante"
 pol = "Kojąca"
+gr = "beruhigend"
 
 [[question]]
 en = "Relaxing"
 fr = "Relaxante"
 pol = "Relaksująca"
+gr = "entspannend"
 
 [[question]]
 en = "Comfortable"
 fr = "Confortable"
 pol = "Wygodna"
+gr = "angenehm"
 
 [[question]]
 en = "Private"
 fr = "Privée"
 pol = "Zapewniająca prywatność"
+gr = "privat"
 
 [[question]]
 en = "Like a quality house"
 fr = "Comme une maison de qualité"
 pol = "Wysokiej jakości"
+gr = "Wie ein Haus von hoher Qualität"
