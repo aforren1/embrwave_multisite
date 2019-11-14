@@ -58,8 +58,8 @@ def setup_logger(pth, now):
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
     sl = StreamToLogger(embr_logger, logging.DEBUG)
-    if is_exe:
-        sys.stderr = sl
+    #if is_exe:
+    sys.stderr = sl
     embr_logger.addHandler(fh)
 
     gatt_logger = logging.getLogger('pygatt')

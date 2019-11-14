@@ -102,10 +102,10 @@ class EmbrWave(object):
             self.device.bond()
             self.disable_leds()  # for debugging, comment this out
             sleep(1)
-            self.device.subscribe("0000400A-1112-efde-1523-725a2aab0123", callback = handle_battery)
-            sleep(1)
-            self.device.subscribe("00004006-1112-efde-1523-725a2aab0123", callback = handle_device_state)
-            sleep(1)
+            # self.device.subscribe("0000400A-1112-efde-1523-725a2aab0123", callback = handle_battery)
+            # sleep(1)
+            # self.device.subscribe("00004006-1112-efde-1523-725a2aab0123", callback = handle_device_state)
+            # sleep(1)
             # set warming/cooling to be rather long (we'll end up turning them off manually)
             self.write(EmbrVal.COOL_WARM_ONLY, 0)
             for val in [6, 7]:  # heating, cooling respectively
