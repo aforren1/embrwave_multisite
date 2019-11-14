@@ -50,7 +50,7 @@ class PreEmbr(object):
                                    address_type='BLEAddressType.public',
                                    interval_min=15, interval_max=30,
                                    supervision_timeout=400, latency=0)
-        for i in range(3):
+        for i in range(2):
             self._blink(dev)
         dev.disconnect()
 
@@ -173,7 +173,7 @@ class EmbrWave(object):
         # only bother writing if the new value is meaningful?
         if value != 0:
             self.write(EmbrVal.LEVEL, value)
-            self._timer.start(10000) # run every 8 secs
+            self._timer.start(10000) # run every 10 secs
     
     def _level_setter(self):
         # runs every 10 sec in the background

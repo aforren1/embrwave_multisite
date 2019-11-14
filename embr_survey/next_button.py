@@ -5,6 +5,9 @@ import PySide2.QtWidgets as qtw
 from functools import partial
 from datetime import datetime
 from embr_survey.common_widgets import SpecialStack
+import logging
+
+embr_logger = logging.getLogger('embr_survey')
 
 base_style = '''
 QPushButton {border:4px solid rgb(0, 0, 0); 
@@ -84,12 +87,14 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
+        embr_logger.info('Current widget: %s' % type(current_widget).__name__)
         # handle when the current widget is a Stack
         if isinstance(current_widget, SpecialStack):
             # consume a subwidget
             c2 = current_widget.currentWidget()
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
+            embr_logger.info('Exiting subwidgeet %s' % type(c2).__name__)
             if hasattr(c2, 'on_exit'):
                 c2.on_exit()
             # move to the next subwidget
@@ -101,6 +106,7 @@ class NextButton(qtw.QPushButton):
                 c3.adjustSize()
                 current_widget.adjustSize()
                 self.stack.adjustSize()
+                embr_logger.info('Entering subwidget %s' % type(c3).__name__)
                 if hasattr(c3, 'on_enter'):
                     c3.on_enter()
                 if getattr(c3, 'auto_continue', True):
