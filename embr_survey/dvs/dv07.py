@@ -90,7 +90,7 @@ class DV07PerceptualFocus(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': self.questions,
-                # 'question_original_order': [q[0] for q in self.questions],
+                'question_original_order': ['q0'] * num_q,
                 'responses': current_answers,
                 'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],

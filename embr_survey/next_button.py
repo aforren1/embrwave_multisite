@@ -95,7 +95,7 @@ class NextButton(qtw.QPushButton):
             c2 = current_widget.currentWidget()
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
-            embr_logger.info('Exiting subwidgeet %s' % type(c2).__name__)
+            embr_logger.info('Exiting subwidget %s' % type(c2).__name__)
             if hasattr(c2, 'on_exit'):
                 c2.on_exit()
             # move to the next subwidget

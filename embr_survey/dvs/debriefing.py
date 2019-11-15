@@ -114,6 +114,7 @@ class Debriefing(StackedDV):
                 'language': [settings['language']]*lq,
                 'locale': [settings['locale']]*lq,
                 'questions': self.qs,
+                'question_original_order': [('q%s' % x) for x in range(lq)],
                 'responses': ans,
                 'dv': [self.long_name]*lq,
                 'block_number': [self.block_num]*lq,

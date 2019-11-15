@@ -71,6 +71,7 @@ class DV00Intro_1(StackedDV):
                 'language': [settings['language']],
                 'locale': [settings['locale']],
                 'questions': [self.qtxt],
+                'question_original_order': ['q0'], 
                 'responses': current_answers,
                 'dv': [self.long_name],
                 'block_number': [self.block_num],

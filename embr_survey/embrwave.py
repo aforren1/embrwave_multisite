@@ -135,11 +135,11 @@ class EmbrWave(object):
             embr_log.debug('Closing device...')
             self.on = False
             self.stop()
+            self.enable_leds()
             self.write(EmbrVal.MODE, (6, 1))
             self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
             self.write(EmbrVal.MODE, (7, 1))
             self.write(EmbrVal.DURATION, 131)
-            self.enable_leds()
             self.device.disconnect()
             self.adapter.stop()
             embr_log.debug('Device closed.')

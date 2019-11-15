@@ -323,6 +323,9 @@ class IntroDlg(qtw.QWidget):
         block_num = 0
         if is_end:
             block_num = 15
+            logger.info('Efficacy block is at the end.')
+        else:
+            logger.info('Efficacy block is at the beginning.')
 
         individ_diffs = [dvs.IndividualDifferencesPart1(block_num, device, settings),
                          dvs.IndividualDifferencesPart2(block_num, device, 0, settings),
@@ -341,11 +344,12 @@ class IntroDlg(qtw.QWidget):
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
-        self._window.add_widgets([dv0]) # always first (sanity check)
-        #stack2 = [dv10]
+        #self._window.add_widgets([dv0]) # always first (sanity check)
+        stack2 = [dv6]
         self._window.add_widgets(stack2)
 
 def handle_sig(dev, *args):
-    print('Premature CTRL+C.')
+    logger = logging.getLogger('embr_survey')
+    logger.warn('Premature escape.')
     dev.close()
     qtw.QApplication.instance().quit()
