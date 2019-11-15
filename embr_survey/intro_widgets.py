@@ -346,8 +346,8 @@ class IntroDlg(qtw.QWidget):
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
-        #self._window.add_widgets([dv0]) # always first (sanity check)
-        stack2 = [dv6]
+        self._window.add_widgets([dv0]) # always first (sanity check)
+        #stack2 = [dv6]
         self._window.add_widgets(stack2)
 
 def handle_sig(dev, *args):
