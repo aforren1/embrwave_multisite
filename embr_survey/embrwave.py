@@ -6,7 +6,7 @@ from PySide2.QtCore import QTimer
 
 logging.basicConfig()
 gatt_log = logging.getLogger('pygatt')
-
+embr_log = logging.getLogger('embr_survey')
 
 class EmbrVal(object):
     # enum-like class
@@ -92,6 +92,7 @@ class EmbrWave(object):
             devs = self.adapter.scan()
             addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
         self.addr = addr
+        embr_log.debug('Trying to connect to address: %s' % addr)
         self.device = self.adapter.connect(address=addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
@@ -117,8 +118,10 @@ class EmbrWave(object):
                 # self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
         except Exception as e:
+            embr_log.warn('Device connection failed for some reason (should be in traceback).')
             self.device.disconnect()
             raise e
+        embr_log.debug('Embr Wave successfully connected.')
 
     def __enter__(self):
         return self
@@ -129,6 +132,7 @@ class EmbrWave(object):
     def close(self):
         # called at the end of the task
         if self.on:
+            embr_log.debug('Closing device...')
             self.on = False
             self.stop()
             self.write(EmbrVal.MODE, (6, 1))
@@ -138,6 +142,9 @@ class EmbrWave(object):
             self.enable_leds()
             self.device.disconnect()
             self.adapter.stop()
+            embr_log.debug('Device closed.')
+        else:
+            embr_log.debug('Close already called on device.')
 
     def write(self, uuid, value):
         # converts to bytes, *then* write for real
@@ -150,12 +157,20 @@ class EmbrWave(object):
         sleep(2)  # TODO: check if this should be longer/shorter
 
     def _write(self, uuid, value):
-        self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+        if self.on:
+            self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+        else:
+            embr_log.debug('Device already closed (write to %s probably ineffective)' % uuid[0])
+
 
     def read(self, uuid):
-        res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
-        sleep(0.2)  # TODO: check if this should be longer/shorter
-        return struct.unpack(uuid[1], res)[0]
+        if self.on:
+            res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
+            sleep(0.2)  # TODO: check if this should be longer/shorter
+            return struct.unpack(uuid[1], res)[0]
+        else:
+            embr_log.debug('Device already closed (read from %s probably ineffective)' % uuid[0])
+            return 0
 
     @property
     def level(self):
@@ -173,7 +188,7 @@ class EmbrWave(object):
         # only bother writing if the new value is meaningful?
         if value != 0:
             self.write(EmbrVal.LEVEL, value)
-            self._timer.start(10000) # run every 10 secs
+        self._timer.start(10000) # run every 10 secs
     
     def _level_setter(self):
         # runs every 10 sec in the background

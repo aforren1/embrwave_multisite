@@ -48,6 +48,7 @@ class NextButton(qtw.QPushButton):
 
     @state.setter
     def state(self, value):
+        embr_logger.info('New NextButton state: %s' % value)
         self._state = value
         if value == 'neutral':
             new_sty = no_style
@@ -130,10 +131,13 @@ class NextButton(qtw.QPushButton):
                                          qtw.QSizePolicy.Ignored)
             self.stack.adjustSize()
             self.stack.removeWidget(current_widget)
+            embr_logger.info('Exiting widget %s' % type(current_widget).__name__)
             if self.stack.count() <= 0:
+                embr_logger.info('Done!')
                 sys.exit(0)
             # move to the next one
             new_widget = self.stack.currentWidget()
+            embr_logger.info('Entering widget %s' % type(new_widget).__name__)
             if passed_data is not None:
                 new_widget.passed_data = passed_data
             if hasattr(new_widget, 'on_enter'):
