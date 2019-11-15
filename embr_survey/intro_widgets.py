@@ -95,6 +95,8 @@ def on_activated(self, idx):
         self.locale_label.setText(self.translations['locale'][new_lang])
         self._button.incomplete_txt = self.translations['incomplete'][new_lang]
         self._button.setText(self.translations['next'][new_lang])
+        self._button.yes = self.translations['yes'][new_lang]
+        self._button.no = self.translations['no'][new_lang]
     except AttributeError:
         pass
 
@@ -351,5 +353,5 @@ class IntroDlg(qtw.QWidget):
 def handle_sig(dev, *args):
     logger = logging.getLogger('embr_survey')
     logger.warn('Premature escape.')
-    dev.close()
+    dev.close() # TODO: will this get called by atexit, or not?
     qtw.QApplication.instance().quit()

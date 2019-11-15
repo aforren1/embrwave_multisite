@@ -41,6 +41,9 @@ class NextButton(qtw.QPushButton):
         self.state = 'complete'
         self.incomplete_txt = 'Are you sure? You left some blank.'
         self.win = win
+        self.yes = 'Yes'
+        self.no = 'No'
+
 
     @property
     def state(self):
@@ -73,9 +76,12 @@ class NextButton(qtw.QPushButton):
         if self.state == 'neutral':
             return
         if self.state == 'incomplete' or not all_ans:
-            choice = qtw.QMessageBox.question(None, '',
-                                              self.incomplete_txt,
-                                              qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+            msgbox = qtw.QMessageBox(qtw.QMessageBox.Question, '', 
+                                     self.incomplete_txt,
+                                     qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+            msgbox.setButtonText(qtw.QMessageBox.Yes, self.yes)
+            msgbox.setButtonText(qtw.QMessageBox.No, self.no)
+            choice = msgbox.exec()
             if choice != qtw.QMessageBox.Yes:
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)

@@ -1,5 +1,19 @@
 # for any non-task translations (largely for the intro dialog)
 
+[yes]
+en = 'Yes'
+es = 'Sí'
+fr = 'Oui'
+pol = 'Tak'
+gr = 'Ja'
+
+[no]
+en = 'No'
+es = 'No'
+fr = 'Non'
+pol = 'Nie'
+gr = 'Nein'
+
 [next]
 en = 'Next'
 es = 'Próxima'

@@ -127,15 +127,15 @@ class EmbrWave(object):
         return self
 
     def __exit__(self, *args):
-        self.close()
+        pass # let atexit do it
+        #self.close()
 
     def close(self):
         # called at the end of the task
         if self.on:
             embr_log.debug('Closing device...')
-            self.on = False
-            self.stop()
             self.enable_leds()
+            self.stop()
             self.write(EmbrVal.MODE, (6, 1))
             self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
             self.write(EmbrVal.MODE, (7, 1))
@@ -143,6 +143,7 @@ class EmbrWave(object):
             self.device.disconnect()
             self.adapter.stop()
             embr_log.debug('Device closed.')
+            self.on = False
         else:
             embr_log.debug('Close already called on device.')
 

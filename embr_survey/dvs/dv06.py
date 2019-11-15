@@ -20,10 +20,10 @@ class CriminalQuestion(qtw.QWidget):
         img = QPixmap(img_name)
         img_holder = qtw.QLabel()
         img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        img_holder.setAlignment(Qt.AlignCenter)
+        #img_holder.setAlignment(Qt.AlignHCenter)
         self.question = MultiQuestion(header, questions)
         layout = qtw.QVBoxLayout()
-        layout.addWidget(img_holder, alignment=Qt.AlignVCenter)
+        layout.addWidget(img_holder, alignment=Qt.AlignHCenter)
         layout.addWidget(self.question)
         self.setLayout(layout)
 

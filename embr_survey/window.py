@@ -55,7 +55,7 @@ class MainWindow(object):
         self.scroll_area = qtw.QScrollArea()
         self.scroll_area.setAlignment(Qt.AlignCenter)
         self.scroll_area.setStyleSheet(scroll_style)
-        self.main_layout.addWidget(self.scroll_area)
+        self.main_layout.addWidget(self.scroll_area, Qt.AlignCenter)
 
         # next button iterates through the stack
         self.widgets = SpecialStack()
