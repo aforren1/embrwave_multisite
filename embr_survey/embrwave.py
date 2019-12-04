@@ -100,8 +100,8 @@ class EmbrWave(object):
         try:
             self.blink()
             self.blink()
-            self.device.bond()
-            self.disable_leds()  # for debugging, comment this out
+            self.device.bond(permanent=True)
+            #self.disable_leds()  # for debugging, comment this out
             sleep(1)
             # self.device.subscribe("0000400A-1112-efde-1523-725a2aab0123", callback = handle_battery)
             # sleep(1)
@@ -122,13 +122,18 @@ class EmbrWave(object):
             self.device.disconnect()
             raise e
         embr_log.debug('Embr Wave successfully connected.')
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        pass # let atexit do it
-        #self.close()
+    
+    def reconnect(self):
+        embr_log.debug('Reconnecting.')
+        self.device = self.adapter.connect(address=self.addr, timeout=5,
+                                           address_type='BLEAddressType.public',
+                                           interval_min=15, interval_max=30,
+                                           supervision_timeout=400, latency=0)
+        self.blink()
+        self.blink()
+        self.device.bond()
+        sleep(5)
+        self.level = self._level
 
     def close(self):
         # called at the end of the task
@@ -179,6 +184,7 @@ class EmbrWave(object):
 
     @level.setter
     def level(self, value):
+        embr_log.debug('Setting level to %i' % value)
         # stop qtimer if it exists
         self._level = value
         self._timer.stop()
@@ -293,28 +299,41 @@ class DummyWave(object):
 
 
 if __name__ == '__main__':
+    import sys
     # device already needs to be in pairing mode!
+    embr_log.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    embr_log.addHandler(handler)
+
     try:
         embr = EmbrWave()  # TODO: explicitly pass in address?
     except Exception as e:
         embr = DummyWave()
 
-    with embr:
-        print(embr.device_id)
-        print(embr.firmware_version)
-        print(embr.battery_charge)
-        for i in range(2):
-            embr.blink()
-        sleep(2)
-        embr.level = 7
-        sleep(60)
-        # print(embr.level)
-        #embr.level = -9
-        # print('bump')
-        #embr.level = -9
-        # print('bump')
-        # sleep(5)
-        #print('now warming')
-        #embr.level = 9
-        # sleep(60)
-        print(embr.level)
+    print(embr.device_id)
+    print(embr.firmware_version)
+    print(embr.battery_charge)
+    for i in range(2):
+        embr.blink()
+    sleep(2)
+    embr.level = 7
+    sleep(10)
+    # print(embr.level)
+    #embr.level = -9
+    # print('bump')
+    #embr.level = -9
+    # print('bump')
+    # sleep(5)
+    #print('now warming')
+    #embr.level = 9
+    # sleep(60)
+    print(embr.level)
+    embr.device.disconnect()
+    embr.reconnect()
+    embr.level = -9
+    sleep(10)
+    print('#######################################%s' % embr.level)
+    embr.close()

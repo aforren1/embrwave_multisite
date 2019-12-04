@@ -12,8 +12,8 @@ pol = "1)\tKtóre z poniższych twierdzeń najlepiej opisuje Twój stan cywilny?
 gr = "1. Welche der folgenden Aussagen beschreibt Ihren Familienstand am besten?"
 
 [q1_ans]
-en = ["currently married && living together, or living with someone in marital-like relationship",
-      "never married && never lived with someone in a marital-like relationship",
+en = ["currently married and living together, or living with someone in marital-like relationship",
+      "never married and never lived with someone in a marital-like relationship",
       "separated",
       "divorced or formerly lived with someone in a marital-like relationship",
       "widowed"]
@@ -94,7 +94,7 @@ gr = "Sehen oder telefonieren Sie mit einem Elternteil Ihres Partners mindestens
 # (reuse q3_ans for q4a_ans, remove the 'not applicable' option)
 
 [q5]
-en = "How many other relatives (other than your spouse, parents && children) do you feel close to?"
+en = "How many other relatives (other than your spouse, parents and children) do you feel close to?"
 fr = "De combien d’autres membres de votre famille (autres que votre époux/se, conjoint-e, parents et enfants) vous sentez-vous proche ? (Si '0', cochez cette case et passez à la question suivante.)"
 pol = "W stosunku do ilu innych krewnych (innych niż małżonek/żona, rodzice i dzieci) czujesz się blisko? (jeśli do żadnego, zaznacz \"0\" i przejdź do pytania 6.)"
 gr = "Wie vielen Ihrer Verwandten (außer Ihrem Ehepartner, Eltern und Kindern) fühlen Sie sich nahe? (Wenn \"0\", markieren Sie dieses Feld und fahren Sie mit Frage 8 fort.)"
