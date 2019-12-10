@@ -3,6 +3,8 @@ import struct
 from time import sleep
 import logging
 from PySide2.QtCore import QTimer
+import PySide2.QtWidgets as qtw
+from embr_survey.pygatt.backends.bgapi.exceptions import ExpectedResponseTimeout
 
 logging.basicConfig()
 gatt_log = logging.getLogger('pygatt')
@@ -117,6 +119,7 @@ class EmbrWave(object):
                 #self.write(EmbrVal.DURATION, 60) # custom duration (60s)
                 # self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
+            # QTimer.singleShot(45 * 1000, self.device.disconnect) # try to simulate device disconnect
         except Exception as e:
             embr_log.warn('Device connection failed for some reason (should be in traceback).')
             self.device.disconnect()
@@ -125,6 +128,11 @@ class EmbrWave(object):
     
     def reconnect(self):
         embr_log.debug('Reconnecting.')
+        txt = qtw.QMessageBox()
+        txt.setWindowTitle('Reconnecting')
+        txt.setText('Reconnecting to the device...')
+        txt.setStandardButtons(qtw.QMessageBox.NoButton)
+        txt.show()
         self.device = self.adapter.connect(address=self.addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
@@ -134,6 +142,7 @@ class EmbrWave(object):
         self.device.bond()
         sleep(5)
         self.level = self._level
+        txt.close()
 
     def close(self):
         # called at the end of the task
@@ -164,14 +173,22 @@ class EmbrWave(object):
 
     def _write(self, uuid, value):
         if self.on:
-            self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+            try:
+                self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+            except ExpectedResponseTimeout: # gatt.exceptions.NotConnectedError for testing
+                self.reconnect()
+                self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
         else:
             embr_log.debug('Device already closed (write to %s probably ineffective)' % uuid[0])
 
 
     def read(self, uuid):
         if self.on:
-            res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
+            try:
+                res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
+            except ExpectedResponseTimeout:
+                self.reconnect()
+                res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
             sleep(0.2)  # TODO: check if this should be longer/shorter
             return struct.unpack(uuid[1], res)[0]
         else:
