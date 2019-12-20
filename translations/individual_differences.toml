@@ -146,7 +146,7 @@ gr = "Wie viele Mitglieder Ihrer Kirche oder religiösen Gruppe sehen Sie oder s
 [q8]
 en = "Do you attend any classes (school, university, technical training, or adult education) on a regular basis?"
 fr = "Suivez-vous des cours (école, université, formations ou cours du soir) régulièrement ? (Si ‘non’, cochez la case appropriée et passez à la question 9.)"
-pol = "Suivez-vous des cours (école, université, formations ou cours du soir) régulièrement ? (Si ‘non’, cochez la case appropriée et passez à la question 9.)"
+pol = "Czy regularnie uczęszczasz na zajęcia (szkoła, uniwersytet, szkolenie techniczne, edukacja dla dorosłych)? (jeśli nie, zaznacz „nie” i przejdź do pytania 9)"
 gr = "Besuchen Sie regelmäßig Kurse jeglicher Art (Schule, Universität, Fachausbildung oder Volkshochschule)? (Wenn nicht, markieren Sie \"nein\" und fahren Sie mit Frage 9 fort.)"
 
 # q8_ans is q7_ans
@@ -214,7 +214,7 @@ gr = "Mit wie vielen Personen Ihres Ehrenamtes sprechen Sie über das Ehrenamt b
 [q12]
 en = "Do you belong to any groups in which you talk to one or more members of the group about group-related issues at least once every 2 weeks? Examples include social clubs, recreational groups, trade unions, commercial groups, professional organizations, groups concerned with children like the PTA or Boy Scouts, groups concerned with community service, etc."
 fr = "Appartenez-vous à un ou plusieurs groupes dans lesquels vous parlez avec un ou plusieurs membres concernant des sujets liés à ce groupe au moins une fois toutes les deux semaines ? Exemple de groupes : « clubs sociaux », groupes de loisirs, syndicats, groupes commerciaux, organisations professionnelles, groupes s’occupant d’enfants (Scouts…), travaux d’intérêts généraux, etc. (Si vous n’appartenez à aucun groupe tel que ceux-là, cochez ‘non’ et passez à la section ci-dessous."
-pol = "Appartenez-vous à un ou plusieurs groupes dans lesquels vous parlez avec un ou plusieurs membres concernant des sujets liés à ce groupe au moins une fois toutes les deux semaines ? Exemple de groupes : « clubs sociaux », groupes de loisirs, syndicats, groupes commerciaux, organisations professionnelles, groupes s’occupant d’enfants (Scouts…), travaux d’intérêts généraux, etc. (Si vous n’appartenez à aucun groupe tel que ceux-là, cochez ‘non’ et passez à la section ci-dessous."
+pol = "Czy przynależysz do jakichś grup w których rozmawiasz z jednym lub więcej członkiem grupy na tematy powiązane z tą grupą przynajmniej raz na 2 tygodnie? Przykłady takich grup to kluby osiedlowe, grupy rekreacyjne, związki zawodowe, stowarzyszenia handlowe, organizacje zawodowe, grupy powiązane z dziećmi, takie jak rada rodziców, związek harcerski, grupy powiązane z pracą na rzecz społeczności lokalnej, itd."
 gr = "Gehören Sie einer Gruppe an, in der Sie mindestens alle zwei Wochen mit einem oder mehreren Mitgliedern der Gruppe über gruppenbezogene Themen sprechen? Beispiele hierfür sind Vereine, Freizeitgruppen, Gewerkschaften, Handelsgruppen, Berufsverbände, Gruppen, die sich mit Kindern beschäftigen wie das PTA oder Pfadfinder, Gruppen, die sich mit Zivildiensten befassen usw. (Wenn Sie keiner solchen Gruppe angehören, markieren Sie \"nein\" und überspringen Sie den folgenden Abschnitt.)"
 
 # q12_ans is q7_ans
