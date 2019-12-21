@@ -7,7 +7,7 @@ gr = "In diesem Abschnitt werden wir Ihnen Bilder von Personen zeigen, die Verbr
 [header]
 en = ["1\nVery unlikely", "2", "3", "4", "5", "6", "7\nVery likely"]
 fr = ["1\nTrès peu probable", "2", "3", "4", "5", "6", "7\nTrès probable"]
-pol = ["1\nbardzo mało prawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo prawdopodobne"]
+pol = ["1\nbardzo mało\nprawdopodobne", "2", "3", "4", "5", "6", "7\nbardzo\nprawdopodobne"]
 gr = ["1\nsehr unwahrscheinlich", "2", "3", "4", "5", "6", "7\nsehr wahrscheinlich"]
 
 [[question]]

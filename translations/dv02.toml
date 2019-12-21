@@ -7,7 +7,7 @@ gr = "In diesem Abschnitt werden wir Ihnen einige Fragen dazu stellen wie Sie si
 [header]
 en = ["1\nNot at all", "2", "3", "4", "5\nExtremely"]
 fr = ["1\nPas du tout", "2", "3", "4", "5\nExtrêmement"]
-pol = ["1\nzupełnie tak się nie czuję", "2", "3", "4", "5\nczuję się tak w ekstremalnym stopniu"]
+pol = ["1\nzupełnie tak\nsię nie czuję", "2", "3", "4", "5\nczuję się tak w\nekstremalnym stopniu"]
 gr = ["1\nüberhaupt nicht", "2", "3", "4", "5\nsehr"]
 
 [[question]]

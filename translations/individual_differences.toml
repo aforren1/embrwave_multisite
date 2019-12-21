@@ -8,8 +8,8 @@ gr = "<b>Anleitung</b>: Dieser Fragebogen befasst sich mit der Anzahl der Person
 [q1]
 en = "Which of the following best describes your marital status?"
 fr = "Laquelle des réponses suivantes décrit le mieux votre statut marital ?"
-pol = "1)\tKtóre z poniższych twierdzeń najlepiej opisuje Twój stan cywilny?"
-gr = "1. Welche der folgenden Aussagen beschreibt Ihren Familienstand am besten?"
+pol = "Które z poniższych twierdzeń najlepiej opisuje Twój stan cywilny?"
+gr = "Welche der folgenden Aussagen beschreibt Ihren Familienstand am besten?"
 
 [q1_ans]
 en = ["currently married and living together, or living with someone in marital-like relationship",
@@ -244,7 +244,7 @@ gr = "Die folgenden Aussagen beziehen sich darauf, wie Sie sich in emotional int
 [intimate_header]
 en = ["1\nstrongly disagree", "2", "3", "4", "5", "6", "7\nstrongly agree"]
 fr = ["1\nPas du tout d'accord", "2", "3", "4", "5", "6", "7\nTout à fait d'accord"]
-pol = ["1\nZdecydowanie się nie zgadzam", "2", "3", "4", "5", "6", "7\nZdecydowanie się zgadzam"]
+pol = ["1\nZdecydowanie\nsię nie zgadzam", "2", "3", "4", "5", "6", "7\nZdecydowanie\nsię zgadzam"]
 gr = ["1\nStimme überhaupt nicht zu ", "2", "3", "4", "5", "6", "7\nStimme sehr zu"]
 
 [relationship_qs]
@@ -416,7 +416,7 @@ Nachdem Sie die folgenden Fragen beantwortet haben, können Sie mit der nächste
 [part3_header]
 en = ["1\nCompletely disagree", "2\nDisagree", "3\nNeutral", "4\nAgree", "5\nCompletely agree"]
 fr = ["1\nPas du tout d'accord", "2\nPas d'accord", "3\nNeutre", "4\nD'accord", "5\nTout à fait d'accord"]
-pol = ["1\nZdecydowanie się nie zgadzam", "2\nNie zgadzam się", "3\nAni się zgadzam, ani nie zgadzam", "4\nZgadzam się", "5\nZdecydowanie się zgadzam"]
+pol = ["1\nZdecydowanie\nsię nie zgadzam", "2\nNie zgadzam się", "3\nAni się zgadzam,\nani nie zgadzam", "4\nZgadzam się", "5\nZdecydowanie\nsię zgadzam"]
 gr = ["1\nStimme überhaupt nicht zu", "2\nStimme nicht zu", "3\nNeutral", "4\nStimme zu", "5\nStimme sehr zu"]
 
 [part3_qs]

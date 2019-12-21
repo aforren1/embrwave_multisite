@@ -103,7 +103,7 @@ class EmbrWave(object):
             self.blink()
             self.blink()
             self.device.bond(permanent=True)
-            #self.disable_leds()  # for debugging, comment this out
+            self.disable_leds()  # for debugging, comment this out
             sleep(1)
             # self.device.subscribe("0000400A-1112-efde-1523-725a2aab0123", callback = handle_battery)
             # sleep(1)
