@@ -8,7 +8,7 @@ gr = "Als nächstes werden wir Ihnen ein Haus präsentieren. Nachdem Sie die Inf
 en = 'What do you think about this house?'
 fr = 'Que pensez-vous de cette maison?'
 pol = 'Co myślisz o tym domu?'
-gr = 'Was denken Sie über dieses Haus?'
+gr = ''
 
 [big_title]
 en = "General Information"

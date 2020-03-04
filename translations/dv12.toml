@@ -23,9 +23,9 @@ gr = ['1', '2', '3', '4', '5', '6', '7']
 
 [[question]]
 en = "1 = Ungenerous, \n7 = Generous"
-fr = "1 = Pas généreuse, \n = Généreuse"
-pol = "1 = Skąpa, \n = Hojna"
-gr = "1 = geizig, \n = großzügig"
+fr = "1 = Pas généreuse, \n7 = Généreuse"
+pol = "1 = Skąpa, \n7 = Hojna"
+gr = "1 = geizig, \n7 = großzügig"
 
 [[question]]
 en = "1 = Unhappy, \n7 = Happy"

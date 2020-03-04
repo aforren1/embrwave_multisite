@@ -8,7 +8,7 @@ gr = "Bitte denken Sie an jemanden, den Sie kennen. Schreiben Sie den Namen der 
 en = "Please think of someone else who you know, but do not repeat someone's name you used previously in this exercise. Write the name of the first person to come to mind:"
 fr = "Veuillez penser à une autre personne que vous connaissez, mais ne répétez pas le nom d’une personne que vous avez déjà utilisé précédemment dans cette tâche. Écrivez le nom de la première personne qui vous est venu à l’esprit :"
 pol = "Proszę pomyśl o kimś innym kogo znasz, ale nie powtarzaj imienia, które już użyłeś/użyłaś wcześniej w tym ćwiczeniu. Napisz imię pierwszej osoby jaka przyjdzie Ci do głowy:"
-gr = "Bitte denken Sie an jemand anderen, den Sie kennen, aber wiederholen Sie nicht den Namen, den Sie zuvor in dieser Übung verwendet haben. Schreiben Sie den Namen der ersten Person auf, die Ihnen in den Sinn kommt:"
+gr = "Bitte denken Sie an jemand anderen, den Sie kennen, aber wiederholen Sie nicht den Namen, den Sie zuvor in dieser Aufgabe verwendet haben. Schreiben Sie den Namen der ersten Person auf, die Ihnen in den Sinn kommt:"
 
 [q_sub]
 # note the need for the %s to substitute the name in

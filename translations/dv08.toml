@@ -2,7 +2,7 @@
 en = "In this next section, we will ask for your impressions of three major shoe brands. If you are not familiar with the shoe brand, simply skip the questions about that brand."
 fr = "Dans cette partie nous vous demanderons votre avis concernant trois grandes marques de chaussures. Si vous n’êtes pas familier avec la marque de chaussure, passez simplement les questions portant sur cette marque."
 pol = "W tej części zapytamy Cię o Twoje odczucia dotyczące trzech wiodących marek produkujących buty. Jeśli nie znasz określonej marki, po prostu pomiń pytania na jej temat."
-gr = "In diesem nächsten Abschnitt werden wir Sie nach Ihrem ersten Eindruck zu drei großen Schuhmarken fragen. Wenn Sie die Marke nicht kennen, überspringen Sie einfach diese Frage."
+gr = "In diesem Abschnitt werden wir Sie nach Ihrem ersten Eindruck zu drei großen Schuhmarken fragen. Wenn Sie die Marke nicht kennen, überspringen Sie einfach diese Frage."
 
 [prompt2]
 # Please place the %s wherever the brand name should appear in the translation.

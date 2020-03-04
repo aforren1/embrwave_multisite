@@ -3,7 +3,7 @@
 en = "<b>Instructions</b>: This questionnaire is concerned with how many people you see or talk to on a regular basis including family, friends, workmates, neighbors, etc. Please read and answer each question carefully. Answer follow-up questions where appropriate. "
 fr = "<b>Instructions</b>: Ce questionnaire concerne le nombre de personnes que vous voyez ou à qui vous parlez de manière régulière, incluant famille, amis, collègues de travail, voisins, etc. S’il vous plaît, lisez et répondez à chaque question attentivement. Répondez aux questions suivantes quand cela est approprié."
 pol = "<b>Instrukcja</b>: Ten kwestionariusz odnosi się do tego, z iloma osobami się regularnie spotykasz lub rozmawiasz, włączając w to rodzinę, przyjaciół, znajomych z pracy, sąsiadów, itd. Proszę przeczytaj i uważnie odpowiedz na każde pytanie. Odpowiedz również na pytania uzupełniające tam, gdzie będzie to stosowne."
-gr = "<b>Anleitung</b>: Dieser Fragebogen befasst sich mit der Anzahl der Personen, die Sie regelmäßig sehen oder mit denen Sie sprechen, einschließlich Familie, Freunden, Arbeitskollegen, Nachbarn usw. Bitte lesen und beantworten Sie jede Frage sorgfältig. Beantworten Sie gegebenenfalls Folgefragen, wenn zutreffend."
+gr = "<b>Anleitung</b>: Dieser Fragebogen befasst sich mit der Anzahl der Personen, die Sie regelmäßig sehen oder mit denen Sie sprechen, einschließlich Familie, Freund*innen, Arbeitskolleg*innen, Nachbar*innen usw. Bitte lesen und beantworten Sie jede Frage sorgfältig. Beantworten Sie gegebenenfalls Folgefragen, wenn zutreffend."
 
 [q1]
 en = "Which of the following best describes your marital status?"
@@ -113,7 +113,7 @@ gr = "Wie viele dieser Verwandten sehen Sie oder sprechen Sie telefonisch mindes
 en = "How many close friends do you have? (meaning people that you feel at ease with, can talk to about private matters, and can call on for help)"
 fr = "Combien d’amis proches avez-vous ? (c’est-à-dire des personnes avec qui vous êtes à l’aise, avec qui vous pouvez parler de choses privées et que vous pouvez appeler quand vous avez besoin d’aide)"
 pol = "Ilu masz bliskich przyjaciół? (oznaczających ludzi z którymi czujesz się swobodnie, możesz rozmawiać na osobiste tematy i których możesz wezwać na pomoc)"
-gr = "Wie viele enge Freunde haben Sie? (gemeint sind Menschen, mit denen Sie sich wohl fühlen, Sie über private Angelegenheiten reden können und die Sie um Hilfe bitten können.)"
+gr = "Wie viele enge Freund*innen haben Sie? (gemeint sind Menschen, mit denen Sie sich wohl fühlen, Sie über private Angelegenheiten reden können und die Sie um Hilfe bitten können.)"
 
 # q6_ans is q2_ans
 
@@ -121,7 +121,7 @@ gr = "Wie viele enge Freunde haben Sie? (gemeint sind Menschen, mit denen Sie si
 en = "How many of these friends do you see or talk to at least once every 2 weeks?"
 fr = "À combien de ces amis parlez-vous au téléphone ou voyez-vous au moins une fois toutes les deux semaines ?"
 pol = "Z iloma spośród tych przyjaciół widzisz się lub rozmawiasz przynajmniej raz na dwa tygodnie?"
-gr = "Wie viele dieser Freunde sehen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen?"
+gr = "Wie viele dieser Freund*innen sehen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen?"
 
 [q7]
 en = "Do you belong to a church, temple, or other religious group?"
@@ -155,7 +155,7 @@ gr = "Besuchen Sie regelmäßig Kurse jeglicher Art (Schule, Universität, Facha
 en = "How many fellow students or teachers do you talk to at least once every 2 weeks? (This includes at class meetings.)"
 fr = "À combien de vos camarades ou professeurs parlez-vous au moins une fois toutes les deux semaines ? (Cela inclut les réunions de classe.)"
 pol = "Z iloma spośród innych uczniów/studentów lub nauczycieli rozmawiasz przynajmniej raz na dwa tygodnie? (włączając w to spotkania na zajęciach)"
-gr = " Wie viele Mitstudierenden oder Lehrer sehen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen? (Dies gilt auch für Klassentreffen.)"
+gr = " Wie viele Mitstudierenden oder Leher*innen sehen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen? (Dies gilt auch für Klassentreffen.)"
 
 # q8a_ans is q2_ans
 
@@ -191,7 +191,7 @@ gr = "Wie viele Personen an Ihrem Arbeitsplatz (außer denen, die Sie beaufsicht
 en = "How many of your neighbors do you visit or talk to at least once every 2 weeks?"
 fr = "À combien de vos voisins rendez-vous visite ou parlez-vous au moins une fois toutes les deux semaines ?"
 pol = "Ilu sąsiadów odwiedzasz lub z iloma rozmawiasz przynajmniej raz na dwa tygodnie"
-gr = "Wie viele Ihrer Nachbarn besuchen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen?"
+gr = "Wie viele Ihrer Nachbar*innen besuchen Sie oder sprechen Sie telefonisch mindestens alle zwei Wochen?"
 
 # q10_ans is q2_ans
 

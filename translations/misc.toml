@@ -19,7 +19,7 @@ en = 'Next'
 es = 'Próxima'
 fr = 'Suivant'
 pol = 'Kolejny'
-gr = 'Nächster'
+gr = 'Weiter'
 
 [incomplete]
 en = "Are you sure? You left some blank."
