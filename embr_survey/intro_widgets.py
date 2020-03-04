@@ -107,7 +107,7 @@ def on_blink(sel):
     dev = sel.device.currentText()
     if dev:
         sel.pre_embr.blink(sel.device.currentText())
-    sel.device.clear() # TODO: why was this here?
+    sel.device.clear()  # TODO: why was this here?
     sel.device.addItems(sel.pre_embr.addrs)
 
 
@@ -236,7 +236,7 @@ class IntroDlg(qtw.QWidget):
         if not self._already_done:
             self._already_done = True
             self._part2()
-    
+
     def _part2(self):
         from embr_survey import application_path
         from embr_survey import setup_logger
@@ -263,7 +263,7 @@ class IntroDlg(qtw.QWidget):
 
         os.makedirs(settings['data_dir'], exist_ok=True)
         setup_logger(settings['data_dir'], exp_start)
-        seed = int(time()) # seconds since Unix epoch
+        seed = int(time())  # seconds since Unix epoch
         # TESTING: one of the bad runs
         #seed = 1573207638
         random.seed(seed)
@@ -340,18 +340,19 @@ class IntroDlg(qtw.QWidget):
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        stack2.append(efficacy) # always right after DVs
+        stack2.append(efficacy)  # always right after DVs
         if is_end:
             stack2.extend(individ_diffs)
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
-        self._window.add_widgets([dv0]) # always first (sanity check)
-        #stack2 = [dv6]
+        self._window.add_widgets([dv0])  # always first (sanity check)
+        #stack2 = [dv7]
         self._window.add_widgets(stack2)
+
 
 def handle_sig(dev, *args):
     logger = logging.getLogger('embr_survey')
     logger.warn('Premature escape.')
-    dev.close() # TODO: will this get called by atexit, or not?
+    dev.close()  # TODO: will this get called by atexit, or not?
     qtw.QApplication.instance().quit()
