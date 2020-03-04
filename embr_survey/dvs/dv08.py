@@ -105,6 +105,7 @@ class DV08BrandPersonality(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': [q[:40] + '...' for q in self.questions],
+                'question_original_order': [('q%s' % x) for x in range(7)] * 3,
                 'responses': current_answers,
                 'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],

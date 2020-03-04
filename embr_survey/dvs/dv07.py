@@ -49,10 +49,7 @@ class DV07PerceptualFocus(StackedDV):
 
         # load images
         img_names = ['dv7_%i.png' % i for i in range(1, 8, 1)]
-        if lang == 'fr':
-            self.img_names = [os.path.join(settings['translation_dir'], 'fr/%s' % x) for x in img_names]
-        else: # english
-            self.img_names = [resource_filename('embr_survey', 'images/%s' % img) for img in img_names]
+        self.img_names = [os.path.join(settings['translation_dir'], '%s/%s' % (lang, x)) for x in img_names]
         random.shuffle(self.img_names)
 
         self.prompt = translation['prompt'][lang]
@@ -76,7 +73,7 @@ class DV07PerceptualFocus(StackedDV):
         # flatten out responses
         current_answers = [x.get_responses() for x in self.qs]
         current_answers = [x for sublist in current_answers for x in sublist]
-        current_answers = [ca if ca >= 1 else None for ca in current_answers]
+        current_answers = [ca-1 if ca >= 1 else None for ca in current_answers]
         # Convert from 0/1 to A/B
         for count, ca in enumerate(current_answers):
             if ca is not None:
@@ -93,7 +90,7 @@ class DV07PerceptualFocus(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': self.questions,
-                # 'question_original_order': [q[0] for q in self.questions],
+                'question_original_order': ['q0'] * num_q,
                 'responses': current_answers,
                 'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],

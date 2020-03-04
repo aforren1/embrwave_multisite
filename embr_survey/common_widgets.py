@@ -1,4 +1,5 @@
 from PySide2.QtCore import Qt, QTimer
+from PySide2.QtGui import QFontMetrics
 import PySide2.QtWidgets as qtw
 from functools import partial
 import logging
@@ -38,7 +39,7 @@ class SpecialStack(qtw.QStackedWidget):
 class JustText(qtw.QLabel):
     def __init__(self, text):
         super().__init__(text)
-        self.setStyleSheet('font-size:20pt;')
+        self.setStyleSheet('font-size:18pt;')
         self.setWordWrap(True)
         self.setTextFormat(Qt.RichText)  # allow HTML
 
@@ -77,20 +78,25 @@ class MultiQuestion(qtw.QWidget):
     def __init__(self, header, questions):
         super().__init__()
         grid = qtw.QGridLayout()
+        grid.setSizeConstraint(qtw.QLayout.SetMinimumSize)
+        self.setLayout(grid)
         for count, head in enumerate(header):
             h = qtw.QLabel(head)
             h.setStyleSheet('font-size:18pt;')
             h.setAlignment(Qt.AlignCenter)
-            grid.addWidget(h, 0, count + 1,
+            grid.addWidget(h, 0, count + 2,
                            alignment=Qt.AlignCenter | Qt.AlignBottom)
         qbgs = []
         for i, quest in enumerate(questions):
             q = qtw.QLabel()
+            q.setSizePolicy(qtw.QSizePolicy.Preferred, qtw.QSizePolicy.MinimumExpanding)
+            q.setTextFormat(Qt.RichText)
             q.setWordWrap(True)
             q.setStyleSheet(no_ans)
-            q.setTextFormat(Qt.RichText)
             q.setText(quest)
-            grid.addWidget(q, i+1, 0)
+            q.ensurePolished()
+            qfm = QFontMetrics(q.font())
+            grid.addWidget(q, i+1, 0, 1, 2)
             qbg = qtw.QButtonGroup()
             qbg.buttonClicked.connect(partial(deal_with_toggle, i, qbg, q))
             qbgs.append(qbg)
@@ -103,14 +109,17 @@ class MultiQuestion(qtw.QWidget):
                 rad = qtw.QRadioButton()
                 rad.setStyleSheet(style)
                 qbg.addButton(rad, count)
-                grid.addWidget(rad, i+1, count+1, alignment=Qt.AlignCenter)
+                grid.addWidget(rad, i+1, count+2, alignment=Qt.AlignCenter)
 
+        self.updateGeometry()
         self.qbgs = qbgs
-        self.setLayout(grid)
 
     def get_responses(self):
         resps = [bg.checkedId() + 1 for bg in self.qbgs]
         return resps
+    
+    def all_ans(self):
+        return all([x > 0 for x in self.get_responses()])
 
 
 class SingleQuestion(MultiQuestion):
@@ -151,6 +160,10 @@ class RadioGroupQ(qtw.QWidget):
     
     def get_responses(self):
         return self.resp.checkedId() + 1
+    
+    def all_ans(self):
+        return self.get_responses() > 0
+
 
 class DropDownQuestion(qtw.QWidget):
     def __init__(self, question, answers):
@@ -170,3 +183,6 @@ class DropDownQuestion(qtw.QWidget):
 
     def get_responses(self):
         return self.answer.currentText()
+    
+    def all_ans(self):
+        return self.get_responses() != self._default_ans

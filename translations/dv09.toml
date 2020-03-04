@@ -5,91 +5,143 @@ en = '''<b>Instructions</b>: The following statements describe how people someti
 
 If you never felt happy, you would respond "never"; if you always feel happy, you would respond "always."'''
 fr = '''<b>Instructions</b>: Vous trouverez ci-dessous une liste de phrases décrivant comment parfois les gens se sentent. Pour chaque phrase, veuillez indiquer la fréquence à laquelle vous vous sentez de la façon décrite dans la phrase en sélectionnant la réponse appropriée. Voici un exemple :
- 
+
 	À quelle fréquence vous sentez-vous heureux ?
 
 Si vous ne vous êtes jamais senti heureux, répondez "jamais"; si vous vous sentez toujours heureux, répondez "toujours".'''
+pol = '''<b>Instrukcja:</b> Poniższe twierdzenia opisują jak ludzie się czasem czują. Dla każdego twierdzenia, zaznacz proszę jak często czujesz się w opisany sposób poprzez wybranie jednej z odpowiedzi poniżej. Oto przykład:
+
+	Jak często czujesz się szczęśliwy?
+
+Jeśli nigdy nie czułeś się szczęśliwy, zaznaczyłbyś "nigdy"; jeśli zawsze czujesz się szczęśliwy, odpowiedziałbyś "zawsze".'''
+gr = '''<b>Anleitung:</b> Die folgenden Aussagen beschreiben, wie sich Menschen manchmal fühlen. Geben Sie für jede Aussage an, wie oft Sie sich wie beschrieben fühlen, indem Sie eine der untenstehenden Antworten auswählen. Hier ist ein Beispiel:
+
+	Wie oft fühlen Sie sich glücklich?
+
+Wenn Sie sich nie glücklich fühlen, würden Sie "nie" antworten. Wenn Sie sich immer glücklich fühlen, würden Sie "immer" antworten.'''
 
 [header]
 en = ["Never", "Rarely", "Sometimes", "Always"]
 fr = ["Jamais", "Rarement", "Parfois", "Toujours"]
+pol = ["Nigdy", "Rzadko", "Czasem", "Zawsze"]
+gr = ["Nie", "Selten", "Manchmal", "Immer"]
 
 [[question]]
 en = 'How often do you feel that you are "in tune" with the people around you?'
 fr = 'À quelle fréquence vous sentez-vous sur la même longueur d’ondes que les gens autour de vous ?'
+pol = 'Jak często czujesz, że jesteś "zgrany" z ludźmi wokół Ciebie?'
+gr = 'Wie oft haben Sie das Gefühl, mit den Menschen um Sie herum "im Einklang" zu sein?'
 
 [[question]]
 en = "How often do you feel that you lack companionship?"
 fr = "À quelle fréquence ressentez-vous un manque d’amis ?"
+pol = "Jak często czujesz, że brak Ci towarzystwa?"
+gr = "Wie oft haben Sie das Gefühl, dass Ihnen Gesellschaft fehlt?"
 
 [[question]]
 en = "How often do you feel that there is no one you can turn to?"
 fr = "À quelle fréquence ressentez-vous qu’il n’y a personne sur qui vous pouvez compter ?"
+pol = "Jak często czujesz, że nie ma nikogo, do kogo mógłbyś się zwrócić?"
+gr = "Wie oft haben Sie das Gefühl, dass Sie sich an niemanden wenden können?"
 
 [[question]]
 en = "How often do you feel alone?"
 fr = "À quelle fréquence vous sentez-vous seul-e ?"
+pol = "Jak często czujesz się sam?"
+gr = "Wie oft fühlen Sie sich allein?"
 
 [[question]]
 en = "How often do you feel part of a group of friends?"
 fr = "À quelle fréquence ressentez-vous que vous faites partie d’un groupe d’amis ?"
+pol = "Jak często czujesz się częścią grupy przyjaciół?"
+gr = "Wie oft fühlen Sie sich als Teil von Freunden?"
 
 [[question]]
 en = "How often do you feel that you have a lot in common with the people around you?"
 fr = "À quelle fréquence ressentez-vous que vous avez beaucoup de choses en commun avec les gens qui vous entourent ?"
+pol = "Jak często czujesz, że masz dużo wspólnego z ludźmi wokół Ciebie?"
+gr = "Wie oft haben Sie das Gefühl, dass Sie viel mit den Menschen um Sie herum gemeinsam haben? "
 
 [[question]]
 en = "How often do you feel that you are no longer close to anyone?"
 fr = "À quelle fréquence ressentez-vous que vous n’êtes plus proche de personne ?"
+pol = "Jak często czujesz, że już nie jesteś blisko z nikim?"
+gr = "Wie oft haben Sie das Gefühl, niemandem mehr nahe zu sein?"
 
 [[question]]
 en = "How often do you feel that your interests and ideas are not shared by those around you?"
 fr = "À quelle fréquence ressentez-vous que vos intérêts et idées ne sont pas partagés par ceux qui vous entourent ?"
+pol = "Jak często czujesz, że Twoje zainteresowania i idee nie są dzielone przez tych, którzy Cię otaczają?"
+gr = "Wie oft haben Sie das Gefühl, dass Ihre Interessen und Ideen von niemandem um Sie herum geteilt werden?"
 
 [[question]]
 en = "How often do you feel outgoing and friendly?"
 fr = "À quelle fréquence avez-vous l’impression d’être une personne sociable et amicale ?"
+pol = "Jak często czujesz się wylewny i przyjacielski?"
+gr = "Wie oft fühlen Sie sich aufgeschlossen und freundlich? "
 
 [[question]]
 en = "How often do you feel close to people?"
 fr = "À quelle fréquence vous sentez-vous proche de certaines personnes ?"
+pol = "Jak często czujesz się bliski ludziom?"
+gr = "Wie oft fühlen Sie sich Menschen nahe?"
 
 [[question]]
 en = "How often do you feel left out?"
 fr = "À quelle fréquence vous sentez-vous exclu-e ?"
+pol = "Jak często czujesz się pominięty?"
+gr = "Wie oft fühlen Sie sich ausgeschlossen?"
 
 [[question]]
 en = "How often do you feel that your relationships with others are not meaningful?"
 fr = "À quelle fréquence ressentez-vous que vos relations sociales sont superficielles ?"
+pol = "Jak często czujesz, że Twoje związki z innymi nie są istotne?"
+gr = "Wie oft haben Sie das Gefühl, dass die Beziehungen zu anderen bedeutungslos sind?"
 
 [[question]]
 en = "How often do you feel that no one really knows you well?"
 fr = "À quelle fréquence ressentez-vous que personne ne vous connaît vraiment bien ?"
+pol = "Jak często czujesz, że nikt tak naprawdę Cię dobrze nie zna?"
+gr = "Wie oft haben Sie das Gefühl, dass niemand Sie wirklich gut kennt?"
 
 [[question]]
 en = "How often do you feel isolated from others?"
 fr = "À quelle fréquence vous sentez-vous isolé-e des autres ?"
+pol = "Jak często czujesz się odizolowany od innych?"
+gr = "Wie oft fühlen Sie sich isoliert von anderen?"
 
 [[question]]
 en = "How often do you feel that you can find companionship when you want it?"
 fr = "À quelle fréquence avez-vous l’impression de pouvoir vous entourer d’ami-e-s quand vous en avez envie ?"
+pol = "Jak często czujesz, że możesz znaleźć towarzystwo kiedy go potrzebujesz?"
+gr = "Wie oft haben Sie das Gefühl, dass Sie Gesellschaft finden können, wenn Sie es wollen?"
 
 [[question]]
 en = "How often do you feel that there are people who really understand you?"
 fr = "À quelle fréquence ressentez-vous qu’il y a des gens qui vous comprennent vraiment bien ?"
+pol = "Jak często czujesz, że są ludzie, którzy naprawdę Cię rozumieją?"
+gr = "Wie oft haben Sie das Gefühl, dass es Personen gibt, die Sie wirklich verstehen? "
 
 [[question]]
 en = "How often do you feel shy?"
 fr = "À quelle fréquence vous sentez-vous timide ?"
+pol = "Jak często czujesz się nieśmiały/nieśmiała?"
+gr = "Wie oft fühlen Sie sich schüchtern?"
 
 [[question]]
 en = "How often do you feel that people are around you but not with you?"
 fr = "À quelle fréquence avez-vous l’impression que les gens sont autour de vous mais pas avec vous ?"
+pol = "Jak często czujesz, że ludzie są wokół Ciebie, ale nie z Tobą?"
+gr = "Wie oft haben Sie das Gefühl, dass Menschen in Ihrer Nähe aber nicht bei Ihnen sind? "
 
 [[question]]
 en = "How often do you feel that there are people you can talk to?"
 fr = "À quelle fréquence ressentez-vous qu’il y a des gens à qui vous pouvez parler ?"
+pol = "Jak często czujesz, że są ludzie, z którymi możesz porozmawiać?"
+gr = "Wie oft haben Sie das Gefühl, dass es Menschen gibt, mit denen Sie reden können?"
 
 [[question]]
 en = "How often do you feel that there are people you can turn to?"
 fr = "À quelle fréquence ressentez-vous qu’il y a des gens sur qui vous pouvez compter ?"
+pol = "Jak często czujesz, że są ludzie, do których możesz się zwrócić?"
+gr = "Wie oft haben Sie das Gefühl, dass es Menschen gibt, an die Sie sich wenden können?"

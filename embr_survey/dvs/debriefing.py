@@ -38,6 +38,19 @@ class TextInput(qtw.QWidget):
         name = self.get_responses()
         return name != ''
 
+class Fin(qtw.QWidget):
+    def __init__(self, fin, q_data, fin2):
+        super().__init__()
+        self.q_data = q_data
+        lyt = qtw.QVBoxLayout()
+        lyt.addWidget(fin)
+        lyt.addWidget(self.q_data)
+        lyt.addWidget(fin2)
+        self.setLayout(lyt)
+    
+    def all_ans(self):
+        return self.q_data.all_ans()
+
 class Debriefing(StackedDV):
     long_name = 'debriefing'
     name = 'debriefing'
@@ -67,12 +80,7 @@ class Debriefing(StackedDV):
         self.q_data = RadioGroupQ('', translation['q_related_ans'][:2])
         self.fin2 = JustText(translation['fin2'])
 
-        wid = qtw.QWidget()
-        lyt = qtw.QVBoxLayout()
-        lyt.addWidget(self.fin)
-        lyt.addWidget(self.q_data)
-        lyt.addWidget(self.fin2)
-        wid.setLayout(lyt)
+        wid = Fin(self.fin, self.q_data, self.fin2)
 
         self.add_widgets([self.q_purpose, self.q_related, self.q_related_how,
                           self.q_influence, self.q_how_influence, wid])
@@ -89,8 +97,7 @@ class Debriefing(StackedDV):
         self.device.level = 0
     
     def all_ans(self):
-        # 
-        return True
+        return self.currentWidget().all_ans()
 
     def save_data(self):
         # write to csv
@@ -107,6 +114,7 @@ class Debriefing(StackedDV):
                 'language': [settings['language']]*lq,
                 'locale': [settings['locale']]*lq,
                 'questions': self.qs,
+                'question_original_order': [('q%s' % x) for x in range(lq)],
                 'responses': ans,
                 'dv': [self.long_name]*lq,
                 'block_number': [self.block_num]*lq,

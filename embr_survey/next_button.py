@@ -5,6 +5,9 @@ import PySide2.QtWidgets as qtw
 from functools import partial
 from datetime import datetime
 from embr_survey.common_widgets import SpecialStack
+import logging
+
+embr_logger = logging.getLogger('embr_survey')
 
 base_style = '''
 QPushButton {border:4px solid rgb(0, 0, 0); 
@@ -38,6 +41,9 @@ class NextButton(qtw.QPushButton):
         self.state = 'complete'
         self.incomplete_txt = 'Are you sure? You left some blank.'
         self.win = win
+        self.yes = 'Yes'
+        self.no = 'No'
+
 
     @property
     def state(self):
@@ -45,6 +51,7 @@ class NextButton(qtw.QPushButton):
 
     @state.setter
     def state(self, value):
+        embr_logger.info('New NextButton state: %s' % value)
         self._state = value
         if value == 'neutral':
             new_sty = no_style
@@ -69,9 +76,12 @@ class NextButton(qtw.QPushButton):
         if self.state == 'neutral':
             return
         if self.state == 'incomplete' or not all_ans:
-            choice = qtw.QMessageBox.question(None, '',
-                                              self.incomplete_txt,
-                                              qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+            msgbox = qtw.QMessageBox(qtw.QMessageBox.Question, '', 
+                                     self.incomplete_txt,
+                                     qtw.QMessageBox.Yes | qtw.QMessageBox.No)
+            msgbox.setButtonText(qtw.QMessageBox.Yes, self.yes)
+            msgbox.setButtonText(qtw.QMessageBox.No, self.no)
+            choice = msgbox.exec()
             if choice != qtw.QMessageBox.Yes:
                 return
         # all good to keep going, save data (no-op for instructions, but important for surveys)
@@ -84,12 +94,14 @@ class NextButton(qtw.QPushButton):
     # - if we're out of widgets, exit
     def _callback_pt2(self):
         current_widget = self.stack.currentWidget()
+        embr_logger.info('Current widget: %s' % type(current_widget).__name__)
         # handle when the current widget is a Stack
         if isinstance(current_widget, SpecialStack):
             # consume a subwidget
             c2 = current_widget.currentWidget()
             c2.setSizePolicy(qtw.QSizePolicy.Ignored, qtw.QSizePolicy.Ignored)
             # current_widget.adjustSize()
+            embr_logger.info('Exiting subwidget %s' % type(c2).__name__)
             if hasattr(c2, 'on_exit'):
                 c2.on_exit()
             # move to the next subwidget
@@ -101,6 +113,7 @@ class NextButton(qtw.QPushButton):
                 c3.adjustSize()
                 current_widget.adjustSize()
                 self.stack.adjustSize()
+                embr_logger.info('Entering subwidget %s' % type(c3).__name__)
                 if hasattr(c3, 'on_enter'):
                     c3.on_enter()
                 if getattr(c3, 'auto_continue', True):
@@ -124,10 +137,13 @@ class NextButton(qtw.QPushButton):
                                          qtw.QSizePolicy.Ignored)
             self.stack.adjustSize()
             self.stack.removeWidget(current_widget)
+            embr_logger.info('Exiting widget %s' % type(current_widget).__name__)
             if self.stack.count() <= 0:
+                embr_logger.info('Done!')
                 sys.exit(0)
             # move to the next one
             new_widget = self.stack.currentWidget()
+            embr_logger.info('Entering widget %s' % type(new_widget).__name__)
             if passed_data is not None:
                 new_widget.passed_data = passed_data
             if hasattr(new_widget, 'on_enter'):

@@ -1,11 +1,17 @@
 [prompt]
 en = """In this next section, you will be asked to assess 6 figures. A 'target object' will be shown at the top of the screen, with two other objects below it. The goal is for you to judge which of the two objects looks like the one at the top. Do not think too long, instead use your first instinct. There is no right or wrong!\n\nFirst, we will give you a sample question so you know what it looks like."""
 fr = """Dans cette partie nous allons vous demander d’évaluer 6 figures. Un ‘objet cible’ sera affiché en haut de l’écran, et deux autres objets seront affichés en-dessous de ce dernier. Votre objectif sera de juger lequel des deux objets ressemble à celui au-dessus. Ne réfléchissez pas trop longtemps, fiez-vous à votre première intuition. Il n’y a pas de bonnes ou de mauvaises réponses ! \n\nNous allons tout d’abord vous donner un exemple de question afin que vous sachiez à quoi cela ressemble."""
+pol = """W tej części zostaniesz poproszony (-a) o ocenę 6 obiektów. Obiekt oceniany będzie się pokazywał na górze ekranu, a pod nim dwa inne obiekty. Twoim zadaniem jest ocenić, który z dwóch obiektów na dole przypomina ten na górze ekranu. Nie myśl zbyt długo, kieruj się Twoim pierwszym wrażeniem. Nie ma w tym zadaniu ani dobrych, ani złych odpowiedzi! \n\nNajpierw pokażemy Ci przykładowe pytanie, abyś wiedział (a), jak to wygląda."""
+gr = """In diesem nächsten Abschnitt werden Sie aufgefordert, 6 Figuren zu bewerten. Am oberen Bildschirmrand wird ein 'Zielobjekt' mit zwei weiteren Objekten darunter angezeigt. Ihre Aufgabe besteht darin, zu beurteilen, welches der beiden Objekte wie das obere aussieht. Denken Sie nicht zu lange nach, sondern folgen Sie Ihrem Bauchgefühl. Es gibt kein Richtig oder Falsch! \n\nZuerst geben wir Ihnen eine Beispielfrage, damit Sie wissen, wie es aussieht."""
 
 [prompt2]
 en = "That was the sample question. You will get 6 more figures to evaluate. The question remains the same: Which object (A or B) most resembles the target object to you? Good luck!"
 fr = "Ceci était un exemple de question. Vous aurez 6 figures de plus à évaluer. La question reste la même : Selon vous, quel objet (A ou B) ressemble le plus à l’objet cible ? Bonne chance !"
+pol = "To było przykładowe pytanie. Otrzymasz 6 takich obiektów do oceny. Pytanie pozostaje takie samo: Który obiekt (A lub B) najbardziej przypomina obiekt docelowy? Powodzenia!"
+gr = "Das war die Beispielfrage. Sie bekommen sechs weitere Figuren zur Beurteilung. Die Frage bleibt die gleiche: Welches Objekt (A or B) ähnelt für Sie dem Zielobjekt am meisten? Viel Erfolg!"
 
 [question]
 en = "Which object most resembles the target object to you? [Object A/Object B]"
 fr = "Selon vous, quel objet ressemble le plus à l’objet cible ? [Objet A/Objet B]"
+pol = "Który obiekt na dole najbardziej przypomina obiekt na górze? [Obiekt A/Obiekt B]"
+gr = "Welches Objekt ähnelt für Sie dem Zielobjekt am meisten? [Objekt A/Objekt B]"

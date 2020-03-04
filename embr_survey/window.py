@@ -55,7 +55,7 @@ class MainWindow(object):
         self.scroll_area = qtw.QScrollArea()
         self.scroll_area.setAlignment(Qt.AlignCenter)
         self.scroll_area.setStyleSheet(scroll_style)
-        self.main_layout.addWidget(self.scroll_area)
+        self.main_layout.addWidget(self.scroll_area, Qt.AlignCenter)
 
         # next button iterates through the stack
         self.widgets = SpecialStack()
@@ -65,7 +65,7 @@ class MainWindow(object):
         # alternatively, we could've detected in the button whether the current
         # widget was a StackedWidget or not
         self.add_widgets(widgets)
-        self.widgets.setFixedWidth(1.2*self.height)
+        self.widgets.setFixedWidth(1.4*self.height)
         self.scroll_area.setWidget(self.widgets)
         self.widgets.currentWidget().setSizePolicy(qtw.QSizePolicy.Preferred,
                                                    qtw.QSizePolicy.Preferred)

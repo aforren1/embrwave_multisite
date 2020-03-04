@@ -95,6 +95,8 @@ def on_activated(self, idx):
         self.locale_label.setText(self.translations['locale'][new_lang])
         self._button.incomplete_txt = self.translations['incomplete'][new_lang]
         self._button.setText(self.translations['next'][new_lang])
+        self._button.yes = self.translations['yes'][new_lang]
+        self._button.no = self.translations['no'][new_lang]
     except AttributeError:
         pass
 
@@ -105,7 +107,7 @@ def on_blink(sel):
     dev = sel.device.currentText()
     if dev:
         sel.pre_embr.blink(sel.device.currentText())
-    sel.device.clear() # TODO: why was this here?
+    sel.device.clear()  # TODO: why was this here?
     sel.device.addItems(sel.pre_embr.addrs)
 
 
@@ -118,6 +120,7 @@ class IntroDlg(qtw.QWidget):
         self._window = None  # patched in later (reference to MainWindow)
         self._device = DummyWave()
         self._is_connected = False
+        self._already_done = False
 
         if not gatt_ble:
             self.pre_embr = DummyPreEmbr()
@@ -154,7 +157,7 @@ class IntroDlg(qtw.QWidget):
         self.id = qtw.QLineEdit()
         self.lang = qtw.QComboBox()
         fnt = self.lang.font()
-        fnt.setPointSize(26)
+        fnt.setPointSize(20)
         self.lang.setFont(fnt)
         self.lang.currentIndexChanged.connect(partial(on_activated, self))
         self.locale = qtw.QComboBox()
@@ -223,19 +226,29 @@ class IntroDlg(qtw.QWidget):
                 self._device = device
                 self.connector.setText('Connected.')
                 self.connector.setStyleSheet(green_style)
+                self.layout().addWidget(JustText('<b>Battery level: %i</b>' % device.battery_charge), 6, 0, 2, 2, Qt.AlignCenter)
         except Exception as e:
             self.connector.setText('Connection failed.\nTry to click again\n(or restart program)?')
             self._is_connected = False
             self._log.warn(repr(e))
 
     def on_exit(self):
+        if not self._already_done:
+            self._already_done = True
+            self._part2()
+
+    def _part2(self):
         from embr_survey import application_path
         from embr_survey import setup_logger
         from embr_survey._version import __version__
         from hashlib import md5
         import random
+        from time import time
         from embr_survey.common_widgets import EmbrFactory, EmbrSection
         import embr_survey.dvs as dvs
+        import os
+        import sys
+        import platform
 
         # we should now have sufficient info to start the experiment
         exp_start = datetime.now().strftime('%y%m%d-%H%M%S')
@@ -250,7 +263,9 @@ class IntroDlg(qtw.QWidget):
 
         os.makedirs(settings['data_dir'], exist_ok=True)
         setup_logger(settings['data_dir'], exp_start)
-        seed = md5(settings['id'].encode('utf-8')).hexdigest()
+        seed = int(time())  # seconds since Unix epoch
+        # TESTING: one of the bad runs
+        #seed = 1573207638
         random.seed(seed)
         settings['seed'] = seed
         logger = logging.getLogger('embr_survey')
@@ -259,6 +274,10 @@ class IntroDlg(qtw.QWidget):
         logger.info('Seed: %s' % seed)
         logger.info('Language: %s' % settings['language'])
         logger.info('Locale: %s' % settings['locale'])
+        logger.info('System platform: %s' % platform.platform())
+        logger.info('Machine: %s' % platform.machine())
+        logger.info('Python version: %s' % platform.python_version())
+
         logger.info('embr_survey version: %s' % __version__)
         logger.info('----------')
         device = self._device
@@ -274,6 +293,7 @@ class IntroDlg(qtw.QWidget):
         random.shuffle(dv_order)
         temps2 = [temps[val] for val in dv_order]
         self._log.info('Temperature progression: %s' % temps2)
+        self._log.info('DV order: %s' % dv_order)
 
         # TODO: feed in locale
         lang = settings['language']
@@ -305,6 +325,9 @@ class IntroDlg(qtw.QWidget):
         block_num = 0
         if is_end:
             block_num = 15
+            logger.info('Efficacy block is at the end.')
+        else:
+            logger.info('Efficacy block is at the beginning.')
 
         individ_diffs = [dvs.IndividualDifferencesPart1(block_num, device, settings),
                          dvs.IndividualDifferencesPart2(block_num, device, 0, settings),
@@ -317,16 +340,19 @@ class IntroDlg(qtw.QWidget):
                  dv11, dv12, dv13, dv14]
         # shuffle around questions
         stack2 = [stack[i] for i in dv_order]
-        stack2.append(efficacy) # always right after DVs
+        stack2.append(efficacy)  # always right after DVs
         if is_end:
             stack2.extend(individ_diffs)
         else:
             stack2.insert(0, individ_diffs)
         stack2.append(debriefing)
-        self._window.add_widgets([dv0]) # always first (sanity check)
+        self._window.add_widgets([dv0])  # always first (sanity check)
+        #stack2 = [dv7]
         self._window.add_widgets(stack2)
 
+
 def handle_sig(dev, *args):
-    print('Premature CTRL+C.')
-    dev.close()
+    logger = logging.getLogger('embr_survey')
+    logger.warn('Premature escape.')
+    dev.close()  # TODO: will this get called by atexit, or not?
     qtw.QApplication.instance().quit()

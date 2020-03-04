@@ -118,6 +118,7 @@ class DV14RomanceMovies(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': [q[:40] + '...' for q in self.qs],
+                'question_original_order': ['q0', 'q1', 'q2'] * (num_q//3),
                 'movie_txt': [strip_tags(q[:40]) + '...' for q in self.movs],
                 'responses': current_answers,
                 'dv': num_q * [self.long_name],

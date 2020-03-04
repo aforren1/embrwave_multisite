@@ -20,10 +20,10 @@ class CriminalQuestion(qtw.QWidget):
         img = QPixmap(img_name)
         img_holder = qtw.QLabel()
         img_holder.setPixmap(img.scaled(800, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        img_holder.setAlignment(Qt.AlignCenter)
+        #img_holder.setAlignment(Qt.AlignHCenter)
         self.question = MultiQuestion(header, questions)
         layout = qtw.QVBoxLayout()
-        layout.addWidget(img_holder)
+        layout.addWidget(img_holder, alignment=Qt.AlignHCenter)
         layout.addWidget(self.question)
         self.setLayout(layout)
 
@@ -81,6 +81,7 @@ class DV06CriminalRating(StackedDV):
                 'language': num_q * [settings['language']],
                 'locale': num_q * [settings['locale']],
                 'questions': ['...' + q[-40:] for q in self.questions],
+                'question_original_order': ['q0', 'q1'] * (num_q//2), 
                 'responses': current_answers,
                 'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],

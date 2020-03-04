@@ -214,8 +214,16 @@ class IndividualDifferencesPart1(qtw.QWidget):
         self.device.level = 0
     
     def all_ans(self):
-        # 
-        pass
+        core = [True]
+        for x in [self.q1, self.q2, self.q3, self.q4, self.q5, self.q6, self.q7, self.q8,
+                  self.q9, self.q10, self.q11, self.q12]:
+            core.append(x.all_ans())
+
+        for x in [self.q2a, self.q3a, self.q4a, self.q5a, self.q6a, self.q7a, self.q8a, self.q9a,
+                  self.q9b, self.q11a, self.q12a]:
+            if x.isVisible():
+                core.append(x.all_ans())
+        return all(core)
 
     def save_data(self):
         # write to csv
@@ -242,6 +250,7 @@ class IndividualDifferencesPart1(qtw.QWidget):
                 'language': [settings['language']]*lq,
                 'locale': [settings['locale']]*lq,
                 'questions': [self.translation[x] for x in names],
+                'question_original_order': names,
                 'responses': ans,
                 'dv': [self.long_name]*lq,
                 'block_number': [self.block_num]*lq,
@@ -270,7 +279,7 @@ class IndividualDifferencesPart2_3(BaseDV):
         layout = qtw.QVBoxLayout()
         self.qs = MultiQuestion(header, [q[1] for q in self.questions])
         head = qtw.QLabel(prompt)
-        head.setStyleSheet('font-size:26pt;')
+        head.setStyleSheet('font-size:18pt;')
         head.setWordWrap(True)
         layout.addWidget(head)
         layout.addWidget(self.qs)
@@ -346,26 +355,25 @@ class IndividualDifferencesPart4(qtw.QWidget):
         
         layout = qtw.QVBoxLayout()
 
-        if locale_settings['height'] == 'inches':
-            h_min, h_max = 47, 83
-        else:
-            h_min, h_max = 120, 210
+        # default ranges (cm, kg)
+        h_min, h_max = 120, 210
+        w_min, w_max = 30, 160
 
-        if locale_settings['weight'] == 'pounds':
-            w_min, w_max = 66, 353
-        else:
-            w_min, w_max = 30, 160
 
         lt, gt = translation['less_than'], translation['more_than']
         no_resp = translation['q_sex_ans'][0] # prefer not to respond
 
         try:
             height = locale_settings['height'][locale]
+            if locale_settings['height'][locale] == 'inches':
+                h_min, h_max = 47, 83
         except KeyError:
             # use default locale (US)
             height = locale_settings['height']['us']
         try:
             weight = locale_settings['weight'][locale]
+            if locale_settings['weight'][locale] == 'pounds':
+                w_min, w_max = 66, 353
         except KeyError:
             # use default locale (US)
             weight = locale_settings['weight']['us']
@@ -390,6 +398,7 @@ class IndividualDifferencesPart4(qtw.QWidget):
 
         age_range = [str(x) for x in range(18, 100)]
         age_range.append('100+')
+        age_range.insert(0, no_resp)
         self.q_age = DropDownQuestion(translation['q_age'], age_range)
 
         self.relationship = RadioGroupQ(translation['q_relationship'], translation['q_relationship_ans'])
@@ -412,6 +421,16 @@ class IndividualDifferencesPart4(qtw.QWidget):
                                                  'q_tobacco_2']])
 
         self.setLayout(layout)
+
+    def all_ans(self):
+        core = [True]
+        for x in [self.q_height, self.q_weight, self.q_sex, self.q_age, self.relationship, self.q_tobacco, self.q_lang]:
+            core.append(x.all_ans())
+
+        for x in [self.q_tobacco2]:
+            if x.isVisible():
+                core.append(x.all_ans())
+        return all(core)
 
     def on_enter(self):
         # need to set each time, at least to keep connection alive
@@ -438,6 +457,7 @@ class IndividualDifferencesPart4(qtw.QWidget):
                 'language': [settings['language']]*lq,
                 'locale': [settings['locale']]*lq,
                 'questions': self.qs,
+                'question_original_order': [('q%s' % x) for x in range(lq)],
                 'responses': ans,
                 'dv': [self.long_name]*lq,
                 'block_number': [self.block_num]*lq,
@@ -497,6 +517,16 @@ class IndividualDifferencesPart5(qtw.QWidget):
         self.setLayout(layout)
         self.qs = [translation[x] for x in ['q_contra', 'q_period', 'q_cycle_len', 'q_confidence', 'q_days_since', 'q_days_until']]
     
+    def all_ans(self):
+        core = [True]
+        for x in [self.q_contra, self.q_period]:
+            core.append(x.all_ans())
+
+        for x in [self.q_cycle, self.confidence, self.days_since, self.days_until]:
+            if x.isVisible():
+                core.append(x.all_ans())
+        return all(core)
+
     def on_enter(self):
         self.device.level = 0
 
@@ -518,6 +548,7 @@ class IndividualDifferencesPart5(qtw.QWidget):
                 'language': [settings['language']]*lq,
                 'locale': [settings['locale']]*lq,
                 'questions': self.qs,
+                'question_original_order': [('q%s' % x) for x in range(lq)],
                 'responses': ans,
                 'dv': [self.long_name]*lq,
                 'block_number': [self.block_num]*lq,

@@ -15,7 +15,7 @@ border-radius: 10px;background-color: #a1ffb2;font-size:18pt;padding:5px;
 class JustText(qtw.QLabel):
     def __init__(self, text):
         super().__init__(text)
-        self.setStyleSheet('font-size:20pt;')
+        self.setStyleSheet('font-size:18pt;')
         self.setWordWrap(True)
         self.setTextFormat(Qt.RichText)  # allow HTML
 
@@ -26,7 +26,7 @@ class DropDownQuestion(qtw.QWidget):
         q = JustText(question)
         self.answer = qtw.QComboBox()
         fnt = self.answer.font()
-        fnt.setPointSize(26)
+        fnt.setPointSize(18)
         self.answer.setFont(fnt)
         self.answer.addItems(answers)
         self._default_ans = answers[0]

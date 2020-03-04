@@ -2,10 +2,13 @@ import embr_survey.pygatt as gatt
 import struct
 from time import sleep
 import logging
+from PySide2.QtCore import QTimer
+import PySide2.QtWidgets as qtw
+from embr_survey.pygatt.backends.bgapi.exceptions import ExpectedResponseTimeout
 
 logging.basicConfig()
-logging.getLogger('pygatt').setLevel(logging.DEBUG)
-
+gatt_log = logging.getLogger('pygatt')
+embr_log = logging.getLogger('embr_survey')
 
 class EmbrVal(object):
     # enum-like class
@@ -49,7 +52,7 @@ class PreEmbr(object):
                                    address_type='BLEAddressType.public',
                                    interval_min=15, interval_max=30,
                                    supervision_timeout=400, latency=0)
-        for i in range(3):
+        for i in range(2):
             self._blink(dev)
         dev.disconnect()
 
@@ -67,6 +70,14 @@ class DummyPreEmbr(object):
     def blink(self, addr):
         pass
 
+# Callback for receiving battery level number from device
+def handle_battery(handle, value):
+    battery = struct.unpack('<B',value)[0]
+    print("******Battery: %s" % battery)
+
+def handle_device_state(handle, value):
+    device_state = struct.unpack('<B',value)[0]
+    print("******State: %s" % device_state)
 
 class EmbrWave(object):
     def __init__(self, addr=None):
@@ -75,10 +86,15 @@ class EmbrWave(object):
         self.on = True
         self.name = 'EmbrWave'
         self.adapter = gatt_ble
+        self._level = 0
+        self._timer = QTimer()
+        self._timer.timeout.connect(self._level_setter)
 
         if not addr:
             devs = self.adapter.scan()
             addr = next(d['address'] for d in devs if d['name'] == 'EmbrWave')
+        self.addr = addr
+        embr_log.debug('Trying to connect to address: %s' % addr)
         self.device = self.adapter.connect(address=addr, timeout=5,
                                            address_type='BLEAddressType.public',
                                            interval_min=15, interval_max=30,
@@ -86,9 +102,13 @@ class EmbrWave(object):
         try:
             self.blink()
             self.blink()
-            self.device.bond()
+            self.device.bond(permanent=True)
             self.disable_leds()  # for debugging, comment this out
             sleep(1)
+            # self.device.subscribe("0000400A-1112-efde-1523-725a2aab0123", callback = handle_battery)
+            # sleep(1)
+            # self.device.subscribe("00004006-1112-efde-1523-725a2aab0123", callback = handle_device_state)
+            # sleep(1)
             # set warming/cooling to be rather long (we'll end up turning them off manually)
             self.write(EmbrVal.COOL_WARM_ONLY, 0)
             for val in [6, 7]:  # heating, cooling respectively
@@ -96,30 +116,50 @@ class EmbrWave(object):
                 # pass
                 self.write(EmbrVal.MODE, (val, 1))  # indicate we want to change duration
                 self.write(EmbrVal.DURATION, 129)  # extended mode
+                #self.write(EmbrVal.DURATION, 60) # custom duration (60s)
                 # self.write(EmbrVal.MODE, (val, 2))  # within custom mode, can change the ramp rate
             # self.write(EmbrVal.DURATION, 1)  # ramp up at 1C/s
+            # QTimer.singleShot(45 * 1000, self.device.disconnect) # try to simulate device disconnect
         except Exception as e:
+            embr_log.warn('Device connection failed for some reason (should be in traceback).')
             self.device.disconnect()
             raise e
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        self.close()
+        embr_log.debug('Embr Wave successfully connected.')
+    
+    def reconnect(self):
+        embr_log.debug('Reconnecting.')
+        txt = qtw.QMessageBox()
+        txt.setWindowTitle('Reconnecting')
+        txt.setText('Reconnecting to the device...')
+        txt.setStandardButtons(qtw.QMessageBox.NoButton)
+        txt.show()
+        self.device = self.adapter.connect(address=self.addr, timeout=5,
+                                           address_type='BLEAddressType.public',
+                                           interval_min=15, interval_max=30,
+                                           supervision_timeout=400, latency=0)
+        self.blink()
+        self.blink()
+        self.device.bond()
+        sleep(5)
+        self.level = self._level
+        txt.close()
 
     def close(self):
         # called at the end of the task
         if self.on:
-            self.on = False
+            embr_log.debug('Closing device...')
+            self.enable_leds()
             self.stop()
             self.write(EmbrVal.MODE, (6, 1))
             self.write(EmbrVal.DURATION, 131)  # set back to "standard" mode
             self.write(EmbrVal.MODE, (7, 1))
             self.write(EmbrVal.DURATION, 131)
-            self.enable_leds()
             self.device.disconnect()
             self.adapter.stop()
+            embr_log.debug('Device closed.')
+            self.on = False
+        else:
+            embr_log.debug('Close already called on device.')
 
     def write(self, uuid, value):
         # converts to bytes, *then* write for real
@@ -132,12 +172,28 @@ class EmbrWave(object):
         sleep(2)  # TODO: check if this should be longer/shorter
 
     def _write(self, uuid, value):
-        self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+        if self.on:
+            try:
+                self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+            except ExpectedResponseTimeout: # gatt.exceptions.NotConnectedError for testing
+                self.reconnect()
+                self.device.char_write('0000%s-1112-efde-1523-725a2aab0123' % uuid[0], bytearray(value))
+        else:
+            embr_log.debug('Device already closed (write to %s probably ineffective)' % uuid[0])
+
 
     def read(self, uuid):
-        res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
-        sleep(0.2)  # TODO: check if this should be longer/shorter
-        return struct.unpack(uuid[1], res)[0]
+        if self.on:
+            try:
+                res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
+            except ExpectedResponseTimeout:
+                self.reconnect()
+                res = self.device.char_read('0000%s-1112-efde-1523-725a2aab0123' % uuid[0])
+            sleep(0.2)  # TODO: check if this should be longer/shorter
+            return struct.unpack(uuid[1], res)[0]
+        else:
+            embr_log.debug('Device already closed (read from %s probably ineffective)' % uuid[0])
+            return 0
 
     @property
     def level(self):
@@ -145,11 +201,29 @@ class EmbrWave(object):
 
     @level.setter
     def level(self, value):
+        embr_log.debug('Setting level to %i' % value)
+        # stop qtimer if it exists
+        self._level = value
+        self._timer.stop()
         self.blink()
         sleep(1)
         self.stop()
         sleep(1)
-        self.write(EmbrVal.LEVEL, value)
+        # only bother writing if the new value is meaningful?
+        if value != 0:
+            self.write(EmbrVal.LEVEL, value)
+        self._timer.start(10000) # run every 10 secs
+    
+    def _level_setter(self):
+        # runs every 10 sec in the background
+        self._write(EmbrVal.STOP, [0x00, 0x00, 0x00, 0x20])
+        if self._level != 0:
+            self._tmptimer = QTimer.singleShot(2000, self._level2)
+
+    def _level2(self):
+        # build in delay, so that 
+        nv = struct.pack(EmbrVal.LEVEL[1], self._level)
+        self._write(EmbrVal.LEVEL, nv)
 
     @property
     def battery_charge(self):
@@ -242,28 +316,41 @@ class DummyWave(object):
 
 
 if __name__ == '__main__':
+    import sys
     # device already needs to be in pairing mode!
+    embr_log.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    embr_log.addHandler(handler)
+
     try:
         embr = EmbrWave()  # TODO: explicitly pass in address?
     except Exception as e:
         embr = DummyWave()
 
-    with embr:
-        print(embr.device_id)
-        print(embr.firmware_version)
-        print(embr.battery_charge)
-        for i in range(2):
-            embr.blink()
-        sleep(2)
-        embr.level = 7
-        sleep(60)
-        # print(embr.level)
-        #embr.level = -9
-        # print('bump')
-        #embr.level = -9
-        # print('bump')
-        # sleep(5)
-        #print('now warming')
-        #embr.level = 9
-        # sleep(60)
-        print(embr.level)
+    print(embr.device_id)
+    print(embr.firmware_version)
+    print(embr.battery_charge)
+    for i in range(2):
+        embr.blink()
+    sleep(2)
+    embr.level = 7
+    sleep(10)
+    # print(embr.level)
+    #embr.level = -9
+    # print('bump')
+    #embr.level = -9
+    # print('bump')
+    # sleep(5)
+    #print('now warming')
+    #embr.level = 9
+    # sleep(60)
+    print(embr.level)
+    embr.device.disconnect()
+    embr.reconnect()
+    embr.level = -9
+    sleep(10)
+    print('#######################################%s' % embr.level)
+    embr.close()

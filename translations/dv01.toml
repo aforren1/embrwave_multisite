@@ -1,32 +1,47 @@
 [prompt]
 en = "Next, we will present you with some pairs of objects. Please rate how similar or different they seem to you."
 fr = "Ensuite, nous vous présenterons quelques paires d'objets. Veuillez évaluer leur ressemblance ou leur différence."
+pol = "W tej części, zaprezentujemy Ci pary obiektów. Prosimy o zaznaczenie, na ile są one według Ciebie do siebie podobne lub różne."
+gr = "Als nächstes werden wir Ihnen einige Objektpaare präsentieren. Bitte bewerten Sie, wie ähnlich oder unterschiedlich sie Ihnen erscheinen."
 
 [header]
 en = ["1\nVery Different", "2", "3", "4", "5", "6\nVery Similar"]
 fr = ["1\nTrès Différent", "2", "3", "4", "5", "6\nTrès Similaire"]
-
+pol = ["1\nzupełnie różne", "2", "3", "4", "5", "6\nbardzo podobne"]
+gr = ["1\nsehr unterschiedlich", "2", "3", "4", "5", "6\nsehr ähnlich"]
 
 [[question]]
 en = "whale - dolphin"
 fr = "baleine - dauphin"
+pol = "orka – delfin"
+gr = "Wal – Delphin"
 
 [[question]]
 en = "white wine - red wine"
 fr = "vin blanc - vin rouge"
+pol = "białe wino – czerwone wino"
+gr = "Weißwein – Rotwein"
 
 [[question]]
 en = "bicycle - motorcycle"
 fr = "vélo - moto"
+pol = "rower – motor"
+gr = "Fahrrad – Motorrad"
 
 [[question]]
 en = "peach - nectarine"
 fr = "pêche - nectarine"
+pol = "brzoskwinia - nekatryna"
+gr = "Pfirsich – Nektarine"
 
 [[question]]
 en = "broccoli - zucchini"
 fr = "brocoli - courgette"
+pol = "brokuł – cukinia"
+gr = "Brokkoli – Zucchini"
 
 [[question]]
 en = "pen - pencil"
 fr = "stylo - crayon"
+pol = "długopis – ołówek"
+gr = "Kugelschreiber – Bleistift"

@@ -48,6 +48,7 @@ class DV10WillingnessToForgive(BaseDV):
                 'language': [settings['language']],
                 'locale': [settings['locale']],
                 'questions': [self.question],
+                'question_original_order': ['q0'],
                 'responses': current_answers,
                 'dv': [self.long_name],
                 'block_number': [self.block_num],

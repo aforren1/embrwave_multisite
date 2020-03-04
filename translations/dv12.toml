@@ -7,47 +7,76 @@ fr = """Imaginez-vous la personne suivante : La personne X est intelligente, hab
 
 Comment évalueriez-vous cette personne sur les traits suivants ?
 """
+pol = """Zastanów się nad następującą osobą: Osoba X jest inteligentna, zręczna i pracowita. Osoba X jest też zdeterminowana, praktyczna oraz ostrożna.
 
+Jak oceniłbyś/oceniłabyś poniższe cechy tej osoby?
+"""
+gr = """Betrachten Sie die folgende Person: Person A ist intelligent, geschickt und fleißig. Person A ist außerdem entschlossen, praktisch und vorsichtig
+
+Wie beurteilen Sie diese Person anhand der folgenden Merkmale?
+"""
 [header]
 en = ['1', '2', '3', '4', '5', '6', '7']
 fr = ['1', '2', '3', '4', '5', '6', '7']
+pol = ['1', '2', '3', '4', '5', '6', '7']
+gr = ['1', '2', '3', '4', '5', '6', '7']
 
 [[question]]
 en = "1 = Ungenerous, \n7 = Generous"
-fr = "1 = Pas généreuse, \n = Généreuse"
+fr = "1 = Pas généreuse, \n7 = Généreuse"
+pol = "1 = Skąpa, \n7 = Hojna"
+gr = "1 = geizig, \n7 = großzügig"
 
 [[question]]
 en = "1 = Unhappy, \n7 = Happy"
 fr = "1 = Malheureuse, \n7 = Heureuse"
+pol = "1 = Nieszczęśliwa, \n7 = Szczęśliwa"
+gr = "1 = unglücklich, \n7 = glücklich"
 
 [[question]]
 en = "1 = Irritable, \n7 = Good-natured"
 fr = "1 = Irritable, \n7 = Joviale"
+pol = "1 = Drażliwa, \n7 = Dobroduszna"
+gr = "1 = irritierbar, \n7 = gutmütig"
 
 [[question]]
 en = "1 = Anti-social, \n7 = Sociable"
 fr = "1 = Antisociale, \n7 = Sociable"
+pol = "1 = Antyspołeczna, \n7 = Towarzyska"
+gr = "1 = unsozial, \n7 = sozial"
 
 [[question]]
 en = "1 = Selfish, \n7 = Caring"
 fr = "1 = Égoïste, \n7 = Bienveillante"
+pol = "1 = Samolubna, \n7 = Troskliwa"
+gr = "1 = egoistisch, \n7 = fürsorglich"
 
 [[question]]
 en = "1 = Unattractive, \n7 = Attractive"
 fr = "1 = Peu attrayante, \n7 = Attrayante"
+pol = "1 = Nieatrakcyjna, \n7 = Atrakcyjna"
+gr = "1 = unattraktiv, \n7 = attraktiv"
 
 [[question]]
 en = "1 = Serious, \n7 = Carefree"
 fr = "1 = Sérieuse, \n7 = Insouciante"
+pol = "1 = Poważna, \n7 = Beztroska"
+gr = "1 = ernst, \n7 = sorgenfrei"
 
 [[question]]
 en = "1 = Quiet, \n7 = Talkative"
 fr = "1 = Calme, \n7 = Bavarde"
+pol = "1 = Cicha, \n7 = Gadatliwa"
+gr = "1 = ruhig, \n7 = gesprächig"
 
 [[question]]
 en = "1 = Weak, \n7 = Strong"
 fr = "1 = Faible, \n7 = Forte"
+pol = "1 = Słaba, \n7 = Silna"
+gr = "1 = schwach, \n7 = stark"
 
 [[question]]
 en = "1 = Dishonest, \n7 = Honest"
 fr = "1 = Malhonnête, \n7 = Honnête"
+pol = "1 = Nieuczciwa, \n7 = Uczciwa"
+gr = "1 = unehrlich, \n7 = ehrlich"

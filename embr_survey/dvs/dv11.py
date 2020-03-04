@@ -107,10 +107,8 @@ class DV11Part2(StackedDV):
         with open(translation_path, 'r', encoding='utf8') as f:
             translation = toml.load(f)
 
-        if lang == 'fr':
-            circle_img = os.path.join(settings['translation_dir'], 'fr/dv11_1.png')
-        else:
-            circle_img = resource_filename('embr_survey', 'images/dv11_1.png')
+        circle_img = os.path.join(settings['translation_dir'], ('%s/dv11_1.png' % lang))
+
         q1_part2 = translation['q_sub'][lang]
         header = translation['header'][lang]
 
@@ -144,6 +142,8 @@ class DV11Part2(StackedDV):
                 'locale': num_q * [settings['locale']],
                 'names': self.passed_data,
                 'responses': current_answers,
+                # TODO: questions not currently included-- if people include full names, HIPAA issues?
+                'question_original_order': ['q0']*5,
                 'dv': num_q * [self.long_name],
                 'block_number': num_q * [self.block_num],
                 'embr_temperature': num_q * [self.temperature]}
